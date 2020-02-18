@@ -24,7 +24,7 @@ import subprocess
 try:
     s.shell.run(["nox", "-s", "blacken"], hide_output=False)
 except subprocess.CalledProcessError:
-    print(os.listdir(".nox/blacken/bin"))
+    print(os.listdir(".nox/blacken"))
     print(os.getenv("PATH"))
     print(s.shell.run(["which", "pip"], hide_output=False))
 #############################################################
