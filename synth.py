@@ -15,101 +15,115 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-from synthtool import gcp
 
-gapic = gcp.GAPICGenerator()
-common = gcp.CommonTemplates()
-versions = ["v1beta1", "v1p2beta1", "v1p1beta1", "v1"]
+#############################################################
+# REMOVE ME: Temporarily adding to debug failing synth build.
+import os
+import subprocess
 
-excludes = ["setup.py", "nox*.py", "README.rst", "docs/conf.py", "docs/index.rst"]
+try:
+    s.shell.run(["nox", "-s", "blacken"], hide_output=False)
+except subprocess.CalledProcessError:
+    print(os.listdir(".nox/blacken/bin"))
+    print(os.getenv("PATH"))
+#############################################################
 
-# ----------------------------------------------------------------------------
-# Generate asset GAPIC layer
-# ----------------------------------------------------------------------------
-for version in versions:
-    if version == "v1p1beta1":
-        config_path = "/google/cloud/asset/v1p1beta1/artman_cloudasset_v1p1beta1.yaml"
-    else:
-        config_path = f"/google/cloud/asset/artman_cloudasset_{version}.yaml"
-    library = gapic.py_library(
-        "asset",
-        version,
-        config_path=config_path,
-        artman_output_name=f"asset-{version}",
-        include_protos=True,
-    )
+# from synthtool import gcp
 
-    s.move(library, excludes=excludes)
+# gapic = gcp.GAPICGenerator()
+# common = gcp.CommonTemplates()
+# versions = ["v1beta1", "v1p2beta1", "v1p1beta1", "v1"]
 
-s.replace(
-    "google/cloud/asset_v*/proto/assets_pb2.py",
-    "from google.iam.v1 import policy_pb2 as",
-    "from google.iam.v1 import iam_policy_pb2_grpc as",
-)
+# excludes = ["setup.py", "nox*.py", "README.rst", "docs/conf.py", "docs/index.rst"]
 
-s.replace(
-    "google/cloud/asset_v*/proto/assets_pb2.py",
-    "from google.iam.v1 import iam_policy_pb2_grpc "
-    "as google_dot_iam_dot_v1_dot_policy__pb2",
-    "from google.iam.v1 import iam_policy_pb2 "
-    "as google_dot_iam_dot_v1_dot_policy__pb2",
-)
+# # ----------------------------------------------------------------------------
+# # Generate asset GAPIC layer
+# # ----------------------------------------------------------------------------
+# for version in versions:
+#     if version == "v1p1beta1":
+#         config_path = "/google/cloud/asset/v1p1beta1/artman_cloudasset_v1p1beta1.yaml"
+#     else:
+#         config_path = f"/google/cloud/asset/artman_cloudasset_{version}.yaml"
+#     library = gapic.py_library(
+#         "asset",
+#         version,
+#         config_path=config_path,
+#         artman_output_name=f"asset-{version}",
+#         include_protos=True,
+#     )
 
-s.replace(
-    "google/cloud/asset_v*/proto/assets_pb2.py",
-    "_ASSET\.fields_by_name\['iam_policy'\]\.message_type "
-    "= google_dot_iam_dot_v1_dot_policy__pb2\._POLICY",
-    "_ASSET.fields_by_name['iam_policy'].message_type = google_dot_iam_dot"
-    "_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY",
-)
+#     s.move(library, excludes=excludes)
 
-s.replace(
-    "google/cloud/asset_v*/proto/assets_pb2.py",
-    "_IAMPOLICYSEARCHRESULT\.fields_by_name\['policy'\]\.message_type "
-    "= google_dot_iam_dot_v1_dot_policy__pb2\._POLICY",
-    "_IAMPOLICYSEARCHRESULT.fields_by_name['policy'].message_type = google_dot_iam_dot"
-    "_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY",
-)
+# s.replace(
+#     "google/cloud/asset_v*/proto/assets_pb2.py",
+#     "from google.iam.v1 import policy_pb2 as",
+#     "from google.iam.v1 import iam_policy_pb2_grpc as",
+# )
+
+# s.replace(
+#     "google/cloud/asset_v*/proto/assets_pb2.py",
+#     "from google.iam.v1 import iam_policy_pb2_grpc "
+#     "as google_dot_iam_dot_v1_dot_policy__pb2",
+#     "from google.iam.v1 import iam_policy_pb2 "
+#     "as google_dot_iam_dot_v1_dot_policy__pb2",
+# )
+
+# s.replace(
+#     "google/cloud/asset_v*/proto/assets_pb2.py",
+#     "_ASSET\.fields_by_name\['iam_policy'\]\.message_type "
+#     "= google_dot_iam_dot_v1_dot_policy__pb2\._POLICY",
+#     "_ASSET.fields_by_name['iam_policy'].message_type = google_dot_iam_dot"
+#     "_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY",
+# )
+
+# s.replace(
+#     "google/cloud/asset_v*/proto/assets_pb2.py",
+#     "_IAMPOLICYSEARCHRESULT\.fields_by_name\['policy'\]\.message_type "
+#     "= google_dot_iam_dot_v1_dot_policy__pb2\._POLICY",
+#     "_IAMPOLICYSEARCHRESULT.fields_by_name['policy'].message_type = google_dot_iam_dot"
+#     "_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY",
+# )
 
 
 
-_BORKED_ASSET_DOCSTRING = """\
-          The full name of the asset. For example: ``//compute.googleapi
-          s.com/projects/my_project_123/zones/zone1/instances/instance1`
-          `. See `Resource Names <https://cloud.google.com/apis/design/r
-          esource_names#full_resource_name>`__ for more information.
-"""
+# _BORKED_ASSET_DOCSTRING = """\
+#           The full name of the asset. For example: ``//compute.googleapi
+#           s.com/projects/my_project_123/zones/zone1/instances/instance1`
+#           `. See `Resource Names <https://cloud.google.com/apis/design/r
+#           esource_names#full_resource_name>`__ for more information.
+# """
 
-_FIXED_ASSET_DOCSTRING = """
-          The full name of the asset. For example:
-          ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
-          See https://cloud.google.com/apis/design/resource_names#full_resource_name
-          for more information.
-"""
+# _FIXED_ASSET_DOCSTRING = """
+#           The full name of the asset. For example:
+#           ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
+#           See https://cloud.google.com/apis/design/resource_names#full_resource_name
+#           for more information.
+# """
 
-s.replace(
-    "google/cloud/asset_v*/proto/assets_pb2.py",
-    _BORKED_ASSET_DOCSTRING,
-    _FIXED_ASSET_DOCSTRING,
-)
+# s.replace(
+#     "google/cloud/asset_v*/proto/assets_pb2.py",
+#     _BORKED_ASSET_DOCSTRING,
+#     _FIXED_ASSET_DOCSTRING,
+# )
 
-s.replace(
-    "google/cloud/**/asset_service_client.py",
-    "google-cloud-cloudasset",
-    "google-cloud-asset"
-)
-# Fix docstrings with no summary line
-s.replace(
-    "google/cloud/**/proto/*_pb2.py",
-    r'''__doc__\s*=\s*"""Attributes:''',
-    '''__doc__ = """
-    Attributes:''',
-)
+# s.replace(
+#     "google/cloud/**/asset_service_client.py",
+#     "google-cloud-cloudasset",
+#     "google-cloud-asset"
+# )
+# # Fix docstrings with no summary line
+# s.replace(
+#     "google/cloud/**/proto/*_pb2.py",
+#     r'''__doc__\s*=\s*"""Attributes:''',
+#     '''__doc__ = """
+#     Attributes:''',
+# )
 
-# ----------------------------------------------------------------------------
-# Add templated files
-# ----------------------------------------------------------------------------
-templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80, system_test_dependencies=["test_utils"])
-s.move(templated_files)
+# # ----------------------------------------------------------------------------
+# # Add templated files
+# # ----------------------------------------------------------------------------
+# templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80, system_test_dependencies=["test_utils"])
+# s.move(templated_files)
 
-s.shell.run(["nox", "-s", "blacken"], hide_output=False)
+# s.shell.run(["nox", "-s", "blacken"], hide_output=False)
+
