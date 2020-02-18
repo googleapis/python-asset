@@ -15,7 +15,7 @@
 """This script is used to synthesize generated parts of this library."""
 
 import synthtool as s
-
+from synthtool import gcp
 #############################################################
 # REMOVE ME: Temporarily adding to debug failing synth build.
 import os
@@ -26,9 +26,8 @@ try:
 except subprocess.CalledProcessError:
     print(os.listdir(".nox/blacken/bin"))
     print(os.getenv("PATH"))
+    print(s.shell.run(["which", "pip"], hide_output=False))
 #############################################################
-
-# from synthtool import gcp
 
 # gapic = gcp.GAPICGenerator()
 # common = gcp.CommonTemplates()
