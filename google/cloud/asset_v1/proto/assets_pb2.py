@@ -444,8 +444,8 @@ TemporalAsset = _reflection.GeneratedProtocolMessageType(
     dict(
         DESCRIPTOR=_TEMPORALASSET,
         __module__="google.cloud.asset_v1.proto.assets_pb2",
-        __doc__="""Temporal asset. In addition to the asset, the temporal
-  asset includes the status of the asset and valid from and to time of it.
+        __doc__="""Temporal asset. In addition to the asset, the temporal asset includes
+  the status of the asset and valid from and to time of it.
   
   
   Attributes:
