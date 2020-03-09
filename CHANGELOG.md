@@ -9,7 +9,6 @@
 
 ### Features
 
-* bump release level to ga ([#10](https://www.github.com/googleapis/python-asset/issues/10)) ([25c687b](https://www.github.com/googleapis/python-asset/commit/25c687b342394aff10f76c4a8b9472d64242fcaf))
 * remove search resources and search iam policies support in v1p1beta1; remove export assets and batch get assets history from v1p2beta1 (via synth) ([#12](https://www.github.com/googleapis/python-asset/issues/12)) ([15b60a3](https://www.github.com/googleapis/python-asset/commit/15b60a349c93c928fe121dc47d44d812a0c14439))
 
 
