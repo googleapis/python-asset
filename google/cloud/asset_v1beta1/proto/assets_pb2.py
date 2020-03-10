@@ -416,10 +416,17 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 TemporalAsset = _reflection.GeneratedProtocolMessageType(
     "TemporalAsset",
     (_message.Message,),
+<<<<<<< HEAD
     {
         "DESCRIPTOR": _TEMPORALASSET,
         "__module__": "google.cloud.asset_v1beta1.proto.assets_pb2",
         "__doc__": """Temporal asset. In addition to the asset, the temporal
+=======
+    dict(
+        DESCRIPTOR=_TEMPORALASSET,
+        __module__="google.cloud.asset_v1beta1.proto.assets_pb2",
+        __doc__="""Temporal asset. In addition to the asset, the temporal
+>>>>>>> 532a8e6... [CHANGE ME] Re-generated  to pick up changes in the API or client library generator.
   asset includes the status of the asset and valid from and to time of it.
   
   
