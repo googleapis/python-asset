@@ -112,7 +112,7 @@ def system(session):
     # virtualenv's dist-packages.
     session.install("mock", "pytest")
 
-    session.install("git+https://github.com/danoscarmike/python-test-utils@danom-dev")
+    session.install("git+https://github.com/danoscarmike/python-test-utils")
     session.install("-e", ".")
 
     # Run py.test against the system tests.
