@@ -28,7 +28,6 @@ import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
 import google.api_core.operation
 import google.api_core.operations_v1
-import google.api_core.path_template
 import grpc
 
 from google.cloud.asset_v1beta1.gapic import asset_service_client_config
@@ -73,13 +72,6 @@ class AssetServiceClient(object):
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
-
-    @classmethod
-    def project_path(cls, project):
-        """Return a fully-qualified project string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}", project=project
-        )
 
     def __init__(
         self,
@@ -213,7 +205,8 @@ class AssetServiceClient(object):
             >>>
             >>> client = asset_v1beta1.AssetServiceClient()
             >>>
-            >>> parent = client.project_path('[PROJECT]')
+            >>> # TODO: Initialize `parent`:
+            >>> parent = ''
             >>>
             >>> # TODO: Initialize `output_config`:
             >>> output_config = {}
@@ -321,9 +314,9 @@ class AssetServiceClient(object):
     def batch_get_assets_history(
         self,
         parent,
-        content_type,
-        read_time_window,
         asset_names=None,
+        content_type=None,
+        read_time_window=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
@@ -358,33 +351,18 @@ class AssetServiceClient(object):
 
         Example:
             >>> from google.cloud import asset_v1beta1
-            >>> from google.cloud.asset_v1beta1 import enums
             >>>
             >>> client = asset_v1beta1.AssetServiceClient()
             >>>
-            >>> parent = client.project_path('[PROJECT]')
+            >>> # TODO: Initialize `parent`:
+            >>> parent = ''
             >>>
-            >>> # TODO: Initialize `content_type`:
-            >>> content_type = enums.ContentType.CONTENT_TYPE_UNSPECIFIED
-            >>>
-            >>> # TODO: Initialize `read_time_window`:
-            >>> read_time_window = {}
-            >>>
-            >>> response = client.batch_get_assets_history(parent, content_type, read_time_window)
+            >>> response = client.batch_get_assets_history(parent)
 
         Args:
             parent (str): Required. The relative name of the root asset. It can only be an
                 organization number (such as "organizations/123"), a project ID (such as
                 "projects/my-project-id")", or a project number (such as "projects/12345").
-            content_type (~google.cloud.asset_v1beta1.types.ContentType): Optional. The content type.
-            read_time_window (Union[dict, ~google.cloud.asset_v1beta1.types.TimeWindow]): If set, all the classes from the .proto file are wrapped in a single
-                outer class with the given name. This applies to both Proto1 (equivalent
-                to the old "--one_java_file" option) and Proto2 (where a .proto always
-                translates to a single class, but you may want to explicitly choose the
-                class name).
-
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.asset_v1beta1.types.TimeWindow`
             asset_names (list[str]): The full name of the immediate parent of this resource. See
                 `Resource
                 Names <https://cloud.google.com/apis/design/resource_names#full_resource_name>`__
@@ -397,6 +375,15 @@ class AssetServiceClient(object):
                 ``"//cloudresourcemanager.googleapis.com/projects/my_project_123"``.
 
                 For third-party assets, it is up to the users to define.
+            content_type (~google.cloud.asset_v1beta1.types.ContentType): Optional. The content type.
+            read_time_window (Union[dict, ~google.cloud.asset_v1beta1.types.TimeWindow]): If set, all the classes from the .proto file are wrapped in a single
+                outer class with the given name. This applies to both Proto1 (equivalent
+                to the old "--one_java_file" option) and Proto2 (where a .proto always
+                translates to a single class, but you may want to explicitly choose the
+                class name).
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1beta1.types.TimeWindow`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -429,9 +416,9 @@ class AssetServiceClient(object):
 
         request = asset_service_pb2.BatchGetAssetsHistoryRequest(
             parent=parent,
+            asset_names=asset_names,
             content_type=content_type,
             read_time_window=read_time_window,
-            asset_names=asset_names,
         )
         if metadata is None:
             metadata = []

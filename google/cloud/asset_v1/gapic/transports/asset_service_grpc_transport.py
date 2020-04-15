@@ -116,15 +116,53 @@ class AssetServiceGrpcTransport(object):
         return self._channel
 
     @property
+    def delete_feed(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.delete_feed`.
+
+        Deletes an asset feed.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["asset_service_stub"].DeleteFeed
+
+    @property
     def export_assets(self):
         """Return the gRPC stub for :meth:`AssetServiceClient.export_assets`.
 
-        Additional information regarding long-running operations. In
-        particular, this specifies the types that are returned from long-running
-        operations.
+        Protocol Buffers - Google's data interchange format Copyright 2008
+        Google Inc. All rights reserved.
+        https://developers.google.com/protocol-buffers/
 
-        Required for methods that return ``google.longrunning.Operation``;
-        invalid otherwise.
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are
+        met:
+
+        ::
+
+            * Redistributions of source code must retain the above copyright
+
+        notice, this list of conditions and the following disclaimer. \*
+        Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution. \*
+        Neither the name of Google Inc. nor the names of its contributors may be
+        used to endorse or promote products derived from this software without
+        specific prior written permission.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+        IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+        TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+        PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+        OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+        EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+        PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+        PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+        LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+        NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -137,10 +175,17 @@ class AssetServiceGrpcTransport(object):
     def batch_get_assets_history(self):
         """Return the gRPC stub for :meth:`AssetServiceClient.batch_get_assets_history`.
 
-        JSON name of this field. The value is set by protocol compiler. If
-        the user has set a "json_name" option on this field, that option's value
-        will be used. Otherwise, it's deduced from the field's name by
-        converting it to camelCase.
+        ``ServicePerimeter`` describes a set of Google Cloud resources which
+        can freely import and export data amongst themselves, but not export
+        outside of the ``ServicePerimeter``. If a request with a source within
+        this ``ServicePerimeter`` has a target outside of the
+        ``ServicePerimeter``, the request will be blocked. Otherwise the request
+        is allowed. There are two types of Service Perimeter - Regular and
+        Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud
+        project can only belong to a single regular Service Perimeter. Service
+        Perimeter Bridges can contain only Google Cloud projects as members, a
+        single Google Cloud project may belong to multiple Service Perimeter
+        Bridges.
 
         Returns:
             Callable: A callable which accepts the appropriate
@@ -201,16 +246,3 @@ class AssetServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["asset_service_stub"].UpdateFeed
-
-    @property
-    def delete_feed(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.delete_feed`.
-
-        Deletes an asset feed.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["asset_service_stub"].DeleteFeed

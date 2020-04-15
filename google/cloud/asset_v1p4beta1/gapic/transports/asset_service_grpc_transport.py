@@ -116,20 +116,6 @@ class AssetServiceGrpcTransport(object):
         return self._channel
 
     @property
-    def analyze_iam_policy(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.analyze_iam_policy`.
-
-        For extensions, this is the name of the type being extended. It is
-        resolved in the same manner as type_name.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["asset_service_stub"].AnalyzeIamPolicy
-
-    @property
     def export_iam_policy_analysis(self):
         """Return the gRPC stub for :meth:`AssetServiceClient.export_iam_policy_analysis`.
 
@@ -148,3 +134,17 @@ class AssetServiceGrpcTransport(object):
                 deserialized response object.
         """
         return self._stubs["asset_service_stub"].ExportIamPolicyAnalysis
+
+    @property
+    def analyze_iam_policy(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.analyze_iam_policy`.
+
+        For extensions, this is the name of the type being extended. It is
+        resolved in the same manner as type_name.
+
+        Returns:
+            Callable: A callable which accepts the appropriate
+                deserialized request object and returns a
+                deserialized response object.
+        """
+        return self._stubs["asset_service_stub"].AnalyzeIamPolicy
