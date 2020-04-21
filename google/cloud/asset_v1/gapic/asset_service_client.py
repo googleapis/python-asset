@@ -83,13 +83,6 @@ class AssetServiceClient(object):
             "projects/{project}/feeds/{feed}", project=project, feed=feed
         )
 
-    @classmethod
-    def project_path(cls, project):
-        """Return a fully-qualified project string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}", project=project
-        )
-
     def __init__(
         self,
         transport=None,
@@ -203,6 +196,103 @@ class AssetServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
+    def delete_feed(
+        self,
+        name,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
+        """
+        Deletes an asset feed.
+
+        Example:
+            >>> from google.cloud import asset_v1
+            >>>
+            >>> client = asset_v1.AssetServiceClient()
+            >>>
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
+            >>>
+            >>> client.delete_feed(name)
+
+        Args:
+            name (str): Each of the definitions above may have "options" attached. These are
+                just annotations which may cause code to be generated slightly
+                differently or may contain hints for code that manipulates protocol
+                messages.
+
+                Clients may define custom options as extensions of the \*Options
+                messages. These extensions may not yet be known at parsing time, so the
+                parser cannot store the values in them. Instead it stores them in a
+                field in the \*Options message called uninterpreted_option. This field
+                must have the same name across all \*Options messages. We then use this
+                field to populate the extensions when we build a descriptor, at which
+                point all protos have been parsed and so all extensions are known.
+
+                Extension numbers for custom options may be chosen as follows:
+
+                -  For options which will only be used within a single application or
+                   organization, or for experimental options, use field numbers 50000
+                   through 99999. It is up to you to ensure that you do not use the same
+                   number for multiple options.
+                -  For options which will be published and used publicly by multiple
+                   independent entities, e-mail
+                   protobuf-global-extension-registry@google.com to reserve extension
+                   numbers. Simply provide your project name (e.g. Objective-C plugin)
+                   and your project website (if available) -- there's no need to explain
+                   how you intend to use them. Usually you only need one extension
+                   number. You can declare multiple options with only one extension
+                   number by putting them in a sub-message. See the Custom Options
+                   section of the docs for examples:
+                   https://developers.google.com/protocol-buffers/docs/proto#options If
+                   this turns out to be popular, a web service will be set up to
+                   automatically assign option numbers.
+            retry (Optional[google.api_core.retry.Retry]):  A retry object used
+                to retry requests. If ``None`` is specified, requests will
+                be retried using a default configuration.
+            timeout (Optional[float]): The amount of time, in seconds, to wait
+                for the request to complete. Note that if ``retry`` is
+                specified, the timeout applies to each individual attempt.
+            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
+                that is provided to the method.
+
+        Raises:
+            google.api_core.exceptions.GoogleAPICallError: If the request
+                    failed for any reason.
+            google.api_core.exceptions.RetryError: If the request failed due
+                    to a retryable error and retry attempts failed.
+            ValueError: If the parameters are invalid.
+        """
+        # Wrap the transport method to add retry and timeout logic.
+        if "delete_feed" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "delete_feed"
+            ] = google.api_core.gapic_v1.method.wrap_method(
+                self.transport.delete_feed,
+                default_retry=self._method_configs["DeleteFeed"].retry,
+                default_timeout=self._method_configs["DeleteFeed"].timeout,
+                client_info=self._client_info,
+            )
+
+        request = asset_service_pb2.DeleteFeedRequest(name=name)
+        if metadata is None:
+            metadata = []
+        metadata = list(metadata)
+        try:
+            routing_header = [("name", name)]
+        except AttributeError:
+            pass
+        else:
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
+            metadata.append(routing_metadata)
+
+        self._inner_api_calls["delete_feed"](
+            request, retry=retry, timeout=timeout, metadata=metadata
+        )
+
     def export_assets(
         self,
         parent,
@@ -215,12 +305,37 @@ class AssetServiceClient(object):
         metadata=None,
     ):
         """
-        Additional information regarding long-running operations. In
-        particular, this specifies the types that are returned from long-running
-        operations.
+        Protocol Buffers - Google's data interchange format Copyright 2008
+        Google Inc. All rights reserved.
+        https://developers.google.com/protocol-buffers/
 
-        Required for methods that return ``google.longrunning.Operation``;
-        invalid otherwise.
+        Redistribution and use in source and binary forms, with or without
+        modification, are permitted provided that the following conditions are
+        met:
+
+        ::
+
+            * Redistributions of source code must retain the above copyright
+
+        notice, this list of conditions and the following disclaimer. \*
+        Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution. \*
+        Neither the name of Google Inc. nor the names of its contributors may be
+        used to endorse or promote products derived from this software without
+        specific prior written permission.
+
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+        IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+        TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+        PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
+        OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+        EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+        PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+        PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+        LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+        NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+        SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
         Example:
             >>> from google.cloud import asset_v1
@@ -255,18 +370,22 @@ class AssetServiceClient(object):
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.OutputConfig`
             read_time (Union[dict, ~google.cloud.asset_v1.types.Timestamp]): Timestamp to take an asset snapshot. This can only be set to a timestamp
-                between 2018-10-02 UTC (inclusive) and the current time. If not specified,
-                the current time will be used. Due to delays in resource data collection
-                and indexing, there is a volatile window during which running the same
-                query may get different results.
+                between the current time and the current time minus 35 days (inclusive).
+                If not specified, the current time will be used. Due to delays in resource
+                data collection and indexing, there is a volatile window during which
+                running the same query may get different results.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.Timestamp`
-            asset_types (list[str]): A list of asset types of which to take a snapshot for. For example:
-                "compute.googleapis.com/Disk". If specified, only matching assets will
-                be returned. See `Introduction to Cloud Asset
-                Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
-                for all supported asset types.
+            asset_types (list[str]): The ancestry path of an asset in Google Cloud `resource
+                hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
+                represented as a list of relative resource names. An ancestry path
+                starts with the closest ancestor in the hierarchy and ends at root. If
+                the asset is a project, folder, or organization, the ancestry path
+                starts from the asset itself.
+
+                For example:
+                ``["projects/123456789", "folders/5432", "organizations/1234"]``
             content_type (~google.cloud.asset_v1.types.ContentType): Asset content type. If not specified, no content but the asset name will be
                 returned.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
@@ -332,57 +451,50 @@ class AssetServiceClient(object):
     def batch_get_assets_history(
         self,
         parent,
-        content_type,
-        read_time_window,
         asset_names=None,
+        content_type=None,
+        read_time_window=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
     ):
         """
-        JSON name of this field. The value is set by protocol compiler. If
-        the user has set a "json_name" option on this field, that option's value
-        will be used. Otherwise, it's deduced from the field's name by
-        converting it to camelCase.
+        ``ServicePerimeter`` describes a set of Google Cloud resources which
+        can freely import and export data amongst themselves, but not export
+        outside of the ``ServicePerimeter``. If a request with a source within
+        this ``ServicePerimeter`` has a target outside of the
+        ``ServicePerimeter``, the request will be blocked. Otherwise the request
+        is allowed. There are two types of Service Perimeter - Regular and
+        Bridge. Regular Service Perimeters cannot overlap, a single Google Cloud
+        project can only belong to a single regular Service Perimeter. Service
+        Perimeter Bridges can contain only Google Cloud projects as members, a
+        single Google Cloud project may belong to multiple Service Perimeter
+        Bridges.
 
         Example:
             >>> from google.cloud import asset_v1
-            >>> from google.cloud.asset_v1 import enums
             >>>
             >>> client = asset_v1.AssetServiceClient()
             >>>
             >>> # TODO: Initialize `parent`:
             >>> parent = ''
             >>>
-            >>> # TODO: Initialize `content_type`:
-            >>> content_type = enums.ContentType.CONTENT_TYPE_UNSPECIFIED
-            >>>
-            >>> # TODO: Initialize `read_time_window`:
-            >>> read_time_window = {}
-            >>>
-            >>> response = client.batch_get_assets_history(parent, content_type, read_time_window)
+            >>> response = client.batch_get_assets_history(parent)
 
         Args:
             parent (str): Required. The relative name of the root asset. It can only be an
                 organization number (such as "organizations/123"), a project ID (such as
                 "projects/my-project-id")", or a project number (such as "projects/12345").
+            asset_names (list[str]): List of values allowed at this resource. Can only be set if
+                ``all_values`` is set to ``ALL_VALUES_UNSPECIFIED``.
             content_type (~google.cloud.asset_v1.types.ContentType): Optional. The content type.
-            read_time_window (Union[dict, ~google.cloud.asset_v1.types.TimeWindow]): Manages long-running operations with an API service.
-
-                When an API method normally takes long time to complete, it can be
-                designed to return ``Operation`` to the client, and the client can use
-                this interface to receive the real response asynchronously by polling
-                the operation resource, or pass the operation resource to another API
-                (such as Google Cloud Pub/Sub API) to receive the response. Any API
-                service that returns long-running operations should implement the
-                ``Operations`` interface so developers can have a consistent client
-                experience.
+            read_time_window (Union[dict, ~google.cloud.asset_v1.types.TimeWindow]): Required. Resource name for the ServicePerimeter. The ``short_name``
+                component must begin with a letter and only include alphanumeric and
+                '_'. Format:
+                ``accessPolicies/{policy_id}/servicePerimeters/{short_name}``
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.TimeWindow`
-            asset_names (list[str]): The resource has one pattern, but the API owner expects to add more
-                later. (This is the inverse of ORIGINALLY_SINGLE_PATTERN, and prevents
-                that from being necessary once there are multiple patterns.)
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -415,9 +527,9 @@ class AssetServiceClient(object):
 
         request = asset_service_pb2.BatchGetAssetsHistoryRequest(
             parent=parent,
+            asset_names=asset_names,
             content_type=content_type,
             read_time_window=read_time_window,
-            asset_names=asset_names,
         )
         if metadata is None:
             metadata = []
@@ -473,37 +585,8 @@ class AssetServiceClient(object):
                 "projects/12345").
             feed_id (str): Required. This is the client-assigned asset feed identifier and it needs to
                 be unique under a specific parent project/folder/organization.
-            feed (Union[dict, ~google.cloud.asset_v1.types.Feed]): Each of the definitions above may have "options" attached. These are
-                just annotations which may cause code to be generated slightly
-                differently or may contain hints for code that manipulates protocol
-                messages.
-
-                Clients may define custom options as extensions of the \*Options
-                messages. These extensions may not yet be known at parsing time, so the
-                parser cannot store the values in them. Instead it stores them in a
-                field in the \*Options message called uninterpreted_option. This field
-                must have the same name across all \*Options messages. We then use this
-                field to populate the extensions when we build a descriptor, at which
-                point all protos have been parsed and so all extensions are known.
-
-                Extension numbers for custom options may be chosen as follows:
-
-                -  For options which will only be used within a single application or
-                   organization, or for experimental options, use field numbers 50000
-                   through 99999. It is up to you to ensure that you do not use the same
-                   number for multiple options.
-                -  For options which will be published and used publicly by multiple
-                   independent entities, e-mail
-                   protobuf-global-extension-registry@google.com to reserve extension
-                   numbers. Simply provide your project name (e.g. Objective-C plugin)
-                   and your project website (if available) -- there's no need to explain
-                   how you intend to use them. Usually you only need one extension
-                   number. You can declare multiple options with only one extension
-                   number by putting them in a sub-message. See the Custom Options
-                   section of the docs for examples:
-                   https://developers.google.com/protocol-buffers/docs/proto#options If
-                   this turns out to be popular, a web service will be set up to
-                   automatically assign option numbers.
+            feed (Union[dict, ~google.cloud.asset_v1.types.Feed]): List of values denied at this resource. Can only be set if
+                ``all_values`` is set to ``ALL_VALUES_UNSPECIFIED``.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.Feed`
@@ -572,21 +655,232 @@ class AssetServiceClient(object):
             >>>
             >>> client = asset_v1.AssetServiceClient()
             >>>
-            >>> name = client.feed_path('[PROJECT]', '[FEED]')
+            >>> # TODO: Initialize `name`:
+            >>> name = ''
             >>>
             >>> response = client.get_feed(name)
 
         Args:
-            name (str): The resource type. It must be in the format of
-                {service_name}/{resource_type_kind}. The ``resource_type_kind`` must be
-                singular and must not include version numbers.
+            name (str): ``FieldMask`` represents a set of symbolic field paths, for example:
 
-                Example: ``storage.googleapis.com/Bucket``
+                ::
 
-                The value of the resource_type_kind must follow the regular expression
-                /[A-Za-z][a-zA-Z0-9]+/. It should start with an upper case character and
-                should use PascalCase (UpperCamelCase). The maximum number of characters
-                allowed for the ``resource_type_kind`` is 100.
+                    paths: "f.a"
+                    paths: "f.b.d"
+
+                Here ``f`` represents a field in some root message, ``a`` and ``b``
+                fields in the message found in ``f``, and ``d`` a field found in the
+                message in ``f.b``.
+
+                Field masks are used to specify a subset of fields that should be
+                returned by a get operation or modified by an update operation. Field
+                masks also have a custom JSON encoding (see below).
+
+                # Field Masks in Projections
+
+                When used in the context of a projection, a response message or
+                sub-message is filtered by the API to only contain those fields as
+                specified in the mask. For example, if the mask in the previous example
+                is applied to a response message as follows:
+
+                ::
+
+                    f {
+                      a : 22
+                      b {
+                        d : 1
+                        x : 2
+                      }
+                      y : 13
+                    }
+                    z: 8
+
+                The result will not contain specific values for fields x,y and z (their
+                value will be set to the default, and omitted in proto text output):
+
+                ::
+
+                    f {
+                      a : 22
+                      b {
+                        d : 1
+                      }
+                    }
+
+                A repeated field is not allowed except at the last position of a paths
+                string.
+
+                If a FieldMask object is not present in a get operation, the operation
+                applies to all fields (as if a FieldMask of all fields had been
+                specified).
+
+                Note that a field mask does not necessarily apply to the top-level
+                response message. In case of a REST get operation, the field mask
+                applies directly to the response, but in case of a REST list operation,
+                the mask instead applies to each individual message in the returned
+                resource list. In case of a REST custom method, other definitions may be
+                used. Where the mask applies will be clearly documented together with
+                its declaration in the API. In any case, the effect on the returned
+                resource/resources is required behavior for APIs.
+
+                # Field Masks in Update Operations
+
+                A field mask in update operations specifies which fields of the targeted
+                resource are going to be updated. The API is required to only change the
+                values of the fields as specified in the mask and leave the others
+                untouched. If a resource is passed in to describe the updated values,
+                the API ignores the values of all fields not covered by the mask.
+
+                If a repeated field is specified for an update operation, new values
+                will be appended to the existing repeated field in the target resource.
+                Note that a repeated field is only allowed in the last position of a
+                ``paths`` string.
+
+                If a sub-message is specified in the last position of the field mask for
+                an update operation, then new value will be merged into the existing
+                sub-message in the target resource.
+
+                For example, given the target message:
+
+                ::
+
+                    f {
+                      b {
+                        d: 1
+                        x: 2
+                      }
+                      c: [1]
+                    }
+
+                And an update message:
+
+                ::
+
+                    f {
+                      b {
+                        d: 10
+                      }
+                      c: [2]
+                    }
+
+                then if the field mask is:
+
+                paths: ["f.b", "f.c"]
+
+                then the result will be:
+
+                ::
+
+                    f {
+                      b {
+                        d: 10
+                        x: 2
+                      }
+                      c: [1, 2]
+                    }
+
+                An implementation may provide options to override this default behavior
+                for repeated and message fields.
+
+                In order to reset a field's value to the default, the field must be in
+                the mask and set to the default value in the provided resource. Hence,
+                in order to reset all fields of a resource, provide a default instance
+                of the resource and set all fields in the mask, or do not provide a mask
+                as described below.
+
+                If a field mask is not present on update, the operation applies to all
+                fields (as if a field mask of all fields has been specified). Note that
+                in the presence of schema evolution, this may mean that fields the
+                client does not know and has therefore not filled into the request will
+                be reset to their default. If this is unwanted behavior, a specific
+                service may require a client to always specify a field mask, producing
+                an error if not.
+
+                As with get operations, the location of the resource which describes the
+                updated values in the request message depends on the operation kind. In
+                any case, the effect of the field mask is required to be honored by the
+                API.
+
+                ## Considerations for HTTP REST
+
+                The HTTP kind of an update operation which uses a field mask must be set
+                to PATCH instead of PUT in order to satisfy HTTP semantics (PUT must
+                only be used for full updates).
+
+                # JSON Encoding of Field Masks
+
+                In JSON, a field mask is encoded as a single string where paths are
+                separated by a comma. Fields name in each path are converted to/from
+                lower-camel naming conventions.
+
+                As an example, consider the following message declarations:
+
+                ::
+
+                    message Profile {
+                      User user = 1;
+                      Photo photo = 2;
+                    }
+                    message User {
+                      string display_name = 1;
+                      string address = 2;
+                    }
+
+                In proto a field mask for ``Profile`` may look as such:
+
+                ::
+
+                    mask {
+                      paths: "user.display_name"
+                      paths: "photo"
+                    }
+
+                In JSON, the same mask is represented as below:
+
+                ::
+
+                    {
+                      mask: "user.displayName,photo"
+                    }
+
+                # Field Masks and Oneof Fields
+
+                Field masks treat fields in oneofs just as regular fields. Consider the
+                following message:
+
+                ::
+
+                    message SampleMessage {
+                      oneof test_oneof {
+                        string name = 4;
+                        SubMessage sub_message = 9;
+                      }
+                    }
+
+                The field mask can be:
+
+                ::
+
+                    mask {
+                      paths: "name"
+                    }
+
+                Or:
+
+                ::
+
+                    mask {
+                      paths: "sub_message"
+                    }
+
+                Note that oneof type names ("test_oneof" in this case) cannot be used in
+                paths.
+
+                ## Field Mask Verification
+
+                The implementation of any API method which has a FieldMask type field in
+                the request should verify the included field paths, and return an
+                ``INVALID_ARGUMENT`` error if any path is unmappable.
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -732,36 +1026,15 @@ class AssetServiceClient(object):
             >>> response = client.update_feed(feed, update_mask)
 
         Args:
-            feed (Union[dict, ~google.cloud.asset_v1.types.Feed]): See ``HttpRule``.
+            feed (Union[dict, ~google.cloud.asset_v1.types.Feed]): Required. The BigQuery dataset in format
+                "projects/projectId/datasets/datasetId", to which the snapshot result
+                should be exported. If this dataset does not exist, the export call
+                returns an INVALID_ARGUMENT error.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.Feed`
-            update_mask (Union[dict, ~google.cloud.asset_v1.types.FieldMask]): A URL/resource name that uniquely identifies the type of the
-                serialized protocol buffer message. This string must contain at least
-                one "/" character. The last segment of the URL's path must represent the
-                fully qualified name of the type (as in
-                ``path/google.protobuf.Duration``). The name should be in a canonical
-                form (e.g., leading "." is not accepted).
-
-                In practice, teams usually precompile into the binary all types that
-                they expect it to use in the context of Any. However, for URLs which use
-                the scheme ``http``, ``https``, or no scheme, one can optionally set up
-                a type server that maps type URLs to message definitions as follows:
-
-                -  If no scheme is provided, ``https`` is assumed.
-                -  An HTTP GET on the URL must yield a ``google.protobuf.Type`` value in
-                   binary format, or produce an error.
-                -  Applications are allowed to cache lookup results based on the URL, or
-                   have them precompiled into a binary to avoid any lookup. Therefore,
-                   binary compatibility needs to be preserved on changes to types. (Use
-                   versioned type names to manage breaking changes.)
-
-                Note: this functionality is not currently available in the official
-                protobuf release, and it is not used for type URLs beginning with
-                type.googleapis.com.
-
-                Schemes other than ``http``, ``https`` (or the empty scheme) might be
-                used with implementation specific semantics.
+            update_mask (Union[dict, ~google.cloud.asset_v1.types.FieldMask]): Description of the ``ServicePerimeter`` and its use. Does not affect
+                behavior.
 
                 If a dict is provided, it must be of the same form as the protobuf
                 message :class:`~google.cloud.asset_v1.types.FieldMask`
@@ -812,80 +1085,5 @@ class AssetServiceClient(object):
             metadata.append(routing_metadata)
 
         return self._inner_api_calls["update_feed"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
-
-    def delete_feed(
-        self,
-        name,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
-        """
-        Deletes an asset feed.
-
-        Example:
-            >>> from google.cloud import asset_v1
-            >>>
-            >>> client = asset_v1.AssetServiceClient()
-            >>>
-            >>> name = client.feed_path('[PROJECT]', '[FEED]')
-            >>>
-            >>> client.delete_feed(name)
-
-        Args:
-            name (str): A list of the full names of the assets. For example:
-                ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
-                See `Resource
-                Names <https://cloud.google.com/apis/design/resource_names#full_resource_name>`__
-                and `Resource Name
-                Format <https://cloud.google.com/asset-inventory/docs/resource-name-format>`__
-                for more info.
-
-                The request becomes a no-op if the asset name list is empty, and the max
-                size of the asset name list is 100 in one request.
-            retry (Optional[google.api_core.retry.Retry]):  A retry object used
-                to retry requests. If ``None`` is specified, requests will
-                be retried using a default configuration.
-            timeout (Optional[float]): The amount of time, in seconds, to wait
-                for the request to complete. Note that if ``retry`` is
-                specified, the timeout applies to each individual attempt.
-            metadata (Optional[Sequence[Tuple[str, str]]]): Additional metadata
-                that is provided to the method.
-
-        Raises:
-            google.api_core.exceptions.GoogleAPICallError: If the request
-                    failed for any reason.
-            google.api_core.exceptions.RetryError: If the request failed due
-                    to a retryable error and retry attempts failed.
-            ValueError: If the parameters are invalid.
-        """
-        # Wrap the transport method to add retry and timeout logic.
-        if "delete_feed" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "delete_feed"
-            ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.delete_feed,
-                default_retry=self._method_configs["DeleteFeed"].retry,
-                default_timeout=self._method_configs["DeleteFeed"].timeout,
-                client_info=self._client_info,
-            )
-
-        request = asset_service_pb2.DeleteFeedRequest(name=name)
-        if metadata is None:
-            metadata = []
-        metadata = list(metadata)
-        try:
-            routing_header = [("name", name)]
-        except AttributeError:
-            pass
-        else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
-            metadata.append(routing_metadata)
-
-        self._inner_api_calls["delete_feed"](
             request, retry=retry, timeout=timeout, metadata=metadata
         )

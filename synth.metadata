@@ -1,48 +1,60 @@
 {
-  "updateTime": "2020-03-17T12:16:54.059305Z",
   "sources": [
     {
       "generator": {
         "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
+        "version": "2.0.0",
+        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
       }
     },
     {
       "generator": {
         "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
+        "version": "2.0.0",
+        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
       }
     },
     {
       "generator": {
         "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
+        "version": "2.0.0",
+        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
       }
     },
     {
       "generator": {
         "name": "artman",
-        "version": "1.1.1",
-        "dockerImage": "googleapis/artman@sha256:5ef340c8d9334719bc5c6981d95f4a5d2737b0a6a24f2b9a0d430e96fff85c5b"
+        "version": "2.0.0",
+        "dockerImage": "googleapis/artman@sha256:b3b47805231a305d0f40c4bf069df20f6a2635574e6d4259fac651d3f9f6e098"
+      }
+    },
+    {
+      "git": {
+        "name": ".",
+        "remote": "https://github.com/googleapis/python-asset.git",
+        "sha": "5fdf3544c6d25e5f7c61cf5bdde960b75aed13e2"
       }
     },
     {
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "23d5f09e670ebb0c1b36214acf78704e2ecfc2ac",
-        "internalRef": "301337970",
-        "log": "23d5f09e670ebb0c1b36214acf78704e2ecfc2ac\nUpdate field_behavior annotations in V1 and V2.\n\nPiperOrigin-RevId: 301337970\n\nb2cf37e7fd62383a811aa4d54d013ecae638851d\nData Catalog V1 API\n\nPiperOrigin-RevId: 301282503\n\n1976b9981e2900c8172b7d34b4220bdb18c5db42\nCloud DLP api update. Adds missing fields to Finding and adds support for hybrid jobs.\n\nPiperOrigin-RevId: 301205325\n\n"
+        "sha": "42ee97c1b93a0e3759bbba3013da309f670a90ab",
+        "internalRef": "307114445"
       }
     },
     {
-      "template": {
-        "name": "python_library",
-        "origin": "synthtool.gcp",
-        "version": "2020.2.4"
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "f5e4c17dc78a966dbf29961dd01f9bbd63e20a04"
+      }
+    },
+    {
+      "git": {
+        "name": "synthtool",
+        "remote": "https://github.com/googleapis/synthtool.git",
+        "sha": "f5e4c17dc78a966dbf29961dd01f9bbd63e20a04"
       }
     }
   ],

@@ -1061,9 +1061,9 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
             {
                 "DESCRIPTOR": _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Specifies the resource to analyze for access policies,
-    which may be set directly on the resource, or on ancestors such as
-    organizations, folders or projects. At least one of
+                "__doc__": """Specifies the resource to analyze for access policies, which may be set
+    directly on the resource, or on ancestors such as organizations, folders
+    or projects. At least one of
     [ResourceSelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector],
     [IdentitySelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector]
     or
