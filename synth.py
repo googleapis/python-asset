@@ -88,7 +88,7 @@ s.replace(
 s.replace(
     "google/cloud/**/asset_service_client.py",
     "google-cloud-cloudasset",
-    "google-cloud-asset"
+    "google-cloud-asset",
 )
 # Fix docstrings with no summary line
 s.replace(
@@ -98,10 +98,25 @@ s.replace(
     Attributes:''',
 )
 
+# Fix accesscontextmanager and orgpolicy imports
+s.replace(
+    "google/cloud/asset_v1/types.py",
+    "from google\.cloud\.asset_v1\.proto import ((access_level_pb2)|(service_perimeter_pb2)|(access_policy_pb2))",
+    "from google.identity.accesscontextmanager.v1 import \g<1>",
+)
+
+s.replace(
+    "google/cloud/asset_v1/types.py",
+    "from google\.cloud\.asset_v1\.proto import orgpolicy_pb2",
+    "from google.cloud.orgpolicy.v1 import orgpolicy_pb2"
+)
+
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
-templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80, system_test_dependencies=["test_utils"])
+templated_files = gcp.CommonTemplates().py_library(
+    unit_cov_level=79, cov_level=80, system_test_dependencies=["test_utils"]
+)
 s.move(templated_files)
 
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
