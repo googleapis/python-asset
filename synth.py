@@ -59,6 +59,14 @@ s.replace(
 
 s.replace(
     "google/cloud/asset_v*/proto/assets_pb2.py",
+    "_IAMPOLICYSEARCHRESULT\.fields_by_name\['policy'\]\.message_type "
+    "= google_dot_iam_dot_v1_dot_policy__pb2\._POLICY",
+    "_IAMPOLICYSEARCHRESULT.fields_by_name['policy'].message_type = google_dot_iam_dot"
+    "_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY",
+)
+
+s.replace(
+    "google/cloud/asset_v*/proto/assets_pb2.py",
     "_IAMPOLICYANALYSISRESULT\.fields_by_name\['iam_binding'\]\.message_type "
     "= google_dot_iam_dot_v1_dot_policy__pb2\._BINDING",
     "_IAMPOLICYANALYSISRESULT.fields_by_name['iam_binding'].message_type = google_dot_iam_dot"
@@ -150,8 +158,8 @@ count = s.replace(
     """def batch_get_assets_history(
             self,
             parent,
-            content_type,
-            read_time_window,
+            content_type=None,
+            read_time_window=None,
             asset_names=None,
             retry=google.api_core.gapic_v1.method.DEFAULT,
             timeout=google.api_core.gapic_v1.method.DEFAULT,
@@ -166,4 +174,4 @@ if count != 2:
 templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80)
 s.move(templated_files)
 
-s.shell.run(["nox", "-s", "blacken"], hide_output=False)
+#s.shell.run(["nox", "-s", "blacken"], hide_output=False)

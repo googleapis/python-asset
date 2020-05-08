@@ -509,7 +509,9 @@ _IAMPOLICYSEARCHRESULT_EXPLANATION.fields_by_name[
 _IAMPOLICYSEARCHRESULT_EXPLANATION.containing_type = _IAMPOLICYSEARCHRESULT
 _IAMPOLICYSEARCHRESULT.fields_by_name[
     "policy"
-].message_type = google_dot_iam_dot_v1_dot_policy__pb2._POLICY
+].message_type = (
+    google_dot_iam_dot_v1_dot_policy__pb2.google_dot_iam_dot_v1_dot_policy__pb2._POLICY
+)
 _IAMPOLICYSEARCHRESULT.fields_by_name[
     "explanation"
 ].message_type = _IAMPOLICYSEARCHRESULT_EXPLANATION
