@@ -4,15 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/python-asset.git",
-        "sha": "27dbe7900d53a96ad1775414c9bed43cc8a30a9e"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "d3cc7bbf41afdfd6677cc1ab0d53965625cc073b",
-        "internalRef": "310454506"
+        "sha": "3925fac13e28ebd81d735aa90c9220cf60e8cd8b"
       }
     },
     {

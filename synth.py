@@ -111,6 +111,21 @@ s.replace(
     "from google.cloud.orgpolicy.v1 import orgpolicy_pb2"
 )
 
+# Glue in Project Path Method.
+# TODO: Remove during microgenerator transition
+s.replace(
+    "google/cloud/asset_v*/gapic/asset_service_client.py",
+    "(def __init__\()",
+    '''@classmethod
+    def project_path(cls, project):
+        """Return a fully-qualified project string."""
+        return google.api_core.path_template.expand(
+            "projects/{project}", project=project
+        )
+    \g<1>''',
+    )
+
+
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
