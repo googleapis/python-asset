@@ -28,14 +28,14 @@ class AssetServiceGrpcTransport(object):
     which can be used to take advantage of advanced
     features of gRPC.
     """
-
     # The scopes needed to make gRPC calls to all of the methods defined
     # in this service.
-    _OAUTH_SCOPES = ("https://www.googleapis.com/auth/cloud-platform",)
+    _OAUTH_SCOPES = (
+        'https://www.googleapis.com/auth/cloud-platform',
+    )
 
-    def __init__(
-        self, channel=None, credentials=None, address="cloudasset.googleapis.com:443"
-    ):
+    def __init__(self, channel=None, credentials=None,
+                 address='cloudasset.googleapis.com:443'):
         """Instantiate the transport class.
 
         Args:
@@ -53,7 +53,8 @@ class AssetServiceGrpcTransport(object):
         # exception (channels come with credentials baked in already).
         if channel is not None and credentials is not None:
             raise ValueError(
-                "The `channel` and `credentials` arguments are mutually " "exclusive."
+                'The `channel` and `credentials` arguments are mutually '
+                'exclusive.',
             )
 
         # Create the channel.
@@ -62,8 +63,8 @@ class AssetServiceGrpcTransport(object):
                 address=address,
                 credentials=credentials,
                 options={
-                    "grpc.max_send_message_length": -1,
-                    "grpc.max_receive_message_length": -1,
+                    'grpc.max_send_message_length': -1,
+                    'grpc.max_receive_message_length': -1,
                 }.items(),
             )
 
@@ -72,13 +73,16 @@ class AssetServiceGrpcTransport(object):
         # gRPC uses objects called "stubs" that are bound to the
         # channel and provide a basic method for each RPC.
         self._stubs = {
-            "asset_service_stub": asset_service_pb2_grpc.AssetServiceStub(channel)
+            'asset_service_stub': asset_service_pb2_grpc.AssetServiceStub(channel),
         }
+
 
     @classmethod
     def create_channel(
-        cls, address="cloudasset.googleapis.com:443", credentials=None, **kwargs
-    ):
+                cls,
+                address='cloudasset.googleapis.com:443',
+                credentials=None,
+                **kwargs):
         """Create and return a gRPC channel object.
 
         Args:
@@ -95,7 +99,10 @@ class AssetServiceGrpcTransport(object):
             grpc.Channel: A gRPC channel object.
         """
         return google.api_core.grpc_helpers.create_channel(
-            address, credentials=credentials, scopes=cls._OAUTH_SCOPES, **kwargs
+            address,
+            credentials=credentials,
+            scopes=cls._OAUTH_SCOPES,
+            **kwargs
         )
 
     @property
@@ -123,7 +130,7 @@ class AssetServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs["asset_service_stub"].SearchAllResources
+        return self._stubs['asset_service_stub'].SearchAllResources
 
     @property
     def search_all_iam_policies(self):
@@ -141,4 +148,4 @@ class AssetServiceGrpcTransport(object):
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs["asset_service_stub"].SearchAllIamPolicies
+        return self._stubs['asset_service_stub'].SearchAllIamPolicies

@@ -6,7 +6,6 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from google.protobuf import reflection as _reflection
 from google.protobuf import symbol_database as _symbol_database
-
 # @@protoc_insertion_point(imports)
 
 _sym_db = _symbol_database.Default()
@@ -14,1054 +13,625 @@ _sym_db = _symbol_database.Default()
 
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.api import field_behavior_pb2 as google_dot_api_dot_field__behavior__pb2
-from google.cloud.asset_v1p4beta1.proto import (
-    assets_pb2 as google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2,
-)
+from google.cloud.asset_v1p4beta1.proto import assets_pb2 as google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2
 from google.iam.v1 import policy_pb2 as google_dot_iam_dot_v1_dot_policy__pb2
-from google.longrunning import (
-    operations_pb2 as google_dot_longrunning_dot_operations__pb2,
-)
+from google.longrunning import operations_pb2 as google_dot_longrunning_dot_operations__pb2
 from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
 from google.api import client_pb2 as google_dot_api_dot_client__pb2
 
 
 DESCRIPTOR = _descriptor.FileDescriptor(
-    name="google/cloud/asset_v1p4beta1/proto/asset_service.proto",
-    package="google.cloud.asset.v1p4beta1",
-    syntax="proto3",
-    serialized_options=b"\n com.google.cloud.asset.v1p4beta1B\021AssetServiceProtoP\001ZAgoogle.golang.org/genproto/googleapis/cloud/asset/v1p4beta1;asset\252\002\034Google.Cloud.Asset.V1P4Beta1\312\002\034Google\\Cloud\\Asset\\V1p4beta1",
-    serialized_pb=b'\n6google/cloud/asset_v1p4beta1/proto/asset_service.proto\x12\x1cgoogle.cloud.asset.v1p4beta1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a/google/cloud/asset_v1p4beta1/proto/assets.proto\x1a\x1agoogle/iam/v1/policy.proto\x1a#google/longrunning/operations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x17google/api/client.proto"\xfe\x03\n\x16IamPolicyAnalysisQuery\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x65\n\x11resource_selector\x18\x02 \x01(\x0b\x32\x45.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelectorB\x03\xe0\x41\x01\x12\x65\n\x11identity_selector\x18\x03 \x01(\x0b\x32\x45.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelectorB\x03\xe0\x41\x01\x12\x61\n\x0f\x61\x63\x63\x65ss_selector\x18\x04 \x01(\x0b\x32\x43.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelectorB\x03\xe0\x41\x01\x1a\x33\n\x10ResourceSelector\x12\x1f\n\x12\x66ull_resource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x1a)\n\x10IdentitySelector\x12\x15\n\x08identity\x18\x01 \x01(\tB\x03\xe0\x41\x02\x1a>\n\x0e\x41\x63\x63\x65ssSelector\x12\x12\n\x05roles\x18\x01 \x03(\tB\x03\xe0\x41\x01\x12\x18\n\x0bpermissions\x18\x02 \x03(\tB\x03\xe0\x41\x01"\xd7\x03\n\x17\x41nalyzeIamPolicyRequest\x12Q\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQueryB\x03\xe0\x41\x02\x12S\n\x07options\x18\x02 \x01(\x0b\x32=.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.OptionsB\x03\xe0\x41\x01\x1a\x93\x02\n\x07Options\x12\x1a\n\rexpand_groups\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12\x19\n\x0c\x65xpand_roles\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1d\n\x10\x65xpand_resources\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12"\n\x15output_resource_edges\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1f\n\x12output_group_edges\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x12\x32\n%analyze_service_account_impersonation\x18\x06 \x01(\x08\x42\x03\xe0\x41\x01\x12\x39\n\x11\x65xecution_timeout\x18\x07 \x01(\x0b\x32\x19.google.protobuf.DurationB\x03\xe0\x41\x01"\xbc\x04\n\x18\x41nalyzeIamPolicyResponse\x12_\n\rmain_analysis\x18\x01 \x01(\x0b\x32H.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis\x12x\n&service_account_impersonation_analysis\x18\x02 \x03(\x0b\x32H.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis\x12\x16\n\x0e\x66ully_explored\x18\x03 \x01(\x08\x12`\n\x13non_critical_errors\x18\x04 \x03(\x0b\x32\x43.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState\x1a\xca\x01\n\x11IamPolicyAnalysis\x12L\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery\x12O\n\x10\x61nalysis_results\x18\x02 \x03(\x0b\x32\x35.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult\x12\x16\n\x0e\x66ully_explored\x18\x03 \x01(\x08"\xb9\x01\n\x1dIamPolicyAnalysisOutputConfig\x12\x65\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32J.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestinationH\x00\x1a"\n\x0eGcsDestination\x12\x10\n\x03uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\r\n\x0b\x64\x65stination"\x83\x04\n\x1e\x45xportIamPolicyAnalysisRequest\x12Q\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQueryB\x03\xe0\x41\x02\x12Z\n\x07options\x18\x02 \x01(\x0b\x32\x44.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.OptionsB\x03\xe0\x41\x01\x12W\n\routput_config\x18\x03 \x01(\x0b\x32;.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfigB\x03\xe0\x41\x02\x1a\xd8\x01\n\x07Options\x12\x1a\n\rexpand_groups\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12\x19\n\x0c\x65xpand_roles\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1d\n\x10\x65xpand_resources\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12"\n\x15output_resource_edges\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1f\n\x12output_group_edges\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x12\x32\n%analyze_service_account_impersonation\x18\x06 \x01(\x08\x42\x03\xe0\x41\x01"u\n\x1f\x45xportIamPolicyAnalysisResponse\x12R\n\routput_config\x18\x01 \x01(\x0b\x32;.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig2\xe5\x04\n\x0c\x41ssetService\x12\xc2\x01\n\x10\x41nalyzeIamPolicy\x12\x35.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest\x1a\x36.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse"?\x82\xd3\xe4\x93\x02\x39\x12\x37/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy\x12\xc0\x02\n\x17\x45xportIamPolicyAnalysis\x12<.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest\x1a\x1d.google.longrunning.Operation"\xc7\x01\x82\xd3\xe4\x93\x02\x43">/v1p4beta1/{analysis_query.parent=*/*}:exportIamPolicyAnalysis:\x01*\xca\x41{\n<google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse\x12;google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest\x1aM\xca\x41\x19\x63loudasset.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\xb8\x01\n com.google.cloud.asset.v1p4beta1B\x11\x41ssetServiceProtoP\x01ZAgoogle.golang.org/genproto/googleapis/cloud/asset/v1p4beta1;asset\xaa\x02\x1cGoogle.Cloud.Asset.V1P4Beta1\xca\x02\x1cGoogle\\Cloud\\Asset\\V1p4beta1b\x06proto3',
-    dependencies=[
-        google_dot_api_dot_annotations__pb2.DESCRIPTOR,
-        google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,
-        google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2.DESCRIPTOR,
-        google_dot_iam_dot_v1_dot_policy__pb2.DESCRIPTOR,
-        google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,
-        google_dot_protobuf_dot_duration__pb2.DESCRIPTOR,
-        google_dot_api_dot_client__pb2.DESCRIPTOR,
-    ],
-)
+  name='google/cloud/asset_v1p4beta1/proto/asset_service.proto',
+  package='google.cloud.asset.v1p4beta1',
+  syntax='proto3',
+  serialized_options=b'\n com.google.cloud.asset.v1p4beta1B\021AssetServiceProtoP\001ZAgoogle.golang.org/genproto/googleapis/cloud/asset/v1p4beta1;asset\252\002\034Google.Cloud.Asset.V1P4Beta1\312\002\034Google\\Cloud\\Asset\\V1p4beta1',
+  serialized_pb=b'\n6google/cloud/asset_v1p4beta1/proto/asset_service.proto\x12\x1cgoogle.cloud.asset.v1p4beta1\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a/google/cloud/asset_v1p4beta1/proto/assets.proto\x1a\x1agoogle/iam/v1/policy.proto\x1a#google/longrunning/operations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x17google/api/client.proto\"\xfe\x03\n\x16IamPolicyAnalysisQuery\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x65\n\x11resource_selector\x18\x02 \x01(\x0b\x32\x45.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelectorB\x03\xe0\x41\x01\x12\x65\n\x11identity_selector\x18\x03 \x01(\x0b\x32\x45.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelectorB\x03\xe0\x41\x01\x12\x61\n\x0f\x61\x63\x63\x65ss_selector\x18\x04 \x01(\x0b\x32\x43.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelectorB\x03\xe0\x41\x01\x1a\x33\n\x10ResourceSelector\x12\x1f\n\x12\x66ull_resource_name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x1a)\n\x10IdentitySelector\x12\x15\n\x08identity\x18\x01 \x01(\tB\x03\xe0\x41\x02\x1a>\n\x0e\x41\x63\x63\x65ssSelector\x12\x12\n\x05roles\x18\x01 \x03(\tB\x03\xe0\x41\x01\x12\x18\n\x0bpermissions\x18\x02 \x03(\tB\x03\xe0\x41\x01\"\xd7\x03\n\x17\x41nalyzeIamPolicyRequest\x12Q\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQueryB\x03\xe0\x41\x02\x12S\n\x07options\x18\x02 \x01(\x0b\x32=.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.OptionsB\x03\xe0\x41\x01\x1a\x93\x02\n\x07Options\x12\x1a\n\rexpand_groups\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12\x19\n\x0c\x65xpand_roles\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1d\n\x10\x65xpand_resources\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12\"\n\x15output_resource_edges\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1f\n\x12output_group_edges\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x12\x32\n%analyze_service_account_impersonation\x18\x06 \x01(\x08\x42\x03\xe0\x41\x01\x12\x39\n\x11\x65xecution_timeout\x18\x07 \x01(\x0b\x32\x19.google.protobuf.DurationB\x03\xe0\x41\x01\"\xbc\x04\n\x18\x41nalyzeIamPolicyResponse\x12_\n\rmain_analysis\x18\x01 \x01(\x0b\x32H.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis\x12x\n&service_account_impersonation_analysis\x18\x02 \x03(\x0b\x32H.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis\x12\x16\n\x0e\x66ully_explored\x18\x03 \x01(\x08\x12`\n\x13non_critical_errors\x18\x04 \x03(\x0b\x32\x43.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.AnalysisState\x1a\xca\x01\n\x11IamPolicyAnalysis\x12L\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery\x12O\n\x10\x61nalysis_results\x18\x02 \x03(\x0b\x32\x35.google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult\x12\x16\n\x0e\x66ully_explored\x18\x03 \x01(\x08\"\xb9\x01\n\x1dIamPolicyAnalysisOutputConfig\x12\x65\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32J.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestinationH\x00\x1a\"\n\x0eGcsDestination\x12\x10\n\x03uri\x18\x01 \x01(\tB\x03\xe0\x41\x02\x42\r\n\x0b\x64\x65stination\"\x83\x04\n\x1e\x45xportIamPolicyAnalysisRequest\x12Q\n\x0e\x61nalysis_query\x18\x01 \x01(\x0b\x32\x34.google.cloud.asset.v1p4beta1.IamPolicyAnalysisQueryB\x03\xe0\x41\x02\x12Z\n\x07options\x18\x02 \x01(\x0b\x32\x44.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.OptionsB\x03\xe0\x41\x01\x12W\n\routput_config\x18\x03 \x01(\x0b\x32;.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfigB\x03\xe0\x41\x02\x1a\xd8\x01\n\x07Options\x12\x1a\n\rexpand_groups\x18\x01 \x01(\x08\x42\x03\xe0\x41\x01\x12\x19\n\x0c\x65xpand_roles\x18\x02 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1d\n\x10\x65xpand_resources\x18\x03 \x01(\x08\x42\x03\xe0\x41\x01\x12\"\n\x15output_resource_edges\x18\x04 \x01(\x08\x42\x03\xe0\x41\x01\x12\x1f\n\x12output_group_edges\x18\x05 \x01(\x08\x42\x03\xe0\x41\x01\x12\x32\n%analyze_service_account_impersonation\x18\x06 \x01(\x08\x42\x03\xe0\x41\x01\"u\n\x1f\x45xportIamPolicyAnalysisResponse\x12R\n\routput_config\x18\x01 \x01(\x0b\x32;.google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig2\xe5\x04\n\x0c\x41ssetService\x12\xc2\x01\n\x10\x41nalyzeIamPolicy\x12\x35.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest\x1a\x36.google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse\"?\x82\xd3\xe4\x93\x02\x39\x12\x37/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy\x12\xc0\x02\n\x17\x45xportIamPolicyAnalysis\x12<.google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest\x1a\x1d.google.longrunning.Operation\"\xc7\x01\x82\xd3\xe4\x93\x02\x43\">/v1p4beta1/{analysis_query.parent=*/*}:exportIamPolicyAnalysis:\x01*\xca\x41{\n<google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse\x12;google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest\x1aM\xca\x41\x19\x63loudasset.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\xb8\x01\n com.google.cloud.asset.v1p4beta1B\x11\x41ssetServiceProtoP\x01ZAgoogle.golang.org/genproto/googleapis/cloud/asset/v1p4beta1;asset\xaa\x02\x1cGoogle.Cloud.Asset.V1P4Beta1\xca\x02\x1cGoogle\\Cloud\\Asset\\V1p4beta1b\x06proto3'
+  ,
+  dependencies=[google_dot_api_dot_annotations__pb2.DESCRIPTOR,google_dot_api_dot_field__behavior__pb2.DESCRIPTOR,google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2.DESCRIPTOR,google_dot_iam_dot_v1_dot_policy__pb2.DESCRIPTOR,google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,google_dot_protobuf_dot_duration__pb2.DESCRIPTOR,google_dot_api_dot_client__pb2.DESCRIPTOR,])
+
+
 
 
 _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR = _descriptor.Descriptor(
-    name="ResourceSelector",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="full_resource_name",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.full_resource_name",
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=1,
-            has_default_value=False,
-            default_value=b"".decode("utf-8"),
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        )
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=675,
-    serialized_end=726,
+  name='ResourceSelector',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='full_resource_name', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector.full_resource_name', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=675,
+  serialized_end=726,
 )
 
 _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR = _descriptor.Descriptor(
-    name="IdentitySelector",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="identity",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.identity",
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=1,
-            has_default_value=False,
-            default_value=b"".decode("utf-8"),
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        )
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=728,
-    serialized_end=769,
+  name='IdentitySelector',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='identity', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector.identity', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=728,
+  serialized_end=769,
 )
 
 _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR = _descriptor.Descriptor(
-    name="AccessSelector",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="roles",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.roles",
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=3,
-            has_default_value=False,
-            default_value=[],
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="permissions",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.permissions",
-            index=1,
-            number=2,
-            type=9,
-            cpp_type=9,
-            label=3,
-            has_default_value=False,
-            default_value=[],
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=771,
-    serialized_end=833,
+  name='AccessSelector',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='roles', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.roles', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='permissions', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector.permissions', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=771,
+  serialized_end=833,
 )
 
 _IAMPOLICYANALYSISQUERY = _descriptor.Descriptor(
-    name="IamPolicyAnalysisQuery",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="parent",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.parent",
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=1,
-            has_default_value=False,
-            default_value=b"".decode("utf-8"),
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="resource_selector",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.resource_selector",
-            index=1,
-            number=2,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="identity_selector",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.identity_selector",
-            index=2,
-            number=3,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="access_selector",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.access_selector",
-            index=3,
-            number=4,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[
-        _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR,
-        _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR,
-        _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR,
-    ],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=323,
-    serialized_end=833,
+  name='IamPolicyAnalysisQuery',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='parent', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.parent', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='resource_selector', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.resource_selector', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='identity_selector', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.identity_selector', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='access_selector', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.access_selector', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_IAMPOLICYANALYSISQUERY_RESOURCESELECTOR, _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR, _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=323,
+  serialized_end=833,
 )
 
 
 _ANALYZEIAMPOLICYREQUEST_OPTIONS = _descriptor.Descriptor(
-    name="Options",
-    full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="expand_groups",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_groups",
-            index=0,
-            number=1,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="expand_roles",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_roles",
-            index=1,
-            number=2,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="expand_resources",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_resources",
-            index=2,
-            number=3,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="output_resource_edges",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.output_resource_edges",
-            index=3,
-            number=4,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="output_group_edges",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.output_group_edges",
-            index=4,
-            number=5,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="analyze_service_account_impersonation",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.analyze_service_account_impersonation",
-            index=5,
-            number=6,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="execution_timeout",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.execution_timeout",
-            index=6,
-            number=7,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=1032,
-    serialized_end=1307,
+  name='Options',
+  full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='expand_groups', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_groups', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='expand_roles', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_roles', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='expand_resources', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.expand_resources', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='output_resource_edges', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.output_resource_edges', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='output_group_edges', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.output_group_edges', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='analyze_service_account_impersonation', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.analyze_service_account_impersonation', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='execution_timeout', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options.execution_timeout', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1032,
+  serialized_end=1307,
 )
 
 _ANALYZEIAMPOLICYREQUEST = _descriptor.Descriptor(
-    name="AnalyzeIamPolicyRequest",
-    full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="analysis_query",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.analysis_query",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="options",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.options",
-            index=1,
-            number=2,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[_ANALYZEIAMPOLICYREQUEST_OPTIONS],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=836,
-    serialized_end=1307,
+  name='AnalyzeIamPolicyRequest',
+  full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='analysis_query', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.analysis_query', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='options', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.options', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_ANALYZEIAMPOLICYREQUEST_OPTIONS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=836,
+  serialized_end=1307,
 )
 
 
 _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS = _descriptor.Descriptor(
-    name="IamPolicyAnalysis",
-    full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="analysis_query",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysis_query",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="analysis_results",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysis_results",
-            index=1,
-            number=2,
-            type=11,
-            cpp_type=10,
-            label=3,
-            has_default_value=False,
-            default_value=[],
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="fully_explored",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.fully_explored",
-            index=2,
-            number=3,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=1680,
-    serialized_end=1882,
+  name='IamPolicyAnalysis',
+  full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='analysis_query', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysis_query', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='analysis_results', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysis_results', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fully_explored', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.fully_explored', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1680,
+  serialized_end=1882,
 )
 
 _ANALYZEIAMPOLICYRESPONSE = _descriptor.Descriptor(
-    name="AnalyzeIamPolicyResponse",
-    full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="main_analysis",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.main_analysis",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="service_account_impersonation_analysis",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis",
-            index=1,
-            number=2,
-            type=11,
-            cpp_type=10,
-            label=3,
-            has_default_value=False,
-            default_value=[],
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="fully_explored",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.fully_explored",
-            index=2,
-            number=3,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="non_critical_errors",
-            full_name="google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.non_critical_errors",
-            index=3,
-            number=4,
-            type=11,
-            cpp_type=10,
-            label=3,
-            has_default_value=False,
-            default_value=[],
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=1310,
-    serialized_end=1882,
+  name='AnalyzeIamPolicyResponse',
+  full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='main_analysis', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.main_analysis', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='service_account_impersonation_analysis', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='fully_explored', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.fully_explored', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='non_critical_errors', full_name='google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.non_critical_errors', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1310,
+  serialized_end=1882,
 )
 
 
 _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION = _descriptor.Descriptor(
-    name="GcsDestination",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="uri",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.uri",
-            index=0,
-            number=1,
-            type=9,
-            cpp_type=9,
-            label=1,
-            has_default_value=False,
-            default_value=b"".decode("utf-8"),
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        )
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=2021,
-    serialized_end=2055,
+  name='GcsDestination',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='uri', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination.uri', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2021,
+  serialized_end=2055,
 )
 
 _IAMPOLICYANALYSISOUTPUTCONFIG = _descriptor.Descriptor(
-    name="IamPolicyAnalysisOutputConfig",
-    full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="gcs_destination",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.gcs_destination",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        )
-    ],
-    extensions=[],
-    nested_types=[_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[
-        _descriptor.OneofDescriptor(
-            name="destination",
-            full_name="google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.destination",
-            index=0,
-            containing_type=None,
-            fields=[],
-        )
-    ],
-    serialized_start=1885,
-    serialized_end=2070,
+  name='IamPolicyAnalysisOutputConfig',
+  full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='gcs_destination', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.gcs_destination', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='destination', full_name='google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.destination',
+      index=0, containing_type=None, fields=[]),
+  ],
+  serialized_start=1885,
+  serialized_end=2070,
 )
 
 
 _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS = _descriptor.Descriptor(
-    name="Options",
-    full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="expand_groups",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_groups",
-            index=0,
-            number=1,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="expand_roles",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_roles",
-            index=1,
-            number=2,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="expand_resources",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_resources",
-            index=2,
-            number=3,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="output_resource_edges",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.output_resource_edges",
-            index=3,
-            number=4,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="output_group_edges",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.output_group_edges",
-            index=4,
-            number=5,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="analyze_service_account_impersonation",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.analyze_service_account_impersonation",
-            index=5,
-            number=6,
-            type=8,
-            cpp_type=7,
-            label=1,
-            has_default_value=False,
-            default_value=False,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=1032,
-    serialized_end=1248,
+  name='Options',
+  full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='expand_groups', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_groups', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='expand_roles', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_roles', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='expand_resources', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.expand_resources', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='output_resource_edges', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.output_resource_edges', index=3,
+      number=4, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='output_group_edges', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.output_group_edges', index=4,
+      number=5, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='analyze_service_account_impersonation', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options.analyze_service_account_impersonation', index=5,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1032,
+  serialized_end=1248,
 )
 
 _EXPORTIAMPOLICYANALYSISREQUEST = _descriptor.Descriptor(
-    name="ExportIamPolicyAnalysisRequest",
-    full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="analysis_query",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.analysis_query",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="options",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.options",
-            index=1,
-            number=2,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\001",
-            file=DESCRIPTOR,
-        ),
-        _descriptor.FieldDescriptor(
-            name="output_config",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.output_config",
-            index=2,
-            number=3,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=b"\340A\002",
-            file=DESCRIPTOR,
-        ),
-    ],
-    extensions=[],
-    nested_types=[_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=2073,
-    serialized_end=2588,
+  name='ExportIamPolicyAnalysisRequest',
+  full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='analysis_query', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.analysis_query', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='options', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.options', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\001', file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='output_config', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.output_config', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=b'\340A\002', file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS, ],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2073,
+  serialized_end=2588,
 )
 
 
 _EXPORTIAMPOLICYANALYSISRESPONSE = _descriptor.Descriptor(
-    name="ExportIamPolicyAnalysisResponse",
-    full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse",
-    filename=None,
-    file=DESCRIPTOR,
-    containing_type=None,
-    fields=[
-        _descriptor.FieldDescriptor(
-            name="output_config",
-            full_name="google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse.output_config",
-            index=0,
-            number=1,
-            type=11,
-            cpp_type=10,
-            label=1,
-            has_default_value=False,
-            default_value=None,
-            message_type=None,
-            enum_type=None,
-            containing_type=None,
-            is_extension=False,
-            extension_scope=None,
-            serialized_options=None,
-            file=DESCRIPTOR,
-        )
-    ],
-    extensions=[],
-    nested_types=[],
-    enum_types=[],
-    serialized_options=None,
-    is_extendable=False,
-    syntax="proto3",
-    extension_ranges=[],
-    oneofs=[],
-    serialized_start=2590,
-    serialized_end=2707,
+  name='ExportIamPolicyAnalysisResponse',
+  full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='output_config', full_name='google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse.output_config', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=2590,
+  serialized_end=2707,
 )
 
 _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR.containing_type = _IAMPOLICYANALYSISQUERY
 _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR.containing_type = _IAMPOLICYANALYSISQUERY
 _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR.containing_type = _IAMPOLICYANALYSISQUERY
-_IAMPOLICYANALYSISQUERY.fields_by_name[
-    "resource_selector"
-].message_type = _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR
-_IAMPOLICYANALYSISQUERY.fields_by_name[
-    "identity_selector"
-].message_type = _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR
-_IAMPOLICYANALYSISQUERY.fields_by_name[
-    "access_selector"
-].message_type = _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name[
-    "execution_timeout"
-].message_type = google_dot_protobuf_dot_duration__pb2._DURATION
+_IAMPOLICYANALYSISQUERY.fields_by_name['resource_selector'].message_type = _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR
+_IAMPOLICYANALYSISQUERY.fields_by_name['identity_selector'].message_type = _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR
+_IAMPOLICYANALYSISQUERY.fields_by_name['access_selector'].message_type = _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['execution_timeout'].message_type = google_dot_protobuf_dot_duration__pb2._DURATION
 _ANALYZEIAMPOLICYREQUEST_OPTIONS.containing_type = _ANALYZEIAMPOLICYREQUEST
-_ANALYZEIAMPOLICYREQUEST.fields_by_name[
-    "analysis_query"
-].message_type = _IAMPOLICYANALYSISQUERY
-_ANALYZEIAMPOLICYREQUEST.fields_by_name[
-    "options"
-].message_type = _ANALYZEIAMPOLICYREQUEST_OPTIONS
-_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS.fields_by_name[
-    "analysis_query"
-].message_type = _IAMPOLICYANALYSISQUERY
-_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS.fields_by_name[
-    "analysis_results"
-].message_type = (
-    google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2._IAMPOLICYANALYSISRESULT
-)
+_ANALYZEIAMPOLICYREQUEST.fields_by_name['analysis_query'].message_type = _IAMPOLICYANALYSISQUERY
+_ANALYZEIAMPOLICYREQUEST.fields_by_name['options'].message_type = _ANALYZEIAMPOLICYREQUEST_OPTIONS
+_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS.fields_by_name['analysis_query'].message_type = _IAMPOLICYANALYSISQUERY
+_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS.fields_by_name['analysis_results'].message_type = google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2._IAMPOLICYANALYSISRESULT
 _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS.containing_type = _ANALYZEIAMPOLICYRESPONSE
-_ANALYZEIAMPOLICYRESPONSE.fields_by_name[
-    "main_analysis"
-].message_type = _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS
-_ANALYZEIAMPOLICYRESPONSE.fields_by_name[
-    "service_account_impersonation_analysis"
-].message_type = _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS
-_ANALYZEIAMPOLICYRESPONSE.fields_by_name[
-    "non_critical_errors"
-].message_type = (
-    google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2._IAMPOLICYANALYSISRESULT_ANALYSISSTATE
-)
-_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION.containing_type = (
-    _IAMPOLICYANALYSISOUTPUTCONFIG
-)
-_IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name[
-    "gcs_destination"
-].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION
-_IAMPOLICYANALYSISOUTPUTCONFIG.oneofs_by_name["destination"].fields.append(
-    _IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name["gcs_destination"]
-)
-_IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name[
-    "gcs_destination"
-].containing_oneof = _IAMPOLICYANALYSISOUTPUTCONFIG.oneofs_by_name["destination"]
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.containing_type = (
-    _EXPORTIAMPOLICYANALYSISREQUEST
-)
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name[
-    "analysis_query"
-].message_type = _IAMPOLICYANALYSISQUERY
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name[
-    "options"
-].message_type = _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name[
-    "output_config"
-].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG
-_EXPORTIAMPOLICYANALYSISRESPONSE.fields_by_name[
-    "output_config"
-].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG
-DESCRIPTOR.message_types_by_name["IamPolicyAnalysisQuery"] = _IAMPOLICYANALYSISQUERY
-DESCRIPTOR.message_types_by_name["AnalyzeIamPolicyRequest"] = _ANALYZEIAMPOLICYREQUEST
-DESCRIPTOR.message_types_by_name["AnalyzeIamPolicyResponse"] = _ANALYZEIAMPOLICYRESPONSE
-DESCRIPTOR.message_types_by_name[
-    "IamPolicyAnalysisOutputConfig"
-] = _IAMPOLICYANALYSISOUTPUTCONFIG
-DESCRIPTOR.message_types_by_name[
-    "ExportIamPolicyAnalysisRequest"
-] = _EXPORTIAMPOLICYANALYSISREQUEST
-DESCRIPTOR.message_types_by_name[
-    "ExportIamPolicyAnalysisResponse"
-] = _EXPORTIAMPOLICYANALYSISRESPONSE
+_ANALYZEIAMPOLICYRESPONSE.fields_by_name['main_analysis'].message_type = _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS
+_ANALYZEIAMPOLICYRESPONSE.fields_by_name['service_account_impersonation_analysis'].message_type = _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS
+_ANALYZEIAMPOLICYRESPONSE.fields_by_name['non_critical_errors'].message_type = google_dot_cloud_dot_asset__v1p4beta1_dot_proto_dot_assets__pb2._IAMPOLICYANALYSISRESULT_ANALYSISSTATE
+_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION.containing_type = _IAMPOLICYANALYSISOUTPUTCONFIG
+_IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name['gcs_destination'].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION
+_IAMPOLICYANALYSISOUTPUTCONFIG.oneofs_by_name['destination'].fields.append(
+  _IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name['gcs_destination'])
+_IAMPOLICYANALYSISOUTPUTCONFIG.fields_by_name['gcs_destination'].containing_oneof = _IAMPOLICYANALYSISOUTPUTCONFIG.oneofs_by_name['destination']
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.containing_type = _EXPORTIAMPOLICYANALYSISREQUEST
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['analysis_query'].message_type = _IAMPOLICYANALYSISQUERY
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['options'].message_type = _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['output_config'].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG
+_EXPORTIAMPOLICYANALYSISRESPONSE.fields_by_name['output_config'].message_type = _IAMPOLICYANALYSISOUTPUTCONFIG
+DESCRIPTOR.message_types_by_name['IamPolicyAnalysisQuery'] = _IAMPOLICYANALYSISQUERY
+DESCRIPTOR.message_types_by_name['AnalyzeIamPolicyRequest'] = _ANALYZEIAMPOLICYREQUEST
+DESCRIPTOR.message_types_by_name['AnalyzeIamPolicyResponse'] = _ANALYZEIAMPOLICYRESPONSE
+DESCRIPTOR.message_types_by_name['IamPolicyAnalysisOutputConfig'] = _IAMPOLICYANALYSISOUTPUTCONFIG
+DESCRIPTOR.message_types_by_name['ExportIamPolicyAnalysisRequest'] = _EXPORTIAMPOLICYANALYSISREQUEST
+DESCRIPTOR.message_types_by_name['ExportIamPolicyAnalysisResponse'] = _EXPORTIAMPOLICYANALYSISRESPONSE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
-IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
-    "IamPolicyAnalysisQuery",
-    (_message.Message,),
-    {
-        "ResourceSelector": _reflection.GeneratedProtocolMessageType(
-            "ResourceSelector",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Specifies the resource to analyze for access policies,
+IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType('IamPolicyAnalysisQuery', (_message.Message,), {
+
+  'ResourceSelector' : _reflection.GeneratedProtocolMessageType('ResourceSelector', (_message.Message,), {
+    'DESCRIPTOR' : _IAMPOLICYANALYSISQUERY_RESOURCESELECTOR,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """Specifies the resource to analyze for access policies,
     which may be set directly on the resource, or on ancestors such as
     organizations, folders or projects. At least one of
     [ResourceSelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector],
@@ -1076,16 +646,15 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
             Required. The `full resource name <https://cloud.google.com/ap
             is/design/resource_names#full_resource_name>`__ .
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector)
-            },
-        ),
-        "IdentitySelector": _reflection.GeneratedProtocolMessageType(
-            "IdentitySelector",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Specifies an identity for which to determine resource
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector)
+    })
+  ,
+
+  'IdentitySelector' : _reflection.GeneratedProtocolMessageType('IdentitySelector', (_message.Message,), {
+    'DESCRIPTOR' : _IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """Specifies an identity for which to determine resource
     access, based on roles assigned either directly to them or to the groups
     they belong to, directly or indirectly.
     
@@ -1096,16 +665,15 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
             policy binding
             <https://cloud.google.com/iam/reference/rest/v1/Binding>`__.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector)
-            },
-        ),
-        "AccessSelector": _reflection.GeneratedProtocolMessageType(
-            "AccessSelector",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Specifies roles and/or permissions to analyze, to
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector)
+    })
+  ,
+
+  'AccessSelector' : _reflection.GeneratedProtocolMessageType('AccessSelector', (_message.Message,), {
+    'DESCRIPTOR' : _IAMPOLICYANALYSISQUERY_ACCESSSELECTOR,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """Specifies roles and/or permissions to analyze, to
     determine both the identities possessing them and the resources they
     control. If multiple values are specified, results will include
     identities and resources matching any of them.
@@ -1117,12 +685,13 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
         permissions:
             Optional. The permissions to appear in result.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector)
-            },
-        ),
-        "DESCRIPTOR": _IAMPOLICYANALYSISQUERY,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """IAM policy analysis query message.
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector)
+    })
+  ,
+  'DESCRIPTOR' : _IAMPOLICYANALYSISQUERY,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """IAM policy analysis query message.
   
   
   Attributes:
@@ -1141,25 +710,20 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
           Optional. Specifies roles or permissions for analysis. Leaving
           it empty means ANY.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery)
+  })
 _sym_db.RegisterMessage(IamPolicyAnalysisQuery)
 _sym_db.RegisterMessage(IamPolicyAnalysisQuery.ResourceSelector)
 _sym_db.RegisterMessage(IamPolicyAnalysisQuery.IdentitySelector)
 _sym_db.RegisterMessage(IamPolicyAnalysisQuery.AccessSelector)
 
-AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType(
-    "AnalyzeIamPolicyRequest",
-    (_message.Message,),
-    {
-        "Options": _reflection.GeneratedProtocolMessageType(
-            "Options",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _ANALYZEIAMPOLICYREQUEST_OPTIONS,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Contains request options.
+AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType('AnalyzeIamPolicyRequest', (_message.Message,), {
+
+  'Options' : _reflection.GeneratedProtocolMessageType('Options', (_message.Message,), {
+    'DESCRIPTOR' : _ANALYZEIAMPOLICYREQUEST_OPTIONS,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """Contains request options.
     
     
     Attributes:
@@ -1230,12 +794,13 @@ AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType(
             it’s not finished until then, you will get a DEADLINE_EXCEEDED
             error.  Default is empty.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options)
-            },
-        ),
-        "DESCRIPTOR": _ANALYZEIAMPOLICYREQUEST,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """A request message for
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest.Options)
+    })
+  ,
+  'DESCRIPTOR' : _ANALYZEIAMPOLICYREQUEST,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """A request message for
   [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
   
   
@@ -1245,23 +810,18 @@ AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType(
       options:
           Optional. The request options.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyRequest)
+  })
 _sym_db.RegisterMessage(AnalyzeIamPolicyRequest)
 _sym_db.RegisterMessage(AnalyzeIamPolicyRequest.Options)
 
-AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType(
-    "AnalyzeIamPolicyResponse",
-    (_message.Message,),
-    {
-        "IamPolicyAnalysis": _reflection.GeneratedProtocolMessageType(
-            "IamPolicyAnalysis",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """An analysis message to group the query and results.
+AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType('AnalyzeIamPolicyResponse', (_message.Message,), {
+
+  'IamPolicyAnalysis' : _reflection.GeneratedProtocolMessageType('IamPolicyAnalysis', (_message.Message,), {
+    'DESCRIPTOR' : _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """An analysis message to group the query and results.
     
     
     Attributes:
@@ -1277,12 +837,13 @@ AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType(
             ysis.analysis_results] have been fully explored to answer the
             query.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis)
-            },
-        ),
-        "DESCRIPTOR": _ANALYZEIAMPOLICYRESPONSE,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """A response message for
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis)
+    })
+  ,
+  'DESCRIPTOR' : _ANALYZEIAMPOLICYRESPONSE,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """A response message for
   [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
   
   
@@ -1304,23 +865,18 @@ AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType(
           handling to explain why ``fully_explored`` is false, or empty
           if no error happened.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse)
+  })
 _sym_db.RegisterMessage(AnalyzeIamPolicyResponse)
 _sym_db.RegisterMessage(AnalyzeIamPolicyResponse.IamPolicyAnalysis)
 
-IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType(
-    "IamPolicyAnalysisOutputConfig",
-    (_message.Message,),
-    {
-        "GcsDestination": _reflection.GeneratedProtocolMessageType(
-            "GcsDestination",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """A Cloud Storage location.
+IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType('IamPolicyAnalysisOutputConfig', (_message.Message,), {
+
+  'GcsDestination' : _reflection.GeneratedProtocolMessageType('GcsDestination', (_message.Message,), {
+    'DESCRIPTOR' : _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """A Cloud Storage location.
     
     
     Attributes:
@@ -1332,12 +888,13 @@ IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType(
             <https://cloud.google.com/storage/docs/viewing-editing-
             metadata>`__ for more information.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination)
-            },
-        ),
-        "DESCRIPTOR": _IAMPOLICYANALYSISOUTPUTCONFIG,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """Output configuration for export IAM policy analysis
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig.GcsDestination)
+    })
+  ,
+  'DESCRIPTOR' : _IAMPOLICYANALYSISOUTPUTCONFIG,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """Output configuration for export IAM policy analysis
   destination.
   
   
@@ -1347,23 +904,18 @@ IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType(
       gcs_destination:
           Destination on Cloud Storage.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.IamPolicyAnalysisOutputConfig)
+  })
 _sym_db.RegisterMessage(IamPolicyAnalysisOutputConfig)
 _sym_db.RegisterMessage(IamPolicyAnalysisOutputConfig.GcsDestination)
 
-ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType(
-    "ExportIamPolicyAnalysisRequest",
-    (_message.Message,),
-    {
-        "Options": _reflection.GeneratedProtocolMessageType(
-            "Options",
-            (_message.Message,),
-            {
-                "DESCRIPTOR": _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS,
-                "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-                "__doc__": """Contains request options.
+ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType('ExportIamPolicyAnalysisRequest', (_message.Message,), {
+
+  'Options' : _reflection.GeneratedProtocolMessageType('Options', (_message.Message,), {
+    'DESCRIPTOR' : _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS,
+    '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+    ,
+    '__doc__': """Contains request options.
     
     
     Attributes:
@@ -1422,12 +974,13 @@ ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType(
             .asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impe
             rsonation_analysis].  Default is false.
     """,
-                # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options)
-            },
-        ),
-        "DESCRIPTOR": _EXPORTIAMPOLICYANALYSISREQUEST,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """A request message for
+    # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest.Options)
+    })
+  ,
+  'DESCRIPTOR' : _EXPORTIAMPOLICYANALYSISREQUEST,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """A request message for
   [AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
   
   
@@ -1440,19 +993,16 @@ ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType(
           Required. Output configuration indicating where the results
           will be output to.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest)
+  })
 _sym_db.RegisterMessage(ExportIamPolicyAnalysisRequest)
 _sym_db.RegisterMessage(ExportIamPolicyAnalysisRequest.Options)
 
-ExportIamPolicyAnalysisResponse = _reflection.GeneratedProtocolMessageType(
-    "ExportIamPolicyAnalysisResponse",
-    (_message.Message,),
-    {
-        "DESCRIPTOR": _EXPORTIAMPOLICYANALYSISRESPONSE,
-        "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
-        "__doc__": """The export IAM policy analysis response. This message is
+ExportIamPolicyAnalysisResponse = _reflection.GeneratedProtocolMessageType('ExportIamPolicyAnalysisResponse', (_message.Message,), {
+  'DESCRIPTOR' : _EXPORTIAMPOLICYANALYSISRESPONSE,
+  '__module__' : 'google.cloud.asset_v1p4beta1.proto.asset_service_pb2'
+  ,
+  '__doc__': """The export IAM policy analysis response. This message is
   returned by the [google.longrunning.Operations.GetOperation][] method in
   the returned [google.longrunning.Operation.response][] field.
   
@@ -1462,84 +1012,70 @@ ExportIamPolicyAnalysisResponse = _reflection.GeneratedProtocolMessageType(
           Output configuration indicating where the results were output
           to.
   """,
-        # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse)
-    },
-)
+  # @@protoc_insertion_point(class_scope:google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse)
+  })
 _sym_db.RegisterMessage(ExportIamPolicyAnalysisResponse)
 
 
 DESCRIPTOR._options = None
-_IAMPOLICYANALYSISQUERY_RESOURCESELECTOR.fields_by_name[
-    "full_resource_name"
-]._options = None
-_IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR.fields_by_name["identity"]._options = None
-_IAMPOLICYANALYSISQUERY_ACCESSSELECTOR.fields_by_name["roles"]._options = None
-_IAMPOLICYANALYSISQUERY_ACCESSSELECTOR.fields_by_name["permissions"]._options = None
-_IAMPOLICYANALYSISQUERY.fields_by_name["parent"]._options = None
-_IAMPOLICYANALYSISQUERY.fields_by_name["resource_selector"]._options = None
-_IAMPOLICYANALYSISQUERY.fields_by_name["identity_selector"]._options = None
-_IAMPOLICYANALYSISQUERY.fields_by_name["access_selector"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["expand_groups"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["expand_roles"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["expand_resources"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["output_resource_edges"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["output_group_edges"]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name[
-    "analyze_service_account_impersonation"
-]._options = None
-_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name["execution_timeout"]._options = None
-_ANALYZEIAMPOLICYREQUEST.fields_by_name["analysis_query"]._options = None
-_ANALYZEIAMPOLICYREQUEST.fields_by_name["options"]._options = None
-_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION.fields_by_name["uri"]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name["expand_groups"]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name["expand_roles"]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name[
-    "expand_resources"
-]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name[
-    "output_resource_edges"
-]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name[
-    "output_group_edges"
-]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name[
-    "analyze_service_account_impersonation"
-]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name["analysis_query"]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name["options"]._options = None
-_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name["output_config"]._options = None
+_IAMPOLICYANALYSISQUERY_RESOURCESELECTOR.fields_by_name['full_resource_name']._options = None
+_IAMPOLICYANALYSISQUERY_IDENTITYSELECTOR.fields_by_name['identity']._options = None
+_IAMPOLICYANALYSISQUERY_ACCESSSELECTOR.fields_by_name['roles']._options = None
+_IAMPOLICYANALYSISQUERY_ACCESSSELECTOR.fields_by_name['permissions']._options = None
+_IAMPOLICYANALYSISQUERY.fields_by_name['parent']._options = None
+_IAMPOLICYANALYSISQUERY.fields_by_name['resource_selector']._options = None
+_IAMPOLICYANALYSISQUERY.fields_by_name['identity_selector']._options = None
+_IAMPOLICYANALYSISQUERY.fields_by_name['access_selector']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['expand_groups']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['expand_roles']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['expand_resources']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['output_resource_edges']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['output_group_edges']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['analyze_service_account_impersonation']._options = None
+_ANALYZEIAMPOLICYREQUEST_OPTIONS.fields_by_name['execution_timeout']._options = None
+_ANALYZEIAMPOLICYREQUEST.fields_by_name['analysis_query']._options = None
+_ANALYZEIAMPOLICYREQUEST.fields_by_name['options']._options = None
+_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION.fields_by_name['uri']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['expand_groups']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['expand_roles']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['expand_resources']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['output_resource_edges']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['output_group_edges']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS.fields_by_name['analyze_service_account_impersonation']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['analysis_query']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['options']._options = None
+_EXPORTIAMPOLICYANALYSISREQUEST.fields_by_name['output_config']._options = None
 
 _ASSETSERVICE = _descriptor.ServiceDescriptor(
-    name="AssetService",
-    full_name="google.cloud.asset.v1p4beta1.AssetService",
-    file=DESCRIPTOR,
+  name='AssetService',
+  full_name='google.cloud.asset.v1p4beta1.AssetService',
+  file=DESCRIPTOR,
+  index=0,
+  serialized_options=b'\312A\031cloudasset.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform',
+  serialized_start=2710,
+  serialized_end=3323,
+  methods=[
+  _descriptor.MethodDescriptor(
+    name='AnalyzeIamPolicy',
+    full_name='google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy',
     index=0,
-    serialized_options=b"\312A\031cloudasset.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform",
-    serialized_start=2710,
-    serialized_end=3323,
-    methods=[
-        _descriptor.MethodDescriptor(
-            name="AnalyzeIamPolicy",
-            full_name="google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy",
-            index=0,
-            containing_service=None,
-            input_type=_ANALYZEIAMPOLICYREQUEST,
-            output_type=_ANALYZEIAMPOLICYRESPONSE,
-            serialized_options=b"\202\323\344\223\0029\0227/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy",
-        ),
-        _descriptor.MethodDescriptor(
-            name="ExportIamPolicyAnalysis",
-            full_name="google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis",
-            index=1,
-            containing_service=None,
-            input_type=_EXPORTIAMPOLICYANALYSISREQUEST,
-            output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
-            serialized_options=b'\202\323\344\223\002C">/v1p4beta1/{analysis_query.parent=*/*}:exportIamPolicyAnalysis:\001*\312A{\n<google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse\022;google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest',
-        ),
-    ],
-)
+    containing_service=None,
+    input_type=_ANALYZEIAMPOLICYREQUEST,
+    output_type=_ANALYZEIAMPOLICYRESPONSE,
+    serialized_options=b'\202\323\344\223\0029\0227/v1p4beta1/{analysis_query.parent=*/*}:analyzeIamPolicy',
+  ),
+  _descriptor.MethodDescriptor(
+    name='ExportIamPolicyAnalysis',
+    full_name='google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis',
+    index=1,
+    containing_service=None,
+    input_type=_EXPORTIAMPOLICYANALYSISREQUEST,
+    output_type=google_dot_longrunning_dot_operations__pb2._OPERATION,
+    serialized_options=b'\202\323\344\223\002C\">/v1p4beta1/{analysis_query.parent=*/*}:exportIamPolicyAnalysis:\001*\312A{\n<google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisResponse\022;google.cloud.asset.v1p4beta1.ExportIamPolicyAnalysisRequest',
+  ),
+])
 _sym_db.RegisterServiceDescriptor(_ASSETSERVICE)
 
-DESCRIPTOR.services_by_name["AssetService"] = _ASSETSERVICE
+DESCRIPTOR.services_by_name['AssetService'] = _ASSETSERVICE
 
 # @@protoc_insertion_point(module_scope)

@@ -38,18 +38,22 @@ from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-asset").version
+
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    'google-cloud-asset',
+).version
 
 
 class AssetServiceClient(object):
     """Asset service definition."""
 
-    SERVICE_ADDRESS = "cloudasset.googleapis.com:443"
+    SERVICE_ADDRESS = 'cloudasset.googleapis.com:443'
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = "google.cloud.asset.v1p2beta1.AssetService"
+    _INTERFACE_NAME = 'google.cloud.asset.v1p2beta1.AssetService'
+
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -65,28 +69,25 @@ class AssetServiceClient(object):
         Returns:
             AssetServiceClient: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(filename)
-        kwargs["credentials"] = credentials
+        credentials = service_account.Credentials.from_service_account_file(
+            filename)
+        kwargs['credentials'] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
+
 
     @classmethod
     def feed_path(cls, project, feed):
         """Return a fully-qualified feed string."""
         return google.api_core.path_template.expand(
-            "projects/{project}/feeds/{feed}", project=project, feed=feed
+            'projects/{project}/feeds/{feed}',
+            project=project,
+            feed=feed,
         )
 
-    def __init__(
-        self,
-        transport=None,
-        channel=None,
-        credentials=None,
-        client_config=None,
-        client_info=None,
-        client_options=None,
-    ):
+    def __init__(self, transport=None, channel=None, credentials=None,
+            client_config=None, client_info=None, client_options=None):
         """Constructor.
 
         Args:
@@ -122,27 +123,20 @@ class AssetServiceClient(object):
         """
         # Raise deprecation warnings for things we want to go away.
         if client_config is not None:
-            warnings.warn(
-                "The `client_config` argument is deprecated.",
-                PendingDeprecationWarning,
-                stacklevel=2,
-            )
+            warnings.warn('The `client_config` argument is deprecated.',
+                          PendingDeprecationWarning, stacklevel=2)
         else:
             client_config = asset_service_client_config.config
 
         if channel:
-            warnings.warn(
-                "The `channel` argument is deprecated; use " "`transport` instead.",
-                PendingDeprecationWarning,
-                stacklevel=2,
-            )
+            warnings.warn('The `channel` argument is deprecated; use '
+                          '`transport` instead.',
+                          PendingDeprecationWarning, stacklevel=2)
 
         api_endpoint = self.SERVICE_ADDRESS
         if client_options:
             if type(client_options) == dict:
-                client_options = google.api_core.client_options.from_dict(
-                    client_options
-                )
+                client_options = google.api_core.client_options.from_dict(client_options)
             if client_options.api_endpoint:
                 api_endpoint = client_options.api_endpoint
 
@@ -159,18 +153,20 @@ class AssetServiceClient(object):
             else:
                 if credentials:
                     raise ValueError(
-                        "Received both a transport instance and "
-                        "credentials; these are mutually exclusive."
+                        'Received both a transport instance and '
+                        'credentials; these are mutually exclusive.'
                     )
                 self.transport = transport
         else:
             self.transport = asset_service_grpc_transport.AssetServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials
+                address=api_endpoint,
+                channel=channel,
+                credentials=credentials,
             )
 
         if client_info is None:
             client_info = google.api_core.gapic_v1.client_info.ClientInfo(
-                gapic_version=_GAPIC_LIBRARY_VERSION
+                gapic_version=_GAPIC_LIBRARY_VERSION,
             )
         else:
             client_info.gapic_version = _GAPIC_LIBRARY_VERSION
@@ -181,7 +177,7 @@ class AssetServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config["interfaces"][self._INTERFACE_NAME]
+            client_config['interfaces'][self._INTERFACE_NAME],
         )
 
         # Save a dictionary of cached API call functions.
@@ -192,12 +188,11 @@ class AssetServiceClient(object):
 
     # Service calls
     def delete_feed(
-        self,
-        name,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
+            self,
+            name,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
         Deletes an asset feed.
 
@@ -233,43 +228,38 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "delete_feed" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "delete_feed"
-            ] = google.api_core.gapic_v1.method.wrap_method(
+        if 'delete_feed' not in self._inner_api_calls:
+            self._inner_api_calls['delete_feed'] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.delete_feed,
-                default_retry=self._method_configs["DeleteFeed"].retry,
-                default_timeout=self._method_configs["DeleteFeed"].timeout,
+                default_retry=self._method_configs['DeleteFeed'].retry,
+                default_timeout=self._method_configs['DeleteFeed'].timeout,
                 client_info=self._client_info,
             )
 
-        request = asset_service_pb2.DeleteFeedRequest(name=name)
+        request = asset_service_pb2.DeleteFeedRequest(
+            name=name,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("name", name)]
+            routing_header = [('name', name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
             metadata.append(routing_metadata)
 
-        self._inner_api_calls["delete_feed"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
+        self._inner_api_calls['delete_feed'](request, retry=retry, timeout=timeout, metadata=metadata)
 
     def create_feed(
-        self,
-        parent,
-        feed_id,
-        feed,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
+            self,
+            parent,
+            feed_id,
+            feed,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
         Creates a feed in a parent project/folder/organization to listen to its
         asset updates.
@@ -326,43 +316,38 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "create_feed" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "create_feed"
-            ] = google.api_core.gapic_v1.method.wrap_method(
+        if 'create_feed' not in self._inner_api_calls:
+            self._inner_api_calls['create_feed'] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.create_feed,
-                default_retry=self._method_configs["CreateFeed"].retry,
-                default_timeout=self._method_configs["CreateFeed"].timeout,
+                default_retry=self._method_configs['CreateFeed'].retry,
+                default_timeout=self._method_configs['CreateFeed'].timeout,
                 client_info=self._client_info,
             )
 
         request = asset_service_pb2.CreateFeedRequest(
-            parent=parent, feed_id=feed_id, feed=feed
+            parent=parent,
+            feed_id=feed_id,
+            feed=feed,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("parent", parent)]
+            routing_header = [('parent', parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls["create_feed"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
+        return self._inner_api_calls['create_feed'](request, retry=retry, timeout=timeout, metadata=metadata)
 
     def get_feed(
-        self,
-        name,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
+            self,
+            name,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
         Gets details about an asset feed.
 
@@ -401,41 +386,36 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "get_feed" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "get_feed"
-            ] = google.api_core.gapic_v1.method.wrap_method(
+        if 'get_feed' not in self._inner_api_calls:
+            self._inner_api_calls['get_feed'] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.get_feed,
-                default_retry=self._method_configs["GetFeed"].retry,
-                default_timeout=self._method_configs["GetFeed"].timeout,
+                default_retry=self._method_configs['GetFeed'].retry,
+                default_timeout=self._method_configs['GetFeed'].timeout,
                 client_info=self._client_info,
             )
 
-        request = asset_service_pb2.GetFeedRequest(name=name)
+        request = asset_service_pb2.GetFeedRequest(
+            name=name,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("name", name)]
+            routing_header = [('name', name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls["get_feed"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
+        return self._inner_api_calls['get_feed'](request, retry=retry, timeout=timeout, metadata=metadata)
 
     def list_feeds(
-        self,
-        parent,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
+            self,
+            parent,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
         Lists all asset feeds in a parent project/folder/organization.
 
@@ -473,42 +453,37 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "list_feeds" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "list_feeds"
-            ] = google.api_core.gapic_v1.method.wrap_method(
+        if 'list_feeds' not in self._inner_api_calls:
+            self._inner_api_calls['list_feeds'] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.list_feeds,
-                default_retry=self._method_configs["ListFeeds"].retry,
-                default_timeout=self._method_configs["ListFeeds"].timeout,
+                default_retry=self._method_configs['ListFeeds'].retry,
+                default_timeout=self._method_configs['ListFeeds'].timeout,
                 client_info=self._client_info,
             )
 
-        request = asset_service_pb2.ListFeedsRequest(parent=parent)
+        request = asset_service_pb2.ListFeedsRequest(
+            parent=parent,
+        )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("parent", parent)]
+            routing_header = [('parent', parent)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls["list_feeds"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
+        return self._inner_api_calls['list_feeds'](request, retry=retry, timeout=timeout, metadata=metadata)
 
     def update_feed(
-        self,
-        feed,
-        update_mask,
-        retry=google.api_core.gapic_v1.method.DEFAULT,
-        timeout=google.api_core.gapic_v1.method.DEFAULT,
-        metadata=None,
-    ):
+            self,
+            feed,
+            update_mask,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):
         """
         Updates an asset feed configuration.
 
@@ -560,32 +535,27 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "update_feed" not in self._inner_api_calls:
-            self._inner_api_calls[
-                "update_feed"
-            ] = google.api_core.gapic_v1.method.wrap_method(
+        if 'update_feed' not in self._inner_api_calls:
+            self._inner_api_calls['update_feed'] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.update_feed,
-                default_retry=self._method_configs["UpdateFeed"].retry,
-                default_timeout=self._method_configs["UpdateFeed"].timeout,
+                default_retry=self._method_configs['UpdateFeed'].retry,
+                default_timeout=self._method_configs['UpdateFeed'].timeout,
                 client_info=self._client_info,
             )
 
         request = asset_service_pb2.UpdateFeedRequest(
-            feed=feed, update_mask=update_mask
+            feed=feed,
+            update_mask=update_mask,
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("feed.name", feed.name)]
+            routing_header = [('feed.name', feed.name)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
-                routing_header
-            )
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
             metadata.append(routing_metadata)
 
-        return self._inner_api_calls["update_feed"](
-            request, retry=retry, timeout=timeout, metadata=metadata
-        )
+        return self._inner_api_calls['update_feed'](request, retry=retry, timeout=timeout, metadata=metadata)
