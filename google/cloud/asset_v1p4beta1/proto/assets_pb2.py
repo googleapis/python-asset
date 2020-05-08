@@ -697,7 +697,8 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
             {
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_ACCESS,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
-                "__doc__": """A role or permission that appears in an access control list.
+                "__doc__": """A role or permission that appears in an access control
+    list.
     
     
     Attributes:

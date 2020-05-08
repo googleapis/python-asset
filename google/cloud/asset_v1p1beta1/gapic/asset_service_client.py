@@ -76,13 +76,6 @@ class AssetServiceClient(object):
             "projects/{project}", project=project
         )
 
-    @classmethod
-    def project_path(cls, project):
-        """Return a fully-qualified project string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}", project=project
-        )
-
     def __init__(
         self,
         transport=None,
@@ -202,6 +195,7 @@ class AssetServiceClient(object):
         query=None,
         asset_types=None,
         page_size=None,
+        order_by=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
@@ -237,12 +231,13 @@ class AssetServiceClient(object):
             ...         pass
 
         Args:
-            scope (str): Required. The relative name of an asset. The search is limited to the
-                resources within the ``scope``. The allowed value must be:
+            scope (str): Required. The relative name of an asset. The search is limited to
+                the resources within the ``scope``. The allowed value must be:
 
                 -  Organization number (such as "organizations/123")
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
+                -  Project id (such as "projects/abc")
             query (str): Optional. The query statement.
             asset_types (list[str]): Optional. A list of asset types that this request searches for. If empty, it will
                 search all the supported asset types.
@@ -251,6 +246,10 @@ class AssetServiceClient(object):
                 resource, this parameter does not affect the return value. If page
                 streaming is performed per-page, this determines the maximum number
                 of resources in a page.
+            order_by (str): Optional. A comma separated list of fields specifying the sorting order of the
+                results. The default order is ascending. Add " desc" after the field name
+                to indicate descending order. Redundant space characters are ignored. For
+                example, "  foo ,  bar  desc  ".
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -285,7 +284,11 @@ class AssetServiceClient(object):
             )
 
         request = asset_service_pb2.SearchAllResourcesRequest(
-            scope=scope, query=query, asset_types=asset_types, page_size=page_size
+            scope=scope,
+            query=query,
+            asset_types=asset_types,
+            page_size=page_size,
+            order_by=order_by,
         )
         if metadata is None:
             metadata = []
@@ -355,12 +358,13 @@ class AssetServiceClient(object):
             ...         pass
 
         Args:
-            scope (str): Required. The relative name of an asset. The search is limited to the
-                resources within the ``scope``. The allowed value must be:
+            scope (str): Required. The relative name of an asset. The search is limited to
+                the resources within the ``scope``. The allowed value must be:
 
                 -  Organization number (such as "organizations/123")
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
+                -  Project id (such as "projects/abc")
             query (str): Optional. The query statement. Examples:
 
                 -  "policy:myuser@mydomain.com"

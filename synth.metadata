@@ -4,7 +4,15 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/python-asset.git",
-        "sha": "3925fac13e28ebd81d735aa90c9220cf60e8cd8b"
+        "sha": "098470865283ab729c134459aae14a052e6ca6ee"
+      }
+    },
+    {
+      "git": {
+        "name": "googleapis",
+        "remote": "https://github.com/googleapis/googleapis.git",
+        "sha": "83816bb3093686a28af2891db5b7506614a820b1",
+        "internalRef": "310509915"
       }
     },
     {
@@ -28,6 +36,15 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1beta1",
+        "language": "python",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1p1beta1",
         "language": "python",
         "generator": "bazel"
       }
