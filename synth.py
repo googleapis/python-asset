@@ -115,7 +115,7 @@ s.replace(
 # Add templated files
 # ----------------------------------------------------------------------------
 templated_files = gcp.CommonTemplates().py_library(
-    unit_cov_level=79, cov_level=80, system_test_dependencies=["test_utils"]
+    unit_cov_level=79, cov_level=80
 )
 s.move(templated_files)
 
