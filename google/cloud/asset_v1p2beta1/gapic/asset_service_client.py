@@ -78,13 +78,6 @@ class AssetServiceClient(object):
             "projects/{project}/feeds/{feed}", project=project, feed=feed
         )
 
-    @classmethod
-    def project_path(cls, project):
-        """Return a fully-qualified project string."""
-        return google.api_core.path_template.expand(
-            "projects/{project}", project=project
-        )
-
     def __init__(
         self,
         transport=None,

@@ -114,7 +114,8 @@ s.replace(
 # Glue in Project Path Method.
 # TODO: Remove during microgenerator transition
 s.replace(
-    "google/cloud/asset_v*/gapic/asset_service_client.py",
+    ["google/cloud/asset_v1/gapic/asset_service_client.py",
+    "google/cloud/asset_v1beta1/gapic/asset_service_client.py"],
     "(def __init__\()",
     '''@classmethod
     def project_path(cls, project):
