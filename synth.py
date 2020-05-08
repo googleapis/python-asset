@@ -108,14 +108,16 @@ s.replace(
 s.replace(
     "google/cloud/asset_v1/types.py",
     "from google\.cloud\.asset_v1\.proto import orgpolicy_pb2",
-    "from google.cloud.orgpolicy.v1 import orgpolicy_pb2"
+    "from google.cloud.orgpolicy.v1 import orgpolicy_pb2",
 )
 
 # Glue in Project Path Method.
 # TODO: Remove during microgenerator transition
-s.replace(
-    ["google/cloud/asset_v1/gapic/asset_service_client.py",
-    "google/cloud/asset_v1beta1/gapic/asset_service_client.py"],
+count = s.replace(
+    [
+        "google/cloud/asset_v1/gapic/asset_service_client.py",
+        "google/cloud/asset_v1beta1/gapic/asset_service_client.py",
+    ],
     "(def __init__\()",
     '''@classmethod
     def project_path(cls, project):
@@ -124,15 +126,44 @@ s.replace(
             "projects/{project}", project=project
         )
     \g<1>''',
-    )
+)
+if count != 2:
+    raise Exception("``project_path`` method not added.")
 
+# Keep same parameter order to avoid breaking existing calls
+# Not re-ordering the docstring as that is more likely to break
+# TODO: Remove during microgenerator transition
+count = s.replace(
+    [
+        "google/cloud/asset_v1/gapic/asset_service_client.py",
+        "google/cloud/asset_v1beta1/gapic/asset_service_client.py",
+    ],
+    """def batch_get_assets_history\(
+            self,
+            parent,
+            asset_names=None,
+            content_type=None,
+            read_time_window=None,
+            retry=google\.api_core\.gapic_v1\.method\.DEFAULT,
+            timeout=google\.api_core\.gapic_v1\.method\.DEFAULT,
+            metadata=None\):""",
+    """def batch_get_assets_history(
+            self,
+            parent,
+            content_type,
+            read_time_window,
+            asset_names=None,
+            retry=google.api_core.gapic_v1.method.DEFAULT,
+            timeout=google.api_core.gapic_v1.method.DEFAULT,
+            metadata=None):""",
+)
+if count != 2:
+    raise Exception("Parameter order replace not made.")
 
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
-templated_files = gcp.CommonTemplates().py_library(
-    unit_cov_level=79, cov_level=80
-)
+templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80)
 s.move(templated_files)
 
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)

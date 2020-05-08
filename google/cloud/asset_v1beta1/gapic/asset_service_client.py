@@ -320,9 +320,9 @@ class AssetServiceClient(object):
     def batch_get_assets_history(
         self,
         parent,
+        content_type,
+        read_time_window,
         asset_names=None,
-        content_type=None,
-        read_time_window=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
