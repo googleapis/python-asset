@@ -30,6 +30,7 @@ class ContentType(enum.IntEnum):
       ORG_POLICY (int): The Cloud Organization Policy set on an asset.
       ACCESS_POLICY (int): The Cloud Access context mananger Policy set on an asset.
     """
+
     CONTENT_TYPE_UNSPECIFIED = 0
     RESOURCE = 1
     IAM_POLICY = 2
@@ -47,6 +48,7 @@ class DeviceEncryptionStatus(enum.IntEnum):
       UNENCRYPTED (int): The device supports encryption, but is currently unencrypted.
       ENCRYPTED (int): The device is encrypted.
     """
+
     ENCRYPTION_UNSPECIFIED = 0
     ENCRYPTION_UNSUPPORTED = 1
     UNENCRYPTED = 2
@@ -66,6 +68,7 @@ class DeviceManagementLevel(enum.IntEnum):
       ability to directly manage the device (such as remote wiping). This can be
       enabled through the Android Enterprise Platform.
     """
+
     MANAGEMENT_UNSPECIFIED = 0
     NONE = 1
     BASIC = 2
@@ -82,6 +85,7 @@ class NullValue(enum.IntEnum):
     Attributes:
       NULL_VALUE (int): Null value.
     """
+
     NULL_VALUE = 0
 
 
@@ -99,6 +103,7 @@ class OsType(enum.IntEnum):
       ANDROID (int): An Android operating system.
       IOS (int): An iOS operating system.
     """
+
     OS_UNSPECIFIED = 0
     DESKTOP_MAC = 1
     DESKTOP_WINDOWS = 2
@@ -119,6 +124,7 @@ class BasicLevel(object):
           OR (int): If at least one ``Condition`` is true, then the ``BasicLevel`` is
           true.
         """
+
         AND = 0
         OR = 1
 
@@ -141,6 +147,7 @@ class Policy(object):
               ALLOW (int): A policy with this set allows all values.
               DENY (int): A policy with this set denies all values.
             """
+
             ALL_VALUES_UNSPECIFIED = 0
             ALLOW = 1
             DENY = 2
@@ -169,6 +176,6 @@ class ServicePerimeter(object):
           PERIMETER_TYPE_REGULAR (int): Regular Perimeter.
           PERIMETER_TYPE_BRIDGE (int): Perimeter Bridge.
         """
+
         PERIMETER_TYPE_REGULAR = 0
         PERIMETER_TYPE_BRIDGE = 1
-    

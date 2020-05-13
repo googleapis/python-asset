@@ -36,22 +36,18 @@ from google.cloud.asset_v1p1beta1.proto import asset_service_pb2
 from google.cloud.asset_v1p1beta1.proto import asset_service_pb2_grpc
 
 
-
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
-    'google-cloud-asset',
-).version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-asset").version
 
 
 class AssetServiceClient(object):
     """Asset service definition."""
 
-    SERVICE_ADDRESS = 'cloudasset.googleapis.com:443'
+    SERVICE_ADDRESS = "cloudasset.googleapis.com:443"
     """The default address of the service."""
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = 'google.cloud.asset.v1p1beta1.AssetService'
-
+    _INTERFACE_NAME = "google.cloud.asset.v1p1beta1.AssetService"
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -67,15 +63,21 @@ class AssetServiceClient(object):
         Returns:
             AssetServiceClient: The constructed client.
         """
-        credentials = service_account.Credentials.from_service_account_file(
-            filename)
-        kwargs['credentials'] = credentials
+        credentials = service_account.Credentials.from_service_account_file(filename)
+        kwargs["credentials"] = credentials
         return cls(*args, **kwargs)
 
     from_service_account_json = from_service_account_file
 
-    def __init__(self, transport=None, channel=None, credentials=None,
-            client_config=None, client_info=None, client_options=None):
+    def __init__(
+        self,
+        transport=None,
+        channel=None,
+        credentials=None,
+        client_config=None,
+        client_info=None,
+        client_options=None,
+    ):
         """Constructor.
 
         Args:
@@ -111,20 +113,27 @@ class AssetServiceClient(object):
         """
         # Raise deprecation warnings for things we want to go away.
         if client_config is not None:
-            warnings.warn('The `client_config` argument is deprecated.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `client_config` argument is deprecated.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
         else:
             client_config = asset_service_client_config.config
 
         if channel:
-            warnings.warn('The `channel` argument is deprecated; use '
-                          '`transport` instead.',
-                          PendingDeprecationWarning, stacklevel=2)
+            warnings.warn(
+                "The `channel` argument is deprecated; use " "`transport` instead.",
+                PendingDeprecationWarning,
+                stacklevel=2,
+            )
 
         api_endpoint = self.SERVICE_ADDRESS
         if client_options:
             if type(client_options) == dict:
-                client_options = google.api_core.client_options.from_dict(client_options)
+                client_options = google.api_core.client_options.from_dict(
+                    client_options
+                )
             if client_options.api_endpoint:
                 api_endpoint = client_options.api_endpoint
 
@@ -141,20 +150,18 @@ class AssetServiceClient(object):
             else:
                 if credentials:
                     raise ValueError(
-                        'Received both a transport instance and '
-                        'credentials; these are mutually exclusive.'
+                        "Received both a transport instance and "
+                        "credentials; these are mutually exclusive."
                     )
                 self.transport = transport
         else:
             self.transport = asset_service_grpc_transport.AssetServiceGrpcTransport(
-                address=api_endpoint,
-                channel=channel,
-                credentials=credentials,
+                address=api_endpoint, channel=channel, credentials=credentials
             )
 
         if client_info is None:
             client_info = google.api_core.gapic_v1.client_info.ClientInfo(
-                gapic_version=_GAPIC_LIBRARY_VERSION,
+                gapic_version=_GAPIC_LIBRARY_VERSION
             )
         else:
             client_info.gapic_version = _GAPIC_LIBRARY_VERSION
@@ -165,7 +172,7 @@ class AssetServiceClient(object):
         # (Ordinarily, these are the defaults specified in the `*_config.py`
         # file next to this one.)
         self._method_configs = google.api_core.gapic_v1.config.parse_method_configs(
-            client_config['interfaces'][self._INTERFACE_NAME],
+            client_config["interfaces"][self._INTERFACE_NAME]
         )
 
         # Save a dictionary of cached API call functions.
@@ -176,15 +183,16 @@ class AssetServiceClient(object):
 
     # Service calls
     def search_all_resources(
-            self,
-            scope,
-            query=None,
-            asset_types=None,
-            page_size=None,
-            order_by=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        scope,
+        query=None,
+        asset_types=None,
+        page_size=None,
+        order_by=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Searches all the resources under a given accessible CRM scope
         (project/folder/organization). This RPC gives callers
@@ -258,11 +266,13 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'search_all_resources' not in self._inner_api_calls:
-            self._inner_api_calls['search_all_resources'] = google.api_core.gapic_v1.method.wrap_method(
+        if "search_all_resources" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "search_all_resources"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.search_all_resources,
-                default_retry=self._method_configs['SearchAllResources'].retry,
-                default_timeout=self._method_configs['SearchAllResources'].timeout,
+                default_retry=self._method_configs["SearchAllResources"].retry,
+                default_timeout=self._method_configs["SearchAllResources"].timeout,
                 client_info=self._client_info,
             )
 
@@ -277,31 +287,39 @@ class AssetServiceClient(object):
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('scope', scope)]
+            routing_header = [("scope", scope)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
-            method=functools.partial(self._inner_api_calls['search_all_resources'], retry=retry, timeout=timeout, metadata=metadata),
+            method=functools.partial(
+                self._inner_api_calls["search_all_resources"],
+                retry=retry,
+                timeout=timeout,
+                metadata=metadata,
+            ),
             request=request,
-            items_field='results',
-            request_token_field='page_token',
-            response_token_field='next_page_token',
+            items_field="results",
+            request_token_field="page_token",
+            response_token_field="next_page_token",
         )
         return iterator
 
     def search_all_iam_policies(
-            self,
-            scope,
-            query=None,
-            page_size=None,
-            retry=google.api_core.gapic_v1.method.DEFAULT,
-            timeout=google.api_core.gapic_v1.method.DEFAULT,
-            metadata=None):
+        self,
+        scope,
+        query=None,
+        page_size=None,
+        retry=google.api_core.gapic_v1.method.DEFAULT,
+        timeout=google.api_core.gapic_v1.method.DEFAULT,
+        metadata=None,
+    ):
         """
         Searches all the IAM policies under a given accessible CRM scope
         (project/folder/organization). This RPC gives callers
@@ -372,36 +390,43 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if 'search_all_iam_policies' not in self._inner_api_calls:
-            self._inner_api_calls['search_all_iam_policies'] = google.api_core.gapic_v1.method.wrap_method(
+        if "search_all_iam_policies" not in self._inner_api_calls:
+            self._inner_api_calls[
+                "search_all_iam_policies"
+            ] = google.api_core.gapic_v1.method.wrap_method(
                 self.transport.search_all_iam_policies,
-                default_retry=self._method_configs['SearchAllIamPolicies'].retry,
-                default_timeout=self._method_configs['SearchAllIamPolicies'].timeout,
+                default_retry=self._method_configs["SearchAllIamPolicies"].retry,
+                default_timeout=self._method_configs["SearchAllIamPolicies"].timeout,
                 client_info=self._client_info,
             )
 
         request = asset_service_pb2.SearchAllIamPoliciesRequest(
-            scope=scope,
-            query=query,
-            page_size=page_size,
+            scope=scope, query=query, page_size=page_size
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [('scope', scope)]
+            routing_header = [("scope", scope)]
         except AttributeError:
             pass
         else:
-            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(routing_header)
+            routing_metadata = google.api_core.gapic_v1.routing_header.to_grpc_metadata(
+                routing_header
+            )
             metadata.append(routing_metadata)
 
         iterator = google.api_core.page_iterator.GRPCIterator(
             client=None,
-            method=functools.partial(self._inner_api_calls['search_all_iam_policies'], retry=retry, timeout=timeout, metadata=metadata),
+            method=functools.partial(
+                self._inner_api_calls["search_all_iam_policies"],
+                retry=retry,
+                timeout=timeout,
+                metadata=metadata,
+            ),
             request=request,
-            items_field='results',
-            request_token_field='page_token',
-            response_token_field='next_page_token',
+            items_field="results",
+            request_token_field="page_token",
+            response_token_field="next_page_token",
         )
         return iterator

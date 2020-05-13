@@ -24,9 +24,9 @@ from google.cloud.asset_v1p1beta1.proto import asset_service_pb2
 from google.cloud.asset_v1p1beta1.proto import assets_pb2
 
 
-
 class MultiCallableStub(object):
     """Stub for the grpc.UnaryUnaryMultiCallable interface."""
+
     def __init__(self, method, channel_stub):
         self.method = method
         self.channel_stub = channel_stub
@@ -47,12 +47,12 @@ class MultiCallableStub(object):
 
 class ChannelStub(object):
     """Stub for the grpc.Channel interface."""
-    def __init__(self, responses = []):
+
+    def __init__(self, responses=[]):
         self.responses = responses
         self.requests = []
 
-    def unary_unary(
-            self, method, request_serializer=None, response_deserializer=None):
+    def unary_unary(self, method, request_serializer=None, response_deserializer=None):
         return MultiCallableStub(method, self)
 
 
@@ -61,24 +61,25 @@ class CustomException(Exception):
 
 
 class TestAssetServiceClient(object):
-
     def test_search_all_resources(self):
         # Setup Expected Response
-        next_page_token = ''
+        next_page_token = ""
         results_element = {}
         results = [results_element]
-        expected_response = {'next_page_token': next_page_token, 'results': results}
-        expected_response = asset_service_pb2.SearchAllResourcesResponse(**expected_response)
+        expected_response = {"next_page_token": next_page_token, "results": results}
+        expected_response = asset_service_pb2.SearchAllResourcesResponse(
+            **expected_response
+        )
 
         # Mock the API response
-        channel = ChannelStub(responses = [expected_response])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[expected_response])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1p1beta1.AssetServiceClient()
 
         # Setup Request
-        scope = 'scope109264468'
+        scope = "scope109264468"
 
         paged_list_response = client.search_all_resources(scope)
         resources = list(paged_list_response)
@@ -92,14 +93,14 @@ class TestAssetServiceClient(object):
         assert expected_request == actual_request
 
     def test_search_all_resources_exception(self):
-        channel = ChannelStub(responses = [CustomException()])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[CustomException()])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1p1beta1.AssetServiceClient()
 
         # Setup request
-        scope = 'scope109264468'
+        scope = "scope109264468"
 
         paged_list_response = client.search_all_resources(scope)
         with pytest.raises(CustomException):
@@ -107,21 +108,23 @@ class TestAssetServiceClient(object):
 
     def test_search_all_iam_policies(self):
         # Setup Expected Response
-        next_page_token = ''
+        next_page_token = ""
         results_element = {}
         results = [results_element]
-        expected_response = {'next_page_token': next_page_token, 'results': results}
-        expected_response = asset_service_pb2.SearchAllIamPoliciesResponse(**expected_response)
+        expected_response = {"next_page_token": next_page_token, "results": results}
+        expected_response = asset_service_pb2.SearchAllIamPoliciesResponse(
+            **expected_response
+        )
 
         # Mock the API response
-        channel = ChannelStub(responses = [expected_response])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[expected_response])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1p1beta1.AssetServiceClient()
 
         # Setup Request
-        scope = 'scope109264468'
+        scope = "scope109264468"
 
         paged_list_response = client.search_all_iam_policies(scope)
         resources = list(paged_list_response)
@@ -135,14 +138,14 @@ class TestAssetServiceClient(object):
         assert expected_request == actual_request
 
     def test_search_all_iam_policies_exception(self):
-        channel = ChannelStub(responses = [CustomException()])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[CustomException()])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1p1beta1.AssetServiceClient()
 
         # Setup request
-        scope = 'scope109264468'
+        scope = "scope109264468"
 
         paged_list_response = client.search_all_iam_policies(scope)
         with pytest.raises(CustomException):

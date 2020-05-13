@@ -25,14 +25,9 @@ from google.protobuf import empty_pb2
 from google.protobuf import field_mask_pb2
 
 
-_shared_modules = [
-    empty_pb2,
-    field_mask_pb2,
-]
+_shared_modules = [empty_pb2, field_mask_pb2]
 
-_local_modules = [
-    asset_service_pb2,
-]
+_local_modules = [asset_service_pb2]
 
 names = []
 
@@ -41,10 +36,10 @@ for module in _shared_modules:  # pragma: NO COVER
         setattr(sys.modules[__name__], name, message)
         names.append(name)
 for module in _local_modules:
-      for name, message in get_messages(module).items():
-          message.__module__ = 'google.cloud.asset_v1p2beta1.types'
-          setattr(sys.modules[__name__], name, message)
-          names.append(name)
+    for name, message in get_messages(module).items():
+        message.__module__ = "google.cloud.asset_v1p2beta1.types"
+        setattr(sys.modules[__name__], name, message)
+        names.append(name)
 
 
 __all__ = tuple(sorted(names))

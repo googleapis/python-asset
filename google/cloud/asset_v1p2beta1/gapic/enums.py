@@ -28,6 +28,7 @@ class ContentType(enum.IntEnum):
       RESOURCE (int): Resource metadata.
       IAM_POLICY (int): The actual IAM policy set on a resource.
     """
+
     CONTENT_TYPE_UNSPECIFIED = 0
     RESOURCE = 1
     IAM_POLICY = 2

@@ -147,6 +147,7 @@ class Code(enum.IntEnum):
 
       HTTP Mapping: 500 Internal Server Error
     """
+
     OK = 0
     CANCELLED = 1
     UNKNOWN = 2

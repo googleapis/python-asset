@@ -26,9 +26,9 @@ from google.cloud.asset_v1beta1.proto import asset_service_pb2
 from google.longrunning import operations_pb2
 
 
-
 class MultiCallableStub(object):
     """Stub for the grpc.UnaryUnaryMultiCallable interface."""
+
     def __init__(self, method, channel_stub):
         self.method = method
         self.channel_stub = channel_stub
@@ -49,12 +49,12 @@ class MultiCallableStub(object):
 
 class ChannelStub(object):
     """Stub for the grpc.Channel interface."""
-    def __init__(self, responses = []):
+
+    def __init__(self, responses=[]):
         self.responses = responses
         self.requests = []
 
-    def unary_unary(
-            self, method, request_serializer=None, response_deserializer=None):
+    def unary_unary(self, method, request_serializer=None, response_deserializer=None):
         return MultiCallableStub(method, self)
 
 
@@ -63,23 +63,24 @@ class CustomException(Exception):
 
 
 class TestAssetServiceClient(object):
-
     def test_export_assets(self):
         # Setup Expected Response
         expected_response = {}
         expected_response = asset_service_pb2.ExportAssetsResponse(**expected_response)
-        operation = operations_pb2.Operation(name='operations/test_export_assets', done=True)
+        operation = operations_pb2.Operation(
+            name="operations/test_export_assets", done=True
+        )
         operation.response.Pack(expected_response)
 
         # Mock the API response
         channel = ChannelStub(responses=[operation])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1beta1.AssetServiceClient()
 
         # Setup Request
-        parent = 'parent-995424086'
+        parent = "parent-995424086"
         output_config = {}
 
         response = client.export_assets(parent, output_config)
@@ -87,26 +88,29 @@ class TestAssetServiceClient(object):
         assert expected_response == result
 
         assert len(channel.requests) == 1
-        expected_request = asset_service_pb2.ExportAssetsRequest(parent=parent, output_config=output_config)
+        expected_request = asset_service_pb2.ExportAssetsRequest(
+            parent=parent, output_config=output_config
+        )
         actual_request = channel.requests[0][1]
         assert expected_request == actual_request
-
 
     def test_export_assets_exception(self):
         # Setup Response
         error = status_pb2.Status()
-        operation = operations_pb2.Operation(name='operations/test_export_assets_exception', done=True)
+        operation = operations_pb2.Operation(
+            name="operations/test_export_assets_exception", done=True
+        )
         operation.error.CopyFrom(error)
 
         # Mock the API response
         channel = ChannelStub(responses=[operation])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1beta1.AssetServiceClient()
 
         # Setup Request
-        parent = 'parent-995424086'
+        parent = "parent-995424086"
         output_config = {}
 
         response = client.export_assets(parent, output_config)
@@ -116,17 +120,19 @@ class TestAssetServiceClient(object):
     def test_batch_get_assets_history(self):
         # Setup Expected Response
         expected_response = {}
-        expected_response = asset_service_pb2.BatchGetAssetsHistoryResponse(**expected_response)
+        expected_response = asset_service_pb2.BatchGetAssetsHistoryResponse(
+            **expected_response
+        )
 
         # Mock the API response
-        channel = ChannelStub(responses = [expected_response])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[expected_response])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1beta1.AssetServiceClient()
 
         # Setup Request
-        parent = 'parent-995424086'
+        parent = "parent-995424086"
 
         response = client.batch_get_assets_history(parent)
         assert expected_response == response
@@ -138,14 +144,14 @@ class TestAssetServiceClient(object):
 
     def test_batch_get_assets_history_exception(self):
         # Mock the API response
-        channel = ChannelStub(responses = [CustomException()])
-        patch = mock.patch('google.api_core.grpc_helpers.create_channel')
+        channel = ChannelStub(responses=[CustomException()])
+        patch = mock.patch("google.api_core.grpc_helpers.create_channel")
         with patch as create_channel:
             create_channel.return_value = channel
             client = asset_v1beta1.AssetServiceClient()
 
         # Setup request
-        parent = 'parent-995424086'
+        parent = "parent-995424086"
 
         with pytest.raises(CustomException):
             client.batch_get_assets_history(parent)
