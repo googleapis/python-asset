@@ -28,7 +28,6 @@ import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
 import google.api_core.operation
 import google.api_core.operations_v1
-import google.api_core.path_template
 import grpc
 
 from google.cloud.asset_v1beta1.gapic import asset_service_client_config
@@ -216,7 +215,8 @@ class AssetServiceClient(object):
             >>>
             >>> client = asset_v1beta1.AssetServiceClient()
             >>>
-            >>> parent = client.project_path('[PROJECT]')
+            >>> # TODO: Initialize `parent`:
+            >>> parent = ''
             >>>
             >>> # TODO: Initialize `output_config`:
             >>> output_config = {}
@@ -320,51 +320,35 @@ class AssetServiceClient(object):
     def batch_get_assets_history(
         self,
         parent,
-        content_type,
-        read_time_window,
+        content_type=None,
+        read_time_window=None,
         asset_names=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
     ):
         """
-        Batch gets the update history of assets that overlap a time window. For
-        RESOURCE content, this API outputs history with asset in both non-delete
-        or deleted status. For IAM\_POLICY content, this API outputs history
-        when the asset and its attached IAM POLICY both exist. This can create
-        gaps in the output history. If a specified asset does not exist, this
-        API returns an INVALID\_ARGUMENT error.
+        Batch gets the update history of assets that overlap a time window.
+        For RESOURCE content, this API outputs history with asset in both
+        non-delete or deleted status. For IAM_POLICY content, this API outputs
+        history when the asset and its attached IAM POLICY both exist. This can
+        create gaps in the output history. If a specified asset does not exist,
+        this API returns an INVALID_ARGUMENT error.
 
         Example:
             >>> from google.cloud import asset_v1beta1
-            >>> from google.cloud.asset_v1beta1 import enums
             >>>
             >>> client = asset_v1beta1.AssetServiceClient()
             >>>
-            >>> parent = client.project_path('[PROJECT]')
+            >>> # TODO: Initialize `parent`:
+            >>> parent = ''
             >>>
-            >>> # TODO: Initialize `content_type`:
-            >>> content_type = enums.ContentType.CONTENT_TYPE_UNSPECIFIED
-            >>>
-            >>> # TODO: Initialize `read_time_window`:
-            >>> read_time_window = {}
-            >>>
-            >>> response = client.batch_get_assets_history(parent, content_type, read_time_window)
+            >>> response = client.batch_get_assets_history(parent)
 
         Args:
             parent (str): Required. The relative name of the root asset. It can only be an
                 organization number (such as "organizations/123"), a project ID (such as
                 "projects/my-project-id")", or a project number (such as "projects/12345").
-            content_type (~google.cloud.asset_v1beta1.types.ContentType): Optional. The content type.
-            read_time_window (Union[dict, ~google.cloud.asset_v1beta1.types.TimeWindow]): Optional. The time window for the asset history. Both start\_time and
-                end\_time are optional and if set, it must be after 2018-10-02 UTC. If
-                end\_time is not set, it is default to current timestamp. If start\_time
-                is not set, the snapshot of the assets at end\_time will be returned.
-                The returned results contain all temporal assets whose time window
-                overlap with read\_time\_window.
-
-                If a dict is provided, it must be of the same form as the protobuf
-                message :class:`~google.cloud.asset_v1beta1.types.TimeWindow`
             asset_names (list[str]): A list of the full names of the assets. For example:
                 ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
                 See `Resource
@@ -373,6 +357,16 @@ class AssetServiceClient(object):
 
                 The request becomes a no-op if the asset name list is empty, and the max
                 size of the asset name list is 100 in one request.
+            content_type (~google.cloud.asset_v1beta1.types.ContentType): Optional. The content type.
+            read_time_window (Union[dict, ~google.cloud.asset_v1beta1.types.TimeWindow]): Optional. The time window for the asset history. Both start_time and
+                end_time are optional and if set, it must be after 2018-10-02 UTC. If
+                end_time is not set, it is default to current timestamp. If start_time
+                is not set, the snapshot of the assets at end_time will be returned. The
+                returned results contain all temporal assets whose time window overlap
+                with read_time_window.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1beta1.types.TimeWindow`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -405,9 +399,9 @@ class AssetServiceClient(object):
 
         request = asset_service_pb2.BatchGetAssetsHistoryRequest(
             parent=parent,
+            asset_names=asset_names,
             content_type=content_type,
             read_time_window=read_time_window,
-            asset_names=asset_names,
         )
         if metadata is None:
             metadata = []

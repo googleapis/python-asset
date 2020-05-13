@@ -1,6 +1,6 @@
 config = {
     "interfaces": {
-        "google.cloud.asset.v1p2beta1.AssetService": {
+        "google.cloud.asset.v1p4beta1.AssetService": {
             "retry_codes": {
                 "idempotent": ["DEADLINE_EXCEEDED", "UNAVAILABLE"],
                 "non_idempotent": [],
@@ -17,29 +17,14 @@ config = {
                 }
             },
             "methods": {
-                "DeleteFeed": {
-                    "timeout_millis": 60000,
-                    "retry_codes_name": "idempotent",
-                    "retry_params_name": "default",
-                },
-                "CreateFeed": {
-                    "timeout_millis": 60000,
+                "ExportIamPolicyAnalysis": {
+                    "timeout_millis": 600000,
                     "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default",
                 },
-                "GetFeed": {
-                    "timeout_millis": 60000,
+                "AnalyzeIamPolicy": {
+                    "timeout_millis": 600000,
                     "retry_codes_name": "idempotent",
-                    "retry_params_name": "default",
-                },
-                "ListFeeds": {
-                    "timeout_millis": 60000,
-                    "retry_codes_name": "idempotent",
-                    "retry_params_name": "default",
-                },
-                "UpdateFeed": {
-                    "timeout_millis": 60000,
-                    "retry_codes_name": "non_idempotent",
                     "retry_params_name": "default",
                 },
             },

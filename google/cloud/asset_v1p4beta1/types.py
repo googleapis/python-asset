@@ -20,35 +20,21 @@ import sys
 
 from google.api_core.protobuf_helpers import get_messages
 
-from google.identity.accesscontextmanager.v1 import access_level_pb2
-from google.identity.accesscontextmanager.v1 import access_policy_pb2
-from google.cloud.asset_v1.proto import asset_service_pb2
-from google.cloud.asset_v1.proto import assets_pb2
-from google.cloud.orgpolicy.v1 import orgpolicy_pb2
-from google.identity.accesscontextmanager.v1 import service_perimeter_pb2
+from google.cloud.asset_v1p4beta1.proto import asset_service_pb2
+from google.cloud.asset_v1p4beta1.proto import assets_pb2
 from google.iam.v1 import policy_pb2
 from google.longrunning import operations_pb2
 from google.protobuf import any_pb2
-from google.protobuf import empty_pb2
-from google.protobuf import field_mask_pb2
-from google.protobuf import struct_pb2
-from google.protobuf import timestamp_pb2
+from google.protobuf import duration_pb2
 from google.rpc import status_pb2
 from google.type import expr_pb2
 
 
 _shared_modules = [
-    access_level_pb2,
-    access_policy_pb2,
-    orgpolicy_pb2,
-    service_perimeter_pb2,
     policy_pb2,
     operations_pb2,
     any_pb2,
-    empty_pb2,
-    field_mask_pb2,
-    struct_pb2,
-    timestamp_pb2,
+    duration_pb2,
     status_pb2,
     expr_pb2,
 ]
@@ -63,7 +49,7 @@ for module in _shared_modules:  # pragma: NO COVER
         names.append(name)
 for module in _local_modules:
     for name, message in get_messages(module).items():
-        message.__module__ = "google.cloud.asset_v1.types"
+        message.__module__ = "google.cloud.asset_v1p4beta1.types"
         setattr(sys.modules[__name__], name, message)
         names.append(name)
 

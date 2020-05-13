@@ -16,13 +16,14 @@
 
 
 import google.api_core.grpc_helpers
+import google.api_core.operations_v1
 
-from google.cloud.asset_v1p2beta1.proto import asset_service_pb2_grpc
+from google.cloud.asset_v1p4beta1.proto import asset_service_pb2_grpc
 
 
 class AssetServiceGrpcTransport(object):
     """gRPC transport class providing stubs for
-    google.cloud.asset.v1p2beta1 AssetService API.
+    google.cloud.asset.v1p4beta1 AssetService API.
 
     The transport provides access to the raw gRPC stubs,
     which can be used to take advantage of advanced
@@ -75,6 +76,13 @@ class AssetServiceGrpcTransport(object):
             "asset_service_stub": asset_service_pb2_grpc.AssetServiceStub(channel)
         }
 
+        # Because this API includes a method that returns a
+        # long-running operation (proto: google.longrunning.Operation),
+        # instantiate an LRO client.
+        self._operations_client = google.api_core.operations_v1.OperationsClient(
+            channel
+        )
+
     @classmethod
     def create_channel(
         cls, address="cloudasset.googleapis.com:443", credentials=None, **kwargs
@@ -108,67 +116,31 @@ class AssetServiceGrpcTransport(object):
         return self._channel
 
     @property
-    def delete_feed(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.delete_feed`.
+    def export_iam_policy_analysis(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.export_iam_policy_analysis`.
 
-        Deletes an asset feed.
+        Exports IAM policy analysis based on the specified request. This API
+        implements the ``google.longrunning.Operation`` API allowing you to keep
+        track of the export. The metadata contains the request to help callers
+        to map responses to requests.
 
         Returns:
             Callable: A callable which accepts the appropriate
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs["asset_service_stub"].DeleteFeed
+        return self._stubs["asset_service_stub"].ExportIamPolicyAnalysis
 
     @property
-    def create_feed(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.create_feed`.
+    def analyze_iam_policy(self):
+        """Return the gRPC stub for :meth:`AssetServiceClient.analyze_iam_policy`.
 
-        Creates a feed in a parent project/folder/organization to listen to its
-        asset updates.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["asset_service_stub"].CreateFeed
-
-    @property
-    def get_feed(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.get_feed`.
-
-        Gets details about an asset feed.
+        Analyzes IAM policies based on the specified request. Returns a list
+        of ``IamPolicyAnalysisResult`` matching the request.
 
         Returns:
             Callable: A callable which accepts the appropriate
                 deserialized request object and returns a
                 deserialized response object.
         """
-        return self._stubs["asset_service_stub"].GetFeed
-
-    @property
-    def list_feeds(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.list_feeds`.
-
-        Lists all asset feeds in a parent project/folder/organization.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["asset_service_stub"].ListFeeds
-
-    @property
-    def update_feed(self):
-        """Return the gRPC stub for :meth:`AssetServiceClient.update_feed`.
-
-        Updates an asset feed configuration.
-
-        Returns:
-            Callable: A callable which accepts the appropriate
-                deserialized request object and returns a
-                deserialized response object.
-        """
-        return self._stubs["asset_service_stub"].UpdateFeed
+        return self._stubs["asset_service_stub"].AnalyzeIamPolicy

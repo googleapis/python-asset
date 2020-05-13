@@ -14,9 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Accesses the google.cloud.asset.v1p1beta1 AssetService API."""
+"""Accesses the google.cloud.asset.v1p4beta1 AssetService API."""
 
-import functools
 import pkg_resources
 import warnings
 
@@ -27,13 +26,16 @@ import google.api_core.gapic_v1.config
 import google.api_core.gapic_v1.method
 import google.api_core.gapic_v1.routing_header
 import google.api_core.grpc_helpers
-import google.api_core.page_iterator
+import google.api_core.operation
+import google.api_core.operations_v1
 import grpc
 
-from google.cloud.asset_v1p1beta1.gapic import asset_service_client_config
-from google.cloud.asset_v1p1beta1.gapic.transports import asset_service_grpc_transport
-from google.cloud.asset_v1p1beta1.proto import asset_service_pb2
-from google.cloud.asset_v1p1beta1.proto import asset_service_pb2_grpc
+from google.cloud.asset_v1p4beta1.gapic import asset_service_client_config
+from google.cloud.asset_v1p4beta1.gapic import enums
+from google.cloud.asset_v1p4beta1.gapic.transports import asset_service_grpc_transport
+from google.cloud.asset_v1p4beta1.proto import asset_service_pb2
+from google.cloud.asset_v1p4beta1.proto import asset_service_pb2_grpc
+from google.longrunning import operations_pb2
 
 
 _GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-asset").version
@@ -47,7 +49,7 @@ class AssetServiceClient(object):
 
     # The name of the interface for this client. This is the key used to
     # find the method configuration in the client_config dictionary.
-    _INTERFACE_NAME = "google.cloud.asset.v1p1beta1.AssetService"
+    _INTERFACE_NAME = "google.cloud.asset.v1p4beta1.AssetService"
 
     @classmethod
     def from_service_account_file(cls, filename, *args, **kwargs):
@@ -182,67 +184,56 @@ class AssetServiceClient(object):
         self._inner_api_calls = {}
 
     # Service calls
-    def search_all_resources(
+    def export_iam_policy_analysis(
         self,
-        scope,
-        query=None,
-        asset_types=None,
-        page_size=None,
-        order_by=None,
+        analysis_query,
+        output_config,
+        options_=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
     ):
         """
-        Searches all the resources under a given accessible CRM scope
-        (project/folder/organization). This RPC gives callers
-        especially admins the ability to search all the resources under a scope,
-        even if they don't have .get permission of all the resources. Callers
-        should have cloud.assets.SearchAllResources permission on the requested
-        scope, otherwise it will be rejected.
+        Exports IAM policy analysis based on the specified request. This API
+        implements the ``google.longrunning.Operation`` API allowing you to keep
+        track of the export. The metadata contains the request to help callers
+        to map responses to requests.
 
         Example:
-            >>> from google.cloud import asset_v1p1beta1
+            >>> from google.cloud import asset_v1p4beta1
             >>>
-            >>> client = asset_v1p1beta1.AssetServiceClient()
+            >>> client = asset_v1p4beta1.AssetServiceClient()
             >>>
-            >>> # TODO: Initialize `scope`:
-            >>> scope = ''
+            >>> # TODO: Initialize `analysis_query`:
+            >>> analysis_query = {}
             >>>
-            >>> # Iterate over all results
-            >>> for element in client.search_all_resources(scope):
-            ...     # process element
-            ...     pass
+            >>> # TODO: Initialize `output_config`:
+            >>> output_config = {}
             >>>
+            >>> response = client.export_iam_policy_analysis(analysis_query, output_config)
             >>>
-            >>> # Alternatively:
+            >>> def callback(operation_future):
+            ...     # Handle result.
+            ...     result = operation_future.result()
             >>>
-            >>> # Iterate over results one page at a time
-            >>> for page in client.search_all_resources(scope).pages:
-            ...     for element in page:
-            ...         # process element
-            ...         pass
+            >>> response.add_done_callback(callback)
+            >>>
+            >>> # Handle metadata.
+            >>> metadata = response.metadata()
 
         Args:
-            scope (str): Required. The relative name of an asset. The search is limited to
-                the resources within the ``scope``. The allowed value must be:
+            analysis_query (Union[dict, ~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery]): Required. The request query.
 
-                -  Organization number (such as "organizations/123")
-                -  Folder number(such as "folders/1234")
-                -  Project number (such as "projects/12345")
-                -  Project id (such as "projects/abc")
-            query (str): Optional. The query statement.
-            asset_types (list[str]): Optional. A list of asset types that this request searches for. If empty, it will
-                search all the supported asset types.
-            page_size (int): The maximum number of resources contained in the
-                underlying API response. If page streaming is performed per-
-                resource, this parameter does not affect the return value. If page
-                streaming is performed per-page, this determines the maximum number
-                of resources in a page.
-            order_by (str): Optional. A comma separated list of fields specifying the sorting order of the
-                results. The default order is ascending. Add " desc" after the field name
-                to indicate descending order. Redundant space characters are ignored. For
-                example, "  foo ,  bar  desc  ".
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery`
+            output_config (Union[dict, ~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig]): Required. Output configuration indicating where the results will be output to.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig`
+            options_ (Union[dict, ~google.cloud.asset_v1p4beta1.types.Options]): Optional. The request options.
+
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1p4beta1.types.Options`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -253,10 +244,7 @@ class AssetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.api_core.page_iterator.PageIterator` instance.
-            An iterable of :class:`~google.cloud.asset_v1p1beta1.types.StandardResourceMetadata` instances.
-            You can also iterate over the pages of the response
-            using its `pages` property.
+            A :class:`~google.cloud.asset_v1p4beta1.types._OperationFuture` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -266,28 +254,24 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "search_all_resources" not in self._inner_api_calls:
+        if "export_iam_policy_analysis" not in self._inner_api_calls:
             self._inner_api_calls[
-                "search_all_resources"
+                "export_iam_policy_analysis"
             ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.search_all_resources,
-                default_retry=self._method_configs["SearchAllResources"].retry,
-                default_timeout=self._method_configs["SearchAllResources"].timeout,
+                self.transport.export_iam_policy_analysis,
+                default_retry=self._method_configs["ExportIamPolicyAnalysis"].retry,
+                default_timeout=self._method_configs["ExportIamPolicyAnalysis"].timeout,
                 client_info=self._client_info,
             )
 
-        request = asset_service_pb2.SearchAllResourcesRequest(
-            scope=scope,
-            query=query,
-            asset_types=asset_types,
-            page_size=page_size,
-            order_by=order_by,
+        request = asset_service_pb2.ExportIamPolicyAnalysisRequest(
+            analysis_query=analysis_query, output_config=output_config, options=options_
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("scope", scope)]
+            routing_header = [("analysis_query.parent", analysis_query.parent)]
         except AttributeError:
             pass
         else:
@@ -296,77 +280,47 @@ class AssetServiceClient(object):
             )
             metadata.append(routing_metadata)
 
-        iterator = google.api_core.page_iterator.GRPCIterator(
-            client=None,
-            method=functools.partial(
-                self._inner_api_calls["search_all_resources"],
-                retry=retry,
-                timeout=timeout,
-                metadata=metadata,
-            ),
-            request=request,
-            items_field="results",
-            request_token_field="page_token",
-            response_token_field="next_page_token",
+        operation = self._inner_api_calls["export_iam_policy_analysis"](
+            request, retry=retry, timeout=timeout, metadata=metadata
         )
-        return iterator
+        return google.api_core.operation.from_gapic(
+            operation,
+            self.transport._operations_client,
+            asset_service_pb2.ExportIamPolicyAnalysisResponse,
+            metadata_type=asset_service_pb2.ExportIamPolicyAnalysisRequest,
+        )
 
-    def search_all_iam_policies(
+    def analyze_iam_policy(
         self,
-        scope,
-        query=None,
-        page_size=None,
+        analysis_query,
+        options_=None,
         retry=google.api_core.gapic_v1.method.DEFAULT,
         timeout=google.api_core.gapic_v1.method.DEFAULT,
         metadata=None,
     ):
         """
-        Searches all the IAM policies under a given accessible CRM scope
-        (project/folder/organization). This RPC gives callers
-        especially admins the ability to search all the IAM policies under a scope,
-        even if they don't have .getIamPolicy permission of all the IAM policies.
-        Callers should have cloud.assets.SearchAllIamPolicies permission on the
-        requested scope, otherwise it will be rejected.
+        Analyzes IAM policies based on the specified request. Returns a list
+        of ``IamPolicyAnalysisResult`` matching the request.
 
         Example:
-            >>> from google.cloud import asset_v1p1beta1
+            >>> from google.cloud import asset_v1p4beta1
             >>>
-            >>> client = asset_v1p1beta1.AssetServiceClient()
+            >>> client = asset_v1p4beta1.AssetServiceClient()
             >>>
-            >>> # TODO: Initialize `scope`:
-            >>> scope = ''
+            >>> # TODO: Initialize `analysis_query`:
+            >>> analysis_query = {}
             >>>
-            >>> # Iterate over all results
-            >>> for element in client.search_all_iam_policies(scope):
-            ...     # process element
-            ...     pass
-            >>>
-            >>>
-            >>> # Alternatively:
-            >>>
-            >>> # Iterate over results one page at a time
-            >>> for page in client.search_all_iam_policies(scope).pages:
-            ...     for element in page:
-            ...         # process element
-            ...         pass
+            >>> response = client.analyze_iam_policy(analysis_query)
 
         Args:
-            scope (str): Required. The relative name of an asset. The search is limited to
-                the resources within the ``scope``. The allowed value must be:
+            analysis_query (Union[dict, ~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery]): Required. The request query.
 
-                -  Organization number (such as "organizations/123")
-                -  Folder number(such as "folders/1234")
-                -  Project number (such as "projects/12345")
-                -  Project id (such as "projects/abc")
-            query (str): Optional. The query statement. Examples:
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery`
+            options_ (Union[dict, ~google.cloud.asset_v1p4beta1.types.Options]): Optional. The request options.
 
-                -  "policy:myuser@mydomain.com"
-                -  "policy:(myuser@mydomain.com viewer)"
-            page_size (int): The maximum number of resources contained in the
-                underlying API response. If page streaming is performed per-
-                resource, this parameter does not affect the return value. If page
-                streaming is performed per-page, this determines the maximum number
-                of resources in a page.
+                If a dict is provided, it must be of the same form as the protobuf
+                message :class:`~google.cloud.asset_v1p4beta1.types.Options`
             retry (Optional[google.api_core.retry.Retry]):  A retry object used
                 to retry requests. If ``None`` is specified, requests will
                 be retried using a default configuration.
@@ -377,10 +331,7 @@ class AssetServiceClient(object):
                 that is provided to the method.
 
         Returns:
-            A :class:`~google.api_core.page_iterator.PageIterator` instance.
-            An iterable of :class:`~google.cloud.asset_v1p1beta1.types.IamPolicySearchResult` instances.
-            You can also iterate over the pages of the response
-            using its `pages` property.
+            A :class:`~google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse` instance.
 
         Raises:
             google.api_core.exceptions.GoogleAPICallError: If the request
@@ -390,24 +341,24 @@ class AssetServiceClient(object):
             ValueError: If the parameters are invalid.
         """
         # Wrap the transport method to add retry and timeout logic.
-        if "search_all_iam_policies" not in self._inner_api_calls:
+        if "analyze_iam_policy" not in self._inner_api_calls:
             self._inner_api_calls[
-                "search_all_iam_policies"
+                "analyze_iam_policy"
             ] = google.api_core.gapic_v1.method.wrap_method(
-                self.transport.search_all_iam_policies,
-                default_retry=self._method_configs["SearchAllIamPolicies"].retry,
-                default_timeout=self._method_configs["SearchAllIamPolicies"].timeout,
+                self.transport.analyze_iam_policy,
+                default_retry=self._method_configs["AnalyzeIamPolicy"].retry,
+                default_timeout=self._method_configs["AnalyzeIamPolicy"].timeout,
                 client_info=self._client_info,
             )
 
-        request = asset_service_pb2.SearchAllIamPoliciesRequest(
-            scope=scope, query=query, page_size=page_size
+        request = asset_service_pb2.AnalyzeIamPolicyRequest(
+            analysis_query=analysis_query, options=options_
         )
         if metadata is None:
             metadata = []
         metadata = list(metadata)
         try:
-            routing_header = [("scope", scope)]
+            routing_header = [("analysis_query.parent", analysis_query.parent)]
         except AttributeError:
             pass
         else:
@@ -416,17 +367,6 @@ class AssetServiceClient(object):
             )
             metadata.append(routing_metadata)
 
-        iterator = google.api_core.page_iterator.GRPCIterator(
-            client=None,
-            method=functools.partial(
-                self._inner_api_calls["search_all_iam_policies"],
-                retry=retry,
-                timeout=timeout,
-                metadata=metadata,
-            ),
-            request=request,
-            items_field="results",
-            request_token_field="page_token",
-            response_token_field="next_page_token",
+        return self._inner_api_calls["analyze_iam_policy"](
+            request, retry=retry, timeout=timeout, metadata=metadata
         )
-        return iterator
