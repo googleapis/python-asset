@@ -655,8 +655,8 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
             {
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_ANALYSISSTATE,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
-                "__doc__": """Represents analysis state of each node in the result graph or
-    non-critical errors in the response.
+                "__doc__": """Represents analysis state of each node in the result graph
+    or non-critical errors in the response.
     
     
     Attributes:

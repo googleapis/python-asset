@@ -1084,9 +1084,8 @@ TemporalAsset = _reflection.GeneratedProtocolMessageType(
     {
         "DESCRIPTOR": _TEMPORALASSET,
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
-        "__doc__": """An asset in Google Cloud and its temporal metadata,
-  including the time window when it was observed and its status during
-  that window.
+        "__doc__": """An asset in Google Cloud and its temporal metadata, including the time
+  window when it was observed and its status during that window.
   
   
   Attributes:
