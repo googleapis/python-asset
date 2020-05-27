@@ -1105,7 +1105,7 @@ TimeWindow = _reflection.GeneratedProtocolMessageType(
     {
         "DESCRIPTOR": _TIMEWINDOW,
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
-        "__doc__": """A time window specified by its “start_time” and “end_time”.
+        "__doc__": """A time window specified by its ``start_time`` and ``end_time``.
   Attributes:
       start_time:
           Start time of the time window (exclusive).
@@ -1131,13 +1131,13 @@ Asset = _reflection.GeneratedProtocolMessageType(
   clusters and objects), or a Cloud IAM policy.
   Attributes:
       name:
-          The full name of the asset. For example: “//compute.googleapis
-          .com/projects/my_project_123/zones/zone1/instances/instance1”
-          See `Resource names <https://cloud.google.com/apis/design/reso
-          urce_names#full_resource_name>`__ for more information.
+          The full name of the asset. For example: ``//compute.googleapi
+          s.com/projects/my_project_123/zones/zone1/instances/instance1`
+          `  See `Resource names <https://cloud.google.com/apis/design/r
+          esource_names#full_resource_name>`__ for more information.
       asset_type:
           The type of the asset. For example:
-          “compute.googleapis.com/Disk”  See `Supported asset types
+          ``compute.googleapis.com/Disk``  See `Supported asset types
           <https://cloud.google.com/asset-inventory/docs/supported-
           asset-types>`__ for more information.
       resource:
@@ -1188,24 +1188,24 @@ Resource = _reflection.GeneratedProtocolMessageType(
         "__doc__": """A representation of a Google Cloud resource.
   Attributes:
       version:
-          The API version. For example: “v1”
+          The API version. For example: ``v1``
       discovery_document_uri:
           The URL of the discovery document containing the resource’s
-          JSON schema. For example:
-          “https://www.googleapis.com/discovery/v1/apis/compute/v1/rest”
-          This value is unspecified for resources that do not have an
-          API based on a discovery document, such as Cloud Bigtable.
+          JSON schema. For example: ``https://www.googleapis.com/discove
+          ry/v1/apis/compute/v1/rest``  This value is unspecified for
+          resources that do not have an API based on a discovery
+          document, such as Cloud Bigtable.
       discovery_name:
           The JSON schema name listed in the discovery document. For
-          example: “Project”  This value is unspecified for resources
+          example: ``Project``  This value is unspecified for resources
           that do not have an API based on a discovery document, such as
           Cloud Bigtable.
       resource_url:
           The REST URL for accessing the resource. An HTTP ``GET``
           request using this URL returns the resource itself. For
           example:
-          “https://cloudresourcemanager.googleapis.com/v1/projects/my-
-          project-123”  This value is unspecified for resources without
+          ``https://cloudresourcemanager.googleapis.com/v1/projects/my-
+          project-123``  This value is unspecified for resources without
           a REST API.
       parent:
           The full name of the immediate parent of this resource. See
@@ -1213,8 +1213,8 @@ Resource = _reflection.GeneratedProtocolMessageType(
           _names#full_resource_name>`__ for more information.  For
           Google Cloud assets, this value is the parent resource defined
           in the `Cloud IAM policy hierarchy <https://cloud.google.com/i
-          am/docs/overview#policy_hierarchy>`__. For example: “//cloudre
-          sourcemanager.googleapis.com/projects/my_project_123”  For
+          am/docs/overview#policy_hierarchy>`__. For example: ``//cloudr
+          esourcemanager.googleapis.com/projects/my_project_123``  For
           third-party assets, this field may be set differently.
       data:
           The content of the resource, in which some sensitive fields
@@ -1248,9 +1248,9 @@ ResourceSearchResult = _reflection.GeneratedProtocolMessageType(
   resoure.
   Attributes:
       name:
-          The full resource name of this resource. Example: “//compute.g
-          oogleapis.com/projects/my_project_123/zones/zone1/instances/in
-          stance1”. See `Cloud Asset Inventory Resource Name Format
+          The full resource name of this resource. Example: ``//compute.
+          googleapis.com/projects/my_project_123/zones/zone1/instances/i
+          nstance1``. See `Cloud Asset Inventory Resource Name Format
           <https://cloud.google.com/asset-inventory/docs/resource-name-
           format>`__ for more information.  To search against the
           ``name``:  -  use a field query. Example: ``name :
@@ -1258,7 +1258,7 @@ ResourceSearchResult = _reflection.GeneratedProtocolMessageType(
           ``"instance1"``
       asset_type:
           The type of this resource. Example:
-          “compute.googleapis.com/Disk”.  To search against the
+          ``compute.googleapis.com/Disk``.  To search against the
           ``asset_type``:  -  specify the ``asset_type`` field in your
           search request.
       project:
@@ -1278,10 +1278,10 @@ ResourceSearchResult = _reflection.GeneratedProtocolMessageType(
           : "*important instance*"`` -  use a free text query. Example:
           ``"*important instance*"``
       location:
-          Location can be “global”, regional like “us-east1”, or zonal
-          like “us-west1-b”.  To search against the ``location``:  -
-          use a field query. Example: ``location : "us-west*"`` -  use a
-          free text query. Example: ``"us-west*"``
+          Location can be ``global``, regional like ``us-east1``, or
+          zonal like ``us-west1-b``.  To search against the
+          ``location``:  -  use a field query. Example: ``location :
+          "us-west*"`` -  use a free text query. Example: ``"us-west*"``
       labels:
           Labels associated with this resource. See `Labelling and
           grouping GCP resources
@@ -1304,12 +1304,12 @@ ResourceSearchResult = _reflection.GeneratedProtocolMessageType(
           free text query. Example: ``"internal"``
       additional_attributes:
           The additional attributes of this resource. The attributes may
-          vary from one resource type to another. Examples: “projectId”
-          for Project, “dnsName” for DNS ManagedZone.  To search against
-          the ``additional_attributes``:  -  use a free text query to
-          match the attributes values. Example: to    search
-          additional_attributes = { dnsName: “foobar” }, you can issue a
-          query ``"foobar"``.
+          vary from one resource type to another. Examples:
+          ``projectId`` for Project, ``dnsName`` for DNS ManagedZone.
+          To search against the ``additional_attributes``:  -  use a
+          free text query to match the attributes values. Example: to
+          search ``additional_attributes = { dnsName: "foobar" }``, you
+          can    issue a query ``"foobar"``.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.ResourceSearchResult)
     },
@@ -1335,7 +1335,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
       Attributes:
           permissions:
               A list of permissions. A sample permission string:
-              “compute.disk.get”.
+              ``compute.disk.get``.
       """,
                         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions)
                     },
@@ -1359,8 +1359,8 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
             ``policy.role.permissions:``). Example: if query
             ``policy.role.permissions : "compute.disk.get"`` matches a
             policy binding that contains owner role, the
-            matched_permissions will be {“roles/owner”:
-            [“compute.disk.get”]}. The roles can also be found in the
+            matched_permissions will be ``{"roles/owner":
+            ["compute.disk.get"]}``. The roles can also be found in the
             returned ``policy`` bindings. Note that the map is populated
             only for requests with permission queries.
     """,
@@ -1374,8 +1374,8 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
   Attributes:
       resource:
           The full resource name of the resource associated with this
-          IAM policy. Example: “//compute.googleapis.com/projects/my_pro
-          ject_123/zones/zone1/instances/instance1”. See `Cloud Asset
+          IAM policy. Example: ``//compute.googleapis.com/projects/my_pr
+          oject_123/zones/zone1/instances/instance1``. See `Cloud Asset
           Inventory Resource Name Format
           <https://cloud.google.com/asset-inventory/docs/resource-name-
           format>`__ for more information.  To search against the
