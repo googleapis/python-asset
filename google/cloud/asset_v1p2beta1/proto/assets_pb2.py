@@ -437,6 +437,7 @@ TemporalAsset = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p2beta1.proto.assets_pb2",
         "__doc__": """Temporal asset. In addition to the asset, the temporal asset includes
   the status of the asset and valid from and to time of it.
+
   Attributes:
       window:
           The time window when the asset data and state was observed.
