@@ -760,9 +760,9 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
             {
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_ACCESSCONTROLLIST,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
-                "__doc__": """An access control list, derived from the above IAM policy
-    binding, which contains a set of resources and accesses. May include one
-    item from each set to compose an access control entry.
+                "__doc__": """An access control list, derived from the above IAM policy binding, which
+    contains a set of resources and accesses. May include one item from each
+    set to compose an access control entry.
     
     NOTICE that there could be multiple access control lists for one IAM
     policy binding. The access control lists are created based on resource
@@ -831,8 +831,8 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
         ),
         "DESCRIPTOR": _IAMPOLICYANALYSISRESULT,
         "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
-        "__doc__": """IAM Policy analysis result, consisting of one IAM policy binding and
-  derived access control lists.
+        "__doc__": """IAM Policy analysis result, consisting of one IAM policy
+  binding and derived access control lists.
   
   
   Attributes:
