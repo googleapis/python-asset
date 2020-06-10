@@ -1134,15 +1134,13 @@ Asset = _reflection.GeneratedProtocolMessageType(
 
   Attributes:
       name:
-          The full name of the asset. For example: ``//compute.googleapi
-          s.com/projects/my_project_123/zones/zone1/instances/instance1`
-          `  See `Resource names <https://cloud.google.com/apis/design/r
-          esource_names#full_resource_name>`__ for more information.
+          The full name of the asset. For example: 
+          ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``
+          See `Resource names <https://cloud.google.com/apis/design/resource_names#full_resource_name>`__ for more information.
       asset_type:
           The type of the asset. For example:
           ``compute.googleapis.com/Disk``  See `Supported asset types
-          <https://cloud.google.com/asset-inventory/docs/supported-
-          asset-types>`__ for more information.
+          <https://cloud.google.com/asset-inventory/docs/supported-asset-types>`__ for more information.
       resource:
           A representation of the resource.
       iam_policy:
@@ -1164,18 +1162,15 @@ Asset = _reflection.GeneratedProtocolMessageType(
           a given resource.
       access_context_policy:
           A representation of an `access policy
-          <https://cloud.google.com/access-context-
-          manager/docs/overview#access-policies>`__.
+          <https://cloud.google.com/access-context-manager/docs/overview#access-policies>`__.
       ancestors:
           The ancestry path of an asset in Google Cloud `resource
-          hierarchy <https://cloud.google.com/resource-
-          manager/docs/cloud-platform-resource-hierarchy>`__,
+          hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
           represented as a list of relative resource names. An ancestry
           path starts with the closest ancestor in the hierarchy and
           ends at root. If the asset is a project, folder, or
           organization, the ancestry path starts from the asset itself.
-          For example: ``["projects/123456789", "folders/5432",
-          "organizations/1234"]``
+          For example: ``["projects/123456789", "folders/5432", "organizations/1234"]``
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.Asset)
     },
