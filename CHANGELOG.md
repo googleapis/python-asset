@@ -4,6 +4,19 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+## [2.0.0](https://www.github.com/googleapis/python-asset/compare/v1.0.0...v2.0.0) (2020-06-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* additional long-running operation annotations
+* some existing request fields are now explicitly required
+* the order of the Session resource patterns has changed
+
+### Features
+
+* add `search_all_resources` and `search_all_iam_policies` (via synth) ([#32](https://www.github.com/googleapis/python-asset/issues/32)) ([24a0827](https://www.github.com/googleapis/python-asset/commit/24a0827913dfa7563ea08cdf2e329626eadca4a3)), closes [#541](https://www.github.com/googleapis/python-asset/issues/541)
+
 ## [1.0.0](https://www.github.com/googleapis/python-asset/compare/v0.10.0...v1.0.0) (2020-06-10)
 
 
