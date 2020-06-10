@@ -815,7 +815,6 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
         "__doc__": """IAM Policy analysis result, consisting of one IAM policy binding and
   derived access control lists.
-
   Attributes:
       attached_resource_full_name:
           The full name of the resource to which the [iam_binding][googl
