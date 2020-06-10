@@ -4,14 +4,7 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
-## [2.0.0](https://www.github.com/googleapis/python-asset/compare/v1.0.0...v2.0.0) (2020-06-10)
-
-
-### ⚠ BREAKING CHANGES
-
-* additional long-running operation annotations
-* some existing request fields are now explicitly required
-* the order of the Session resource patterns has changed
+## [1.1.0](https://www.github.com/googleapis/python-asset/compare/v1.0.0...v1.1.0) (2020-06-10)
 
 ### Features
 
