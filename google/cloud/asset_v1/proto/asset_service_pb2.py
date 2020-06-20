@@ -23,6 +23,7 @@ from google.cloud.asset_v1.proto import (
 from google.longrunning import (
     operations_pb2 as google_dot_longrunning_dot_operations__pb2,
 )
+from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
 from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 from google.protobuf import field_mask_pb2 as google_dot_protobuf_dot_field__mask__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
@@ -35,7 +36,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
     syntax="proto3",
     serialized_options=b"\n\031com.google.cloud.asset.v1B\021AssetServiceProtoP\001Z:google.golang.org/genproto/googleapis/cloud/asset/v1;asset\252\002\025Google.Cloud.Asset.V1\312\002\025Google\\Cloud\\Asset\\V1",
     create_key=_descriptor._internal_create_key,
-    serialized_pb=b'\n/google/cloud/asset_v1/proto/asset_service.proto\x12\x15google.cloud.asset.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a(google/cloud/asset_v1/proto/assets.proto\x1a#google/longrunning/operations.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16google/type/expr.proto"\x8d\x02\n\x13\x45xportAssetsRequest\x12\x37\n\x06parent\x18\x01 \x01(\tB\'\xe0\x41\x02\xfa\x41!\x12\x1f\x63loudasset.googleapis.com/Asset\x12-\n\tread_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x61sset_types\x18\x03 \x03(\t\x12\x38\n\x0c\x63ontent_type\x18\x04 \x01(\x0e\x32".google.cloud.asset.v1.ContentType\x12?\n\routput_config\x18\x05 \x01(\x0b\x32#.google.cloud.asset.v1.OutputConfigB\x03\xe0\x41\x02"\x81\x01\n\x14\x45xportAssetsResponse\x12-\n\tread_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\routput_config\x18\x02 \x01(\x0b\x32#.google.cloud.asset.v1.OutputConfig"\xed\x01\n\x1c\x42\x61tchGetAssetsHistoryRequest\x12\x37\n\x06parent\x18\x01 \x01(\tB\'\xe0\x41\x02\xfa\x41!\x12\x1f\x63loudasset.googleapis.com/Asset\x12\x13\n\x0b\x61sset_names\x18\x02 \x03(\t\x12=\n\x0c\x63ontent_type\x18\x03 \x01(\x0e\x32".google.cloud.asset.v1.ContentTypeB\x03\xe0\x41\x01\x12@\n\x10read_time_window\x18\x04 \x01(\x0b\x32!.google.cloud.asset.v1.TimeWindowB\x03\xe0\x41\x01"U\n\x1d\x42\x61tchGetAssetsHistoryResponse\x12\x34\n\x06\x61ssets\x18\x01 \x03(\x0b\x32$.google.cloud.asset.v1.TemporalAsset"n\n\x11\x43reateFeedRequest\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x14\n\x07\x66\x65\x65\x64_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12.\n\x04\x66\x65\x65\x64\x18\x03 \x01(\x0b\x32\x1b.google.cloud.asset.v1.FeedB\x03\xe0\x41\x02"F\n\x0eGetFeedRequest\x12\x34\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1e\x63loudasset.googleapis.com/Feed"\'\n\x10ListFeedsRequest\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02"?\n\x11ListFeedsResponse\x12*\n\x05\x66\x65\x65\x64s\x18\x01 \x03(\x0b\x32\x1b.google.cloud.asset.v1.Feed"y\n\x11UpdateFeedRequest\x12.\n\x04\x66\x65\x65\x64\x18\x01 \x01(\x0b\x32\x1b.google.cloud.asset.v1.FeedB\x03\xe0\x41\x02\x12\x34\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x03\xe0\x41\x02"I\n\x11\x44\x65leteFeedRequest\x12\x34\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1e\x63loudasset.googleapis.com/Feed"\xab\x01\n\x0cOutputConfig\x12@\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32%.google.cloud.asset.v1.GcsDestinationH\x00\x12J\n\x14\x62igquery_destination\x18\x02 \x01(\x0b\x32*.google.cloud.asset.v1.BigQueryDestinationH\x00\x42\r\n\x0b\x64\x65stination"C\n\x0eGcsDestination\x12\r\n\x03uri\x18\x01 \x01(\tH\x00\x12\x14\n\nuri_prefix\x18\x02 \x01(\tH\x00\x42\x0c\n\nobject_uri"N\n\x13\x42igQueryDestination\x12\x14\n\x07\x64\x61taset\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05table\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\r\n\x05\x66orce\x18\x03 \x01(\x08""\n\x11PubsubDestination\x12\r\n\x05topic\x18\x01 \x01(\t"i\n\x10\x46\x65\x65\x64OutputConfig\x12\x46\n\x12pubsub_destination\x18\x01 \x01(\x0b\x32(.google.cloud.asset.v1.PubsubDestinationH\x00\x42\r\n\x0b\x64\x65stination"\xdb\x02\n\x04\x46\x65\x65\x64\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x0b\x61sset_names\x18\x02 \x03(\t\x12\x13\n\x0b\x61sset_types\x18\x03 \x03(\t\x12\x38\n\x0c\x63ontent_type\x18\x04 \x01(\x0e\x32".google.cloud.asset.v1.ContentType\x12H\n\x12\x66\x65\x65\x64_output_config\x18\x05 \x01(\x0b\x32\'.google.cloud.asset.v1.FeedOutputConfigB\x03\xe0\x41\x02:\x91\x01\xea\x41\x8d\x01\n\x1e\x63loudasset.googleapis.com/Feed\x12\x1fprojects/{project}/feeds/{feed}\x12\x1d\x66olders/{folder}/feeds/{feed}\x12)organizations/{organization}/feeds/{feed} \x01"\xa5\x01\n\x19SearchAllResourcesRequest\x12\x12\n\x05scope\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05query\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x61sset_types\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tpage_size\x18\x04 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08order_by\x18\x06 \x01(\tB\x03\xe0\x41\x01"s\n\x1aSearchAllResourcesResponse\x12<\n\x07results\x18\x01 \x03(\x0b\x32+.google.cloud.asset.v1.ResourceSearchResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t"v\n\x1bSearchAllIamPoliciesRequest\x12\x12\n\x05scope\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05query\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x16\n\tpage_size\x18\x03 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x04 \x01(\tB\x03\xe0\x41\x01"v\n\x1cSearchAllIamPoliciesResponse\x12=\n\x07results\x18\x01 \x03(\x0b\x32,.google.cloud.asset.v1.IamPolicySearchResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t*l\n\x0b\x43ontentType\x12\x1c\n\x18\x43ONTENT_TYPE_UNSPECIFIED\x10\x00\x12\x0c\n\x08RESOURCE\x10\x01\x12\x0e\n\nIAM_POLICY\x10\x02\x12\x0e\n\nORG_POLICY\x10\x04\x12\x11\n\rACCESS_POLICY\x10\x05\x32\xf0\x0b\n\x0c\x41ssetService\x12\xde\x01\n\x0c\x45xportAssets\x12*.google.cloud.asset.v1.ExportAssetsRequest\x1a\x1d.google.longrunning.Operation"\x82\x01\x82\xd3\xe4\x93\x02""\x1d/v1/{parent=*/*}:exportAssets:\x01*\xca\x41W\n*google.cloud.asset.v1.ExportAssetsResponse\x12)google.cloud.asset.v1.ExportAssetsRequest\x12\xb2\x01\n\x15\x42\x61tchGetAssetsHistory\x12\x33.google.cloud.asset.v1.BatchGetAssetsHistoryRequest\x1a\x34.google.cloud.asset.v1.BatchGetAssetsHistoryResponse".\x82\xd3\xe4\x93\x02(\x12&/v1/{parent=*/*}:batchGetAssetsHistory\x12\x7f\n\nCreateFeed\x12(.google.cloud.asset.v1.CreateFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"*\x82\xd3\xe4\x93\x02\x1b"\x16/v1/{parent=*/*}/feeds:\x01*\xda\x41\x06parent\x12t\n\x07GetFeed\x12%.google.cloud.asset.v1.GetFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"%\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/{name=*/*/feeds/*}\xda\x41\x04name\x12\x87\x01\n\tListFeeds\x12\'.google.cloud.asset.v1.ListFeedsRequest\x1a(.google.cloud.asset.v1.ListFeedsResponse"\'\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/{parent=*/*}/feeds\xda\x41\x06parent\x12\x82\x01\n\nUpdateFeed\x12(.google.cloud.asset.v1.UpdateFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"-\x82\xd3\xe4\x93\x02 2\x1b/v1/{feed.name=*/*/feeds/*}:\x01*\xda\x41\x04\x66\x65\x65\x64\x12u\n\nDeleteFeed\x12(.google.cloud.asset.v1.DeleteFeedRequest\x1a\x16.google.protobuf.Empty"%\x82\xd3\xe4\x93\x02\x18*\x16/v1/{name=*/*/feeds/*}\xda\x41\x04name\x12\xbf\x01\n\x12SearchAllResources\x12\x30.google.cloud.asset.v1.SearchAllResourcesRequest\x1a\x31.google.cloud.asset.v1.SearchAllResourcesResponse"D\x82\xd3\xe4\x93\x02$\x12"/v1/{scope=*/*}:searchAllResources\xda\x41\x17scope,query,asset_types\x12\xbb\x01\n\x14SearchAllIamPolicies\x12\x32.google.cloud.asset.v1.SearchAllIamPoliciesRequest\x1a\x33.google.cloud.asset.v1.SearchAllIamPoliciesResponse":\x82\xd3\xe4\x93\x02&\x12$/v1/{scope=*/*}:searchAllIamPolicies\xda\x41\x0bscope,query\x1aM\xca\x41\x19\x63loudasset.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\x9c\x01\n\x19\x63om.google.cloud.asset.v1B\x11\x41ssetServiceProtoP\x01Z:google.golang.org/genproto/googleapis/cloud/asset/v1;asset\xaa\x02\x15Google.Cloud.Asset.V1\xca\x02\x15Google\\Cloud\\Asset\\V1b\x06proto3',
+    serialized_pb=b'\n/google/cloud/asset_v1/proto/asset_service.proto\x12\x15google.cloud.asset.v1\x1a\x1cgoogle/api/annotations.proto\x1a\x17google/api/client.proto\x1a\x1fgoogle/api/field_behavior.proto\x1a\x19google/api/resource.proto\x1a(google/cloud/asset_v1/proto/assets.proto\x1a#google/longrunning/operations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1bgoogle/protobuf/empty.proto\x1a google/protobuf/field_mask.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x16google/type/expr.proto"\x8d\x02\n\x13\x45xportAssetsRequest\x12\x37\n\x06parent\x18\x01 \x01(\tB\'\xe0\x41\x02\xfa\x41!\x12\x1f\x63loudasset.googleapis.com/Asset\x12-\n\tread_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x61sset_types\x18\x03 \x03(\t\x12\x38\n\x0c\x63ontent_type\x18\x04 \x01(\x0e\x32".google.cloud.asset.v1.ContentType\x12?\n\routput_config\x18\x05 \x01(\x0b\x32#.google.cloud.asset.v1.OutputConfigB\x03\xe0\x41\x02"\x81\x01\n\x14\x45xportAssetsResponse\x12-\n\tread_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\routput_config\x18\x02 \x01(\x0b\x32#.google.cloud.asset.v1.OutputConfig"\xed\x01\n\x1c\x42\x61tchGetAssetsHistoryRequest\x12\x37\n\x06parent\x18\x01 \x01(\tB\'\xe0\x41\x02\xfa\x41!\x12\x1f\x63loudasset.googleapis.com/Asset\x12\x13\n\x0b\x61sset_names\x18\x02 \x03(\t\x12=\n\x0c\x63ontent_type\x18\x03 \x01(\x0e\x32".google.cloud.asset.v1.ContentTypeB\x03\xe0\x41\x01\x12@\n\x10read_time_window\x18\x04 \x01(\x0b\x32!.google.cloud.asset.v1.TimeWindowB\x03\xe0\x41\x01"U\n\x1d\x42\x61tchGetAssetsHistoryResponse\x12\x34\n\x06\x61ssets\x18\x01 \x03(\x0b\x32$.google.cloud.asset.v1.TemporalAsset"n\n\x11\x43reateFeedRequest\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x14\n\x07\x66\x65\x65\x64_id\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12.\n\x04\x66\x65\x65\x64\x18\x03 \x01(\x0b\x32\x1b.google.cloud.asset.v1.FeedB\x03\xe0\x41\x02"F\n\x0eGetFeedRequest\x12\x34\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1e\x63loudasset.googleapis.com/Feed"\'\n\x10ListFeedsRequest\x12\x13\n\x06parent\x18\x01 \x01(\tB\x03\xe0\x41\x02"?\n\x11ListFeedsResponse\x12*\n\x05\x66\x65\x65\x64s\x18\x01 \x03(\x0b\x32\x1b.google.cloud.asset.v1.Feed"y\n\x11UpdateFeedRequest\x12.\n\x04\x66\x65\x65\x64\x18\x01 \x01(\x0b\x32\x1b.google.cloud.asset.v1.FeedB\x03\xe0\x41\x02\x12\x34\n\x0bupdate_mask\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.FieldMaskB\x03\xe0\x41\x02"I\n\x11\x44\x65leteFeedRequest\x12\x34\n\x04name\x18\x01 \x01(\tB&\xe0\x41\x02\xfa\x41 \n\x1e\x63loudasset.googleapis.com/Feed"\xab\x01\n\x0cOutputConfig\x12@\n\x0fgcs_destination\x18\x01 \x01(\x0b\x32%.google.cloud.asset.v1.GcsDestinationH\x00\x12J\n\x14\x62igquery_destination\x18\x02 \x01(\x0b\x32*.google.cloud.asset.v1.BigQueryDestinationH\x00\x42\r\n\x0b\x64\x65stination"C\n\x0eGcsDestination\x12\r\n\x03uri\x18\x01 \x01(\tH\x00\x12\x14\n\nuri_prefix\x18\x02 \x01(\tH\x00\x42\x0c\n\nobject_uri"N\n\x13\x42igQueryDestination\x12\x14\n\x07\x64\x61taset\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05table\x18\x02 \x01(\tB\x03\xe0\x41\x02\x12\r\n\x05\x66orce\x18\x03 \x01(\x08""\n\x11PubsubDestination\x12\r\n\x05topic\x18\x01 \x01(\t"i\n\x10\x46\x65\x65\x64OutputConfig\x12\x46\n\x12pubsub_destination\x18\x01 \x01(\x0b\x32(.google.cloud.asset.v1.PubsubDestinationH\x00\x42\r\n\x0b\x64\x65stination"\x81\x03\n\x04\x46\x65\x65\x64\x12\x11\n\x04name\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x13\n\x0b\x61sset_names\x18\x02 \x03(\t\x12\x13\n\x0b\x61sset_types\x18\x03 \x03(\t\x12\x38\n\x0c\x63ontent_type\x18\x04 \x01(\x0e\x32".google.cloud.asset.v1.ContentType\x12H\n\x12\x66\x65\x65\x64_output_config\x18\x05 \x01(\x0b\x32\'.google.cloud.asset.v1.FeedOutputConfigB\x03\xe0\x41\x02\x12$\n\tcondition\x18\x06 \x01(\x0b\x32\x11.google.type.Expr:\x91\x01\xea\x41\x8d\x01\n\x1e\x63loudasset.googleapis.com/Feed\x12\x1fprojects/{project}/feeds/{feed}\x12\x1d\x66olders/{folder}/feeds/{feed}\x12)organizations/{organization}/feeds/{feed} \x01"\xa5\x01\n\x19SearchAllResourcesRequest\x12\x12\n\x05scope\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05query\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x18\n\x0b\x61sset_types\x18\x03 \x03(\tB\x03\xe0\x41\x01\x12\x16\n\tpage_size\x18\x04 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x05 \x01(\tB\x03\xe0\x41\x01\x12\x15\n\x08order_by\x18\x06 \x01(\tB\x03\xe0\x41\x01"s\n\x1aSearchAllResourcesResponse\x12<\n\x07results\x18\x01 \x03(\x0b\x32+.google.cloud.asset.v1.ResourceSearchResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t"v\n\x1bSearchAllIamPoliciesRequest\x12\x12\n\x05scope\x18\x01 \x01(\tB\x03\xe0\x41\x02\x12\x12\n\x05query\x18\x02 \x01(\tB\x03\xe0\x41\x01\x12\x16\n\tpage_size\x18\x03 \x01(\x05\x42\x03\xe0\x41\x01\x12\x17\n\npage_token\x18\x04 \x01(\tB\x03\xe0\x41\x01"v\n\x1cSearchAllIamPoliciesResponse\x12=\n\x07results\x18\x01 \x03(\x0b\x32,.google.cloud.asset.v1.IamPolicySearchResult\x12\x17\n\x0fnext_page_token\x18\x02 \x01(\t*l\n\x0b\x43ontentType\x12\x1c\n\x18\x43ONTENT_TYPE_UNSPECIFIED\x10\x00\x12\x0c\n\x08RESOURCE\x10\x01\x12\x0e\n\nIAM_POLICY\x10\x02\x12\x0e\n\nORG_POLICY\x10\x04\x12\x11\n\rACCESS_POLICY\x10\x05\x32\xf0\x0b\n\x0c\x41ssetService\x12\xde\x01\n\x0c\x45xportAssets\x12*.google.cloud.asset.v1.ExportAssetsRequest\x1a\x1d.google.longrunning.Operation"\x82\x01\x82\xd3\xe4\x93\x02""\x1d/v1/{parent=*/*}:exportAssets:\x01*\xca\x41W\n*google.cloud.asset.v1.ExportAssetsResponse\x12)google.cloud.asset.v1.ExportAssetsRequest\x12\xb2\x01\n\x15\x42\x61tchGetAssetsHistory\x12\x33.google.cloud.asset.v1.BatchGetAssetsHistoryRequest\x1a\x34.google.cloud.asset.v1.BatchGetAssetsHistoryResponse".\x82\xd3\xe4\x93\x02(\x12&/v1/{parent=*/*}:batchGetAssetsHistory\x12\x7f\n\nCreateFeed\x12(.google.cloud.asset.v1.CreateFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"*\x82\xd3\xe4\x93\x02\x1b"\x16/v1/{parent=*/*}/feeds:\x01*\xda\x41\x06parent\x12t\n\x07GetFeed\x12%.google.cloud.asset.v1.GetFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"%\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/{name=*/*/feeds/*}\xda\x41\x04name\x12\x87\x01\n\tListFeeds\x12\'.google.cloud.asset.v1.ListFeedsRequest\x1a(.google.cloud.asset.v1.ListFeedsResponse"\'\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/{parent=*/*}/feeds\xda\x41\x06parent\x12\x82\x01\n\nUpdateFeed\x12(.google.cloud.asset.v1.UpdateFeedRequest\x1a\x1b.google.cloud.asset.v1.Feed"-\x82\xd3\xe4\x93\x02 2\x1b/v1/{feed.name=*/*/feeds/*}:\x01*\xda\x41\x04\x66\x65\x65\x64\x12u\n\nDeleteFeed\x12(.google.cloud.asset.v1.DeleteFeedRequest\x1a\x16.google.protobuf.Empty"%\x82\xd3\xe4\x93\x02\x18*\x16/v1/{name=*/*/feeds/*}\xda\x41\x04name\x12\xbf\x01\n\x12SearchAllResources\x12\x30.google.cloud.asset.v1.SearchAllResourcesRequest\x1a\x31.google.cloud.asset.v1.SearchAllResourcesResponse"D\x82\xd3\xe4\x93\x02$\x12"/v1/{scope=*/*}:searchAllResources\xda\x41\x17scope,query,asset_types\x12\xbb\x01\n\x14SearchAllIamPolicies\x12\x32.google.cloud.asset.v1.SearchAllIamPoliciesRequest\x1a\x33.google.cloud.asset.v1.SearchAllIamPoliciesResponse":\x82\xd3\xe4\x93\x02&\x12$/v1/{scope=*/*}:searchAllIamPolicies\xda\x41\x0bscope,query\x1aM\xca\x41\x19\x63loudasset.googleapis.com\xd2\x41.https://www.googleapis.com/auth/cloud-platformB\x9c\x01\n\x19\x63om.google.cloud.asset.v1B\x11\x41ssetServiceProtoP\x01Z:google.golang.org/genproto/googleapis/cloud/asset/v1;asset\xaa\x02\x15Google.Cloud.Asset.V1\xca\x02\x15Google\\Cloud\\Asset\\V1b\x06proto3',
     dependencies=[
         google_dot_api_dot_annotations__pb2.DESCRIPTOR,
         google_dot_api_dot_client__pb2.DESCRIPTOR,
@@ -43,6 +44,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
         google_dot_api_dot_resource__pb2.DESCRIPTOR,
         google_dot_cloud_dot_asset__v1_dot_proto_dot_assets__pb2.DESCRIPTOR,
         google_dot_longrunning_dot_operations__pb2.DESCRIPTOR,
+        google_dot_protobuf_dot_duration__pb2.DESCRIPTOR,
         google_dot_protobuf_dot_empty__pb2.DESCRIPTOR,
         google_dot_protobuf_dot_field__mask__pb2.DESCRIPTOR,
         google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,
@@ -100,8 +102,8 @@ _CONTENTTYPE = _descriptor.EnumDescriptor(
     ],
     containing_type=None,
     serialized_options=None,
-    serialized_start=2948,
-    serialized_end=3056,
+    serialized_start=3018,
+    serialized_end=3126,
 )
 _sym_db.RegisterEnumDescriptor(_CONTENTTYPE)
 
@@ -225,8 +227,8 @@ _EXPORTASSETSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=389,
-    serialized_end=658,
+    serialized_start=421,
+    serialized_end=690,
 )
 
 
@@ -285,8 +287,8 @@ _EXPORTASSETSRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=661,
-    serialized_end=790,
+    serialized_start=693,
+    serialized_end=822,
 )
 
 
@@ -383,8 +385,8 @@ _BATCHGETASSETSHISTORYREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=793,
-    serialized_end=1030,
+    serialized_start=825,
+    serialized_end=1062,
 )
 
 
@@ -424,8 +426,8 @@ _BATCHGETASSETSHISTORYRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1032,
-    serialized_end=1117,
+    serialized_start=1064,
+    serialized_end=1149,
 )
 
 
@@ -503,8 +505,8 @@ _CREATEFEEDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1119,
-    serialized_end=1229,
+    serialized_start=1151,
+    serialized_end=1261,
 )
 
 
@@ -544,8 +546,8 @@ _GETFEEDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1231,
-    serialized_end=1301,
+    serialized_start=1263,
+    serialized_end=1333,
 )
 
 
@@ -585,8 +587,8 @@ _LISTFEEDSREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1303,
-    serialized_end=1342,
+    serialized_start=1335,
+    serialized_end=1374,
 )
 
 
@@ -626,8 +628,8 @@ _LISTFEEDSRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1344,
-    serialized_end=1407,
+    serialized_start=1376,
+    serialized_end=1439,
 )
 
 
@@ -686,8 +688,8 @@ _UPDATEFEEDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1409,
-    serialized_end=1530,
+    serialized_start=1441,
+    serialized_end=1562,
 )
 
 
@@ -727,8 +729,8 @@ _DELETEFEEDREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1532,
-    serialized_end=1605,
+    serialized_start=1564,
+    serialized_end=1637,
 )
 
 
@@ -796,8 +798,8 @@ _OUTPUTCONFIG = _descriptor.Descriptor(
             fields=[],
         )
     ],
-    serialized_start=1608,
-    serialized_end=1779,
+    serialized_start=1640,
+    serialized_end=1811,
 )
 
 
@@ -865,8 +867,8 @@ _GCSDESTINATION = _descriptor.Descriptor(
             fields=[],
         )
     ],
-    serialized_start=1781,
-    serialized_end=1848,
+    serialized_start=1813,
+    serialized_end=1880,
 )
 
 
@@ -944,8 +946,8 @@ _BIGQUERYDESTINATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1850,
-    serialized_end=1928,
+    serialized_start=1882,
+    serialized_end=1960,
 )
 
 
@@ -985,8 +987,8 @@ _PUBSUBDESTINATION = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=1930,
-    serialized_end=1964,
+    serialized_start=1962,
+    serialized_end=1996,
 )
 
 
@@ -1035,8 +1037,8 @@ _FEEDOUTPUTCONFIG = _descriptor.Descriptor(
             fields=[],
         )
     ],
-    serialized_start=1966,
-    serialized_end=2071,
+    serialized_start=1998,
+    serialized_end=2103,
 )
 
 
@@ -1143,6 +1145,25 @@ _FEED = _descriptor.Descriptor(
             file=DESCRIPTOR,
             create_key=_descriptor._internal_create_key,
         ),
+        _descriptor.FieldDescriptor(
+            name="condition",
+            full_name="google.cloud.asset.v1.Feed.condition",
+            index=5,
+            number=6,
+            type=11,
+            cpp_type=10,
+            label=1,
+            has_default_value=False,
+            default_value=None,
+            message_type=None,
+            enum_type=None,
+            containing_type=None,
+            is_extension=False,
+            extension_scope=None,
+            serialized_options=None,
+            file=DESCRIPTOR,
+            create_key=_descriptor._internal_create_key,
+        ),
     ],
     extensions=[],
     nested_types=[],
@@ -1152,8 +1173,8 @@ _FEED = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2074,
-    serialized_end=2421,
+    serialized_start=2106,
+    serialized_end=2491,
 )
 
 
@@ -1288,8 +1309,8 @@ _SEARCHALLRESOURCESREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2424,
-    serialized_end=2589,
+    serialized_start=2494,
+    serialized_end=2659,
 )
 
 
@@ -1348,8 +1369,8 @@ _SEARCHALLRESOURCESRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2591,
-    serialized_end=2706,
+    serialized_start=2661,
+    serialized_end=2776,
 )
 
 
@@ -1446,8 +1467,8 @@ _SEARCHALLIAMPOLICIESREQUEST = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2708,
-    serialized_end=2826,
+    serialized_start=2778,
+    serialized_end=2896,
 )
 
 
@@ -1506,8 +1527,8 @@ _SEARCHALLIAMPOLICIESRESPONSE = _descriptor.Descriptor(
     syntax="proto3",
     extension_ranges=[],
     oneofs=[],
-    serialized_start=2828,
-    serialized_end=2946,
+    serialized_start=2898,
+    serialized_end=3016,
 )
 
 _EXPORTASSETSREQUEST.fields_by_name[
@@ -1567,6 +1588,7 @@ _FEEDOUTPUTCONFIG.fields_by_name[
 ].containing_oneof = _FEEDOUTPUTCONFIG.oneofs_by_name["destination"]
 _FEED.fields_by_name["content_type"].enum_type = _CONTENTTYPE
 _FEED.fields_by_name["feed_output_config"].message_type = _FEEDOUTPUTCONFIG
+_FEED.fields_by_name["condition"].message_type = google_dot_type_dot_expr__pb2._EXPR
 _SEARCHALLRESOURCESRESPONSE.fields_by_name[
     "results"
 ].message_type = (
@@ -1635,8 +1657,8 @@ ExportAssetsRequest = _reflection.GeneratedProtocolMessageType(
           indexing, there is a volatile window during which running the
           same query may get different results.
       asset_types:
-          A list of asset types of which to take a snapshot for. For
-          example: “compute.googleapis.com/Disk”. If specified, only
+          A list of asset types of which to take a snapshot for.
+          Example: “compute.googleapis.com/Disk”. If specified, only
           matching assets will be returned. See `Introduction to Cloud
           Asset Inventory <https://cloud.google.com/asset-
           inventory/docs/overview>`__ for all supported asset types.
@@ -1645,8 +1667,7 @@ ExportAssetsRequest = _reflection.GeneratedProtocolMessageType(
           name will be returned.
       output_config:
           Required. Output configuration indicating where the results
-          will be output to. All results will be in newline delimited
-          JSON format.
+          will be output to.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.ExportAssetsRequest)
     },
@@ -1669,7 +1690,7 @@ ExportAssetsResponse = _reflection.GeneratedProtocolMessageType(
           Time the snapshot was taken.
       output_config:
           Output configuration indicating where the results were output
-          to. All results are in JSON format.
+          to.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.ExportAssetsResponse)
     },
@@ -1691,14 +1712,12 @@ BatchGetAssetsHistoryRequest = _reflection.GeneratedProtocolMessageType(
           project ID (such as “projects/my-project-id”)“, or a project
           number (such as”projects/12345").
       asset_names:
-          A list of the full names of the assets. For example: ``//compu
-          te.googleapis.com/projects/my_project_123/zones/zone1/instance
-          s/instance1``. See `Resource Names <https://cloud.google.com/a
-          pis/design/resource_names#full_resource_name>`__ and `Resource
-          Name Format <https://cloud.google.com/asset-
-          inventory/docs/resource-name-format>`__ for more info.  The
-          request becomes a no-op if the asset name list is empty, and
-          the max size of the asset name list is 100 in one request.
+          A list of the full names of the assets. See:
+          https://cloud.google.com/asset-inventory/docs/resource-name-
+          format Example:  ``//compute.googleapis.com/projects/my_projec
+          t_123/zones/zone1/instances/instance1``.  The request becomes
+          a no-op if the asset name list is empty, and the max size of
+          the asset name list is 100 in one request.
       content_type:
           Optional. The content type.
       read_time_window:
@@ -1878,9 +1897,7 @@ OutputConfig = _reflection.GeneratedProtocolMessageType(
           Destination on Cloud Storage.
       bigquery_destination:
           Destination on BigQuery. The output table stores the fields in
-          asset proto as columns in BigQuery. The resource/iam_policy
-          field is converted to a record with each field to a column,
-          except metadata to a single JSON string.
+          asset proto as columns in BigQuery.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.OutputConfig)
     },
@@ -1900,17 +1917,17 @@ GcsDestination = _reflection.GeneratedProtocolMessageType(
           Required.
       uri:
           The uri of the Cloud Storage object. It’s the same uri that is
-          used by gsutil. For example: “gs://bucket_name/object_name”.
-          See `Viewing and Editing Object Metadata
+          used by gsutil. Example: “gs://bucket_name/object_name”. See
+          `Viewing and Editing Object Metadata
           <https://cloud.google.com/storage/docs/viewing-editing-
           metadata>`__ for more information.
       uri_prefix:
-          The uri prefix of all generated Cloud Storage objects. For
-          example: “gs://bucket_name/object_name_prefix”. Each object
+          The uri prefix of all generated Cloud Storage objects.
+          Example: “gs://bucket_name/object_name_prefix”. Each object
           uri is in format: “gs://bucket_name/object_name_prefix// and
-          only contains assets for that type. starts from 0. For example
-          :”gs://bucket_name/object_name_prefix/compute.googleapis.com/D
-          isk/0" is the first shard of output objects containing all
+          only contains assets for that type. starts from 0. Example:”gs
+          ://bucket_name/object_name_prefix/compute.googleapis.com/Disk/
+          0" is the first shard of output objects containing all
           compute.googleapis.com/Disk assets. An INVALID_ARGUMENT error
           will be returned if file with the same name
           “gs://bucket_name/object_name_prefix” already exists.
@@ -1926,7 +1943,7 @@ BigQueryDestination = _reflection.GeneratedProtocolMessageType(
     {
         "DESCRIPTOR": _BIGQUERYDESTINATION,
         "__module__": "google.cloud.asset_v1.proto.asset_service_pb2",
-        "__doc__": """A BigQuery destination.
+        "__doc__": """A BigQuery destination for exporting assets to.
   
   Attributes:
       dataset:
@@ -1960,7 +1977,7 @@ PubsubDestination = _reflection.GeneratedProtocolMessageType(
   
   Attributes:
       topic:
-          The name of the Pub/Sub topic to publish to. For example:
+          The name of the Pub/Sub topic to publish to. Example:
           ``projects/PROJECT_ID/topics/TOPIC_ID``.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.PubsubDestination)
@@ -2011,16 +2028,16 @@ Feed = _reflection.GeneratedProtocolMessageType(
       asset_names:
           A list of the full names of the assets to receive updates. You
           must specify either or both of asset_names and asset_types.
-          Only asset updates matching specified asset_names and
-          asset_types are exported to the feed. For example: ``//compute
-          .googleapis.com/projects/my_project_123/zones/zone1/instances/
-          instance1``. See `Resource Names <https://cloud.google.com/api
-          s/design/resource_names#full_resource_name>`__ for more info.
+          Only asset updates matching specified asset_names or
+          asset_types are exported to the feed. Example: ``//compute.goo
+          gleapis.com/projects/my_project_123/zones/zone1/instances/inst
+          ance1``. See `Resource Names <https://cloud.google.com/apis/de
+          sign/resource_names#full_resource_name>`__ for more info.
       asset_types:
           A list of types of the assets to receive updates. You must
           specify either or both of asset_names and asset_types. Only
-          asset updates matching specified asset_names and asset_types
-          are exported to the feed. For example:
+          asset updates matching specified asset_names or asset_types
+          are exported to the feed. Example:
           ``"compute.googleapis.com/Disk"``  See `this topic
           <https://cloud.google.com/asset-inventory/docs/supported-
           asset-types>`__ for a list of all supported asset types.
@@ -2030,6 +2047,15 @@ Feed = _reflection.GeneratedProtocolMessageType(
       feed_output_config:
           Required. Feed output configuration defining where the asset
           updates are published to.
+      condition:
+          A condition which determines whether an asset update should be
+          published. If specified, an asset will be returned only when
+          the expression evaluates to true. When set, ``expression``
+          field in the ``Expr`` must be a valid [CEL expression]
+          (https://github.com/google/cel-spec) on a TemporalAsset with
+          name ``temporal_asset``. Example: a Feed with expression
+          (“temporal_asset.deleted == true”) will only publish Asset
+          deletions. Other fields in ``Expr`` are optional.
   """,
         # @@protoc_insertion_point(class_scope:google.cloud.asset.v1.Feed)
     },
@@ -2248,8 +2274,8 @@ _ASSETSERVICE = _descriptor.ServiceDescriptor(
     index=0,
     serialized_options=b"\312A\031cloudasset.googleapis.com\322A.https://www.googleapis.com/auth/cloud-platform",
     create_key=_descriptor._internal_create_key,
-    serialized_start=3059,
-    serialized_end=4579,
+    serialized_start=3129,
+    serialized_end=4649,
     methods=[
         _descriptor.MethodDescriptor(
             name="ExportAssets",
