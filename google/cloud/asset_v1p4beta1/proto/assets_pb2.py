@@ -688,6 +688,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
                 "__doc__": """Represents analysis state of each node in the result graph or non-
     critical errors in the response.
+    
     Attributes:
         code:
             The Google standard error code that best describes the state.
@@ -708,6 +709,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_RESOURCE,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
                 "__doc__": """A GCP resource that appears in an access control list.
+    
     Attributes:
         full_resource_name:
             The `full resource name <https://aip.dev/122#full-resource-
@@ -725,6 +727,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_ACCESS,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
                 "__doc__": """A role or permission that appears in an access control list.
+    
     Attributes:
         role:
             The role.
@@ -743,6 +746,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_EDGE,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
                 "__doc__": """A directional edge.
+    
     Attributes:
         source_node:
             The source node of the edge.
@@ -759,6 +763,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYANALYSISRESULT_IDENTITY,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
                 "__doc__": """An identity that appears in an access control list.
+    
     Attributes:
         name:
             The identity name in any form of members appear in `IAM policy
@@ -790,6 +795,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
     R2; - Permission P3 applies to resource R2 and R3;  This will result
     in the following access control lists: - AccessControlList 1: [R1,
     R2], [P1, P2] - AccessControlList 2: [R2, R3], [P3]
+    
     Attributes:
         resources:
             The resources that match one of the following conditions: -
@@ -846,6 +852,7 @@ IamPolicyAnalysisResult = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p4beta1.proto.assets_pb2",
         "__doc__": """IAM Policy analysis result, consisting of one IAM policy binding and
   derived access control lists.
+  
   Attributes:
       attached_resource_full_name:
           The full name of the resource to which the [iam_binding][googl

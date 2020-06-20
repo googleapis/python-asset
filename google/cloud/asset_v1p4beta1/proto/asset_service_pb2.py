@@ -1119,6 +1119,7 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
     ctor][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySele
     ctor] or [AccessSelector][google.cloud.asset.v1p4beta1.IamPolicyAnalys
     isQuery.AccessSelector] must be specified in a request.
+    
     Attributes:
         full_resource_name:
             Required. The `full resource name <https://cloud.google.com/ap
@@ -1136,6 +1137,7 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
                 "__doc__": """Specifies an identity for which to determine resource access, based on
     roles assigned either directly to them or to the groups they belong
     to, directly or indirectly.
+    
     Attributes:
         identity:
             Required. The identity appear in the form of members in `IAM
@@ -1155,6 +1157,7 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
     identities possessing them and the resources they control. If multiple
     values are specified, results will include identities and resources
     matching any of them.
+    
     Attributes:
         roles:
             Optional. The roles to appear in result.
@@ -1167,6 +1170,7 @@ IamPolicyAnalysisQuery = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _IAMPOLICYANALYSISQUERY,
         "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
         "__doc__": """IAM policy analysis query message.
+  
   Attributes:
       parent:
           Required. The relative name of the root asset. Only resources
@@ -1202,6 +1206,7 @@ AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _ANALYZEIAMPOLICYREQUEST_OPTIONS,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
                 "__doc__": """Contains request options.
+    
     Attributes:
         expand_groups:
             Optional. If true, the identities section of the result will
@@ -1277,6 +1282,7 @@ AnalyzeIamPolicyRequest = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
         "__doc__": """A request message for [AssetService.AnalyzeIamPolicy][google.cloud.ass
   et.v1p4beta1.AssetService.AnalyzeIamPolicy].
+  
   Attributes:
       analysis_query:
           Required. The request query.
@@ -1300,6 +1306,7 @@ AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
                 "__doc__": """An analysis message to group the query and results.
+    
     Attributes:
         analysis_query:
             The analysis query.
@@ -1320,6 +1327,7 @@ AnalyzeIamPolicyResponse = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
         "__doc__": """A response message for [AssetService.AnalyzeIamPolicy][google.cloud.as
   set.v1p4beta1.AssetService.AnalyzeIamPolicy].
+  
   Attributes:
       main_analysis:
           The main analysis that matches the original request.
@@ -1355,6 +1363,7 @@ IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
                 "__doc__": """A Cloud Storage location.
+    
     Attributes:
         uri:
             Required. The uri of the Cloud Storage object. It’s the same
@@ -1370,6 +1379,7 @@ IamPolicyAnalysisOutputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _IAMPOLICYANALYSISOUTPUTCONFIG,
         "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
         "__doc__": """Output configuration for export IAM policy analysis destination.
+  
   Attributes:
       destination:
           IAM policy analysis export destination.
@@ -1393,6 +1403,7 @@ ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS,
                 "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
                 "__doc__": """Contains request options.
+    
     Attributes:
         expand_groups:
             Optional. If true, the identities section of the result will
@@ -1456,6 +1467,7 @@ ExportIamPolicyAnalysisRequest = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1p4beta1.proto.asset_service_pb2",
         "__doc__": """A request message for [AssetService.ExportIamPolicyAnalysis][google.cl
   oud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
+  
   Attributes:
       analysis_query:
           Required. The request query.
@@ -1480,6 +1492,7 @@ ExportIamPolicyAnalysisResponse = _reflection.GeneratedProtocolMessageType(
         "__doc__": """The export IAM policy analysis response. This message is returned by
   the [google.longrunning.Operations.GetOperation][] method in the
   returned [google.longrunning.Operation.response][] field.
+  
   Attributes:
       output_config:
           Output configuration indicating where the results were output

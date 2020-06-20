@@ -752,6 +752,7 @@ CreateFeedRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _CREATEFEEDREQUEST,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """Create asset feed request.
+  
   Attributes:
       parent:
           Required. The name of the project/folder/organization where
@@ -782,6 +783,7 @@ GetFeedRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GETFEEDREQUEST,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """Get asset feed request.
+  
   Attributes:
       name:
           Required. The name of the Feed and it must be in the format
@@ -801,6 +803,7 @@ ListFeedsRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _LISTFEEDSREQUEST,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """List asset feeds request.
+  
   Attributes:
       parent:
           Required. The parent project/folder/organization whose feeds
@@ -836,6 +839,7 @@ UpdateFeedRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _UPDATEFEEDREQUEST,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """Update asset feed request.
+  
   Attributes:
       feed:
           Required. The new values of feed details. It must match an
@@ -879,6 +883,7 @@ OutputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _OUTPUTCONFIG,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """Output configuration for export assets destination.
+  
   Attributes:
       destination:
           Asset export destination.
@@ -897,6 +902,7 @@ GcsDestination = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GCSDESTINATION,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """A Cloud Storage location.
+  
   Attributes:
       object_uri:
           Required.
@@ -919,6 +925,7 @@ PubsubDestination = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _PUBSUBDESTINATION,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """A Cloud Pubsub destination.
+  
   Attributes:
       topic:
           The name of the Cloud Pub/Sub topic to publish to. For
@@ -936,6 +943,7 @@ FeedOutputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _FEEDOUTPUTCONFIG,
         "__module__": "google.cloud.asset_v1p2beta1.proto.asset_service_pb2",
         "__doc__": """Output configuration for asset feed destination.
+  
   Attributes:
       destination:
           Asset feed destination.
@@ -957,6 +965,7 @@ Feed = _reflection.GeneratedProtocolMessageType(
   feed filter controls what updates are exported. The asset feed must be
   created within a project, organization, or folder. Supported
   destinations are: Cloud Pub/Sub topics.
+  
   Attributes:
       name:
           Required. The format will be

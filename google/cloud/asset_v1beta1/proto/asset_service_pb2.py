@@ -582,6 +582,7 @@ ExportAssetsRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _EXPORTASSETSREQUEST,
         "__module__": "google.cloud.asset_v1beta1.proto.asset_service_pb2",
         "__doc__": """Export asset request.
+  
   Attributes:
       parent:
           Required. The relative name of the root asset. This can only
@@ -626,6 +627,7 @@ ExportAssetsResponse = _reflection.GeneratedProtocolMessageType(
   grunning.Operations.GetOperation][google.longrunning.Operations.GetOpe
   ration] method in the returned [google.longrunning.Operation.response]
   [google.longrunning.Operation.response] field.
+  
   Attributes:
       read_time:
           Time the snapshot was taken.
@@ -645,6 +647,7 @@ BatchGetAssetsHistoryRequest = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _BATCHGETASSETSHISTORYREQUEST,
         "__module__": "google.cloud.asset_v1beta1.proto.asset_service_pb2",
         "__doc__": """Batch get assets history request.
+  
   Attributes:
       parent:
           Required. The relative name of the root asset. It can only be
@@ -682,6 +685,7 @@ BatchGetAssetsHistoryResponse = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _BATCHGETASSETSHISTORYRESPONSE,
         "__module__": "google.cloud.asset_v1beta1.proto.asset_service_pb2",
         "__doc__": """Batch get assets history response.
+  
   Attributes:
       assets:
           A list of assets with valid time windows.
@@ -698,6 +702,7 @@ OutputConfig = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _OUTPUTCONFIG,
         "__module__": "google.cloud.asset_v1beta1.proto.asset_service_pb2",
         "__doc__": """Output configuration for export assets destination.
+  
   Attributes:
       destination:
           Asset export destination.
@@ -716,6 +721,7 @@ GcsDestination = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _GCSDESTINATION,
         "__module__": "google.cloud.asset_v1beta1.proto.asset_service_pb2",
         "__doc__": """A Cloud Storage location.
+  
   Attributes:
       object_uri:
           Required.

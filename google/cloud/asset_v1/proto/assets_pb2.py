@@ -1138,6 +1138,7 @@ TemporalAsset = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
         "__doc__": """An asset in Google Cloud and its temporal metadata, including the time
   window when it was observed and its status during that window.
+  
   Attributes:
       window:
           The time window when the asset data and state was observed.
@@ -1158,6 +1159,7 @@ TimeWindow = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _TIMEWINDOW,
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
         "__doc__": """A time window specified by its ``start_time`` and ``end_time``.
+  
   Attributes:
       start_time:
           Start time of the time window (exclusive).
@@ -1181,6 +1183,7 @@ Asset = _reflection.GeneratedProtocolMessageType(
   manager/docs/cloud-platform-resource-hierarchy>`__, a resource outside
   the Google Cloud resource hierarchy (such as Google Kubernetes Engine
   clusters and objects), or a Cloud IAM policy.
+  
   Attributes:
       name:
           The full name of the asset. For example: ``//compute.googleapi
@@ -1238,6 +1241,7 @@ Resource = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _RESOURCE,
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
         "__doc__": """A representation of a Google Cloud resource.
+  
   Attributes:
       version:
           The API version. For example: ``v1``
@@ -1298,6 +1302,7 @@ ResourceSearchResult = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
         "__doc__": """A result of Resource Search, containing information of a cloud
   resoure.
+  
   Attributes:
       name:
           The full resource name of this resource. Example: ``//compute.
@@ -1384,6 +1389,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
                         "DESCRIPTOR": _IAMPOLICYSEARCHRESULT_EXPLANATION_PERMISSIONS,
                         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
                         "__doc__": """IAM permissions
+      
       Attributes:
           permissions:
               A list of permissions. A sample permission string:
@@ -1404,6 +1410,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYSEARCHRESULT_EXPLANATION,
                 "__module__": "google.cloud.asset_v1.proto.assets_pb2",
                 "__doc__": """Explanation about the IAM policy search result.
+    
     Attributes:
         matched_permissions:
             The map from roles to their included permissions that match
@@ -1423,6 +1430,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
         "__module__": "google.cloud.asset_v1.proto.assets_pb2",
         "__doc__": """A result of IAM Policy search, containing information of an IAM
   policy.
+  
   Attributes:
       resource:
           The full resource name of the resource associated with this

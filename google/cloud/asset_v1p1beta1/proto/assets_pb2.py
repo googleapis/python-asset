@@ -562,6 +562,7 @@ StandardResourceMetadata = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _STANDARDRESOURCEMETADATA,
         "__module__": "google.cloud.asset_v1p1beta1.proto.assets_pb2",
         "__doc__": """The standard metadata of a cloud resource.
+  
   Attributes:
       name:
           The full resource name. For example: ``//compute.googleapis.co
@@ -626,6 +627,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
                 "DESCRIPTOR": _IAMPOLICYSEARCHRESULT_EXPLANATION,
                 "__module__": "google.cloud.asset_v1p1beta1.proto.assets_pb2",
                 "__doc__": """Explanation about the IAM policy search result.
+    
     Attributes:
         matched_permissions:
             The map from roles to their included permission matching the
@@ -641,6 +643,7 @@ IamPolicySearchResult = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _IAMPOLICYSEARCHRESULT,
         "__module__": "google.cloud.asset_v1p1beta1.proto.assets_pb2",
         "__doc__": """The result for a IAM Policy search.
+  
   Attributes:
       resource:
           The `full resource name <https://cloud.google.com/apis/design/
@@ -678,6 +681,7 @@ Permissions = _reflection.GeneratedProtocolMessageType(
         "DESCRIPTOR": _PERMISSIONS,
         "__module__": "google.cloud.asset_v1p1beta1.proto.assets_pb2",
         "__doc__": """IAM permissions
+  
   Attributes:
       permissions:
           A list of permissions. A sample permission string:
