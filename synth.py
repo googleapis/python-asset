@@ -108,14 +108,14 @@ s.replace(
 
 # Fix accesscontextmanager and orgpolicy imports
 s.replace(
-    "google/cloud/asset_v1/types.py",
-    "from google\.cloud\.asset_v1\.proto import ((access_level_pb2)|(service_perimeter_pb2)|(access_policy_pb2))",
-    "from google.identity.accesscontextmanager.v1 import \g<1>",
+    "google/cloud/asset_v*/types.py",
+    "from google\.cloud\.asset_(v.*)\.proto import ((access_level_pb2)|(service_perimeter_pb2)|(access_policy_pb2))",
+    "from google.identity.accesscontextmanager.v1 import \g<2>",
 )
 
 s.replace(
-    "google/cloud/asset_v1/types.py",
-    "from google\.cloud\.asset_v1\.proto import orgpolicy_pb2",
+    "google/cloud/asset_v*/types.py",
+    "from google\.cloud\.asset_v.*\.proto import orgpolicy_pb2",
     "from google.cloud.orgpolicy.v1 import orgpolicy_pb2",
 )
 

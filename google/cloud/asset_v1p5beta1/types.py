@@ -20,12 +20,12 @@ import sys
 
 from google.api_core.protobuf_helpers import get_messages
 
-from google.cloud.asset_v1p5beta1.proto import access_level_pb2
-from google.cloud.asset_v1p5beta1.proto import access_policy_pb2
+from google.identity.accesscontextmanager.v1 import access_level_pb2
+from google.identity.accesscontextmanager.v1 import access_policy_pb2
 from google.cloud.asset_v1p5beta1.proto import asset_service_pb2
 from google.cloud.asset_v1p5beta1.proto import assets_pb2
-from google.cloud.asset_v1p5beta1.proto import orgpolicy_pb2
-from google.cloud.asset_v1p5beta1.proto import service_perimeter_pb2
+from google.cloud.orgpolicy.v1 import orgpolicy_pb2
+from google.identity.accesscontextmanager.v1 import service_perimeter_pb2
 from google.iam.v1 import policy_pb2
 from google.protobuf import struct_pb2
 from google.protobuf import timestamp_pb2

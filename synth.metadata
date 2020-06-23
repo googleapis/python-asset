@@ -4,7 +4,7 @@
       "git": {
         "name": ".",
         "remote": "git@github.com:googleapis/python-asset.git",
-        "sha": "467ab58b43aa11d8d6f8087800e5d8b451984edc"
+        "sha": "f786ab34a70355da4d6714e2313932840033d30e"
       }
     },
     {
