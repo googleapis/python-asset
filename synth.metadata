@@ -3,30 +3,22 @@
     {
       "git": {
         "name": ".",
-        "remote": "https://github.com/googleapis/python-asset.git",
-        "sha": "6e48d8c588e907256144dc16e431c4a54fefddff"
-      }
-    },
-    {
-      "git": {
-        "name": "googleapis",
-        "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "3dcb344dd2a03043708b3ba40c4df141a3d5b06b",
-        "internalRef": "316789767"
+        "remote": "git@github.com:googleapis/python-asset.git",
+        "sha": "467ab58b43aa11d8d6f8087800e5d8b451984edc"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d2364eb80b840a36136c8ce12f1c6efabcc9600e"
+        "sha": "db4f15fedc76e04018e6e43ec403e804e1142158"
       }
     },
     {
       "git": {
         "name": "synthtool",
         "remote": "https://github.com/googleapis/synthtool.git",
-        "sha": "d2364eb80b840a36136c8ce12f1c6efabcc9600e"
+        "sha": "db4f15fedc76e04018e6e43ec403e804e1142158"
       }
     }
   ],
@@ -63,6 +55,15 @@
         "source": "googleapis",
         "apiName": "asset",
         "apiVersion": "v1p4beta1",
+        "language": "python",
+        "generator": "bazel"
+      }
+    },
+    {
+      "client": {
+        "source": "googleapis",
+        "apiName": "asset",
+        "apiVersion": "v1p5beta1",
         "language": "python",
         "generator": "bazel"
       }

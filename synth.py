@@ -19,7 +19,7 @@ from synthtool import gcp
 
 gapic = gcp.GAPICBazel()
 common = gcp.CommonTemplates()
-versions = ["v1beta1", "v1p1beta1", "v1p2beta1", "v1p4beta1", "v1"]
+versions = ["v1beta1", "v1p1beta1", "v1p2beta1", "v1p4beta1", "v1p5beta1", "v1"]
 
 excludes = ["setup.py", "nox*.py", "README.rst", "docs/conf.py", "docs/index.rst"]
 
@@ -171,7 +171,10 @@ if count != 2:
 # ----------------------------------------------------------------------------
 # Add templated files
 # ----------------------------------------------------------------------------
-templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80)
+templated_files = gcp.CommonTemplates().py_library(unit_cov_level=79, cov_level=80, samples=False)
 s.move(templated_files)
+
+# TODO(busunkim): Use latest sphinx after microgenerator transition
+s.replace("noxfile.py", '"sphinx"', '"sphinx<3.0.0"')
 
 s.shell.run(["nox", "-s", "blacken"], hide_output=False)
