@@ -4,7 +4,7 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
-## [2.1.0](https://www.github.com/googleapis/python-asset/compare/v2.0.0...v2.1.0) (2020-06-23)
+## [1.2.0](https://www.github.com/googleapis/python-asset/compare/v1.1.0...v1.2.0) (2020-06-23)
 
 
 ### Features
