@@ -54,8 +54,8 @@ v1p5beta1
 .. toctree::
     :maxdepth: 2
 
-    Client (v1p5beta1) <gapic/v1p4beta1/api>
-    Types (v1p5beta1) <gapic/v1p4beta1/types>
+    Client (v1p5beta1) <gapic/v1p5beta1/api>
+    Types (v1p5beta1) <gapic/v1p5beta1/types>
 
 
 v1beta1
