@@ -3,8 +3,8 @@
     {
       "git": {
         "name": ".",
-        "remote": "git@github.com:googleapis/python-asset.git",
-        "sha": "f786ab34a70355da4d6714e2313932840033d30e"
+        "remote": "https://github.com/googleapis/python-asset.git",
+        "sha": "c678b4ea5931c38d283b03c2b03254c9e1e2a4a0"
       }
     },
     {
