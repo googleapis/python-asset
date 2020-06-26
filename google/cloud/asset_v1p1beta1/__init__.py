@@ -36,7 +36,4 @@ class AssetServiceClient(asset_service_client.AssetServiceClient):
     __doc__ = asset_service_client.AssetServiceClient.__doc__
 
 
-__all__ = (
-    "types",
-    "AssetServiceClient",
-)
+__all__ = ("types", "AssetServiceClient")
