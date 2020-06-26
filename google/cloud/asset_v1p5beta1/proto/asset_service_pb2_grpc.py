@@ -43,7 +43,7 @@ def add_AssetServiceServicer_to_server(servicer, server):
             servicer.ListAssets,
             request_deserializer=google_dot_cloud_dot_asset__v1p5beta1_dot_proto_dot_asset__service__pb2.ListAssetsRequest.FromString,
             response_serializer=google_dot_cloud_dot_asset__v1p5beta1_dot_proto_dot_asset__service__pb2.ListAssetsResponse.SerializeToString,
-        )
+        ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
         "google.cloud.asset.v1p5beta1.AssetService", rpc_method_handlers

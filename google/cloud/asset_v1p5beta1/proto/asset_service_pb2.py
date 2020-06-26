@@ -422,7 +422,7 @@ _ASSETSERVICE = _descriptor.ServiceDescriptor(
             output_type=_LISTASSETSRESPONSE,
             serialized_options=b"\202\323\344\223\002 \022\036/v1p5beta1/{parent=*/*}/assets",
             create_key=_descriptor._internal_create_key,
-        )
+        ),
     ],
 )
 _sym_db.RegisterServiceDescriptor(_ASSETSERVICE)
