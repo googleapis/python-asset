@@ -150,3 +150,13 @@ from google.cloud import asset
 resource = asset.ContentType.RESOURCE
 cloud_asset = asset.Asset(name="name")
 ```
+
+## Project Path Helper Methods
+
+The project path helper method `project_path` has been removed. Please construct
+this path manually.
+
+```py
+project = 'my-project'
+project_path = f'projects/{project}'
+```
