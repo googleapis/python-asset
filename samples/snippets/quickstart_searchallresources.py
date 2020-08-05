@@ -35,9 +35,8 @@ def search_all_resources(scope,
     client = asset_v1.AssetServiceClient()
     response = client.search_all_resources(
         request = {'scope': scope, 'query': query, 'asset_types': asset_types, 'page_size': page_size, 'order_by': order_by})
-    for page in response.pages:
-        for resource in page:
-            print(resource)
+    for resource in response:
+        print(resource)
         break
     # [END asset_quickstart_search_all_resources]
 

@@ -36,9 +36,8 @@ def list_assets(project_id, asset_types, page_size):
     response = client.list_assets(
         request = {'parent': project_resource, 'read_time': None, 'asset_types': asset_types, 'content_type': content_type, 'page_size': page_size})
 
-    for page in response.pages:
-        for asset in page:
-            print(asset)
+    for asset in response:
+        print(asset)
     # [END asset_quickstart_list_assets]
 
 
