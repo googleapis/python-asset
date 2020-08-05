@@ -26,7 +26,7 @@ def export_assets(project_id, dump_file_path):
     # TODO dump_file_path = 'Your asset dump file path'
 
     client = asset_v1.AssetServiceClient()
-    parent = client.project_path('projects/{}'.format(project_id))
+    parent = 'projects/{}'.format(project_id)
     output_config = asset_v1.OutputConfig()
     output_config.gcs_destination.uri = dump_file_path
     response = client.export_assets(request = {'parent': parent, 'output_config': output_config})
