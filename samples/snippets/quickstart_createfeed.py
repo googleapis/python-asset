@@ -21,7 +21,6 @@ import argparse
 def create_feed(project_id, feed_id, asset_names, topic):
     # [START asset_quickstart_create_feed]
     from google.cloud import asset_v1
-    from google.cloud.asset_v1.proto import asset_service_pb2
 
     # TODO project_id = 'Your Google Cloud Project ID'
     # TODO feed_id = 'Feed ID you want to create'
@@ -30,7 +29,7 @@ def create_feed(project_id, feed_id, asset_names, topic):
 
     client = asset_v1.AssetServiceClient()
     parent = "projects/{}".format(project_id)
-    feed = asset_service_pb2.Feed()
+    feed = asset_v1.Feed()
     feed.asset_names.extend(asset_names)
     feed.feed_output_config.pubsub_destination.topic = topic
     response = client.create_feed(request = {'parent': parent, 'feed_id': feed_id, 'feed': feed})

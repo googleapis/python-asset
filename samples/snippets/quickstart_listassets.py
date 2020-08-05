@@ -21,7 +21,6 @@ import argparse
 def list_assets(project_id, asset_types, page_size):
     # [START asset_quickstart_list_assets]
     from google.cloud import asset_v1p5beta1
-    from google.cloud.asset_v1p5beta1 import enums
 
     # TODO project_id = 'Your Google Cloud Project ID'
     # TODO asset_types = 'Your asset type list, e.g.,
@@ -30,7 +29,7 @@ def list_assets(project_id, asset_types, page_size):
     # 1000 (both inclusively)'
 
     project_resource = 'projects/{}'.format(project_id)
-    content_type = enums.ContentType.RESOURCE
+    content_type = asset_v1p5beta1.ContentType.RESOURCE
     client = asset_v1p5beta1.AssetServiceClient()
 
     # Call ListAssets v1p5beta1 to list assets.
