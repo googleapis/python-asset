@@ -28,36 +28,44 @@ def list_assets(project_id, asset_types, page_size):
     # TODO page_size = 'Num of assets in one page, which must be between 1 and
     # 1000 (both inclusively)'
 
-    project_resource = 'projects/{}'.format(project_id)
+    project_resource = "projects/{}".format(project_id)
     content_type = asset_v1p5beta1.ContentType.RESOURCE
     client = asset_v1p5beta1.AssetServiceClient()
 
     # Call ListAssets v1p5beta1 to list assets.
     response = client.list_assets(
-        request = {'parent': project_resource, 'read_time': None, 'asset_types': asset_types, 'content_type': content_type, 'page_size': page_size})
+        request={
+            "parent": project_resource,
+            "read_time": None,
+            "asset_types": asset_types,
+            "content_type": content_type,
+            "page_size": page_size,
+        }
+    )
 
     for asset in response:
         print(asset)
     # [END asset_quickstart_list_assets]
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description=__doc__,
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument('project_id', help='Your Google Cloud project ID')
+    parser.add_argument("project_id", help="Your Google Cloud project ID")
     parser.add_argument(
-        'asset_types',
-        help='The types of the assets to list, comma delimited, e.g., '
-        'storage.googleapis.com/Bucket')
+        "asset_types",
+        help="The types of the assets to list, comma delimited, e.g., "
+        "storage.googleapis.com/Bucket",
+    )
     parser.add_argument(
-        'page_size',
-        help='Num of assets in one page, which must be between 1 and 1000 '
-        '(both inclusively)')
+        "page_size",
+        help="Num of assets in one page, which must be between 1 and 1000 "
+        "(both inclusively)",
+    )
 
     args = parser.parse_args()
 
-    asset_type_list = args.asset_types.split(',')
+    asset_type_list = args.asset_types.split(",")
 
     list_assets(args.project_id, asset_type_list, int(args.page_size))
