@@ -30,7 +30,7 @@ def export_assets(project_id, dump_file_path):
     parent = client.project_path(project_id)
     output_config = asset_service_pb2.OutputConfig()
     output_config.gcs_destination.uri = dump_file_path
-    response = client.export_assets(parent, output_config)
+    response = client.export_assets(request = {'parent': parent, 'output_config': output_config})
     print(response.result())
     # [END asset_quickstart_export_assets]
 

@@ -33,7 +33,7 @@ def batch_get_assets_history(project_id, asset_names):
     content_type = enums.ContentType.RESOURCE
     read_time_window = assets_pb2.TimeWindow()
     response = client.batch_get_assets_history(
-        parent, content_type, read_time_window, asset_names)
+        request = {'parent': parent, 'asset_names': asset_names, 'content_type': content_type, 'read_time_window': read_time_window})
     print('assets: {}'.format(response.assets))
     # [END asset_quickstart_batch_get_assets_history]
 

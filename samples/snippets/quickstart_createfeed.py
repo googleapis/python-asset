@@ -33,7 +33,7 @@ def create_feed(project_id, feed_id, asset_names, topic):
     feed = asset_service_pb2.Feed()
     feed.asset_names.extend(asset_names)
     feed.feed_output_config.pubsub_destination.topic = topic
-    response = client.create_feed(parent, feed_id, feed)
+    response = client.create_feed(request = {'parent': parent, 'feed_id': feed_id, 'feed': feed})
     print('feed: {}'.format(response))
     # [END asset_quickstart_create_feed]
     return response

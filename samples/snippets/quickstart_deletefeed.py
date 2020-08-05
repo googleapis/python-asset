@@ -25,7 +25,7 @@ def delete_feed(feed_name):
     # TODO feed_name = 'Feed name you want to delete'
 
     client = asset_v1.AssetServiceClient()
-    client.delete_feed(feed_name)
+    client.delete_feed(request = {'name': feed_name})
     print('deleted_feed')
     # [END asset_quickstart_delete_feed]
 

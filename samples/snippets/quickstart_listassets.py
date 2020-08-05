@@ -35,8 +35,7 @@ def list_assets(project_id, asset_types, page_size):
 
     # Call ListAssets v1p5beta1 to list assets.
     response = client.list_assets(
-        parent=project_resource, read_time=None, asset_types=asset_types,
-        content_type=content_type, page_size=page_size)
+        request = {'parent': project_resource, 'read_time': None, 'asset_types': asset_types, 'content_type': content_type, 'page_size': page_size})
 
     for page in response.pages:
         for asset in page:
