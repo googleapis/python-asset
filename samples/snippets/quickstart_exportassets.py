@@ -39,6 +39,10 @@ def export_assets_bigquery(project_id, dataset, table):
     # [START asset_quickstart_export_assets_bigquery]
     from google.cloud import asset_v1
 
+    # TODO project_id = 'Your Google Cloud Project ID'
+    # TODO dataset = 'Your BigQuery dataset path'
+    # TODO table = 'Your BigQuery table name'
+
     client = asset_v1.AssetServiceClient()
     parent = "projects/{}".format(project_id)
     content_type = asset_v1.ContentType.RESOURCE
