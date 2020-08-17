@@ -51,7 +51,7 @@ def asset_bucket(storage_client):
         raise e
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope='module')
 def dataset(bigquery_client):
     dataset_id = "{}.{}".format(PROJECT, DATASET)
     dataset = bigquery.Dataset(dataset_id)
@@ -64,7 +64,7 @@ def dataset(bigquery_client):
             dataset_id, delete_contents=True, not_found_ok=False)
 
 
-def test_export_assets(asset_bucket, capsys):
+def test_export_assets(asset_bucket, dataset, capsys):
     dump_file_path = "gs://{}/assets-dump.txt".format(asset_bucket)
     quickstart_exportassets.export_assets(PROJECT, dump_file_path)
     out, _ = capsys.readouterr()
