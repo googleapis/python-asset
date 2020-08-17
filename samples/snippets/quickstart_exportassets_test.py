@@ -17,8 +17,8 @@
 import os
 import uuid
 
-from google.cloud import storage
 from google.cloud import bigquery
+from google.cloud import storage
 import pytest
 
 import quickstart_exportassets
@@ -31,6 +31,7 @@ DATASET = "assets_{}".format(int(uuid.uuid4()))
 @pytest.fixture(scope="module")
 def storage_client():
     yield storage.Client()
+
 
 @pytest.fixture(scope="module")
 def bigquery_client():
@@ -49,6 +50,7 @@ def asset_bucket(storage_client):
         print("Failed to delete bucket{}".format(BUCKET))
         raise e
 
+
 @pytest.fixture(scope="module")
 def dataset(bigquery_client):
     dataset_id = "{}.{}".format(PROJECT, DATASET)
@@ -60,6 +62,7 @@ def dataset(bigquery_client):
 
     bigquery_client.delete_dataset(
             dataset_id, delete_contents=True, not_found_ok=False)
+
 
 def test_export_assets(asset_bucket, capsys):
     dump_file_path = "gs://{}/assets-dump.txt".format(asset_bucket)

@@ -35,6 +35,7 @@ def export_assets(project_id, dump_file_path):
     print(response.result())
     # [END asset_quickstart_export_assets]
 
+
 def export_assets_bigquery(project_id, dataset, table):
     # [START asset_quickstart_export_assets_bigquery]
     from google.cloud import asset_v1
