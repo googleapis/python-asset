@@ -33,7 +33,7 @@ from google.api_core import operation_async
 from google.cloud.asset_v1p4beta1.types import asset_service
 from google.cloud.asset_v1p4beta1.types import assets
 
-from .transports.base import AssetServiceTransport
+from .transports.base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import AssetServiceGrpcAsyncIOTransport
 from .client import AssetServiceClient
 
@@ -59,6 +59,7 @@ class AssetServiceAsyncClient:
         credentials: credentials.Credentials = None,
         transport: Union[str, AssetServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiate the asset service client.
 
@@ -91,7 +92,10 @@ class AssetServiceAsyncClient:
         """
 
         self._client = AssetServiceClient(
-            credentials=credentials, transport=transport, client_options=client_options,
+            credentials=credentials,
+            transport=transport,
+            client_options=client_options,
+            client_info=client_info,
         )
 
     async def analyze_iam_policy(
@@ -139,7 +143,7 @@ class AssetServiceAsyncClient:
                 predicate=retries.if_exception_type(exceptions.ServiceUnavailable,),
             ),
             default_timeout=300.0,
-            client_info=_client_info,
+            client_info=DEFAULT_CLIENT_INFO,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -203,7 +207,7 @@ class AssetServiceAsyncClient:
         rpc = gapic_v1.method_async.wrap_method(
             self._client._transport.export_iam_policy_analysis,
             default_timeout=60.0,
-            client_info=_client_info,
+            client_info=DEFAULT_CLIENT_INFO,
         )
 
         # Certain fields should be provided within the metadata header;
@@ -230,11 +234,11 @@ class AssetServiceAsyncClient:
 
 
 try:
-    _client_info = gapic_v1.client_info.ClientInfo(
+    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
         gapic_version=pkg_resources.get_distribution("google-cloud-asset",).version,
     )
 except pkg_resources.DistributionNotFound:
-    _client_info = gapic_v1.client_info.ClientInfo()
+    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
 
 
 __all__ = ("AssetServiceAsyncClient",)

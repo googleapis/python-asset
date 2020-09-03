@@ -19,6 +19,7 @@ from typing import Callable, Dict, Optional, Sequence, Tuple
 
 from google.api_core import grpc_helpers  # type: ignore
 from google.api_core import operations_v1  # type: ignore
+from google.api_core import gapic_v1  # type: ignore
 from google import auth  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
@@ -30,7 +31,7 @@ from google.cloud.asset_v1.types import asset_service
 from google.longrunning import operations_pb2 as operations  # type: ignore
 from google.protobuf import empty_pb2 as empty  # type: ignore
 
-from .base import AssetServiceTransport
+from .base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 
 
 class AssetServiceGrpcTransport(AssetServiceTransport):
@@ -58,7 +59,8 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
         channel: grpc.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
-        quota_project_id: Optional[str] = None
+        quota_project_id: Optional[str] = None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiate the transport.
 
@@ -87,6 +89,11 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
                 is None.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
+            client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
+                The client info used to send a user-agent string along with	
+                API requests. If ``None``, then default info will be used.	
+                Generally, you only need to set this if you're developing	
+                your own client library.
 
         Raises:
           google.auth.exceptions.MutualTLSChannelError: If mutual TLS transport
@@ -142,6 +149,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
             credentials_file=credentials_file,
             scopes=scopes or self.AUTH_SCOPES,
             quota_project_id=quota_project_id,
+            client_info=client_info,
         )
 
     @classmethod
@@ -152,7 +160,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
         credentials_file: str = None,
         scopes: Optional[Sequence[str]] = None,
         quota_project_id: Optional[str] = None,
-        **kwargs
+        **kwargs,
     ) -> grpc.Channel:
         """Create and return a gRPC channel object.
         Args:
@@ -186,7 +194,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
             credentials_file=credentials_file,
             scopes=scopes,
             quota_project_id=quota_project_id,
-            **kwargs
+            **kwargs,
         )
 
     @property
@@ -433,11 +441,10 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all resources method over gRPC.
 
-        Searches all the resources within the given
-        accessible scope (e.g., a project, a folder or an
-        organization). Callers should have
-        cloud.assets.SearchAllResources permission upon the
-        requested scope, otherwise the request will be rejected.
+        Searches all Cloud resources within the specified scope, such as
+        a project, folder, or organization. The caller must be granted
+        the ``cloudasset.assets.searchAllResources`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         Returns:
             Callable[[~.SearchAllResourcesRequest],
@@ -466,11 +473,10 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all iam policies method over gRPC.
 
-        Searches all the IAM policies within the given
-        accessible scope (e.g., a project, a folder or an
-        organization). Callers should have
-        cloud.assets.SearchAllIamPolicies permission upon the
-        requested scope, otherwise the request will be rejected.
+        Searches all IAM policies within the specified scope, such as a
+        project, folder, or organization. The caller must be granted the
+        ``cloudasset.assets.searchAllIamPolicies`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         Returns:
             Callable[[~.SearchAllIamPoliciesRequest],
@@ -489,6 +495,71 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
                 response_deserializer=asset_service.SearchAllIamPoliciesResponse.deserialize,
             )
         return self._stubs["search_all_iam_policies"]
+
+    @property
+    def analyze_iam_policy(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeIamPolicyRequest], asset_service.AnalyzeIamPolicyResponse
+    ]:
+        r"""Return a callable for the analyze iam policy method over gRPC.
+
+        Analyzes IAM policies to answer which identities have
+        what accesses on which resources.
+
+        Returns:
+            Callable[[~.AnalyzeIamPolicyRequest],
+                    ~.AnalyzeIamPolicyResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_iam_policy" not in self._stubs:
+            self._stubs["analyze_iam_policy"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeIamPolicy",
+                request_serializer=asset_service.AnalyzeIamPolicyRequest.serialize,
+                response_deserializer=asset_service.AnalyzeIamPolicyResponse.deserialize,
+            )
+        return self._stubs["analyze_iam_policy"]
+
+    @property
+    def export_iam_policy_analysis(
+        self,
+    ) -> Callable[[asset_service.ExportIamPolicyAnalysisRequest], operations.Operation]:
+        r"""Return a callable for the export iam policy analysis method over gRPC.
+
+        Exports the answers of which identities have what accesses on
+        which resources to a Google Cloud Storage or a BigQuery
+        destination. For Cloud Storage destination, the output format is
+        the JSON format that represents a
+        [google.cloud.asset.v1.AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+        This method implements the
+        [google.longrunning.Operation][google.longrunning.Operation],
+        which allows you to track the export status. We recommend
+        intervals of at least 2 seconds with exponential retry to poll
+        the export operation result. The metadata contains the request
+        to help callers to map responses to requests.
+
+        Returns:
+            Callable[[~.ExportIamPolicyAnalysisRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "export_iam_policy_analysis" not in self._stubs:
+            self._stubs["export_iam_policy_analysis"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/ExportIamPolicyAnalysis",
+                request_serializer=asset_service.ExportIamPolicyAnalysisRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["export_iam_policy_analysis"]
 
 
 __all__ = ("AssetServiceGrpcTransport",)

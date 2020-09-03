@@ -43,6 +43,7 @@ from google.cloud.asset_v1.types import asset_service
 from google.cloud.asset_v1.types import assets
 from google.longrunning import operations_pb2
 from google.oauth2 import service_account
+from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.type import expr_pb2 as expr  # type: ignore
@@ -159,6 +160,7 @@ def test_asset_service_client_client_options(
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
             quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
         )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
@@ -175,6 +177,7 @@ def test_asset_service_client_client_options(
                 api_mtls_endpoint=client.DEFAULT_ENDPOINT,
                 client_cert_source=None,
                 quota_project_id=None,
+                client_info=transports.base.DEFAULT_CLIENT_INFO,
             )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS is
@@ -191,6 +194,7 @@ def test_asset_service_client_client_options(
                 api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
                 client_cert_source=None,
                 quota_project_id=None,
+                client_info=transports.base.DEFAULT_CLIENT_INFO,
             )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -210,6 +214,7 @@ def test_asset_service_client_client_options(
                 api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
                 client_cert_source=client_cert_source_callback,
                 quota_project_id=None,
+                client_info=transports.base.DEFAULT_CLIENT_INFO,
             )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -230,6 +235,7 @@ def test_asset_service_client_client_options(
                     api_mtls_endpoint=client.DEFAULT_MTLS_ENDPOINT,
                     client_cert_source=None,
                     quota_project_id=None,
+                    client_info=transports.base.DEFAULT_CLIENT_INFO,
                 )
 
     # Check the case api_endpoint is not provided, GOOGLE_API_USE_MTLS is
@@ -250,6 +256,7 @@ def test_asset_service_client_client_options(
                     api_mtls_endpoint=client.DEFAULT_ENDPOINT,
                     client_cert_source=None,
                     quota_project_id=None,
+                    client_info=transports.base.DEFAULT_CLIENT_INFO,
                 )
 
     # Check the case api_endpoint is not provided and GOOGLE_API_USE_MTLS has
@@ -271,6 +278,7 @@ def test_asset_service_client_client_options(
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
             quota_project_id="octopus",
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
         )
 
 
@@ -301,6 +309,7 @@ def test_asset_service_client_client_options_scopes(
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
             quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
         )
 
 
@@ -331,6 +340,7 @@ def test_asset_service_client_client_options_credentials_file(
             api_mtls_endpoint=client.DEFAULT_ENDPOINT,
             client_cert_source=None,
             quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
         )
 
 
@@ -348,6 +358,7 @@ def test_asset_service_client_client_options_from_dict():
             api_mtls_endpoint="squid.clam.whelk",
             client_cert_source=None,
             quota_project_id=None,
+            client_info=transports.base.DEFAULT_CLIENT_INFO,
         )
 
 
@@ -1860,8 +1871,8 @@ def test_search_all_resources_pages():
             RuntimeError,
         )
         pages = list(client.search_all_resources(request={}).pages)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 @pytest.mark.asyncio
@@ -1937,10 +1948,10 @@ async def test_search_all_resources_async_pages():
             RuntimeError,
         )
         pages = []
-        async for page in (await client.search_all_resources(request={})).pages:
-            pages.append(page)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        async for page_ in (await client.search_all_resources(request={})).pages:
+            pages.append(page_)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 def test_search_all_iam_policies(
@@ -2231,8 +2242,8 @@ def test_search_all_iam_policies_pages():
             RuntimeError,
         )
         pages = list(client.search_all_iam_policies(request={}).pages)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
 
 
 @pytest.mark.asyncio
@@ -2314,10 +2325,266 @@ async def test_search_all_iam_policies_async_pages():
             RuntimeError,
         )
         pages = []
-        async for page in (await client.search_all_iam_policies(request={})).pages:
-            pages.append(page)
-        for page, token in zip(pages, ["abc", "def", "ghi", ""]):
-            assert page.raw_page.next_page_token == token
+        async for page_ in (await client.search_all_iam_policies(request={})).pages:
+            pages.append(page_)
+        for page_, token in zip(pages, ["abc", "def", "ghi", ""]):
+            assert page_.raw_page.next_page_token == token
+
+
+def test_analyze_iam_policy(
+    transport: str = "grpc", request_type=asset_service.AnalyzeIamPolicyRequest
+):
+    client = AssetServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._transport.analyze_iam_policy), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = asset_service.AnalyzeIamPolicyResponse(fully_explored=True,)
+
+        response = client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.AnalyzeIamPolicyRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, asset_service.AnalyzeIamPolicyResponse)
+
+    assert response.fully_explored is True
+
+
+def test_analyze_iam_policy_from_dict():
+    test_analyze_iam_policy(request_type=dict)
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_async(transport: str = "grpc_asyncio"):
+    client = AssetServiceAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = asset_service.AnalyzeIamPolicyRequest()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._client._transport.analyze_iam_policy), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            asset_service.AnalyzeIamPolicyResponse(fully_explored=True,)
+        )
+
+        response = await client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == request
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, asset_service.AnalyzeIamPolicyResponse)
+
+    assert response.fully_explored is True
+
+
+def test_analyze_iam_policy_field_headers():
+    client = AssetServiceClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._transport.analyze_iam_policy), "__call__"
+    ) as call:
+        call.return_value = asset_service.AnalyzeIamPolicyResponse()
+
+        client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_field_headers_async():
+    client = AssetServiceAsyncClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._client._transport.analyze_iam_policy), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            asset_service.AnalyzeIamPolicyResponse()
+        )
+
+        await client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+def test_export_iam_policy_analysis(
+    transport: str = "grpc", request_type=asset_service.ExportIamPolicyAnalysisRequest
+):
+    client = AssetServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._transport.export_iam_policy_analysis), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/spam")
+
+        response = client.export_iam_policy_analysis(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.ExportIamPolicyAnalysisRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_export_iam_policy_analysis_from_dict():
+    test_export_iam_policy_analysis(request_type=dict)
+
+
+@pytest.mark.asyncio
+async def test_export_iam_policy_analysis_async(transport: str = "grpc_asyncio"):
+    client = AssetServiceAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = asset_service.ExportIamPolicyAnalysisRequest()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._client._transport.export_iam_policy_analysis), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+
+        response = await client.export_iam_policy_analysis(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == request
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_export_iam_policy_analysis_field_headers():
+    client = AssetServiceClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.ExportIamPolicyAnalysisRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._transport.export_iam_policy_analysis), "__call__"
+    ) as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+
+        client.export_iam_policy_analysis(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_export_iam_policy_analysis_field_headers_async():
+    client = AssetServiceAsyncClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.ExportIamPolicyAnalysisRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client._client._transport.export_iam_policy_analysis), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+
+        await client.export_iam_policy_analysis(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
 
 
 def test_credentials_transport_error():
@@ -2411,6 +2678,8 @@ def test_asset_service_base_transport():
         "delete_feed",
         "search_all_resources",
         "search_all_iam_policies",
+        "analyze_iam_policy",
+        "export_iam_policy_analysis",
     )
     for method in methods:
         with pytest.raises(NotImplementedError):
@@ -2709,3 +2978,24 @@ def test_parse_feed_path():
     # Check that the path construction is reversible.
     actual = AssetServiceClient.parse_feed_path(path)
     assert expected == actual
+
+
+def test_client_withDEFAULT_CLIENT_INFO():
+    client_info = gapic_v1.client_info.ClientInfo()
+
+    with mock.patch.object(
+        transports.AssetServiceTransport, "_prep_wrapped_messages"
+    ) as prep:
+        client = AssetServiceClient(
+            credentials=credentials.AnonymousCredentials(), client_info=client_info,
+        )
+        prep.assert_called_once_with(client_info)
+
+    with mock.patch.object(
+        transports.AssetServiceTransport, "_prep_wrapped_messages"
+    ) as prep:
+        transport_class = AssetServiceClient.get_transport_class()
+        transport = transport_class(
+            credentials=credentials.AnonymousCredentials(), client_info=client_info,
+        )
+        prep.assert_called_once_with(client_info)

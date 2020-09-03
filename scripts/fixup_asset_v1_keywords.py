@@ -40,10 +40,12 @@ def partition(
 class assetCallTransformer(cst.CSTTransformer):
     CTRL_PARAMS: Tuple[str] = ('retry', 'timeout', 'metadata')
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
+    'analyze_iam_policy': ('analysis_query', 'execution_timeout', ),
     'batch_get_assets_history': ('parent', 'asset_names', 'content_type', 'read_time_window', ),
     'create_feed': ('parent', 'feed_id', 'feed', ),
     'delete_feed': ('name', ),
     'export_assets': ('parent', 'output_config', 'read_time', 'asset_types', 'content_type', ),
+    'export_iam_policy_analysis': ('analysis_query', 'output_config', ),
     'get_feed': ('name', ),
     'list_feeds': ('parent', ),
     'search_all_iam_policies': ('scope', 'query', 'page_size', 'page_token', ),

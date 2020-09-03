@@ -19,6 +19,7 @@ import proto  # type: ignore
 
 
 from google.cloud.asset_v1.types import assets as gca_assets
+from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.type import expr_pb2 as expr  # type: ignore
@@ -39,6 +40,8 @@ __protobuf__ = proto.module(
         "UpdateFeedRequest",
         "DeleteFeedRequest",
         "OutputConfig",
+        "OutputResult",
+        "GcsOutputResult",
         "GcsDestination",
         "BigQueryDestination",
         "PubsubDestination",
@@ -48,6 +51,12 @@ __protobuf__ = proto.module(
         "SearchAllResourcesResponse",
         "SearchAllIamPoliciesRequest",
         "SearchAllIamPoliciesResponse",
+        "IamPolicyAnalysisQuery",
+        "AnalyzeIamPolicyRequest",
+        "AnalyzeIamPolicyResponse",
+        "IamPolicyAnalysisOutputConfig",
+        "ExportIamPolicyAnalysisRequest",
+        "ExportIamPolicyAnalysisResponse",
     },
 )
 
@@ -82,10 +91,26 @@ class ExportAssetsRequest(proto.Message):
             window during which running the same query may
             get different results.
         asset_types (Sequence[str]):
-            A list of asset types of which to take a snapshot for.
-            Example: "compute.googleapis.com/Disk". If specified, only
-            matching assets will be returned. See `Introduction to Cloud
-            Asset
+            A list of asset types to take a snapshot for. For example:
+            "compute.googleapis.com/Disk".
+
+            Regular expressions are also supported. For example:
+
+            -  "compute.googleapis.com.*" snapshots resources whose
+               asset type starts with "compute.googleapis.com".
+            -  ".*Instance" snapshots resources whose asset type ends
+               with "Instance".
+            -  ".*Instance.*" snapshots resources whose asset type
+               contains "Instance".
+
+            See `RE2 <https://github.com/google/re2/wiki/Syntax>`__ for
+            all supported regular expression syntax. If the regular
+            expression does not match any supported asset type, an
+            INVALID_ARGUMENT error will be returned.
+
+            If specified, only matching assets will be returned,
+            otherwise, it will snapshot all asset types. See
+            `Introduction to Cloud Asset
             Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
             for all supported asset types.
         content_type (~.asset_service.ContentType):
@@ -120,11 +145,20 @@ class ExportAssetsResponse(proto.Message):
         output_config (~.asset_service.OutputConfig):
             Output configuration indicating where the
             results were output to.
+        output_result (~.asset_service.OutputResult):
+            Output result indicating where the assets were exported to.
+            For example, a set of actual Google Cloud Storage object
+            uris where the assets are exported to. The uris can be
+            different from what [output_config] has specified, as the
+            service will split the output object into multiple ones once
+            it exceeds a single Google Cloud Storage object limit.
     """
 
     read_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
 
     output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig",)
+
+    output_result = proto.Field(proto.MESSAGE, number=3, message="OutputResult",)
 
 
 class BatchGetAssetsHistoryRequest(proto.Message):
@@ -312,6 +346,31 @@ class OutputConfig(proto.Message):
     )
 
 
+class OutputResult(proto.Message):
+    r"""Output result of export assets.
+
+    Attributes:
+        gcs_result (~.asset_service.GcsOutputResult):
+            Export result on Cloud Storage.
+    """
+
+    gcs_result = proto.Field(
+        proto.MESSAGE, number=1, oneof="result", message="GcsOutputResult",
+    )
+
+
+class GcsOutputResult(proto.Message):
+    r"""A Cloud Storage output result.
+
+    Attributes:
+        uris (Sequence[str]):
+            List of uris of the Cloud Storage objects. Example:
+            "gs://bucket_name/object_name".
+    """
+
+    uris = proto.RepeatedField(proto.STRING, number=1)
+
+
 class GcsDestination(proto.Message):
     r"""A Cloud Storage location.
 
@@ -446,8 +505,12 @@ class Feed(proto.Message):
             expression] (https://github.com/google/cel-spec) on a
             TemporalAsset with name ``temporal_asset``. Example: a Feed
             with expression ("temporal_asset.deleted == true") will only
-            publish Asset deletions. Other fields in ``Expr`` are
+            publish Asset deletions. Other fields of ``Expr`` are
             optional.
+
+            See our `user
+            guide <https://cloud.google.com/asset-inventory/docs/monitoring-asset-changes#feed_with_condition>`__
+            for detailed instructions.
     """
 
     name = proto.Field(proto.STRING, number=1)
@@ -468,51 +531,57 @@ class SearchAllResourcesRequest(proto.Message):
 
     Attributes:
         scope (str):
-            Required. A scope can be a project, a folder or an
+            Required. A scope can be a project, a folder, or an
             organization. The search is limited to the resources within
-            the ``scope``.
+            the ``scope``. The caller must be granted the
+            ```cloudasset.assets.searchAllResources`` <http://cloud.google.com/asset-inventory/docs/access-control#required_permissions>`__
+            permission on the desired scope.
 
             The allowed values are:
 
-            -  projects/{PROJECT_ID}
-            -  projects/{PROJECT_NUMBER}
-            -  folders/{FOLDER_NUMBER}
-            -  organizations/{ORGANIZATION_NUMBER}
+            -  projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+            -  projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+            -  folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+            -  organizations/{ORGANIZATION_NUMBER} (e.g.,
+               "organizations/123456")
         query (str):
-            Optional. The query statement. An empty query can be
-            specified to search all the resources of certain
-            ``asset_types`` within the given ``scope``.
+            Optional. The query statement. See `how to construct a
+            query <http://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query>`__
+            for more information. If not specified or empty, it will
+            search all the resources within the specified ``scope``.
+            Note that the query string is compared against each Cloud
+            IAM policy binding, including its members, roles, and Cloud
+            IAM conditions. The returned Cloud IAM policies will only
+            contain the bindings that match your query. To learn more
+            about the IAM policy structure, see `IAM policy
+            doc <https://cloud.google.com/iam/docs/policies#structure>`__.
 
             Examples:
 
-            -  ``name : "Important"`` to find Cloud resources whose name
+            -  ``name:Important`` to find Cloud resources whose name
                contains "Important" as a word.
-            -  ``displayName : "Impor*"`` to find Cloud resources whose
-               display name contains "Impor" as a word prefix.
-            -  ``description : "*por*"`` to find Cloud resources whose
+            -  ``displayName:Impor*`` to find Cloud resources whose
+               display name contains "Impor" as a prefix.
+            -  ``description:*por*`` to find Cloud resources whose
                description contains "por" as a substring.
-            -  ``location : "us-west*"`` to find Cloud resources whose
+            -  ``location:us-west*`` to find Cloud resources whose
                location is prefixed with "us-west".
-            -  ``labels : "prod"`` to find Cloud resources whose labels
+            -  ``labels:prod`` to find Cloud resources whose labels
                contain "prod" as a key or value.
-            -  ``labels.env : "prod"`` to find Cloud resources which
-               have a label "env" and its value is "prod".
-            -  ``labels.env : *`` to find Cloud resources which have a
+            -  ``labels.env:prod`` to find Cloud resources that have a
+               label "env" and its value is "prod".
+            -  ``labels.env:*`` to find Cloud resources that have a
                label "env".
-            -  ``"Important"`` to find Cloud resources which contain
+            -  ``Important`` to find Cloud resources that contain
                "Important" as a word in any of the searchable fields.
-            -  ``"Impor*"`` to find Cloud resources which contain
-               "Impor" as a word prefix in any of the searchable fields.
-            -  ``"*por*"`` to find Cloud resources which contain "por"
-               as a substring in any of the searchable fields.
-            -  ``("Important" AND location : ("us-west1" OR "global"))``
-               to find Cloud resources which contain "Important" as a
-               word in any of the searchable fields and are also located
-               in the "us-west1" region or the "global" location.
-
-            See `how to construct a
-            query <https://cloud.google.com/asset-inventory/docs/searching-resources#how_to_construct_a_query>`__
-            for more details.
+            -  ``Impor*`` to find Cloud resources that contain "Impor"
+               as a prefix in any of the searchable fields.
+            -  ``*por*`` to find Cloud resources that contain "por" as a
+               substring in any of the searchable fields.
+            -  ``Important location:(us-west1 OR global)`` to find Cloud
+               resources that contain "Important" as a word in any of
+               the searchable fields and are also located in the
+               "us-west1" region or the "global" location.
         asset_types (Sequence[str]):
             Optional. A list of asset types that this request searches
             for. If empty, it will search all the `searchable asset
@@ -535,10 +604,12 @@ class SearchAllResourcesRequest(proto.Message):
             sorting order of the results. The default order is
             ascending. Add " DESC" after the field name to indicate
             descending order. Redundant space characters are ignored.
-            Example: "location DESC, name". See `supported resource
-            metadata
-            fields <https://cloud.google.com/asset-inventory/docs/searching-resources#query_on_resource_metadata_fields>`__
-            for more details.
+            Example: "location DESC, name". Only string fields in the
+            response are sortable, including ``name``, ``displayName``,
+            ``description``, ``location``. All the other fields such as
+            repeated fields (e.g., ``networkTags``), map fields (e.g.,
+            ``labels``) and struct fields (e.g.,
+            ``additionalAttributes``) are not supported.
     """
 
     scope = proto.Field(proto.STRING, number=1)
@@ -585,40 +656,48 @@ class SearchAllIamPoliciesRequest(proto.Message):
 
     Attributes:
         scope (str):
-            Required. A scope can be a project, a folder or an
+            Required. A scope can be a project, a folder, or an
             organization. The search is limited to the IAM policies
-            within the ``scope``.
+            within the ``scope``. The caller must be granted the
+            ```cloudasset.assets.searchAllIamPolicies`` <http://cloud.google.com/asset-inventory/docs/access-control#required_permissions>`__
+            permission on the desired scope.
 
             The allowed values are:
 
-            -  projects/{PROJECT_ID}
-            -  projects/{PROJECT_NUMBER}
-            -  folders/{FOLDER_NUMBER}
-            -  organizations/{ORGANIZATION_NUMBER}
+            -  projects/{PROJECT_ID} (e.g., "projects/foo-bar")
+            -  projects/{PROJECT_NUMBER} (e.g., "projects/12345678")
+            -  folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
+            -  organizations/{ORGANIZATION_NUMBER} (e.g.,
+               "organizations/123456")
         query (str):
-            Optional. The query statement. An empty query can be
-            specified to search all the IAM policies within the given
-            ``scope``.
+            Optional. The query statement. See `how to construct a
+            query <https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query>`__
+            for more information. If not specified or empty, it will
+            search all the IAM policies within the specified ``scope``.
 
             Examples:
 
-            -  ``policy : "amy@gmail.com"`` to find Cloud IAM policy
-               bindings that specify user "amy@gmail.com".
-            -  ``policy : "roles/compute.admin"`` to find Cloud IAM
-               policy bindings that specify the Compute Admin role.
-            -  ``policy.role.permissions : "storage.buckets.update"`` to
-               find Cloud IAM policy bindings that specify a role
-               containing "storage.buckets.update" permission.
-            -  ``resource : "organizations/123"`` to find Cloud IAM
-               policy bindings that are set on "organizations/123".
-            -  ``(resource : ("organizations/123" OR "folders/1234") AND policy : "amy")``
-               to find Cloud IAM policy bindings that are set on
-               "organizations/123" or "folders/1234", and also specify
-               user "amy".
-
-            See `how to construct a
-            query <https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query>`__
-            for more details.
+            -  ``policy:amy@gmail.com`` to find IAM policy bindings that
+               specify user "amy@gmail.com".
+            -  ``policy:roles/compute.admin`` to find IAM policy
+               bindings that specify the Compute Admin role.
+            -  ``policy.role.permissions:storage.buckets.update`` to
+               find IAM policy bindings that specify a role containing
+               "storage.buckets.update" permission. Note that if callers
+               don't have ``iam.roles.get`` access to a role's included
+               permissions, policy bindings that specify this role will
+               be dropped from the search results.
+            -  ``resource:organizations/123456`` to find IAM policy
+               bindings that are set on "organizations/123456".
+            -  ``Important`` to find IAM policy bindings that contain
+               "Important" as a word in any of the searchable fields
+               (except for the included permissions).
+            -  ``*por*`` to find IAM policy bindings that contain "por"
+               as a substring in any of the searchable fields (except
+               for the included permissions).
+            -  ``resource:(instance1 OR instance2) policy:amy`` to find
+               IAM policy bindings that are set on resources "instance1"
+               or "instance2" and also specify user "amy".
         page_size (int):
             Optional. The page size for search result pagination. Page
             size is capped at 500 even if a larger value is given. If
@@ -667,6 +746,528 @@ class SearchAllIamPoliciesResponse(proto.Message):
     )
 
     next_page_token = proto.Field(proto.STRING, number=2)
+
+
+class IamPolicyAnalysisQuery(proto.Message):
+    r"""IAM policy analysis query message.
+
+    Attributes:
+        scope (str):
+            The relative name of the root asset. Only resources and IAM
+            policies within the scope will be analyzed.
+
+            This can only be an organization number (such as
+            "organizations/123"), a folder number (such as
+            "folders/123"), a project ID (such as
+            "projects/my-project-id"), or a project number (such as
+            "projects/12345").
+
+            To know how to get organization id, visit
+            `here <https://cloud.google.com/resource-manager/docs/creating-managing-organization#retrieving_your_organization_id>`__.
+
+            To know how to get folder or project id, visit
+            `here <https://cloud.google.com/resource-manager/docs/creating-managing-folders#viewing_or_listing_folders_and_projects>`__.
+        resource_selector (~.asset_service.IamPolicyAnalysisQuery.ResourceSelector):
+            Specifies a resource for analysis.
+        identity_selector (~.asset_service.IamPolicyAnalysisQuery.IdentitySelector):
+            Specifies an identity for analysis.
+        access_selector (~.asset_service.IamPolicyAnalysisQuery.AccessSelector):
+            Specifies roles or permissions for analysis.
+            This is optional.
+        options (~.asset_service.IamPolicyAnalysisQuery.Options):
+            The query options.
+    """
+
+    class ResourceSelector(proto.Message):
+        r"""Specifies the resource to analyze for access policies, which
+        may be set directly on the resource, or on ancestors such as
+        organizations, folders or projects.
+
+        Attributes:
+            full_resource_name (str):
+                The [full resource name]
+                (https://cloud.google.com/asset-inventory/docs/resource-name-format)
+                of a resource of `supported resource
+                types <https://cloud.google.com/asset-inventory/docs/supported-asset-types#analyzable_asset_types>`__.
+        """
+
+        full_resource_name = proto.Field(proto.STRING, number=1)
+
+    class IdentitySelector(proto.Message):
+        r"""Specifies an identity for which to determine resource access,
+        based on roles assigned either directly to them or to the groups
+        they belong to, directly or indirectly.
+
+        Attributes:
+            identity (str):
+                The identity appear in the form of members in `IAM policy
+                binding <https://cloud.google.com/iam/reference/rest/v1/Binding>`__.
+
+                The examples of supported forms are:
+                "user:mike@example.com", "group:admins@example.com",
+                "domain:google.com",
+                "serviceAccount:my-project-id@appspot.gserviceaccount.com".
+
+                Notice that wildcard characters (such as \* and ?) are not
+                supported. You must give a specific identity.
+        """
+
+        identity = proto.Field(proto.STRING, number=1)
+
+    class AccessSelector(proto.Message):
+        r"""Specifies roles and/or permissions to analyze, to determine
+        both the identities possessing them and the resources they
+        control. If multiple values are specified, results will include
+        roles or permissions matching any of them.
+
+        Attributes:
+            roles (Sequence[str]):
+                The roles to appear in result.
+            permissions (Sequence[str]):
+                The permissions to appear in result.
+        """
+
+        roles = proto.RepeatedField(proto.STRING, number=1)
+
+        permissions = proto.RepeatedField(proto.STRING, number=2)
+
+    class Options(proto.Message):
+        r"""Contains query options.
+
+        Attributes:
+            expand_groups (bool):
+                If true, the identities section of the result will expand
+                any Google groups appearing in an IAM policy binding.
+
+                If
+                [google.cloud.asset.v1.IamPolicyAnalysisQuery.identity_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.identity_selector]
+                is specified, the identity in the result will be determined
+                by the selector, and this flag is not allowed to set.
+
+                Default is false.
+            expand_roles (bool):
+                If true, the access section of result will expand any roles
+                appearing in IAM policy bindings to include their
+                permissions.
+
+                If
+                [google.cloud.asset.v1.IamPolicyAnalysisQuery.access_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.access_selector]
+                is specified, the access section of the result will be
+                determined by the selector, and this flag is not allowed to
+                set.
+
+                Default is false.
+            expand_resources (bool):
+                If true and
+                [google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector]
+                is not specified, the resource section of the result will
+                expand any resource attached to an IAM policy to include
+                resources lower in the resource hierarchy.
+
+                For example, if the request analyzes for which resources
+                user A has permission P, and the results include an IAM
+                policy with P on a GCP folder, the results will also include
+                resources in that folder with permission P.
+
+                If true and
+                [google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector]
+                is specified, the resource section of the result will expand
+                the specified resource to include resources lower in the
+                resource hierarchy.
+
+                For example, if the request analyzes for which users have
+                permission P on a GCP folder with this option enabled, the
+                results will include all users who have permission P on that
+                folder or any lower resource(ex. project).
+
+                Default is false.
+            output_resource_edges (bool):
+                If true, the result will output resource
+                edges, starting from the policy attached
+                resource, to any expanded resources. Default is
+                false.
+            output_group_edges (bool):
+                If true, the result will output group
+                identity edges, starting from the binding's
+                group members, to any expanded identities.
+                Default is false.
+            analyze_service_account_impersonation (bool):
+                If true, the response will include access analysis from
+                identities to resources via service account impersonation.
+                This is a very expensive operation, because many derived
+                queries will be executed. We highly recommend you use
+                [google.cloud.asset.v1.AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1.AssetService.ExportIamPolicyAnalysis]
+                rpc instead.
+
+                For example, if the request analyzes for which resources
+                user A has permission P, and there's an IAM policy states
+                user A has iam.serviceAccounts.getAccessToken permission to
+                a service account SA, and there's another IAM policy states
+                service account SA has permission P to a GCP folder F, then
+                user A potentially has access to the GCP folder F. And those
+                advanced analysis results will be included in
+                [google.cloud.asset.v1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis][google.cloud.asset.v1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis].
+
+                Another example, if the request analyzes for who has
+                permission P to a GCP folder F, and there's an IAM policy
+                states user A has iam.serviceAccounts.actAs permission to a
+                service account SA, and there's another IAM policy states
+                service account SA has permission P to the GCP folder F,
+                then user A potentially has access to the GCP folder F. And
+                those advanced analysis results will be included in
+                [google.cloud.asset.v1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis][google.cloud.asset.v1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis].
+
+                Default is false.
+            max_fanouts_per_group (int):
+                The maximum number of fanouts per group when
+                [expand_groups][expand_groups] is enabled. This internal
+                field is to help load testing and determine a proper value,
+                and won't be public in the future.
+            max_fanouts_per_resource (int):
+                The maximum number of fanouts per parent resource, such as
+                GCP Project etc., when [expand_resources][] is enabled. This
+                internal field is to help load testing and determine a
+                proper value, and won't be public in the future.
+        """
+
+        expand_groups = proto.Field(proto.BOOL, number=1)
+
+        expand_roles = proto.Field(proto.BOOL, number=2)
+
+        expand_resources = proto.Field(proto.BOOL, number=3)
+
+        output_resource_edges = proto.Field(proto.BOOL, number=4)
+
+        output_group_edges = proto.Field(proto.BOOL, number=5)
+
+        analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6)
+
+        max_fanouts_per_group = proto.Field(proto.INT32, number=7)
+
+        max_fanouts_per_resource = proto.Field(proto.INT32, number=8)
+
+    scope = proto.Field(proto.STRING, number=1)
+
+    resource_selector = proto.Field(proto.MESSAGE, number=2, message=ResourceSelector,)
+
+    identity_selector = proto.Field(proto.MESSAGE, number=3, message=IdentitySelector,)
+
+    access_selector = proto.Field(proto.MESSAGE, number=4, message=AccessSelector,)
+
+    options = proto.Field(proto.MESSAGE, number=5, message=Options,)
+
+
+class AnalyzeIamPolicyRequest(proto.Message):
+    r"""A request message for
+    [google.cloud.asset.v1.AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
+
+    Attributes:
+        analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+            The request query.
+        execution_timeout (~.duration.Duration):
+            Amount of time executable has to complete. See JSON
+            representation of
+            `Duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__.
+
+            If this field is set with a value less than the RPC
+            deadline, and the execution of your query hasn't finished in
+            the specified execution timeout, you will get a response
+            with partial result. Otherwise, your query's execution will
+            continue until the RPC deadline. If it's not finished until
+            then, you will get a DEADLINE_EXCEEDED error.
+
+            Default is empty.
+
+            (-- We had discussion of whether we should have this field
+            in the --) (-- request or use the RPC deadline instead. We
+            finally choose this --) (-- approach for the following
+            reasons (detailed in --) (--
+            go/analyze-iam-policy-deadlines): --) (-- \* HTTP clients
+            have very limited support of the RPC deadline. --) (-- There
+            is an X-Server-Timeout header introduced in 2019/09, but --)
+            (-- only implemented in the C++ HTTP server library. --) (--
+            \* The purpose of the RPC deadline is for RPC clients to --)
+            (-- communicate its max waiting time to the server. This
+            deadline --) (-- could be further propagated to the
+            downstream servers. It is --) (-- mainly used for servers to
+            cancel the request processing --) (-- to avoid resource
+            wasting. Overloading the RPC deadline for --) (-- other
+            purposes could make our backend system harder to reason --)
+            (-- about. --)
+    """
+
+    analysis_query = proto.Field(
+        proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+    )
+
+    execution_timeout = proto.Field(proto.MESSAGE, number=2, message=duration.Duration,)
+
+
+class AnalyzeIamPolicyResponse(proto.Message):
+    r"""A response message for
+    [google.cloud.asset.v1.AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
+
+    Attributes:
+        main_analysis (~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis):
+            The main analysis that matches the original
+            request.
+        service_account_impersonation_analysis (Sequence[~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis]):
+            The service account impersonation analysis if
+            [google.cloud.asset.v1.AnalyzeIamPolicyRequest.analyze_service_account_impersonation][google.cloud.asset.v1.AnalyzeIamPolicyRequest.analyze_service_account_impersonation]
+            is enabled.
+        fully_explored (bool):
+            Represents whether all entries in the
+            [main_analysis][main_analysis] and
+            [service_account_impersonation_analysis][] have been fully
+            explored to answer the query in the request.
+    """
+
+    class IamPolicyAnalysis(proto.Message):
+        r"""An analysis message to group the query and results.
+
+        Attributes:
+            analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+                The analysis query.
+            analysis_results (Sequence[~.gca_assets.IamPolicyAnalysisResult]):
+                A list of
+                [google.cloud.asset.v1.IamPolicyAnalysisResult][google.cloud.asset.v1.IamPolicyAnalysisResult]
+                that matches the analysis query, or empty if no result is
+                found.
+            fully_explored (bool):
+                Represents whether all entries in the
+                [analysis_results][analysis_results] have been fully
+                explored to answer the query.
+            stats (Sequence[~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis.Stats]):
+                The stats of how the analysis has been
+                explored.
+            non_critical_errors (Sequence[~.gca_assets.IamPolicyAnalysisState]):
+                A list of non-critical errors happened during
+                the query handling.
+        """
+
+        class Stats(proto.Message):
+            r"""A stats message that contains a set of analysis metrics.
+
+            Here are some equations to show relationships of the explicitly
+            specified metrics with other implicit metrics:
+
+            -  node_count = discovered_node_count +
+               undiscovered_node_count(implicit)
+            -  discovered_node_count = explored_node_count +
+               unexplored_node_count(implicit)
+            -  explored_node_count = capped_node_count +
+               uncapped_node_count(implicit)
+            -  unexplored_node_count(implicit) = permission_denied_node_count +
+               execution_timeout_node_count +
+               other_unexplored_node_count(implicit)
+            -  discovered_node_count = matched_node_count +
+               unmatched_node_count(implicit)
+
+            Attributes:
+                node_type (~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis.Stats.NodeType):
+                    Node type.
+                node_subtype (str):
+                    The subtype of a node, such as:
+
+                    -  For Identity: Group, User, ServiceAccount etc.
+                    -  For Resource: resource type name, such as
+                       cloudresourcemanager.googleapis.com/Organization, etc.
+                    -  For Access: Role or Permission
+                discovered_node_count (int):
+                    The count of discovered nodes.
+                matched_node_count (int):
+                    The count of nodes that match the query.
+                    These nodes form a sub-graph of discovered
+                    nodes.
+                explored_node_count (int):
+                    The count of explored nodes.
+                capped_node_count (int):
+                    The count of nodes that get explored, but are
+                    capped by max fanout setting.
+                permision_denied_node_count (int):
+                    The count of unexplored nodes caused by
+                    permission denied error.
+                execution_timeout_node_count (int):
+                    The count of unexplored nodes caused by
+                    execution timeout.
+            """
+
+            class NodeType(proto.Enum):
+                r"""Type of the node."""
+                NODE_TYPE_UNSPECIFIED = 0
+                BINDING = 1
+                IDENTITY = 2
+                RESOURCE = 3
+                ACCESS = 4
+
+            node_type = proto.Field(
+                proto.ENUM,
+                number=1,
+                enum="AnalyzeIamPolicyResponse.IamPolicyAnalysis.Stats.NodeType",
+            )
+
+            node_subtype = proto.Field(proto.STRING, number=2)
+
+            discovered_node_count = proto.Field(proto.INT32, number=3)
+
+            matched_node_count = proto.Field(proto.INT32, number=4)
+
+            explored_node_count = proto.Field(proto.INT32, number=5)
+
+            capped_node_count = proto.Field(proto.INT32, number=6)
+
+            permision_denied_node_count = proto.Field(proto.INT32, number=7)
+
+            execution_timeout_node_count = proto.Field(proto.INT32, number=8)
+
+        analysis_query = proto.Field(
+            proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+        )
+
+        analysis_results = proto.RepeatedField(
+            proto.MESSAGE, number=2, message=gca_assets.IamPolicyAnalysisResult,
+        )
+
+        fully_explored = proto.Field(proto.BOOL, number=3)
+
+        stats = proto.RepeatedField(
+            proto.MESSAGE,
+            number=4,
+            message="AnalyzeIamPolicyResponse.IamPolicyAnalysis.Stats",
+        )
+
+        non_critical_errors = proto.RepeatedField(
+            proto.MESSAGE, number=5, message=gca_assets.IamPolicyAnalysisState,
+        )
+
+    main_analysis = proto.Field(proto.MESSAGE, number=1, message=IamPolicyAnalysis,)
+
+    service_account_impersonation_analysis = proto.RepeatedField(
+        proto.MESSAGE, number=2, message=IamPolicyAnalysis,
+    )
+
+    fully_explored = proto.Field(proto.BOOL, number=3)
+
+
+class IamPolicyAnalysisOutputConfig(proto.Message):
+    r"""Output configuration for export IAM policy analysis
+    destination.
+
+    Attributes:
+        gcs_destination (~.asset_service.IamPolicyAnalysisOutputConfig.GcsDestination):
+            Destination on Cloud Storage.
+        bigquery_destination (~.asset_service.IamPolicyAnalysisOutputConfig.BigQueryDestination):
+            Destination on BigQuery.
+    """
+
+    class GcsDestination(proto.Message):
+        r"""A Cloud Storage location.
+
+        Attributes:
+            uri (str):
+                The uri of the Cloud Storage object. It's the same uri that
+                is used by gsutil. For example:
+                "gs://bucket_name/object_name". See `Viewing and Editing
+                Object
+                Metadata <https://cloud.google.com/storage/docs/viewing-editing-metadata>`__
+                for more information.
+        """
+
+        uri = proto.Field(proto.STRING, number=1)
+
+    class BigQueryDestination(proto.Message):
+        r"""A BigQuery destination.
+
+        Attributes:
+            dataset (str):
+                The BigQuery dataset in format
+                "projects/projectId/datasets/datasetId", to which the
+                analysis results should be exported. If this dataset does
+                not exist, the export call will return an INVALID_ARGUMENT
+                error.
+            table_prefix (str):
+                The prefix of the BigQuery tables to which the analysis
+                results will be written. Tables will be created based on
+                this table_prefix if not exist:
+
+                -  <table_prefix>_analysis table will contain export
+                   operation's metadata.
+                -  <table_prefix>_analysis_result will contain all the
+                   [IamPolicyAnalysisResult][]. When [partition_key] is
+                   specified, both tables will be partitioned based on the
+                   [partition_key].
+            partition_key (~.asset_service.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey):
+                The partition key for BigQuery partitioned
+                table.
+            write_mode (~.asset_service.IamPolicyAnalysisOutputConfig.BigQueryDestination.WriteMode):
+                The write mode when table exists. WriteMode
+                is ignored when no existing tables, or no
+                existing partitions are found.
+        """
+
+        class PartitionKey(proto.Enum):
+            r"""This enum determines the partition key column for the
+            bigquery tables. Partitioning can improve query performance and
+            reduce query cost by filtering partitions. Refer to
+            https://cloud.google.com/bigquery/docs/partitioned-tables for
+            details.
+            """
+            PARTITION_KEY_UNSPECIFIED = 0
+            REQUEST_TIME = 1
+
+        class WriteMode(proto.Enum):
+            r"""Write mode types if table exists."""
+            WRITE_MODE_UNSPECIFIED = 0
+            ABORT = 1
+            OVERWRITE = 2
+
+        dataset = proto.Field(proto.STRING, number=1)
+
+        table_prefix = proto.Field(proto.STRING, number=2)
+
+        partition_key = proto.Field(
+            proto.ENUM,
+            number=3,
+            enum="IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey",
+        )
+
+        write_mode = proto.Field(
+            proto.ENUM,
+            number=4,
+            enum="IamPolicyAnalysisOutputConfig.BigQueryDestination.WriteMode",
+        )
+
+    gcs_destination = proto.Field(
+        proto.MESSAGE, number=1, oneof="destination", message=GcsDestination,
+    )
+
+    bigquery_destination = proto.Field(
+        proto.MESSAGE, number=2, oneof="destination", message=BigQueryDestination,
+    )
+
+
+class ExportIamPolicyAnalysisRequest(proto.Message):
+    r"""A request message for [AssetService.ExportIamPolicyAnalysis][].
+
+    Attributes:
+        analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+            The request query.
+        output_config (~.asset_service.IamPolicyAnalysisOutputConfig):
+            Output configuration indicating where the
+            results will be output to.
+    """
+
+    analysis_query = proto.Field(
+        proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+    )
+
+    output_config = proto.Field(
+        proto.MESSAGE, number=2, message=IamPolicyAnalysisOutputConfig,
+    )
+
+
+class ExportIamPolicyAnalysisResponse(proto.Message):
+    r"""The export IAM policy analysis response."""
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

@@ -22,6 +22,8 @@ from .assets import (
     Resource,
     ResourceSearchResult,
     IamPolicySearchResult,
+    IamPolicyAnalysisState,
+    IamPolicyAnalysisResult,
 )
 from .asset_service import (
     ExportAssetsRequest,
@@ -35,6 +37,8 @@ from .asset_service import (
     UpdateFeedRequest,
     DeleteFeedRequest,
     OutputConfig,
+    OutputResult,
+    GcsOutputResult,
     GcsDestination,
     BigQueryDestination,
     PubsubDestination,
@@ -44,6 +48,12 @@ from .asset_service import (
     SearchAllResourcesResponse,
     SearchAllIamPoliciesRequest,
     SearchAllIamPoliciesResponse,
+    IamPolicyAnalysisQuery,
+    AnalyzeIamPolicyRequest,
+    AnalyzeIamPolicyResponse,
+    IamPolicyAnalysisOutputConfig,
+    ExportIamPolicyAnalysisRequest,
+    ExportIamPolicyAnalysisResponse,
 )
 
 
@@ -54,6 +64,8 @@ __all__ = (
     "Resource",
     "ResourceSearchResult",
     "IamPolicySearchResult",
+    "IamPolicyAnalysisState",
+    "IamPolicyAnalysisResult",
     "ExportAssetsRequest",
     "ExportAssetsResponse",
     "BatchGetAssetsHistoryRequest",
@@ -65,6 +77,8 @@ __all__ = (
     "UpdateFeedRequest",
     "DeleteFeedRequest",
     "OutputConfig",
+    "OutputResult",
+    "GcsOutputResult",
     "GcsDestination",
     "BigQueryDestination",
     "PubsubDestination",
@@ -74,4 +88,10 @@ __all__ = (
     "SearchAllResourcesResponse",
     "SearchAllIamPoliciesRequest",
     "SearchAllIamPoliciesResponse",
+    "IamPolicyAnalysisQuery",
+    "AnalyzeIamPolicyRequest",
+    "AnalyzeIamPolicyResponse",
+    "IamPolicyAnalysisOutputConfig",
+    "ExportIamPolicyAnalysisRequest",
+    "ExportIamPolicyAnalysisResponse",
 )
