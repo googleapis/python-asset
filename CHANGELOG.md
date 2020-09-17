@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+### [2.0.1](https://www.github.com/googleapis/python-asset/compare/v2.0.0...v2.0.1) (2020-09-17)
+
+
+### Bug Fixes
+
+* **sample:** mark a test with flaky ([#81](https://www.github.com/googleapis/python-asset/issues/81)) ([aa153dc](https://www.github.com/googleapis/python-asset/commit/aa153dce2f62c18101472c40964cc3cee9188d78)), closes [#75](https://www.github.com/googleapis/python-asset/issues/75)
+
 ## [2.0.0](https://www.github.com/googleapis/python-asset/compare/v1.3.0...v2.0.0) (2020-08-05)
 
 
