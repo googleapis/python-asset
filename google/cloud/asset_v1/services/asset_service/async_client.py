@@ -28,8 +28,8 @@ from google.api_core import retry as retries  # type: ignore
 from google.auth import credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
-from google.api_core import operation
-from google.api_core import operation_async
+from google.api_core import operation  # type: ignore
+from google.api_core import operation_async  # type: ignore
 from google.cloud.asset_v1.services.asset_service import pagers
 from google.cloud.asset_v1.types import asset_service
 from google.cloud.asset_v1.types import assets
@@ -226,7 +226,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -395,7 +395,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -476,7 +476,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -630,7 +630,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -780,7 +780,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=15.0,
@@ -919,7 +919,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=15.0,
