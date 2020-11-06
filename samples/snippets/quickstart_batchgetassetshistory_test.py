@@ -30,7 +30,7 @@ BUCKET = "assets-{}".format(uuid.uuid4().hex)
 
 @pytest.fixture(scope="module")
 def storage_client():
-    yield storage.Client()
+    yield storage.Client(project=PROJECT)
 
 
 @pytest.fixture(scope="module")
