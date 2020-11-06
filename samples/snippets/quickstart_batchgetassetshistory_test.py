@@ -35,7 +35,7 @@ def storage_client():
 
 @pytest.fixture(scope="module")
 def asset_bucket(storage_client):
-    bucket = storage_client.create_bucket(BUCKET)
+    bucket = storage_client.create_bucket(BUCKET, project=PROJECT)
 
     yield BUCKET
 
@@ -52,7 +52,7 @@ def test_batch_get_assets_history(asset_bucket, capsys):
         bucket_asset_name,
     ]
 
-    @backoff.on_exception(backoff.expo, (AssertionError, InvalidArgument), max_time=30)
+    @backoff.on_exception(backoff.expo, (AssertionError, InvalidArgument), max_time=60)
     def eventually_consistent_test():
         quickstart_batchgetassetshistory.batch_get_assets_history(PROJECT, asset_names)
         out, _ = capsys.readouterr()
