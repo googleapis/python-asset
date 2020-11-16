@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+### [2.1.1](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v2.1.1) (2020-11-16)
+
+
+### Documentation
+
+* remove note on editable installs ([#99](https://www.github.com/googleapis/python-asset/issues/99)) ([cf6072a](https://www.github.com/googleapis/python-asset/commit/cf6072a09b76dce78bd4c0c471c8c2d81186e0c6))
+
 ## [2.1.0](https://www.github.com/googleapis/python-asset/compare/v2.0.0...v2.1.0) (2020-09-25)
 
 
