@@ -514,5 +514,75 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
             )
         return self._stubs["search_all_iam_policies"]
 
+    @property
+    def analyze_iam_policy(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeIamPolicyRequest], asset_service.AnalyzeIamPolicyResponse
+    ]:
+        r"""Return a callable for the analyze iam policy method over gRPC.
+
+        Analyzes IAM policies to answer which identities have
+        what accesses on which resources.
+
+        Returns:
+            Callable[[~.AnalyzeIamPolicyRequest],
+                    ~.AnalyzeIamPolicyResponse]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_iam_policy" not in self._stubs:
+            self._stubs["analyze_iam_policy"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeIamPolicy",
+                request_serializer=asset_service.AnalyzeIamPolicyRequest.serialize,
+                response_deserializer=asset_service.AnalyzeIamPolicyResponse.deserialize,
+            )
+        return self._stubs["analyze_iam_policy"]
+
+    @property
+    def analyze_iam_policy_longrunning(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeIamPolicyLongrunningRequest], operations.Operation
+    ]:
+        r"""Return a callable for the analyze iam policy longrunning method over gRPC.
+
+        Analyzes IAM policies asynchronously to answer which identities
+        have what accesses on which resources, and writes the analysis
+        results to a Google Cloud Storage or a BigQuery destination. For
+        Cloud Storage destination, the output format is the JSON format
+        that represents a
+        [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+        This method implements the
+        [google.longrunning.Operation][google.longrunning.Operation],
+        which allows you to track the operation status. We recommend
+        intervals of at least 2 seconds with exponential backoff retry
+        to poll the operation result. The metadata contains the request
+        to help callers to map responses to requests.
+
+        Returns:
+            Callable[[~.AnalyzeIamPolicyLongrunningRequest],
+                    ~.Operation]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_iam_policy_longrunning" not in self._stubs:
+            self._stubs[
+                "analyze_iam_policy_longrunning"
+            ] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeIamPolicyLongrunning",
+                request_serializer=asset_service.AnalyzeIamPolicyLongrunningRequest.serialize,
+                response_deserializer=operations.Operation.FromString,
+            )
+        return self._stubs["analyze_iam_policy_longrunning"]
+
 
 __all__ = ("AssetServiceGrpcTransport",)

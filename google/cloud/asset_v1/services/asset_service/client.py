@@ -1146,6 +1146,140 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # Done; return the response.
         return response
 
+    def analyze_iam_policy(
+        self,
+        request: asset_service.AnalyzeIamPolicyRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> asset_service.AnalyzeIamPolicyResponse:
+        r"""Analyzes IAM policies to answer which identities have
+        what accesses on which resources.
+
+        Args:
+            request (:class:`~.asset_service.AnalyzeIamPolicyRequest`):
+                The request object. A request message for
+                [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.asset_service.AnalyzeIamPolicyResponse:
+                A response message for
+                [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
+
+        """
+        # Create or coerce a protobuf request object.
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a asset_service.AnalyzeIamPolicyRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, asset_service.AnalyzeIamPolicyRequest):
+            request = asset_service.AnalyzeIamPolicyRequest(request)
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[self._transport.analyze_iam_policy]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("analysis_query.scope", request.analysis_query.scope),)
+            ),
+        )
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Done; return the response.
+        return response
+
+    def analyze_iam_policy_longrunning(
+        self,
+        request: asset_service.AnalyzeIamPolicyLongrunningRequest = None,
+        *,
+        retry: retries.Retry = gapic_v1.method.DEFAULT,
+        timeout: float = None,
+        metadata: Sequence[Tuple[str, str]] = (),
+    ) -> operation.Operation:
+        r"""Analyzes IAM policies asynchronously to answer which identities
+        have what accesses on which resources, and writes the analysis
+        results to a Google Cloud Storage or a BigQuery destination. For
+        Cloud Storage destination, the output format is the JSON format
+        that represents a
+        [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+        This method implements the
+        [google.longrunning.Operation][google.longrunning.Operation],
+        which allows you to track the operation status. We recommend
+        intervals of at least 2 seconds with exponential backoff retry
+        to poll the operation result. The metadata contains the request
+        to help callers to map responses to requests.
+
+        Args:
+            request (:class:`~.asset_service.AnalyzeIamPolicyLongrunningRequest`):
+                The request object. A request message for
+                [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
+
+            retry (google.api_core.retry.Retry): Designation of what errors, if any,
+                should be retried.
+            timeout (float): The timeout for this request.
+            metadata (Sequence[Tuple[str, str]]): Strings which should be
+                sent along with the request as metadata.
+
+        Returns:
+            ~.operation.Operation:
+                An object representing a long-running operation.
+
+                The result type for the operation will be
+                :class:``~.asset_service.AnalyzeIamPolicyLongrunningResponse``:
+                A response message for
+                [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
+
+        """
+        # Create or coerce a protobuf request object.
+
+        # Minor optimization to avoid making a copy if the user passes
+        # in a asset_service.AnalyzeIamPolicyLongrunningRequest.
+        # There's no risk of modifying the input as we've already verified
+        # there are no flattened fields.
+        if not isinstance(request, asset_service.AnalyzeIamPolicyLongrunningRequest):
+            request = asset_service.AnalyzeIamPolicyLongrunningRequest(request)
+
+        # Wrap the RPC method; this adds retry and timeout information,
+        # and friendly error handling.
+        rpc = self._transport._wrapped_methods[
+            self._transport.analyze_iam_policy_longrunning
+        ]
+
+        # Certain fields should be provided within the metadata header;
+        # add these here.
+        metadata = tuple(metadata) + (
+            gapic_v1.routing_header.to_grpc_metadata(
+                (("analysis_query.scope", request.analysis_query.scope),)
+            ),
+        )
+
+        # Send the request.
+        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+
+        # Wrap the response in an operation future.
+        response = operation.from_gapic(
+            response,
+            self._transport.operations_client,
+            asset_service.AnalyzeIamPolicyLongrunningResponse,
+            metadata_type=asset_service.AnalyzeIamPolicyLongrunningRequest,
+        )
+
+        # Done; return the response.
+        return response
+
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(

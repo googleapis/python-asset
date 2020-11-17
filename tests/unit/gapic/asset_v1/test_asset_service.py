@@ -43,6 +43,7 @@ from google.cloud.asset_v1.types import asset_service
 from google.cloud.asset_v1.types import assets
 from google.longrunning import operations_pb2
 from google.oauth2 import service_account
+from google.protobuf import duration_pb2 as duration  # type: ignore
 from google.protobuf import field_mask_pb2 as field_mask  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 from google.type import expr_pb2 as expr  # type: ignore
@@ -2442,6 +2443,279 @@ async def test_search_all_iam_policies_async_pages():
             assert page_.raw_page.next_page_token == token
 
 
+def test_analyze_iam_policy(
+    transport: str = "grpc", request_type=asset_service.AnalyzeIamPolicyRequest
+):
+    client = AssetServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = asset_service.AnalyzeIamPolicyResponse(fully_explored=True,)
+
+        response = client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.AnalyzeIamPolicyRequest()
+
+    # Establish that the response is the type that we expect.
+
+    assert isinstance(response, asset_service.AnalyzeIamPolicyResponse)
+
+    assert response.fully_explored is True
+
+
+def test_analyze_iam_policy_from_dict():
+    test_analyze_iam_policy(request_type=dict)
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_async(
+    transport: str = "grpc_asyncio", request_type=asset_service.AnalyzeIamPolicyRequest
+):
+    client = AssetServiceAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            asset_service.AnalyzeIamPolicyResponse(fully_explored=True,)
+        )
+
+        response = await client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.AnalyzeIamPolicyRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, asset_service.AnalyzeIamPolicyResponse)
+
+    assert response.fully_explored is True
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_async_from_dict():
+    await test_analyze_iam_policy_async(request_type=dict)
+
+
+def test_analyze_iam_policy_field_headers():
+    client = AssetServiceClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy), "__call__"
+    ) as call:
+        call.return_value = asset_service.AnalyzeIamPolicyResponse()
+
+        client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_field_headers_async():
+    client = AssetServiceAsyncClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            asset_service.AnalyzeIamPolicyResponse()
+        )
+
+        await client.analyze_iam_policy(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+def test_analyze_iam_policy_longrunning(
+    transport: str = "grpc",
+    request_type=asset_service.AnalyzeIamPolicyLongrunningRequest,
+):
+    client = AssetServiceClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy_longrunning), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = operations_pb2.Operation(name="operations/spam")
+
+        response = client.analyze_iam_policy_longrunning(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.AnalyzeIamPolicyLongrunningRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+def test_analyze_iam_policy_longrunning_from_dict():
+    test_analyze_iam_policy_longrunning(request_type=dict)
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_longrunning_async(
+    transport: str = "grpc_asyncio",
+    request_type=asset_service.AnalyzeIamPolicyLongrunningRequest,
+):
+    client = AssetServiceAsyncClient(
+        credentials=credentials.AnonymousCredentials(), transport=transport,
+    )
+
+    # Everything is optional in proto3 as far as the runtime is concerned,
+    # and we are mocking out the actual API, so just send an empty request.
+    request = request_type()
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy_longrunning), "__call__"
+    ) as call:
+        # Designate an appropriate return value for the call.
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/spam")
+        )
+
+        response = await client.analyze_iam_policy_longrunning(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+
+        assert args[0] == asset_service.AnalyzeIamPolicyLongrunningRequest()
+
+    # Establish that the response is the type that we expect.
+    assert isinstance(response, future.Future)
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_longrunning_async_from_dict():
+    await test_analyze_iam_policy_longrunning_async(request_type=dict)
+
+
+def test_analyze_iam_policy_longrunning_field_headers():
+    client = AssetServiceClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyLongrunningRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy_longrunning), "__call__"
+    ) as call:
+        call.return_value = operations_pb2.Operation(name="operations/op")
+
+        client.analyze_iam_policy_longrunning(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls) == 1
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
+@pytest.mark.asyncio
+async def test_analyze_iam_policy_longrunning_field_headers_async():
+    client = AssetServiceAsyncClient(credentials=credentials.AnonymousCredentials(),)
+
+    # Any value that is part of the HTTP/1.1 URI should be sent as
+    # a field header. Set these to a non-empty value.
+    request = asset_service.AnalyzeIamPolicyLongrunningRequest()
+    request.analysis_query.scope = "analysis_query.scope/value"
+
+    # Mock the actual call within the gRPC stub, and fake the request.
+    with mock.patch.object(
+        type(client.transport.analyze_iam_policy_longrunning), "__call__"
+    ) as call:
+        call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
+            operations_pb2.Operation(name="operations/op")
+        )
+
+        await client.analyze_iam_policy_longrunning(request)
+
+        # Establish that the underlying gRPC stub method was called.
+        assert len(call.mock_calls)
+        _, args, _ = call.mock_calls[0]
+        assert args[0] == request
+
+    # Establish that the field header was sent.
+    _, _, kw = call.mock_calls[0]
+    assert (
+        "x-goog-request-params",
+        "analysis_query.scope=analysis_query.scope/value",
+    ) in kw["metadata"]
+
+
 def test_credentials_transport_error():
     # It is an error to provide credentials and a transport instance.
     transport = transports.AssetServiceGrpcTransport(
@@ -2545,6 +2819,8 @@ def test_asset_service_base_transport():
         "delete_feed",
         "search_all_resources",
         "search_all_iam_policies",
+        "analyze_iam_policy",
+        "analyze_iam_policy_longrunning",
     )
     for method in methods:
         with pytest.raises(NotImplementedError):
