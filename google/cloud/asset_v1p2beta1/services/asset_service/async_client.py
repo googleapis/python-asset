@@ -46,42 +46,8 @@ class AssetServiceAsyncClient:
     feed_path = staticmethod(AssetServiceClient.feed_path)
     parse_feed_path = staticmethod(AssetServiceClient.parse_feed_path)
 
-    common_billing_account_path = staticmethod(
-        AssetServiceClient.common_billing_account_path
-    )
-    parse_common_billing_account_path = staticmethod(
-        AssetServiceClient.parse_common_billing_account_path
-    )
-
-    common_folder_path = staticmethod(AssetServiceClient.common_folder_path)
-    parse_common_folder_path = staticmethod(AssetServiceClient.parse_common_folder_path)
-
-    common_organization_path = staticmethod(AssetServiceClient.common_organization_path)
-    parse_common_organization_path = staticmethod(
-        AssetServiceClient.parse_common_organization_path
-    )
-
-    common_project_path = staticmethod(AssetServiceClient.common_project_path)
-    parse_common_project_path = staticmethod(
-        AssetServiceClient.parse_common_project_path
-    )
-
-    common_location_path = staticmethod(AssetServiceClient.common_location_path)
-    parse_common_location_path = staticmethod(
-        AssetServiceClient.parse_common_location_path
-    )
-
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
-
-    @property
-    def transport(self) -> AssetServiceTransport:
-        """Return the transport used by the client instance.
-
-        Returns:
-            AssetServiceTransport: The transport used by the client instance.
-        """
-        return self._client.transport
 
     get_transport_class = functools.partial(
         type(AssetServiceClient).get_transport_class, type(AssetServiceClient)
@@ -185,8 +151,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -263,8 +228,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -345,8 +309,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -432,8 +395,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([feed])
-        if request is not None and has_flattened_params:
+        if request is not None and any([feed]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -501,8 +463,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."

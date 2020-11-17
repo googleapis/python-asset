@@ -525,7 +525,7 @@ class FeedOutputConfig(proto.Message):
     """
 
     pubsub_destination = proto.Field(
-        proto.MESSAGE, number=1, oneof="destination", message="PubsubDestination",
+        proto.MESSAGE, number=1, oneof="destination", message=PubsubDestination,
     )
 
 
@@ -598,9 +598,7 @@ class Feed(proto.Message):
 
     content_type = proto.Field(proto.ENUM, number=4, enum="ContentType",)
 
-    feed_output_config = proto.Field(
-        proto.MESSAGE, number=5, message="FeedOutputConfig",
-    )
+    feed_output_config = proto.Field(proto.MESSAGE, number=5, message=FeedOutputConfig,)
 
     condition = proto.Field(proto.MESSAGE, number=6, message=expr.Expr,)
 

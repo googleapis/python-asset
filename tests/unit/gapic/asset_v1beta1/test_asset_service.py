@@ -94,12 +94,12 @@ def test_asset_service_client_from_service_account_file(client_class):
     ) as factory:
         factory.return_value = creds
         client = client_class.from_service_account_file("dummy/file/path.json")
-        assert client.transport._credentials == creds
+        assert client._transport._credentials == creds
 
         client = client_class.from_service_account_json("dummy/file/path.json")
-        assert client.transport._credentials == creds
+        assert client._transport._credentials == creds
 
-        assert client.transport._host == "cloudasset.googleapis.com:443"
+        assert client._transport._host == "cloudasset.googleapis.com:443"
 
 
 def test_asset_service_client_get_transport_class():
@@ -443,7 +443,7 @@ def test_export_assets(
     request = request_type()
 
     # Mock the actual call within the gRPC stub, and fake the request.
-    with mock.patch.object(type(client.transport.export_assets), "__call__") as call:
+    with mock.patch.object(type(client._transport.export_assets), "__call__") as call:
         # Designate an appropriate return value for the call.
         call.return_value = operations_pb2.Operation(name="operations/spam")
 
@@ -464,19 +464,19 @@ def test_export_assets_from_dict():
 
 
 @pytest.mark.asyncio
-async def test_export_assets_async(
-    transport: str = "grpc_asyncio", request_type=asset_service.ExportAssetsRequest
-):
+async def test_export_assets_async(transport: str = "grpc_asyncio"):
     client = AssetServiceAsyncClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = request_type()
+    request = asset_service.ExportAssetsRequest()
 
     # Mock the actual call within the gRPC stub, and fake the request.
-    with mock.patch.object(type(client.transport.export_assets), "__call__") as call:
+    with mock.patch.object(
+        type(client._client._transport.export_assets), "__call__"
+    ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/spam")
@@ -488,15 +488,10 @@ async def test_export_assets_async(
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == asset_service.ExportAssetsRequest()
+        assert args[0] == request
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, future.Future)
-
-
-@pytest.mark.asyncio
-async def test_export_assets_async_from_dict():
-    await test_export_assets_async(request_type=dict)
 
 
 def test_export_assets_field_headers():
@@ -508,7 +503,7 @@ def test_export_assets_field_headers():
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
-    with mock.patch.object(type(client.transport.export_assets), "__call__") as call:
+    with mock.patch.object(type(client._transport.export_assets), "__call__") as call:
         call.return_value = operations_pb2.Operation(name="operations/op")
 
         client.export_assets(request)
@@ -533,7 +528,9 @@ async def test_export_assets_field_headers_async():
     request.parent = "parent/value"
 
     # Mock the actual call within the gRPC stub, and fake the request.
-    with mock.patch.object(type(client.transport.export_assets), "__call__") as call:
+    with mock.patch.object(
+        type(client._client._transport.export_assets), "__call__"
+    ) as call:
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             operations_pb2.Operation(name="operations/op")
         )
@@ -563,7 +560,7 @@ def test_batch_get_assets_history(
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
-        type(client.transport.batch_get_assets_history), "__call__"
+        type(client._transport.batch_get_assets_history), "__call__"
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = asset_service.BatchGetAssetsHistoryResponse()
@@ -577,7 +574,6 @@ def test_batch_get_assets_history(
         assert args[0] == asset_service.BatchGetAssetsHistoryRequest()
 
     # Establish that the response is the type that we expect.
-
     assert isinstance(response, asset_service.BatchGetAssetsHistoryResponse)
 
 
@@ -586,21 +582,18 @@ def test_batch_get_assets_history_from_dict():
 
 
 @pytest.mark.asyncio
-async def test_batch_get_assets_history_async(
-    transport: str = "grpc_asyncio",
-    request_type=asset_service.BatchGetAssetsHistoryRequest,
-):
+async def test_batch_get_assets_history_async(transport: str = "grpc_asyncio"):
     client = AssetServiceAsyncClient(
         credentials=credentials.AnonymousCredentials(), transport=transport,
     )
 
     # Everything is optional in proto3 as far as the runtime is concerned,
     # and we are mocking out the actual API, so just send an empty request.
-    request = request_type()
+    request = asset_service.BatchGetAssetsHistoryRequest()
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
-        type(client.transport.batch_get_assets_history), "__call__"
+        type(client._client._transport.batch_get_assets_history), "__call__"
     ) as call:
         # Designate an appropriate return value for the call.
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
@@ -613,15 +606,10 @@ async def test_batch_get_assets_history_async(
         assert len(call.mock_calls)
         _, args, _ = call.mock_calls[0]
 
-        assert args[0] == asset_service.BatchGetAssetsHistoryRequest()
+        assert args[0] == request
 
     # Establish that the response is the type that we expect.
     assert isinstance(response, asset_service.BatchGetAssetsHistoryResponse)
-
-
-@pytest.mark.asyncio
-async def test_batch_get_assets_history_async_from_dict():
-    await test_batch_get_assets_history_async(request_type=dict)
 
 
 def test_batch_get_assets_history_field_headers():
@@ -634,7 +622,7 @@ def test_batch_get_assets_history_field_headers():
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
-        type(client.transport.batch_get_assets_history), "__call__"
+        type(client._transport.batch_get_assets_history), "__call__"
     ) as call:
         call.return_value = asset_service.BatchGetAssetsHistoryResponse()
 
@@ -661,7 +649,7 @@ async def test_batch_get_assets_history_field_headers_async():
 
     # Mock the actual call within the gRPC stub, and fake the request.
     with mock.patch.object(
-        type(client.transport.batch_get_assets_history), "__call__"
+        type(client._client._transport.batch_get_assets_history), "__call__"
     ) as call:
         call.return_value = grpc_helpers_async.FakeUnaryUnaryCall(
             asset_service.BatchGetAssetsHistoryResponse()
@@ -715,7 +703,7 @@ def test_transport_instance():
         credentials=credentials.AnonymousCredentials(),
     )
     client = AssetServiceClient(transport=transport)
-    assert client.transport is transport
+    assert client._transport is transport
 
 
 def test_transport_get_channel():
@@ -748,7 +736,7 @@ def test_transport_adc(transport_class):
 def test_transport_grpc_default():
     # A client should use the gRPC transport by default.
     client = AssetServiceClient(credentials=credentials.AnonymousCredentials(),)
-    assert isinstance(client.transport, transports.AssetServiceGrpcTransport,)
+    assert isinstance(client._transport, transports.AssetServiceGrpcTransport,)
 
 
 def test_asset_service_base_transport_error():
@@ -848,7 +836,7 @@ def test_asset_service_host_no_port():
             api_endpoint="cloudasset.googleapis.com"
         ),
     )
-    assert client.transport._host == "cloudasset.googleapis.com:443"
+    assert client._transport._host == "cloudasset.googleapis.com:443"
 
 
 def test_asset_service_host_with_port():
@@ -858,7 +846,7 @@ def test_asset_service_host_with_port():
             api_endpoint="cloudasset.googleapis.com:8000"
         ),
     )
-    assert client.transport._host == "cloudasset.googleapis.com:8000"
+    assert client._transport._host == "cloudasset.googleapis.com:8000"
 
 
 def test_asset_service_grpc_transport_channel():
@@ -966,7 +954,7 @@ def test_asset_service_grpc_lro_client():
     client = AssetServiceClient(
         credentials=credentials.AnonymousCredentials(), transport="grpc",
     )
-    transport = client.transport
+    transport = client._transport
 
     # Ensure that we have a api-core operations client.
     assert isinstance(transport.operations_client, operations_v1.OperationsClient,)
@@ -979,130 +967,13 @@ def test_asset_service_grpc_lro_async_client():
     client = AssetServiceAsyncClient(
         credentials=credentials.AnonymousCredentials(), transport="grpc_asyncio",
     )
-    transport = client.transport
+    transport = client._client._transport
 
     # Ensure that we have a api-core operations client.
     assert isinstance(transport.operations_client, operations_v1.OperationsAsyncClient,)
 
     # Ensure that subsequent calls to the property send the exact same object.
     assert transport.operations_client is transport.operations_client
-
-
-def test_asset_path():
-
-    expected = "*".format()
-    actual = AssetServiceClient.asset_path()
-    assert expected == actual
-
-
-def test_parse_asset_path():
-    expected = {}
-    path = AssetServiceClient.asset_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_asset_path(path)
-    assert expected == actual
-
-
-def test_common_billing_account_path():
-    billing_account = "squid"
-
-    expected = "billingAccounts/{billing_account}".format(
-        billing_account=billing_account,
-    )
-    actual = AssetServiceClient.common_billing_account_path(billing_account)
-    assert expected == actual
-
-
-def test_parse_common_billing_account_path():
-    expected = {
-        "billing_account": "clam",
-    }
-    path = AssetServiceClient.common_billing_account_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_common_billing_account_path(path)
-    assert expected == actual
-
-
-def test_common_folder_path():
-    folder = "whelk"
-
-    expected = "folders/{folder}".format(folder=folder,)
-    actual = AssetServiceClient.common_folder_path(folder)
-    assert expected == actual
-
-
-def test_parse_common_folder_path():
-    expected = {
-        "folder": "octopus",
-    }
-    path = AssetServiceClient.common_folder_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_common_folder_path(path)
-    assert expected == actual
-
-
-def test_common_organization_path():
-    organization = "oyster"
-
-    expected = "organizations/{organization}".format(organization=organization,)
-    actual = AssetServiceClient.common_organization_path(organization)
-    assert expected == actual
-
-
-def test_parse_common_organization_path():
-    expected = {
-        "organization": "nudibranch",
-    }
-    path = AssetServiceClient.common_organization_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_common_organization_path(path)
-    assert expected == actual
-
-
-def test_common_project_path():
-    project = "cuttlefish"
-
-    expected = "projects/{project}".format(project=project,)
-    actual = AssetServiceClient.common_project_path(project)
-    assert expected == actual
-
-
-def test_parse_common_project_path():
-    expected = {
-        "project": "mussel",
-    }
-    path = AssetServiceClient.common_project_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_common_project_path(path)
-    assert expected == actual
-
-
-def test_common_location_path():
-    project = "winkle"
-    location = "nautilus"
-
-    expected = "projects/{project}/locations/{location}".format(
-        project=project, location=location,
-    )
-    actual = AssetServiceClient.common_location_path(project, location)
-    assert expected == actual
-
-
-def test_parse_common_location_path():
-    expected = {
-        "project": "scallop",
-        "location": "abalone",
-    }
-    path = AssetServiceClient.common_location_path(**expected)
-
-    # Check that the path construction is reversible.
-    actual = AssetServiceClient.parse_common_location_path(path)
-    assert expected == actual
 
 
 def test_client_withDEFAULT_CLIENT_INFO():

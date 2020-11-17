@@ -48,47 +48,11 @@ class AssetServiceAsyncClient:
     DEFAULT_ENDPOINT = AssetServiceClient.DEFAULT_ENDPOINT
     DEFAULT_MTLS_ENDPOINT = AssetServiceClient.DEFAULT_MTLS_ENDPOINT
 
-    asset_path = staticmethod(AssetServiceClient.asset_path)
-    parse_asset_path = staticmethod(AssetServiceClient.parse_asset_path)
     feed_path = staticmethod(AssetServiceClient.feed_path)
     parse_feed_path = staticmethod(AssetServiceClient.parse_feed_path)
 
-    common_billing_account_path = staticmethod(
-        AssetServiceClient.common_billing_account_path
-    )
-    parse_common_billing_account_path = staticmethod(
-        AssetServiceClient.parse_common_billing_account_path
-    )
-
-    common_folder_path = staticmethod(AssetServiceClient.common_folder_path)
-    parse_common_folder_path = staticmethod(AssetServiceClient.parse_common_folder_path)
-
-    common_organization_path = staticmethod(AssetServiceClient.common_organization_path)
-    parse_common_organization_path = staticmethod(
-        AssetServiceClient.parse_common_organization_path
-    )
-
-    common_project_path = staticmethod(AssetServiceClient.common_project_path)
-    parse_common_project_path = staticmethod(
-        AssetServiceClient.parse_common_project_path
-    )
-
-    common_location_path = staticmethod(AssetServiceClient.common_location_path)
-    parse_common_location_path = staticmethod(
-        AssetServiceClient.parse_common_location_path
-    )
-
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
-
-    @property
-    def transport(self) -> AssetServiceTransport:
-        """Return the transport used by the client instance.
-
-        Returns:
-            AssetServiceTransport: The transport used by the client instance.
-        """
-        return self._client.transport
 
     get_transport_class = functools.partial(
         type(AssetServiceClient).get_transport_class, type(AssetServiceClient)
@@ -262,7 +226,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -331,8 +295,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -409,8 +372,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -433,7 +395,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -491,8 +453,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([parent])
-        if request is not None and has_flattened_params:
+        if request is not None and any([parent]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -515,7 +476,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -578,8 +539,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([feed])
-        if request is not None and has_flattened_params:
+        if request is not None and any([feed]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -647,8 +607,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([name])
-        if request is not None and has_flattened_params:
+        if request is not None and any([name]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -671,7 +630,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=60.0,
@@ -794,8 +753,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([scope, query, asset_types])
-        if request is not None and has_flattened_params:
+        if request is not None and any([scope, query, asset_types]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -810,9 +768,8 @@ class AssetServiceAsyncClient:
             request.scope = scope
         if query is not None:
             request.query = query
-
-        if asset_types:
-            request.asset_types.extend(asset_types)
+        if asset_types is not None:
+            request.asset_types = asset_types
 
         # Wrap the RPC method; this adds retry and timeout information,
         # and friendly error handling.
@@ -823,7 +780,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=15.0,
@@ -937,8 +894,7 @@ class AssetServiceAsyncClient:
         # Create or coerce a protobuf request object.
         # Sanity check: If we got a request object, we should *not* have
         # gotten any keyword arguments that map to the request.
-        has_flattened_params = any([scope, query])
-        if request is not None and has_flattened_params:
+        if request is not None and any([scope, query]):
             raise ValueError(
                 "If the `request` argument is set, then none of "
                 "the individual field arguments should be set."
@@ -963,7 +919,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                    exceptions.ServiceUnavailable, exceptions.DeadlineExceeded,
                 ),
             ),
             default_timeout=15.0,
