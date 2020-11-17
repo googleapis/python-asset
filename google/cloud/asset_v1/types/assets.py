@@ -19,6 +19,7 @@ import proto  # type: ignore
 
 
 from google.cloud.orgpolicy.v1 import orgpolicy_pb2 as orgpolicy  # type: ignore
+from google.cloud.osconfig.v1 import inventory_pb2 as inventory  # type: ignore
 from google.iam.v1 import policy_pb2 as gi_policy  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_level_pb2 as gia_access_level  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_policy_pb2 as gia_access_policy  # type: ignore
@@ -156,6 +157,11 @@ class Asset(proto.Message):
         service_perimeter (~.gia_service_perimeter.ServicePerimeter):
             Please also refer to the `service perimeter user
             guide <https://cloud.google.com/vpc-service-controls/docs/overview>`__.
+        os_inventory (~.inventory.Inventory):
+            A representation of runtime OS Inventory information. See
+            `this
+            topic <https://cloud.google.com/compute/docs/instances/os-inventory-management>`__
+            for more information.
         ancestors (Sequence[str]):
             The ancestry path of an asset in Google Cloud `resource
             hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
@@ -201,6 +207,8 @@ class Asset(proto.Message):
         oneof="access_context_policy",
         message=gia_service_perimeter.ServicePerimeter,
     )
+
+    os_inventory = proto.Field(proto.MESSAGE, number=12, message=inventory.Inventory,)
 
     ancestors = proto.RepeatedField(proto.STRING, number=10)
 

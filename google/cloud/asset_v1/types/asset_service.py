@@ -69,6 +69,7 @@ class ContentType(proto.Enum):
     IAM_POLICY = 2
     ORG_POLICY = 4
     ACCESS_POLICY = 5
+    OS_INVENTORY = 6
 
 
 class ExportAssetsRequest(proto.Message):
