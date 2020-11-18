@@ -46,7 +46,6 @@ class AssetServiceAsyncClient:
     DEFAULT_MTLS_ENDPOINT = AssetServiceClient.DEFAULT_MTLS_ENDPOINT
 
     asset_path = staticmethod(AssetServiceClient.asset_path)
-    parse_asset_path = staticmethod(AssetServiceClient.parse_asset_path)
 
     common_billing_account_path = staticmethod(
         AssetServiceClient.common_billing_account_path

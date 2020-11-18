@@ -144,12 +144,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return "*".format()
 
     @staticmethod
-    def parse_asset_path(path: str) -> Dict[str, str]:
-        """Parse a asset path into its component segments."""
-        m = re.match(r"^*$", path)
-        return m.groupdict() if m else {}
-
-    @staticmethod
     def common_billing_account_path(billing_account: str,) -> str:
         """Return a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
