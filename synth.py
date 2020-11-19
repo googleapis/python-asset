@@ -90,8 +90,20 @@ python.py_samples(skip_readmes=True)
 
 s.replace(
     "noxfile.py",
-    "google.cloud.cloudasset",
-    "google.cloud.asset",
+    "google\.cloud\.cloudasset",
+    "google/cloud",
+)
+
+s.replace(
+    "noxfile.py",
+    '''["']--cov=google\.cloud["'],''',
+    "",
+)
+
+s.replace(
+    "noxfile.py",
+    """"--cov=tests.unit",""",
+    """"--cov=tests/unit",""",
 )
 
 # Temporarily disable warnings due to
