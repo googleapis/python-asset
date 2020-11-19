@@ -4,12 +4,8 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
-## [3.0.0](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v3.0.0) (2020-11-19)
+## [2.2.0](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v2.2.0) (2020-11-19)
 
-
-### ⚠ BREAKING CHANGES
-
-* update package names to avoid conflict with google-cloud-bigquery
 
 ### Features
 
