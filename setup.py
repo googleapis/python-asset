@@ -21,7 +21,7 @@ import setuptools
 
 name = "google-cloud-asset"
 description = "Cloud Asset API API client library"
-version = "2.1.0"
+version = "2.2.0"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
 # 'Development Status :: 4 - Beta'
@@ -32,6 +32,7 @@ dependencies = [
     "grpc-google-iam-v1 >= 0.12.3, < 0.13dev",
     "google-cloud-access-context-manager >= 0.1.2, < 0.2.0dev",
     "google-cloud-org-policy >= 0.1.2, < 0.2.0dev",
+    "google-cloud-os-config >= 1.0.0, <2.0.0dev",
     "proto-plus >= 0.4.0",
     "libcst >= 0.2.5",
 ]
