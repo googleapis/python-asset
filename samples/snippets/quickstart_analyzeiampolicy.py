@@ -31,7 +31,7 @@ def build_analysis_query(parent):
 
 
 def analyze_iam_policy(project_id):
-    # [START analyze_iam_policy]
+    # [START asset_quickstart_analyze_iam_policy]
 
     # TODO project_id = 'Your Google Cloud Project ID'
 
@@ -42,7 +42,7 @@ def analyze_iam_policy(project_id):
         request={"analysis_query": analysis_query}
     )
     print(response)
-    # [END analyze_iam_policy]
+    # [END asset_quickstart_analyze_iam_policy]
 
 
 if __name__ == "__main__":

@@ -31,7 +31,7 @@ def build_analysis_query(parent):
 
 
 def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
-    # [START analyze_iam_policy_longrunning_gcs]
+    # [START asset_quickstart_analyze_iam_policy_longrunning_gcs]
 
     # TODO project_id = 'Your Google Cloud Project ID'
     # TODO dump_file_path = 'Your analysis dump file path'
@@ -45,11 +45,11 @@ def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
     print(response.metadata)
-    # [END analyze_iam_policy_longrunning_gcs]
+    # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 
 
 def analyze_iam_policy_longrunning_bigquery(project_id, dataset, table):
-    # [START analyze_iam_policy_longrunning_bigquery]
+    # [START asset_quickstart_analyze_iam_policy_longrunning_bigquery]
     from google.cloud import asset_v1
 
     # TODO project_id = 'Your Google Cloud Project ID'
@@ -67,7 +67,7 @@ def analyze_iam_policy_longrunning_bigquery(project_id, dataset, table):
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
     print(response.metadata)
-    # [END analyze_iam_policy_longrunning_bigquery]
+    # [END asset_quickstart_analyze_iam_policy_longrunning_bigquery]
 
 
 if __name__ == "__main__":
