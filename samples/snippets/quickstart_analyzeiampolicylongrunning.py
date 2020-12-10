@@ -41,10 +41,12 @@ def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
     analysis_query = build_analysis_query(parent)
     output_config = asset_v1.IamPolicyAnalysisOutputConfig()
     output_config.gcs_destination.uri = dump_file_path
-    response = client.analyze_iam_policy_longrunning(
+    operation = client.analyze_iam_policy_longrunning(
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
-    print(response.metadata)
+
+    operation.result()
+    print(operation.done())
     # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 
 
@@ -63,10 +65,12 @@ def analyze_iam_policy_longrunning_bigquery(project_id, dataset, table):
     output_config.bigquery_destination.dataset = dataset
     output_config.bigquery_destination.table_prefix = table
     output_config.bigquery_destination.write_disposition = "WRITE_TRUNCATE"
-    response = client.analyze_iam_policy_longrunning(
+    operation = client.analyze_iam_policy_longrunning(
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
-    print(response.metadata)
+
+    operation.result()
+    print(operation.done())
     # [END asset_quickstart_analyze_iam_policy_longrunning_bigquery]
 
 
