@@ -69,9 +69,9 @@ def test_analyze_iam_policy_longrunning(analysis_bucket, dataset, capsys):
     dump_file_path = "gs://{}/analysis-dump.txt".format(analysis_bucket)
     quickstart_analyzeiampolicylongrunning.analyze_iam_policy_longrunning_gcs(PROJECT, dump_file_path)
     out, _ = capsys.readouterr()
-    assert "true" in out
+    assert "True" in out
 
     dataset_id = "projects/{}/datasets/{}".format(PROJECT, dataset)
     quickstart_analyzeiampolicylongrunning.analyze_iam_policy_longrunning_bigquery(PROJECT, dataset_id, "analysis_")
     out, _ = capsys.readouterr()
-    assert "true" in out
+    assert "True" in out

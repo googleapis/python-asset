@@ -45,7 +45,7 @@ def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
 
-    operation.result()
+    operation.result(300)
     print(operation.done())
     # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 
@@ -69,7 +69,7 @@ def analyze_iam_policy_longrunning_bigquery(project_id, dataset, table):
         request={"analysis_query": analysis_query, "output_config": output_config}
     )
 
-    operation.result()
+    operation.result(300)
     print(operation.done())
     # [END asset_quickstart_analyze_iam_policy_longrunning_bigquery]
 
