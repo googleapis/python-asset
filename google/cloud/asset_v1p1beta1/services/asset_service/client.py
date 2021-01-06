@@ -110,6 +110,22 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            AssetServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -121,7 +137,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            AssetServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -213,10 +229,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.AssetServiceTransport]): The
+            transport (Union[str, AssetServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -334,9 +350,9 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         requested scope, otherwise it will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllResourcesRequest`):
+            request (google.cloud.asset_v1p1beta1.types.SearchAllResourcesRequest):
                 The request object. Search all resources request.
-            scope (:class:`str`):
+            scope (str):
                 Required. The relative name of an asset. The search is
                 limited to the resources within the ``scope``. The
                 allowed value must be:
@@ -345,19 +361,21 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
                 -  Project id (such as "projects/abc")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            query (:class:`str`):
+            query (str):
                 Optional. The query statement.
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            asset_types (:class:`Sequence[str]`):
+            asset_types (Sequence[str]):
                 Optional. A list of asset types that
                 this request searches for. If empty, it
                 will search all the supported asset
                 types.
+
                 This corresponds to the ``asset_types`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -369,7 +387,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllResourcesPager:
+            google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllResourcesPager:
                 Search all resources response.
                 Iterating over this object will yield
                 results and resolve additional pages
@@ -446,9 +464,9 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         requested scope, otherwise it will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllIamPoliciesRequest`):
+            request (google.cloud.asset_v1p1beta1.types.SearchAllIamPoliciesRequest):
                 The request object. Search all IAM policies request.
-            scope (:class:`str`):
+            scope (str):
                 Required. The relative name of an asset. The search is
                 limited to the resources within the ``scope``. The
                 allowed value must be:
@@ -457,14 +475,16 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
                 -  Project id (such as "projects/abc")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-            query (:class:`str`):
+            query (str):
                 Optional. The query statement. Examples:
 
                 -  "policy:myuser@mydomain.com"
-                -  "policy:(myuser@mydomain.com viewer)".
+                -  "policy:(myuser@mydomain.com viewer)"
+
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -476,7 +496,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllIamPoliciesPager:
+            google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllIamPoliciesPager:
                 Search all IAM policies response.
                 Iterating over this object will yield
                 results and resolve additional pages

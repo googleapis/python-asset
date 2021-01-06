@@ -78,6 +78,7 @@ class AssetServiceAsyncClient:
         AssetServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = AssetServiceClient.from_service_account_info
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -165,7 +166,7 @@ class AssetServiceAsyncClient:
         the export operation usually finishes within 5 minutes.
 
         Args:
-            request (:class:`~.asset_service.ExportAssetsRequest`):
+            request (:class:`google.cloud.asset_v1.types.ExportAssetsRequest`):
                 The request object. Export asset request.
 
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -175,16 +176,14 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.asset_service.ExportAssetsResponse``: The
-                export asset response. This message is returned by the
-                [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
-                method in the returned
-                [google.longrunning.Operation.response][google.longrunning.Operation.response]
-                field.
+                The result type for the operation will be :class:`google.cloud.asset_v1.types.ExportAssetsResponse` The export asset response. This message is returned by the
+                   [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
+                   method in the returned
+                   [google.longrunning.Operation.response][google.longrunning.Operation.response]
+                   field.
 
         """
         # Create or coerce a protobuf request object.
@@ -236,7 +235,7 @@ class AssetServiceAsyncClient:
         INVALID_ARGUMENT error.
 
         Args:
-            request (:class:`~.asset_service.BatchGetAssetsHistoryRequest`):
+            request (:class:`google.cloud.asset_v1.types.BatchGetAssetsHistoryRequest`):
                 The request object. Batch get assets history request.
 
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
@@ -246,7 +245,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.BatchGetAssetsHistoryResponse:
+            google.cloud.asset_v1.types.BatchGetAssetsHistoryResponse:
                 Batch get assets history response.
         """
         # Create or coerce a protobuf request object.
@@ -295,7 +294,7 @@ class AssetServiceAsyncClient:
         updates.
 
         Args:
-            request (:class:`~.asset_service.CreateFeedRequest`):
+            request (:class:`google.cloud.asset_v1.types.CreateFeedRequest`):
                 The request object. Create asset feed request.
             parent (:class:`str`):
                 Required. The name of the
@@ -307,6 +306,7 @@ class AssetServiceAsyncClient:
                 (such as "projects/my-project-id")", or
                 a project number (such as
                 "projects/12345").
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -318,7 +318,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -378,13 +378,14 @@ class AssetServiceAsyncClient:
         r"""Gets details about an asset feed.
 
         Args:
-            request (:class:`~.asset_service.GetFeedRequest`):
+            request (:class:`google.cloud.asset_v1.types.GetFeedRequest`):
                 The request object. Get asset feed request.
             name (:class:`str`):
                 Required. The name of the Feed and it must be in the
                 format of: projects/project_number/feeds/feed_id
                 folders/folder_number/feeds/feed_id
                 organizations/organization_number/feeds/feed_id
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -396,7 +397,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -465,7 +466,7 @@ class AssetServiceAsyncClient:
         project/folder/organization.
 
         Args:
-            request (:class:`~.asset_service.ListFeedsRequest`):
+            request (:class:`google.cloud.asset_v1.types.ListFeedsRequest`):
                 The request object. List asset feeds request.
             parent (:class:`str`):
                 Required. The parent
@@ -474,6 +475,7 @@ class AssetServiceAsyncClient:
                 project/folder/organization number (such
                 as "folders/12345")", or a project ID
                 (such as "projects/my-project-id").
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -485,7 +487,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.ListFeedsResponse:
+            google.cloud.asset_v1.types.ListFeedsResponse:
 
         """
         # Create or coerce a protobuf request object.
@@ -546,14 +548,15 @@ class AssetServiceAsyncClient:
         r"""Updates an asset feed configuration.
 
         Args:
-            request (:class:`~.asset_service.UpdateFeedRequest`):
+            request (:class:`google.cloud.asset_v1.types.UpdateFeedRequest`):
                 The request object. Update asset feed request.
-            feed (:class:`~.asset_service.Feed`):
+            feed (:class:`google.cloud.asset_v1.types.Feed`):
                 Required. The new values of feed details. It must match
                 an existing feed and the field ``name`` must be in the
                 format of: projects/project_number/feeds/feed_id or
                 folders/folder_number/feeds/feed_id or
                 organizations/organization_number/feeds/feed_id.
+
                 This corresponds to the ``feed`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -565,7 +568,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -627,13 +630,14 @@ class AssetServiceAsyncClient:
         r"""Deletes an asset feed.
 
         Args:
-            request (:class:`~.asset_service.DeleteFeedRequest`):
+            request (:class:`google.cloud.asset_v1.types.DeleteFeedRequest`):
                 The request object.
             name (:class:`str`):
                 Required. The name of the feed and it must be in the
                 format of: projects/project_number/feeds/feed_id
                 folders/folder_number/feeds/feed_id
                 organizations/organization_number/feeds/feed_id
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -706,7 +710,7 @@ class AssetServiceAsyncClient:
         desired scope, otherwise the request will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllResourcesRequest`):
+            request (:class:`google.cloud.asset_v1.types.SearchAllResourcesRequest`):
                 The request object. Search all resources request.
             scope (:class:`str`):
                 Required. A scope can be a project, a folder, or an
@@ -722,6 +726,7 @@ class AssetServiceAsyncClient:
                 -  folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
                 -  organizations/{ORGANIZATION_NUMBER} (e.g.,
                    "organizations/123456")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -765,6 +770,7 @@ class AssetServiceAsyncClient:
                    Cloud resources that contain "Important" as a word in
                    any of the searchable fields and are also located in
                    the "us-west1" region or the "global" location.
+
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -773,6 +779,7 @@ class AssetServiceAsyncClient:
                 searches for. If empty, it will search all the
                 `searchable asset
                 types <https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types>`__.
+
                 This corresponds to the ``asset_types`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -784,7 +791,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllResourcesAsyncPager:
+            google.cloud.asset_v1.services.asset_service.pagers.SearchAllResourcesAsyncPager:
                 Search all resources response.
                 Iterating over this object will yield
                 results and resolve additional pages
@@ -864,7 +871,7 @@ class AssetServiceAsyncClient:
         desired scope, otherwise the request will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllIamPoliciesRequest`):
+            request (:class:`google.cloud.asset_v1.types.SearchAllIamPoliciesRequest`):
                 The request object. Search all IAM policies request.
             scope (:class:`str`):
                 Required. A scope can be a project, a folder, or an
@@ -880,6 +887,7 @@ class AssetServiceAsyncClient:
                 -  folders/{FOLDER_NUMBER} (e.g., "folders/1234567")
                 -  organizations/{ORGANIZATION_NUMBER} (e.g.,
                    "organizations/123456")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -916,6 +924,7 @@ class AssetServiceAsyncClient:
                    find IAM policy bindings that are set on resources
                    "instance1" or "instance2" and also specify user
                    "amy".
+
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -927,7 +936,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllIamPoliciesAsyncPager:
+            google.cloud.asset_v1.services.asset_service.pagers.SearchAllIamPoliciesAsyncPager:
                 Search all IAM policies response.
                 Iterating over this object will yield
                 results and resolve additional pages
@@ -1000,7 +1009,7 @@ class AssetServiceAsyncClient:
         what accesses on which resources.
 
         Args:
-            request (:class:`~.asset_service.AnalyzeIamPolicyRequest`):
+            request (:class:`google.cloud.asset_v1.types.AnalyzeIamPolicyRequest`):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
 
@@ -1011,7 +1020,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.AnalyzeIamPolicyResponse:
+            google.cloud.asset_v1.types.AnalyzeIamPolicyResponse:
                 A response message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
 
@@ -1070,7 +1079,7 @@ class AssetServiceAsyncClient:
         to help callers to map responses to requests.
 
         Args:
-            request (:class:`~.asset_service.AnalyzeIamPolicyLongrunningRequest`):
+            request (:class:`google.cloud.asset_v1.types.AnalyzeIamPolicyLongrunningRequest`):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
 
@@ -1081,11 +1090,11 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
                 The result type for the operation will be
-                :class:``~.asset_service.AnalyzeIamPolicyLongrunningResponse``:
+                :class:`google.cloud.asset_v1.types.AnalyzeIamPolicyLongrunningResponse`
                 A response message for
                 [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
 

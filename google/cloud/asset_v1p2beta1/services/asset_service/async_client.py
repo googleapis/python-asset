@@ -71,6 +71,7 @@ class AssetServiceAsyncClient:
         AssetServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = AssetServiceClient.from_service_account_info
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -149,7 +150,7 @@ class AssetServiceAsyncClient:
         updates.
 
         Args:
-            request (:class:`~.asset_service.CreateFeedRequest`):
+            request (:class:`google.cloud.asset_v1p2beta1.types.CreateFeedRequest`):
                 The request object. Create asset feed request.
             parent (:class:`str`):
                 Required. The name of the
@@ -161,6 +162,7 @@ class AssetServiceAsyncClient:
                 (such as "projects/my-project-id")", or
                 a project number (such as
                 "projects/12345").
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -172,7 +174,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1p2beta1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -232,13 +234,14 @@ class AssetServiceAsyncClient:
         r"""Gets details about an asset feed.
 
         Args:
-            request (:class:`~.asset_service.GetFeedRequest`):
+            request (:class:`google.cloud.asset_v1p2beta1.types.GetFeedRequest`):
                 The request object. Get asset feed request.
             name (:class:`str`):
                 Required. The name of the Feed and it must be in the
                 format of: projects/project_number/feeds/feed_id
                 folders/folder_number/feeds/feed_id
                 organizations/organization_number/feeds/feed_id
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -250,7 +253,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1p2beta1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -319,7 +322,7 @@ class AssetServiceAsyncClient:
         project/folder/organization.
 
         Args:
-            request (:class:`~.asset_service.ListFeedsRequest`):
+            request (:class:`google.cloud.asset_v1p2beta1.types.ListFeedsRequest`):
                 The request object. List asset feeds request.
             parent (:class:`str`):
                 Required. The parent
@@ -328,6 +331,7 @@ class AssetServiceAsyncClient:
                 project/folder/organization number (such
                 as "folders/12345")", or a project ID
                 (such as "projects/my-project-id").
+
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -339,7 +343,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.ListFeedsResponse:
+            google.cloud.asset_v1p2beta1.types.ListFeedsResponse:
 
         """
         # Create or coerce a protobuf request object.
@@ -400,14 +404,15 @@ class AssetServiceAsyncClient:
         r"""Updates an asset feed configuration.
 
         Args:
-            request (:class:`~.asset_service.UpdateFeedRequest`):
+            request (:class:`google.cloud.asset_v1p2beta1.types.UpdateFeedRequest`):
                 The request object. Update asset feed request.
-            feed (:class:`~.asset_service.Feed`):
+            feed (:class:`google.cloud.asset_v1p2beta1.types.Feed`):
                 Required. The new values of feed details. It must match
                 an existing feed and the field ``name`` must be in the
                 format of: projects/project_number/feeds/feed_id or
                 folders/folder_number/feeds/feed_id or
                 organizations/organization_number/feeds/feed_id.
+
                 This corresponds to the ``feed`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -419,7 +424,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.Feed:
+            google.cloud.asset_v1p2beta1.types.Feed:
                 An asset feed used to export asset
                 updates to a destinations. An asset feed
                 filter controls what updates are
@@ -481,13 +486,14 @@ class AssetServiceAsyncClient:
         r"""Deletes an asset feed.
 
         Args:
-            request (:class:`~.asset_service.DeleteFeedRequest`):
+            request (:class:`google.cloud.asset_v1p2beta1.types.DeleteFeedRequest`):
                 The request object.
             name (:class:`str`):
                 Required. The name of the feed and it must be in the
                 format of: projects/project_number/feeds/feed_id
                 folders/folder_number/feeds/feed_id
                 organizations/organization_number/feeds/feed_id
+
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.

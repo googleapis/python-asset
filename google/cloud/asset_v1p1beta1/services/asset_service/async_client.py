@@ -70,6 +70,7 @@ class AssetServiceAsyncClient:
         AssetServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = AssetServiceClient.from_service_account_info
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -154,7 +155,7 @@ class AssetServiceAsyncClient:
         requested scope, otherwise it will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllResourcesRequest`):
+            request (:class:`google.cloud.asset_v1p1beta1.types.SearchAllResourcesRequest`):
                 The request object. Search all resources request.
             scope (:class:`str`):
                 Required. The relative name of an asset. The search is
@@ -165,6 +166,7 @@ class AssetServiceAsyncClient:
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
                 -  Project id (such as "projects/abc")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -178,6 +180,7 @@ class AssetServiceAsyncClient:
                 this request searches for. If empty, it
                 will search all the supported asset
                 types.
+
                 This corresponds to the ``asset_types`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -189,7 +192,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllResourcesAsyncPager:
+            google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllResourcesAsyncPager:
                 Search all resources response.
                 Iterating over this object will yield
                 results and resolve additional pages
@@ -273,7 +276,7 @@ class AssetServiceAsyncClient:
         requested scope, otherwise it will be rejected.
 
         Args:
-            request (:class:`~.asset_service.SearchAllIamPoliciesRequest`):
+            request (:class:`google.cloud.asset_v1p1beta1.types.SearchAllIamPoliciesRequest`):
                 The request object. Search all IAM policies request.
             scope (:class:`str`):
                 Required. The relative name of an asset. The search is
@@ -284,6 +287,7 @@ class AssetServiceAsyncClient:
                 -  Folder number(such as "folders/1234")
                 -  Project number (such as "projects/12345")
                 -  Project id (such as "projects/abc")
+
                 This corresponds to the ``scope`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -291,7 +295,8 @@ class AssetServiceAsyncClient:
                 Optional. The query statement. Examples:
 
                 -  "policy:myuser@mydomain.com"
-                -  "policy:(myuser@mydomain.com viewer)".
+                -  "policy:(myuser@mydomain.com viewer)"
+
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
@@ -303,7 +308,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.pagers.SearchAllIamPoliciesAsyncPager:
+            google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllIamPoliciesAsyncPager:
                 Search all IAM policies response.
                 Iterating over this object will yield
                 results and resolve additional pages

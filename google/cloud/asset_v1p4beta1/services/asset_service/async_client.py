@@ -71,6 +71,7 @@ class AssetServiceAsyncClient:
         AssetServiceClient.parse_common_location_path
     )
 
+    from_service_account_info = AssetServiceClient.from_service_account_info
     from_service_account_file = AssetServiceClient.from_service_account_file
     from_service_account_json = from_service_account_file
 
@@ -149,7 +150,7 @@ class AssetServiceAsyncClient:
         matching the request.
 
         Args:
-            request (:class:`~.asset_service.AnalyzeIamPolicyRequest`):
+            request (:class:`google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyRequest`):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
@@ -160,7 +161,7 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.AnalyzeIamPolicyResponse:
+            google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse:
                 A response message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
@@ -212,7 +213,7 @@ class AssetServiceAsyncClient:
         the request to help callers to map responses to requests.
 
         Args:
-            request (:class:`~.asset_service.ExportIamPolicyAnalysisRequest`):
+            request (:class:`google.cloud.asset_v1p4beta1.types.ExportIamPolicyAnalysisRequest`):
                 The request object. A request message for
                 [AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
 
@@ -223,16 +224,13 @@ class AssetServiceAsyncClient:
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation_async.AsyncOperation:
+            google.api_core.operation_async.AsyncOperation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.asset_service.ExportIamPolicyAnalysisResponse``:
-                The export IAM policy analysis response. This message is
-                returned by the
-                [google.longrunning.Operations.GetOperation][] method in
-                the returned [google.longrunning.Operation.response][]
-                field.
+                The result type for the operation will be :class:`google.cloud.asset_v1p4beta1.types.ExportIamPolicyAnalysisResponse` The export IAM policy analysis response. This message is returned by the
+                   [google.longrunning.Operations.GetOperation][] method
+                   in the returned
+                   [google.longrunning.Operation.response][] field.
 
         """
         # Create or coerce a protobuf request object.

@@ -111,6 +111,22 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
     )
 
     @classmethod
+    def from_service_account_info(cls, info: dict, *args, **kwargs):
+        """Creates an instance of this client using the provided credentials info.
+
+        Args:
+            info (dict): The service account private key info.
+            args: Additional arguments to pass to the constructor.
+            kwargs: Additional arguments to pass to the constructor.
+
+        Returns:
+            AssetServiceClient: The constructed client.
+        """
+        credentials = service_account.Credentials.from_service_account_info(info)
+        kwargs["credentials"] = credentials
+        return cls(*args, **kwargs)
+
+    @classmethod
     def from_service_account_file(cls, filename: str, *args, **kwargs):
         """Creates an instance of this client using the provided credentials
         file.
@@ -122,7 +138,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
             kwargs: Additional arguments to pass to the constructor.
 
         Returns:
-            {@api.name}: The constructed client.
+            AssetServiceClient: The constructed client.
         """
         credentials = service_account.Credentials.from_service_account_file(filename)
         kwargs["credentials"] = credentials
@@ -214,10 +230,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 credentials identify the application to the service; if none
                 are specified, the client will attempt to ascertain the
                 credentials from the environment.
-            transport (Union[str, ~.AssetServiceTransport]): The
+            transport (Union[str, AssetServiceTransport]): The
                 transport to use. If set to None, a transport is chosen
                 automatically.
-            client_options (client_options_lib.ClientOptions): Custom options for the
+            client_options (google.api_core.client_options.ClientOptions): Custom options for the
                 client. It won't take effect if a ``transport`` instance is provided.
                 (1) The ``api_endpoint`` property can be used to override the
                 default endpoint provided by the client. GOOGLE_API_USE_MTLS_ENDPOINT
@@ -329,7 +345,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         matching the request.
 
         Args:
-            request (:class:`~.asset_service.AnalyzeIamPolicyRequest`):
+            request (google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyRequest):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
@@ -340,7 +356,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.asset_service.AnalyzeIamPolicyResponse:
+            google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse:
                 A response message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
@@ -387,7 +403,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         the request to help callers to map responses to requests.
 
         Args:
-            request (:class:`~.asset_service.ExportIamPolicyAnalysisRequest`):
+            request (google.cloud.asset_v1p4beta1.types.ExportIamPolicyAnalysisRequest):
                 The request object. A request message for
                 [AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
 
@@ -398,16 +414,13 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 sent along with the request as metadata.
 
         Returns:
-            ~.operation.Operation:
+            google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be
-                :class:``~.asset_service.ExportIamPolicyAnalysisResponse``:
-                The export IAM policy analysis response. This message is
-                returned by the
-                [google.longrunning.Operations.GetOperation][] method in
-                the returned [google.longrunning.Operation.response][]
-                field.
+                The result type for the operation will be :class:`google.cloud.asset_v1p4beta1.types.ExportIamPolicyAnalysisResponse` The export IAM policy analysis response. This message is returned by the
+                   [google.longrunning.Operations.GetOperation][] method
+                   in the returned
+                   [google.longrunning.Operation.response][] field.
 
         """
         # Create or coerce a protobuf request object.
