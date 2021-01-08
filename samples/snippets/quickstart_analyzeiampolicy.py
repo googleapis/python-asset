@@ -17,29 +17,23 @@
 
 import argparse
 
-from google.cloud import asset_v1
 
+def analyze_iam_policy(project_id):
+    # [START asset_quickstart_analyze_iam_policy]
+    from google.cloud import asset_v1
 
-def build_analysis_query(parent):
-    # [START asset_quickstart_build_analysis_query]
+    # TODO project_id = 'Your Google Cloud Project ID'
+
+    client = asset_v1.AssetServiceClient()
+    parent = "projects/{}".format(project_id)
+
+    # Build analysis query
     analysis_query = asset_v1.IamPolicyAnalysisQuery()
     analysis_query.scope = parent
     analysis_query.resource_selector.full_resource_name = f"//cloudresourcemanager.googleapis.com/{parent}"
     analysis_query.options.expand_groups = True
     analysis_query.options.output_group_edges = True
 
-    return analysis_query
-    # [END asset_quickstart_build_analysis_query]
-
-
-def analyze_iam_policy(project_id):
-    # [START asset_quickstart_analyze_iam_policy]
-
-    # TODO project_id = 'Your Google Cloud Project ID'
-
-    client = asset_v1.AssetServiceClient()
-    parent = "projects/{}".format(project_id)
-    analysis_query = build_analysis_query(parent)
     response = client.analyze_iam_policy(
         request={"analysis_query": analysis_query}
     )

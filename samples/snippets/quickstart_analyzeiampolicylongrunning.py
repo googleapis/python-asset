@@ -17,30 +17,24 @@
 
 import argparse
 
-from google.cloud import asset_v1
-
-
-def build_analysis_query(parent):
-    # [START asset_quickstart_build_analysis_query]
-    analysis_query = asset_v1.IamPolicyAnalysisQuery()
-    analysis_query.scope = parent
-    analysis_query.resource_selector.full_resource_name = f"//cloudresourcemanager.googleapis.com/{parent}"
-    analysis_query.options.expand_groups = True
-    analysis_query.options.output_group_edges = True
-
-    return analysis_query
-    # [END asset_quickstart_build_analysis_query]
-
 
 def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
     # [START asset_quickstart_analyze_iam_policy_longrunning_gcs]
+    from google.cloud import asset_v1
 
     # TODO project_id = 'Your Google Cloud Project ID'
     # TODO dump_file_path = 'Your analysis dump file path'
 
     client = asset_v1.AssetServiceClient()
     parent = "projects/{}".format(project_id)
-    analysis_query = build_analysis_query(parent)
+
+    # Build analysis query
+    analysis_query = asset_v1.IamPolicyAnalysisQuery()
+    analysis_query.scope = parent
+    analysis_query.resource_selector.full_resource_name = f"//cloudresourcemanager.googleapis.com/{parent}"
+    analysis_query.options.expand_groups = True
+    analysis_query.options.output_group_edges = True
+
     output_config = asset_v1.IamPolicyAnalysisOutputConfig()
     output_config.gcs_destination.uri = dump_file_path
     operation = client.analyze_iam_policy_longrunning(
@@ -62,7 +56,14 @@ def analyze_iam_policy_longrunning_bigquery(project_id, dataset, table):
 
     client = asset_v1.AssetServiceClient()
     parent = "projects/{}".format(project_id)
-    analysis_query = build_analysis_query(parent)
+
+    # Build analysis query
+    analysis_query = asset_v1.IamPolicyAnalysisQuery()
+    analysis_query.scope = parent
+    analysis_query.resource_selector.full_resource_name = f"//cloudresourcemanager.googleapis.com/{parent}"
+    analysis_query.options.expand_groups = True
+    analysis_query.options.output_group_edges = True
+
     output_config = asset_v1.IamPolicyAnalysisOutputConfig()
     output_config.bigquery_destination.dataset = dataset
     output_config.bigquery_destination.table_prefix = table
