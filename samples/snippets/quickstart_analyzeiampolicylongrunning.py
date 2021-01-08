@@ -21,13 +21,15 @@ from google.cloud import asset_v1
 
 
 def build_analysis_query(parent):
+    # [START asset_quickstart_build_analysis_query]
     analysis_query = asset_v1.IamPolicyAnalysisQuery()
     analysis_query.scope = parent
-    analysis_query.resource_selector.full_resource_name = "//cloudresourcemanager.googleapis.com/" + parent
+    analysis_query.resource_selector.full_resource_name = f"//cloudresourcemanager.googleapis.com/{parent}"
     analysis_query.options.expand_groups = True
     analysis_query.options.output_group_edges = True
 
     return analysis_query
+    # [END asset_quickstart_build_analysis_query]
 
 
 def analyze_iam_policy_longrunning_gcs(project_id, dump_file_path):
