@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
+#!/usr/bin/env python
 
-# Copyright 2020 Google LLC
+# Copyright 2020 Google LLC. All Rights Reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -13,4 +13,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-#
+
+import os
+
+import quickstart_analyzeiampolicy
+
+PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
+
+
+def test_analyze_iam_policy(capsys):
+    quickstart_analyzeiampolicy.analyze_iam_policy(PROJECT)
+    out, _ = capsys.readouterr()
+    assert "fully_explored: true" in out
