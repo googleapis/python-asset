@@ -4,6 +4,18 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+### [3.0.1](https://www.github.com/googleapis/python-asset/compare/v3.0.0...v3.0.1) (2021-04-01)
+
+
+### Bug Fixes
+
+* remove v1beta1 ([#127](https://www.github.com/googleapis/python-asset/issues/127)) ([dab2d53](https://www.github.com/googleapis/python-asset/commit/dab2d539a1c89c0a5f09df4c4cab4d86f1a4ab08))
+
+
+### Documentation
+
+* **python:** fix intersphinx link for google-auth ([#119](https://www.github.com/googleapis/python-asset/issues/119)) ([e455c9e](https://www.github.com/googleapis/python-asset/commit/e455c9e52641cd9f13440d342c9eeb931135889c))
+
 ## [2.2.0](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v2.2.0) (2020-11-19)
 
 
