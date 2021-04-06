@@ -104,7 +104,7 @@ class IamPolicySearchResult(proto.Message):
             bucket), the project field will indicate the project that
             contains the resource. If an IAM policy is set on a folder
             or orgnization, the project field will be empty.
-        policy (google.iam.v1.policy_pb2.Policy):
+        policy_ (google.iam.v1.policy_pb2.Policy):
             The IAM policy directly set on the given
             resource. Note that the original IAM policy can
             contain multiple bindings. This only contains
@@ -139,7 +139,7 @@ class IamPolicySearchResult(proto.Message):
 
     project = proto.Field(proto.STRING, number=3)
 
-    policy = proto.Field(proto.MESSAGE, number=4, message=giv_policy.Policy,)
+    policy_ = proto.Field(proto.MESSAGE, number=4, message=giv_policy.Policy,)
 
     explanation = proto.Field(proto.MESSAGE, number=5, message=Explanation,)
 

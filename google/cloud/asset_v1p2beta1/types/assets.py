@@ -18,7 +18,7 @@
 import proto  # type: ignore
 
 
-from google.iam.v1 import policy_pb2 as policy  # type: ignore
+from google.iam.v1 import policy_pb2 as giv_policy  # type: ignore
 from google.protobuf import struct_pb2 as struct  # type: ignore
 from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
@@ -105,7 +105,7 @@ class Asset(proto.Message):
 
     resource = proto.Field(proto.MESSAGE, number=3, message="Resource",)
 
-    iam_policy = proto.Field(proto.MESSAGE, number=4, message=policy.Policy,)
+    iam_policy = proto.Field(proto.MESSAGE, number=4, message=giv_policy.Policy,)
 
     ancestors = proto.RepeatedField(proto.STRING, number=6)
 

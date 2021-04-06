@@ -863,7 +863,7 @@ class IamPolicyAnalysisQuery(proto.Message):
         access_selector (google.cloud.asset_v1.types.IamPolicyAnalysisQuery.AccessSelector):
             Optional. Specifies roles or permissions for
             analysis. This is optional.
-        options (google.cloud.asset_v1.types.IamPolicyAnalysisQuery.Options):
+        options_ (google.cloud.asset_v1.types.IamPolicyAnalysisQuery.Options):
             Optional. The query options.
     """
 
@@ -1035,7 +1035,7 @@ class IamPolicyAnalysisQuery(proto.Message):
 
     access_selector = proto.Field(proto.MESSAGE, number=4, message=AccessSelector,)
 
-    options = proto.Field(proto.MESSAGE, number=5, message=Options,)
+    options_ = proto.Field(proto.MESSAGE, number=5, message=Options,)
 
 
 class AnalyzeIamPolicyRequest(proto.Message):

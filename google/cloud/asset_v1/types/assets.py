@@ -433,7 +433,7 @@ class IamPolicySearchResult(proto.Message):
 
             -  specify the ``scope`` field as this project in your
                search request.
-        policy (google.iam.v1.policy_pb2.Policy):
+        policy_ (google.iam.v1.policy_pb2.Policy):
             The IAM policy directly set on the given resource. Note that
             the original IAM policy can contain multiple bindings. This
             only contains the bindings that match the given query. For
@@ -496,7 +496,7 @@ class IamPolicySearchResult(proto.Message):
 
     project = proto.Field(proto.STRING, number=2)
 
-    policy = proto.Field(proto.MESSAGE, number=3, message=gi_policy.Policy,)
+    policy_ = proto.Field(proto.MESSAGE, number=3, message=gi_policy.Policy,)
 
     explanation = proto.Field(proto.MESSAGE, number=4, message=Explanation,)
 

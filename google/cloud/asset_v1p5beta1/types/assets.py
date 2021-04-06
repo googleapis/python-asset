@@ -19,7 +19,7 @@ import proto  # type: ignore
 
 
 from google.cloud.orgpolicy.v1 import orgpolicy_pb2 as orgpolicy  # type: ignore
-from google.iam.v1 import policy_pb2 as policy  # type: ignore
+from google.iam.v1 import policy_pb2 as giv_policy  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_level_pb2 as giav_access_level  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_policy_pb2 as giav_access_policy  # type: ignore
 from google.identity.accesscontextmanager.v1 import service_perimeter_pb2 as giav_service_perimeter  # type: ignore
@@ -80,7 +80,7 @@ class Asset(proto.Message):
 
     resource = proto.Field(proto.MESSAGE, number=3, message="Resource",)
 
-    iam_policy = proto.Field(proto.MESSAGE, number=4, message=policy.Policy,)
+    iam_policy = proto.Field(proto.MESSAGE, number=4, message=giv_policy.Policy,)
 
     org_policy = proto.RepeatedField(proto.MESSAGE, number=6, message=orgpolicy.Policy,)
 

@@ -41,8 +41,8 @@ def partition(
 class assetCallTransformer(cst.CSTTransformer):
     CTRL_PARAMS: Tuple[str] = ('retry', 'timeout', 'metadata')
     METHOD_TO_PARAMS: Dict[str, Tuple[str]] = {
-    'analyze_iam_policy': ('analysis_query', 'options', ),
-    'export_iam_policy_analysis': ('analysis_query', 'output_config', 'options', ),
+    'analyze_iam_policy': ('analysis_query', 'options_', ),
+    'export_iam_policy_analysis': ('analysis_query', 'output_config', 'options_', ),
 
     }
 
