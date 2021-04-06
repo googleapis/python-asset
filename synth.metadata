@@ -11,8 +11,8 @@
       "git": {
         "name": "googleapis",
         "remote": "https://github.com/googleapis/googleapis.git",
-        "sha": "8ff7d794576311d3d68d4df2ac6da93bbfcd7476",
-        "internalRef": "366472163"
+        "sha": "1a7d7641a161bec4d5ab13b7ff5590ed8ba26d96",
+        "internalRef": "366823379"
       }
     },
     {
@@ -134,7 +134,6 @@
     "CONTRIBUTING.rst",
     "LICENSE",
     "MANIFEST.in",
-    "asset-v1-py.tar.gz",
     "docs/_static/custom.css",
     "docs/_templates/layout.html",
     "docs/asset_v1/asset_service.rst",
