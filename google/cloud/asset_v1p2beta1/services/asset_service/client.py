@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 from distutils import util
 import os
@@ -23,17 +21,16 @@ from typing import Callable, Dict, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport import mtls  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
 from google.auth.exceptions import MutualTLSChannelError  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.cloud.asset_v1p2beta1.types import asset_service
-
 from .transports.base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import AssetServiceGrpcTransport
 from .transports.grpc_asyncio import AssetServiceGrpcAsyncIOTransport
@@ -225,7 +222,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
     def __init__(
         self,
         *,
-        credentials: Optional[credentials.Credentials] = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, AssetServiceTransport, None] = None,
         client_options: Optional[client_options_lib.ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -365,7 +362,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -399,10 +395,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, asset_service.CreateFeedRequest):
             request = asset_service.CreateFeedRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
 
@@ -445,7 +439,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -479,10 +472,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, asset_service.GetFeedRequest):
             request = asset_service.GetFeedRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 
@@ -528,7 +519,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -555,10 +545,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, asset_service.ListFeedsRequest):
             request = asset_service.ListFeedsRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if parent is not None:
                 request.parent = parent
 
@@ -602,7 +590,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 This corresponds to the ``feed`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -636,10 +623,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, asset_service.UpdateFeedRequest):
             request = asset_service.UpdateFeedRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if feed is not None:
                 request.feed = feed
 
@@ -684,7 +669,6 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -707,10 +691,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         # there are no flattened fields.
         if not isinstance(request, asset_service.DeleteFeedRequest):
             request = asset_service.DeleteFeedRequest(request)
-
             # If we have keyword arguments corresponding to fields on the
             # request, apply these.
-
             if name is not None:
                 request.name = name
 

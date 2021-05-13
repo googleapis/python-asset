@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 from collections import OrderedDict
 import functools
 import re
@@ -22,10 +20,10 @@ from typing import Dict, Sequence, Tuple, Type, Union
 import pkg_resources
 
 import google.api_core.client_options as ClientOptions  # type: ignore
-from google.api_core import exceptions  # type: ignore
+from google.api_core import exceptions as core_exceptions  # type: ignore
 from google.api_core import gapic_v1  # type: ignore
 from google.api_core import retry as retries  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.oauth2 import service_account  # type: ignore
 
 from google.api_core import operation  # type: ignore
@@ -33,8 +31,7 @@ from google.api_core import operation_async  # type: ignore
 from google.cloud.asset_v1.services.asset_service import pagers
 from google.cloud.asset_v1.types import asset_service
 from google.cloud.asset_v1.types import assets
-from google.type import expr_pb2 as expr  # type: ignore
-
+from google.type import expr_pb2  # type: ignore
 from .transports.base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import AssetServiceGrpcAsyncIOTransport
 from .client import AssetServiceClient
@@ -52,27 +49,22 @@ class AssetServiceAsyncClient:
 
     feed_path = staticmethod(AssetServiceClient.feed_path)
     parse_feed_path = staticmethod(AssetServiceClient.parse_feed_path)
-
     common_billing_account_path = staticmethod(
         AssetServiceClient.common_billing_account_path
     )
     parse_common_billing_account_path = staticmethod(
         AssetServiceClient.parse_common_billing_account_path
     )
-
     common_folder_path = staticmethod(AssetServiceClient.common_folder_path)
     parse_common_folder_path = staticmethod(AssetServiceClient.parse_common_folder_path)
-
     common_organization_path = staticmethod(AssetServiceClient.common_organization_path)
     parse_common_organization_path = staticmethod(
         AssetServiceClient.parse_common_organization_path
     )
-
     common_project_path = staticmethod(AssetServiceClient.common_project_path)
     parse_common_project_path = staticmethod(
         AssetServiceClient.parse_common_project_path
     )
-
     common_location_path = staticmethod(AssetServiceClient.common_location_path)
     parse_common_location_path = staticmethod(
         AssetServiceClient.parse_common_location_path
@@ -126,7 +118,7 @@ class AssetServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         transport: Union[str, AssetServiceTransport] = "grpc_asyncio",
         client_options: ClientOptions = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
@@ -163,7 +155,6 @@ class AssetServiceAsyncClient:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
                 creation failed for any reason.
         """
-
         self._client = AssetServiceClient(
             credentials=credentials,
             transport=transport,
@@ -196,7 +187,6 @@ class AssetServiceAsyncClient:
         Args:
             request (:class:`google.cloud.asset_v1.types.ExportAssetsRequest`):
                 The request object. Export asset request.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -215,7 +205,6 @@ class AssetServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-
         request = asset_service.ExportAssetsRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -265,7 +254,6 @@ class AssetServiceAsyncClient:
         Args:
             request (:class:`google.cloud.asset_v1.types.BatchGetAssetsHistoryRequest`):
                 The request object. Batch get assets history request.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -277,7 +265,6 @@ class AssetServiceAsyncClient:
                 Batch get assets history response.
         """
         # Create or coerce a protobuf request object.
-
         request = asset_service.BatchGetAssetsHistoryRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -339,7 +326,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -371,7 +357,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -418,7 +403,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -450,7 +434,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -509,7 +492,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``parent`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -534,7 +516,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if parent is not None:
             request.parent = parent
 
@@ -591,7 +572,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``feed`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -623,7 +603,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if feed is not None:
             request.feed = feed
 
@@ -672,7 +651,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``name`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -693,7 +671,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if name is not None:
             request.name = name
 
@@ -815,7 +792,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``asset_types`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -844,12 +820,10 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if scope is not None:
             request.scope = scope
         if query is not None:
             request.query = query
-
         if asset_types:
             request.asset_types.extend(asset_types)
 
@@ -961,7 +935,6 @@ class AssetServiceAsyncClient:
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
                 should not be set.
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -990,7 +963,6 @@ class AssetServiceAsyncClient:
 
         # If we have keyword arguments corresponding to fields on the
         # request, apply these.
-
         if scope is not None:
             request.scope = scope
         if query is not None:
@@ -1046,7 +1018,6 @@ class AssetServiceAsyncClient:
             request (:class:`google.cloud.asset_v1.types.AnalyzeIamPolicyRequest`):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1060,7 +1031,6 @@ class AssetServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-
         request = asset_service.AnalyzeIamPolicyRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
@@ -1117,7 +1087,6 @@ class AssetServiceAsyncClient:
             request (:class:`google.cloud.asset_v1.types.AnalyzeIamPolicyLongrunningRequest`):
                 The request object. A request message for
                 [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
-
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
             timeout (float): The timeout for this request.
@@ -1135,7 +1104,6 @@ class AssetServiceAsyncClient:
 
         """
         # Create or coerce a protobuf request object.
-
         request = asset_service.AnalyzeIamPolicyLongrunningRequest(request)
 
         # Wrap the RPC method; this adds retry and timeout information,
