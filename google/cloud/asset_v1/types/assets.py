@@ -16,7 +16,7 @@
 import proto  # type: ignore
 
 from google.cloud.orgpolicy.v1 import orgpolicy_pb2  # type: ignore
-from google.cloud.osconfig.v1 import inventory_pb2  # type: ignore
+from google.cloud.osconfig_v1 import Inventory  # type: ignore
 from google.iam.v1 import policy_pb2  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_level_pb2  # type: ignore
 from google.identity.accesscontextmanager.v1 import access_policy_pb2  # type: ignore
@@ -148,7 +148,7 @@ class Asset(proto.Message):
         service_perimeter (google.identity.accesscontextmanager.v1.service_perimeter_pb2.ServicePerimeter):
             Please also refer to the `service perimeter user
             guide <https://cloud.google.com/vpc-service-controls/docs/overview>`__.
-        os_inventory (google.cloud.osconfig.v1.inventory_pb2.Inventory):
+        os_inventory (ggoogle.cloud.osconfig_v1.Inventory):
             A representation of runtime OS Inventory information. See
             `this
             topic <https://cloud.google.com/compute/docs/instances/os-inventory-management>`__
@@ -194,9 +194,7 @@ class Asset(proto.Message):
         oneof="access_context_policy",
         message=service_perimeter_pb2.ServicePerimeter,
     )
-    os_inventory = proto.Field(
-        proto.MESSAGE, number=12, message=inventory_pb2.Inventory,
-    )
+    os_inventory = proto.Field(proto.MESSAGE, number=12, message=Inventory,)
     ancestors = proto.RepeatedField(proto.STRING, number=10,)
 
 
