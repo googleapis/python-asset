@@ -62,8 +62,7 @@ RUN apt-get update \
 
 
 RUN wget -O /tmp/get-pip.py 'https://bootstrap.pypa.io/get-pip.py' \
-  && python3.7 /tmp/get-pip.py \
   && python3.8 /tmp/get-pip.py \
   && rm /tmp/get-pip.py
 
-CMD ["python3.7"]
+CMD ["python3.8"]
