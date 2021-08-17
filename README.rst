@@ -73,10 +73,9 @@ Windows
 
 .. code-block:: console
 
-    pip install virtualenv
-    virtualenv <your-env>
+    py -3.9 -m venv <your-env>
     <your-env>\Scripts\activate
-    <your-env>\Scripts\pip.exe install google-cloud-asset
+    python -m pip install google-cloud-asset
 
 Next Steps
 ~~~~~~~~~~
