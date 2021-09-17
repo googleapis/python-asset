@@ -18,7 +18,7 @@
 import argparse
 
 
-def list_assets(project_id, asset_types, page_size):
+def list_assets(project_id, asset_types, page_size, content_type):
     # [START asset_quickstart_list_assets]
     from google.cloud import asset_v1
 
@@ -27,9 +27,9 @@ def list_assets(project_id, asset_types, page_size):
     # ["storage.googleapis.com/Bucket","bigquery.googleapis.com/Table"]'
     # TODO page_size = 'Num of assets in one page, which must be between 1 and
     # 1000 (both inclusively)'
+    # TODO content_type ="Content type to list"
 
     project_resource = "projects/{}".format(project_id)
-    content_type = asset_v1.ContentType.RESOURCE
     client = asset_v1.AssetServiceClient()
 
     # Call ListAssets v1 to list assets.
