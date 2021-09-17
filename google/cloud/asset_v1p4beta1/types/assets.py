@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
-from google.iam.v1 import policy_pb2 as policy  # type: ignore
-from google.rpc import code_pb2 as gr_code  # type: ignore
+from google.iam.v1 import policy_pb2  # type: ignore
+from google.rpc import code_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -36,14 +33,14 @@ class IamPolicyAnalysisResult(proto.Message):
             The full name of the resource to which the
             [iam_binding][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.iam_binding]
             policy attaches.
-        iam_binding (~.policy.Binding):
+        iam_binding (google.iam.v1.policy_pb2.Binding):
             The Cloud IAM policy binding under analysis.
-        access_control_lists (Sequence[~.assets.IamPolicyAnalysisResult.AccessControlList]):
+        access_control_lists (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AccessControlList]):
             The access control lists derived from the
             [iam_binding][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.iam_binding]
             that match or potentially match resource and access
             selectors specified in the request.
-        identity_list (~.assets.IamPolicyAnalysisResult.IdentityList):
+        identity_list (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.IdentityList):
             The identity list derived from members of the
             [iam_binding][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.iam_binding]
             that match or potentially match identity selector specified
@@ -60,7 +57,7 @@ class IamPolicyAnalysisResult(proto.Message):
         non-critical errors in the response.
 
         Attributes:
-            code (~.gr_code.Code):
+            code (google.rpc.code_pb2.Code):
                 The Google standard error code that best describes the
                 state. For example:
 
@@ -74,50 +71,43 @@ class IamPolicyAnalysisResult(proto.Message):
                 of failure.
         """
 
-        code = proto.Field(proto.ENUM, number=1, enum=gr_code.Code,)
-
-        cause = proto.Field(proto.STRING, number=2)
+        code = proto.Field(proto.ENUM, number=1, enum=code_pb2.Code,)
+        cause = proto.Field(proto.STRING, number=2,)
 
     class Resource(proto.Message):
         r"""A GCP resource that appears in an access control list.
-
         Attributes:
             full_resource_name (str):
                 The `full resource
                 name <https://aip.dev/122#full-resource-names>`__.
-            analysis_state (~.assets.IamPolicyAnalysisResult.AnalysisState):
+            analysis_state (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AnalysisState):
                 The analysis state of this resource node.
         """
 
-        full_resource_name = proto.Field(proto.STRING, number=1)
-
+        full_resource_name = proto.Field(proto.STRING, number=1,)
         analysis_state = proto.Field(
             proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.AnalysisState",
         )
 
     class Access(proto.Message):
         r"""A role or permission that appears in an access control list.
-
         Attributes:
             role (str):
                 The role.
             permission (str):
                 The permission.
-            analysis_state (~.assets.IamPolicyAnalysisResult.AnalysisState):
+            analysis_state (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AnalysisState):
                 The analysis state of this access node.
         """
 
-        role = proto.Field(proto.STRING, number=1, oneof="oneof_access")
-
-        permission = proto.Field(proto.STRING, number=2, oneof="oneof_access")
-
+        role = proto.Field(proto.STRING, number=1, oneof="oneof_access",)
+        permission = proto.Field(proto.STRING, number=2, oneof="oneof_access",)
         analysis_state = proto.Field(
             proto.MESSAGE, number=3, message="IamPolicyAnalysisResult.AnalysisState",
         )
 
     class Edge(proto.Message):
         r"""A directional edge.
-
         Attributes:
             source_node (str):
                 The source node of the edge.
@@ -125,13 +115,11 @@ class IamPolicyAnalysisResult(proto.Message):
                 The target node of the edge.
         """
 
-        source_node = proto.Field(proto.STRING, number=1)
-
-        target_node = proto.Field(proto.STRING, number=2)
+        source_node = proto.Field(proto.STRING, number=1,)
+        target_node = proto.Field(proto.STRING, number=2,)
 
     class Identity(proto.Message):
         r"""An identity that appears in an access control list.
-
         Attributes:
             name (str):
                 The identity name in any form of members appear in `IAM
@@ -146,12 +134,11 @@ class IamPolicyAnalysisResult(proto.Message):
                 -  domain:google.com
                 -  allUsers
                 -  etc.
-            analysis_state (~.assets.IamPolicyAnalysisResult.AnalysisState):
+            analysis_state (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AnalysisState):
                 The analysis state of this identity node.
         """
 
-        name = proto.Field(proto.STRING, number=1)
-
+        name = proto.Field(proto.STRING, number=1,)
         analysis_state = proto.Field(
             proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.AnalysisState",
         )
@@ -177,19 +164,19 @@ class IamPolicyAnalysisResult(proto.Message):
         -  AccessControlList 2: [R2, R3], [P3]
 
         Attributes:
-            resources (Sequence[~.assets.IamPolicyAnalysisResult.Resource]):
+            resources (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.Resource]):
                 The resources that match one of the following conditions:
 
                 -  The resource_selector, if it is specified in request;
                 -  Otherwise, resources reachable from the policy attached
                    resource.
-            accesses (Sequence[~.assets.IamPolicyAnalysisResult.Access]):
+            accesses (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.Access]):
                 The accesses that match one of the following conditions:
 
                 -  The access_selector, if it is specified in request;
                 -  Otherwise, access specifiers reachable from the policy
                    binding's role.
-            resource_edges (Sequence[~.assets.IamPolicyAnalysisResult.Edge]):
+            resource_edges (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.Edge]):
                 Resource edges of the graph starting from the policy
                 attached resource to any descendant resources. The
                 [Edge.source_node][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.Edge.source_node]
@@ -203,27 +190,24 @@ class IamPolicyAnalysisResult(proto.Message):
         resources = proto.RepeatedField(
             proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Resource",
         )
-
         accesses = proto.RepeatedField(
             proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Access",
         )
-
         resource_edges = proto.RepeatedField(
             proto.MESSAGE, number=3, message="IamPolicyAnalysisResult.Edge",
         )
 
     class IdentityList(proto.Message):
         r"""
-
         Attributes:
-            identities (Sequence[~.assets.IamPolicyAnalysisResult.Identity]):
+            identities (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.Identity]):
                 Only the identities that match one of the following
                 conditions will be presented:
 
                 -  The identity_selector, if it is specified in request;
                 -  Otherwise, identities reachable from the policy binding's
                    members.
-            group_edges (Sequence[~.assets.IamPolicyAnalysisResult.Edge]):
+            group_edges (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.Edge]):
                 Group identity edges of the graph starting from the
                 binding's group members to any node of the
                 [identities][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult.IdentityList.identities].
@@ -240,22 +224,17 @@ class IamPolicyAnalysisResult(proto.Message):
         identities = proto.RepeatedField(
             proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Identity",
         )
-
         group_edges = proto.RepeatedField(
             proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Edge",
         )
 
-    attached_resource_full_name = proto.Field(proto.STRING, number=1)
-
-    iam_binding = proto.Field(proto.MESSAGE, number=2, message=policy.Binding,)
-
+    attached_resource_full_name = proto.Field(proto.STRING, number=1,)
+    iam_binding = proto.Field(proto.MESSAGE, number=2, message=policy_pb2.Binding,)
     access_control_lists = proto.RepeatedField(
         proto.MESSAGE, number=3, message=AccessControlList,
     )
-
     identity_list = proto.Field(proto.MESSAGE, number=4, message=IdentityList,)
-
-    fully_explored = proto.Field(proto.BOOL, number=5)
+    fully_explored = proto.Field(proto.BOOL, number=5,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

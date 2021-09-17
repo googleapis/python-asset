@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,42 +13,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-from .assets import (
-    TemporalAsset,
-    TimeWindow,
-    Asset,
-    Resource,
-)
 from .asset_service import (
     CreateFeedRequest,
+    DeleteFeedRequest,
+    Feed,
+    FeedOutputConfig,
+    GcsDestination,
     GetFeedRequest,
     ListFeedsRequest,
     ListFeedsResponse,
-    UpdateFeedRequest,
-    DeleteFeedRequest,
     OutputConfig,
-    GcsDestination,
     PubsubDestination,
-    FeedOutputConfig,
-    Feed,
+    UpdateFeedRequest,
+    ContentType,
+)
+from .assets import (
+    Asset,
+    Resource,
+    TemporalAsset,
+    TimeWindow,
 )
 
-
 __all__ = (
-    "TemporalAsset",
-    "TimeWindow",
-    "Asset",
-    "Resource",
     "CreateFeedRequest",
+    "DeleteFeedRequest",
+    "Feed",
+    "FeedOutputConfig",
+    "GcsDestination",
     "GetFeedRequest",
     "ListFeedsRequest",
     "ListFeedsResponse",
-    "UpdateFeedRequest",
-    "DeleteFeedRequest",
     "OutputConfig",
-    "GcsDestination",
     "PubsubDestination",
-    "FeedOutputConfig",
-    "Feed",
+    "UpdateFeedRequest",
+    "ContentType",
+    "Asset",
+    "Resource",
+    "TemporalAsset",
+    "TimeWindow",
 )

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import warnings
+from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple, Union
 
-from typing import Awaitable, Callable, Dict, Optional, Sequence, Tuple
-
+from google.api_core import gapic_v1  # type: ignore
 from google.api_core import grpc_helpers_async  # type: ignore
 from google.api_core import operations_v1  # type: ignore
-from google.auth import credentials  # type: ignore
+from google.auth import credentials as ga_credentials  # type: ignore
 from google.auth.transport.grpc import SslCredentials  # type: ignore
+import packaging.version
 
 import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.cloud.asset_v1.types import asset_service
-from google.longrunning import operations_pb2 as operations  # type: ignore
-from google.protobuf import empty_pb2 as empty  # type: ignore
-
-from .base import AssetServiceTransport
+from google.longrunning import operations_pb2  # type: ignore
+from google.protobuf import empty_pb2  # type: ignore
+from .base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .grpc import AssetServiceGrpcTransport
 
 
@@ -53,7 +53,7 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
     def create_channel(
         cls,
         host: str = "cloudasset.googleapis.com",
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         credentials_file: Optional[str] = None,
         scopes: Optional[Sequence[str]] = None,
         quota_project_id: Optional[str] = None,
@@ -61,7 +61,7 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
     ) -> aio.Channel:
         """Create and return a gRPC AsyncIO channel object.
         Args:
-            address (Optional[str]): The host for the channel to use.
+            host (Optional[str]): The host for the channel to use.
             credentials (Optional[~.Credentials]): The
                 authorization credentials to attach to requests. These
                 credentials identify this application to the service. If
@@ -80,13 +80,15 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         Returns:
             aio.Channel: A gRPC AsyncIO channel object.
         """
-        scopes = scopes or cls.AUTH_SCOPES
+
         return grpc_helpers_async.create_channel(
             host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes,
             quota_project_id=quota_project_id,
+            default_scopes=cls.AUTH_SCOPES,
+            scopes=scopes,
+            default_host=cls.DEFAULT_HOST,
             **kwargs,
         )
 
@@ -94,18 +96,23 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         self,
         *,
         host: str = "cloudasset.googleapis.com",
-        credentials: credentials.Credentials = None,
+        credentials: ga_credentials.Credentials = None,
         credentials_file: Optional[str] = None,
         scopes: Optional[Sequence[str]] = None,
         channel: aio.Channel = None,
         api_mtls_endpoint: str = None,
         client_cert_source: Callable[[], Tuple[bytes, bytes]] = None,
+        ssl_channel_credentials: grpc.ChannelCredentials = None,
+        client_cert_source_for_mtls: Callable[[], Tuple[bytes, bytes]] = None,
         quota_project_id=None,
+        client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
+        always_use_jwt_access: Optional[bool] = False,
     ) -> None:
         """Instantiate the transport.
 
         Args:
-            host (Optional[str]): The hostname to connect to.
+            host (Optional[str]):
+                 The hostname to connect to.
             credentials (Optional[google.auth.credentials.Credentials]): The
                 authorization credentials to attach to requests. These
                 credentials identify the application to the service; if none
@@ -120,16 +127,29 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
                 are passed to :func:`google.auth.default`.
             channel (Optional[aio.Channel]): A ``Channel`` instance through
                 which to make calls.
-            api_mtls_endpoint (Optional[str]): The mutual TLS endpoint. If
-                provided, it overrides the ``host`` argument and tries to create
+            api_mtls_endpoint (Optional[str]): Deprecated. The mutual TLS endpoint.
+                If provided, it overrides the ``host`` argument and tries to create
                 a mutual TLS channel with client SSL credentials from
                 ``client_cert_source`` or applicatin default SSL credentials.
-            client_cert_source (Optional[Callable[[], Tuple[bytes, bytes]]]): A
-                callback to provide client SSL certificate bytes and private key
-                bytes, both in PEM format. It is ignored if ``api_mtls_endpoint``
-                is None.
+            client_cert_source (Optional[Callable[[], Tuple[bytes, bytes]]]):
+                Deprecated. A callback to provide client SSL certificate bytes and
+                private key bytes, both in PEM format. It is ignored if
+                ``api_mtls_endpoint`` is None.
+            ssl_channel_credentials (grpc.ChannelCredentials): SSL credentials
+                for grpc channel. It is ignored if ``channel`` is provided.
+            client_cert_source_for_mtls (Optional[Callable[[], Tuple[bytes, bytes]]]):
+                A callback to provide client certificate bytes and private key bytes,
+                both in PEM format. It is used to configure mutual TLS channel. It is
+                ignored if ``channel`` or ``ssl_channel_credentials`` is provided.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
+            client_info (google.api_core.gapic_v1.client_info.ClientInfo):
+                The client info used to send a user-agent string along with
+                API requests. If ``None``, then default info will be used.
+                Generally, you only need to set this if you're developing
+                your own client library.
+            always_use_jwt_access (Optional[bool]): Whether self signed JWT should
+                be used for service account credentials.
 
         Raises:
             google.auth.exceptions.MutualTlsChannelError: If mutual TLS transport
@@ -137,50 +157,70 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
           google.api_core.exceptions.DuplicateCredentialArgs: If both ``credentials``
               and ``credentials_file`` are passed.
         """
-        if channel:
-            # Sanity check: Ensure that channel and credentials are not both
-            # provided.
-            credentials = False
+        self._grpc_channel = None
+        self._ssl_channel_credentials = ssl_channel_credentials
+        self._stubs: Dict[str, Callable] = {}
+        self._operations_client = None
 
+        if api_mtls_endpoint:
+            warnings.warn("api_mtls_endpoint is deprecated", DeprecationWarning)
+        if client_cert_source:
+            warnings.warn("client_cert_source is deprecated", DeprecationWarning)
+
+        if channel:
+            # Ignore credentials if a channel was passed.
+            credentials = False
             # If a channel was explicitly provided, set it.
             self._grpc_channel = channel
-        elif api_mtls_endpoint:
-            host = (
-                api_mtls_endpoint
-                if ":" in api_mtls_endpoint
-                else api_mtls_endpoint + ":443"
-            )
+            self._ssl_channel_credentials = None
+        else:
+            if api_mtls_endpoint:
+                host = api_mtls_endpoint
 
-            # Create SSL credentials with client_cert_source or application
-            # default SSL credentials.
-            if client_cert_source:
-                cert, key = client_cert_source()
-                ssl_credentials = grpc.ssl_channel_credentials(
-                    certificate_chain=cert, private_key=key
-                )
+                # Create SSL credentials with client_cert_source or application
+                # default SSL credentials.
+                if client_cert_source:
+                    cert, key = client_cert_source()
+                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
+                        certificate_chain=cert, private_key=key
+                    )
+                else:
+                    self._ssl_channel_credentials = SslCredentials().ssl_credentials
+
             else:
-                ssl_credentials = SslCredentials().ssl_credentials
+                if client_cert_source_for_mtls and not ssl_channel_credentials:
+                    cert, key = client_cert_source_for_mtls()
+                    self._ssl_channel_credentials = grpc.ssl_channel_credentials(
+                        certificate_chain=cert, private_key=key
+                    )
 
-            # create a new channel. The provided one is ignored.
-            self._grpc_channel = type(self).create_channel(
-                host,
-                credentials=credentials,
-                credentials_file=credentials_file,
-                ssl_credentials=ssl_credentials,
-                scopes=scopes or self.AUTH_SCOPES,
-                quota_project_id=quota_project_id,
-            )
-
-        # Run the base constructor.
+        # The base transport sets the host, credentials and scopes
         super().__init__(
             host=host,
             credentials=credentials,
             credentials_file=credentials_file,
-            scopes=scopes or self.AUTH_SCOPES,
+            scopes=scopes,
             quota_project_id=quota_project_id,
+            client_info=client_info,
+            always_use_jwt_access=always_use_jwt_access,
         )
 
-        self._stubs = {}
+        if not self._grpc_channel:
+            self._grpc_channel = type(self).create_channel(
+                self._host,
+                credentials=self._credentials,
+                credentials_file=credentials_file,
+                scopes=self._scopes,
+                ssl_credentials=self._ssl_channel_credentials,
+                quota_project_id=quota_project_id,
+                options=[
+                    ("grpc.max_send_message_length", -1),
+                    ("grpc.max_receive_message_length", -1),
+                ],
+            )
+
+        # Wrap messages. This must be done after self._grpc_channel exists
+        self._prep_wrapped_messages(client_info)
 
     @property
     def grpc_channel(self) -> aio.Channel:
@@ -189,13 +229,6 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         This property caches on the instance; repeated calls return
         the same channel.
         """
-        # Sanity check: Only create a new channel if we do not already
-        # have one.
-        if not hasattr(self, "_grpc_channel"):
-            self._grpc_channel = self.create_channel(
-                self._host, credentials=self._credentials,
-            )
-
         # Return the channel from cache.
         return self._grpc_channel
 
@@ -207,18 +240,20 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         client.
         """
         # Sanity check: Only create a new client if we do not already have one.
-        if "operations_client" not in self.__dict__:
-            self.__dict__["operations_client"] = operations_v1.OperationsAsyncClient(
+        if self._operations_client is None:
+            self._operations_client = operations_v1.OperationsAsyncClient(
                 self.grpc_channel
             )
 
         # Return the client from cache.
-        return self.__dict__["operations_client"]
+        return self._operations_client
 
     @property
     def export_assets(
         self,
-    ) -> Callable[[asset_service.ExportAssetsRequest], Awaitable[operations.Operation]]:
+    ) -> Callable[
+        [asset_service.ExportAssetsRequest], Awaitable[operations_pb2.Operation]
+    ]:
         r"""Return a callable for the export assets method over gRPC.
 
         Exports assets with time and resource types to a given Cloud
@@ -249,9 +284,38 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
             self._stubs["export_assets"] = self.grpc_channel.unary_unary(
                 "/google.cloud.asset.v1.AssetService/ExportAssets",
                 request_serializer=asset_service.ExportAssetsRequest.serialize,
-                response_deserializer=operations.Operation.FromString,
+                response_deserializer=operations_pb2.Operation.FromString,
             )
         return self._stubs["export_assets"]
+
+    @property
+    def list_assets(
+        self,
+    ) -> Callable[
+        [asset_service.ListAssetsRequest], Awaitable[asset_service.ListAssetsResponse]
+    ]:
+        r"""Return a callable for the list assets method over gRPC.
+
+        Lists assets with time and resource types and returns
+        paged results in response.
+
+        Returns:
+            Callable[[~.ListAssetsRequest],
+                    Awaitable[~.ListAssetsResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "list_assets" not in self._stubs:
+            self._stubs["list_assets"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/ListAssets",
+                request_serializer=asset_service.ListAssetsRequest.serialize,
+                response_deserializer=asset_service.ListAssetsResponse.deserialize,
+            )
+        return self._stubs["list_assets"]
 
     @property
     def batch_get_assets_history(
@@ -400,7 +464,7 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
     @property
     def delete_feed(
         self,
-    ) -> Callable[[asset_service.DeleteFeedRequest], Awaitable[empty.Empty]]:
+    ) -> Callable[[asset_service.DeleteFeedRequest], Awaitable[empty_pb2.Empty]]:
         r"""Return a callable for the delete feed method over gRPC.
 
         Deletes an asset feed.
@@ -419,7 +483,7 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
             self._stubs["delete_feed"] = self.grpc_channel.unary_unary(
                 "/google.cloud.asset.v1.AssetService/DeleteFeed",
                 request_serializer=asset_service.DeleteFeedRequest.serialize,
-                response_deserializer=empty.Empty.FromString,
+                response_deserializer=empty_pb2.Empty.FromString,
             )
         return self._stubs["delete_feed"]
 
@@ -432,11 +496,10 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all resources method over gRPC.
 
-        Searches all the resources within the given
-        accessible scope (e.g., a project, a folder or an
-        organization). Callers should have
-        cloud.assets.SearchAllResources permission upon the
-        requested scope, otherwise the request will be rejected.
+        Searches all Cloud resources within the specified scope, such as
+        a project, folder, or organization. The caller must be granted
+        the ``cloudasset.assets.searchAllResources`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         Returns:
             Callable[[~.SearchAllResourcesRequest],
@@ -465,11 +528,10 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all iam policies method over gRPC.
 
-        Searches all the IAM policies within the given
-        accessible scope (e.g., a project, a folder or an
-        organization). Callers should have
-        cloud.assets.SearchAllIamPolicies permission upon the
-        requested scope, otherwise the request will be rejected.
+        Searches all IAM policies within the specified scope, such as a
+        project, folder, or organization. The caller must be granted the
+        ``cloudasset.assets.searchAllIamPolicies`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         Returns:
             Callable[[~.SearchAllIamPoliciesRequest],
@@ -488,6 +550,112 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
                 response_deserializer=asset_service.SearchAllIamPoliciesResponse.deserialize,
             )
         return self._stubs["search_all_iam_policies"]
+
+    @property
+    def analyze_iam_policy(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeIamPolicyRequest],
+        Awaitable[asset_service.AnalyzeIamPolicyResponse],
+    ]:
+        r"""Return a callable for the analyze iam policy method over gRPC.
+
+        Analyzes IAM policies to answer which identities have
+        what accesses on which resources.
+
+        Returns:
+            Callable[[~.AnalyzeIamPolicyRequest],
+                    Awaitable[~.AnalyzeIamPolicyResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_iam_policy" not in self._stubs:
+            self._stubs["analyze_iam_policy"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeIamPolicy",
+                request_serializer=asset_service.AnalyzeIamPolicyRequest.serialize,
+                response_deserializer=asset_service.AnalyzeIamPolicyResponse.deserialize,
+            )
+        return self._stubs["analyze_iam_policy"]
+
+    @property
+    def analyze_iam_policy_longrunning(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeIamPolicyLongrunningRequest],
+        Awaitable[operations_pb2.Operation],
+    ]:
+        r"""Return a callable for the analyze iam policy longrunning method over gRPC.
+
+        Analyzes IAM policies asynchronously to answer which identities
+        have what accesses on which resources, and writes the analysis
+        results to a Google Cloud Storage or a BigQuery destination. For
+        Cloud Storage destination, the output format is the JSON format
+        that represents a
+        [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
+        This method implements the
+        [google.longrunning.Operation][google.longrunning.Operation],
+        which allows you to track the operation status. We recommend
+        intervals of at least 2 seconds with exponential backoff retry
+        to poll the operation result. The metadata contains the metadata
+        for the long-running operation.
+
+        Returns:
+            Callable[[~.AnalyzeIamPolicyLongrunningRequest],
+                    Awaitable[~.Operation]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_iam_policy_longrunning" not in self._stubs:
+            self._stubs[
+                "analyze_iam_policy_longrunning"
+            ] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeIamPolicyLongrunning",
+                request_serializer=asset_service.AnalyzeIamPolicyLongrunningRequest.serialize,
+                response_deserializer=operations_pb2.Operation.FromString,
+            )
+        return self._stubs["analyze_iam_policy_longrunning"]
+
+    @property
+    def analyze_move(
+        self,
+    ) -> Callable[
+        [asset_service.AnalyzeMoveRequest], Awaitable[asset_service.AnalyzeMoveResponse]
+    ]:
+        r"""Return a callable for the analyze move method over gRPC.
+
+        Analyze moving a resource to a specified destination
+        without kicking off the actual move. The analysis is
+        best effort depending on the user's permissions of
+        viewing different hierarchical policies and
+        configurations. The policies and configuration are
+        subject to change before the actual resource migration
+        takes place.
+
+        Returns:
+            Callable[[~.AnalyzeMoveRequest],
+                    Awaitable[~.AnalyzeMoveResponse]]:
+                A function that, when called, will call the underlying RPC
+                on the server.
+        """
+        # Generate a "stub function" on-the-fly which will actually make
+        # the request.
+        # gRPC handles serialization and deserialization, so we just need
+        # to pass in the functions for each.
+        if "analyze_move" not in self._stubs:
+            self._stubs["analyze_move"] = self.grpc_channel.unary_unary(
+                "/google.cloud.asset.v1.AssetService/AnalyzeMove",
+                request_serializer=asset_service.AnalyzeMoveRequest.serialize,
+                response_deserializer=asset_service.AnalyzeMoveResponse.deserialize,
+            )
+        return self._stubs["analyze_move"]
 
 
 __all__ = ("AssetServiceGrpcAsyncIOTransport",)

@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
 from google.cloud.asset_v1p4beta1.types import assets
-from google.protobuf import duration_pb2 as duration  # type: ignore
+from google.protobuf import duration_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -37,7 +34,6 @@ __protobuf__ = proto.module(
 
 class IamPolicyAnalysisQuery(proto.Message):
     r"""IAM policy analysis query message.
-
     Attributes:
         parent (str):
             Required. The relative name of the root
@@ -46,13 +42,13 @@ class IamPolicyAnalysisQuery(proto.Message):
             organization number (such as
             "organizations/123") or a folder number (such as
             "folders/123").
-        resource_selector (~.asset_service.IamPolicyAnalysisQuery.ResourceSelector):
+        resource_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.ResourceSelector):
             Optional. Specifies a resource for analysis.
             Leaving it empty means ANY.
-        identity_selector (~.asset_service.IamPolicyAnalysisQuery.IdentitySelector):
+        identity_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.IdentitySelector):
             Optional. Specifies an identity for analysis.
             Leaving it empty means ANY.
-        access_selector (~.asset_service.IamPolicyAnalysisQuery.AccessSelector):
+        access_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.AccessSelector):
             Optional. Specifies roles or permissions for
             analysis. Leaving it empty means ANY.
     """
@@ -74,7 +70,7 @@ class IamPolicyAnalysisQuery(proto.Message):
                 .
         """
 
-        full_resource_name = proto.Field(proto.STRING, number=1)
+        full_resource_name = proto.Field(proto.STRING, number=1,)
 
     class IdentitySelector(proto.Message):
         r"""Specifies an identity for which to determine resource access,
@@ -88,7 +84,7 @@ class IamPolicyAnalysisQuery(proto.Message):
                 binding <https://cloud.google.com/iam/reference/rest/v1/Binding>`__.
         """
 
-        identity = proto.Field(proto.STRING, number=1)
+        identity = proto.Field(proto.STRING, number=1,)
 
     class AccessSelector(proto.Message):
         r"""Specifies roles and/or permissions to analyze, to determine
@@ -104,16 +100,12 @@ class IamPolicyAnalysisQuery(proto.Message):
                 result.
         """
 
-        roles = proto.RepeatedField(proto.STRING, number=1)
+        roles = proto.RepeatedField(proto.STRING, number=1,)
+        permissions = proto.RepeatedField(proto.STRING, number=2,)
 
-        permissions = proto.RepeatedField(proto.STRING, number=2)
-
-    parent = proto.Field(proto.STRING, number=1)
-
+    parent = proto.Field(proto.STRING, number=1,)
     resource_selector = proto.Field(proto.MESSAGE, number=2, message=ResourceSelector,)
-
     identity_selector = proto.Field(proto.MESSAGE, number=3, message=IdentitySelector,)
-
     access_selector = proto.Field(proto.MESSAGE, number=4, message=AccessSelector,)
 
 
@@ -122,15 +114,14 @@ class AnalyzeIamPolicyRequest(proto.Message):
     [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
     Attributes:
-        analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+        analysis_query (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery):
             Required. The request query.
-        options (~.asset_service.AnalyzeIamPolicyRequest.Options):
+        options (google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyRequest.Options):
             Optional. The request options.
     """
 
     class Options(proto.Message):
         r"""Contains request options.
-
         Attributes:
             expand_groups (bool):
                 Optional. If true, the identities section of the result will
@@ -200,7 +191,7 @@ class AnalyzeIamPolicyRequest(proto.Message):
                 [AnalyzeIamPolicyResponse.service_account_impersonation_analysis][google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis].
 
                 Default is false.
-            execution_timeout (~.duration.Duration):
+            execution_timeout (google.protobuf.duration_pb2.Duration):
                 Optional. Amount of time executable has to complete. See
                 JSON representation of
                 `Duration <https://developers.google.com/protocol-buffers/docs/proto3#json>`__.
@@ -215,26 +206,19 @@ class AnalyzeIamPolicyRequest(proto.Message):
                 Default is empty.
         """
 
-        expand_groups = proto.Field(proto.BOOL, number=1)
-
-        expand_roles = proto.Field(proto.BOOL, number=2)
-
-        expand_resources = proto.Field(proto.BOOL, number=3)
-
-        output_resource_edges = proto.Field(proto.BOOL, number=4)
-
-        output_group_edges = proto.Field(proto.BOOL, number=5)
-
-        analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6)
-
+        expand_groups = proto.Field(proto.BOOL, number=1,)
+        expand_roles = proto.Field(proto.BOOL, number=2,)
+        expand_resources = proto.Field(proto.BOOL, number=3,)
+        output_resource_edges = proto.Field(proto.BOOL, number=4,)
+        output_group_edges = proto.Field(proto.BOOL, number=5,)
+        analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6,)
         execution_timeout = proto.Field(
-            proto.MESSAGE, number=7, message=duration.Duration,
+            proto.MESSAGE, number=7, message=duration_pb2.Duration,
         )
 
     analysis_query = proto.Field(
-        proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+        proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
     )
-
     options = proto.Field(proto.MESSAGE, number=2, message=Options,)
 
 
@@ -243,10 +227,10 @@ class AnalyzeIamPolicyResponse(proto.Message):
     [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
 
     Attributes:
-        main_analysis (~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis):
+        main_analysis (google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse.IamPolicyAnalysis):
             The main analysis that matches the original
             request.
-        service_account_impersonation_analysis (Sequence[~.asset_service.AnalyzeIamPolicyResponse.IamPolicyAnalysis]):
+        service_account_impersonation_analysis (Sequence[google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse.IamPolicyAnalysis]):
             The service account impersonation analysis if
             [AnalyzeIamPolicyRequest.analyze_service_account_impersonation][]
             is enabled.
@@ -256,7 +240,7 @@ class AnalyzeIamPolicyResponse(proto.Message):
             and
             [service_account_impersonation_analysis][google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis]
             have been fully explored to answer the query in the request.
-        non_critical_errors (Sequence[~.assets.IamPolicyAnalysisResult.AnalysisState]):
+        non_critical_errors (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AnalysisState]):
             A list of non-critical errors happened during the request
             handling to explain why ``fully_explored`` is false, or
             empty if no error happened.
@@ -264,11 +248,10 @@ class AnalyzeIamPolicyResponse(proto.Message):
 
     class IamPolicyAnalysis(proto.Message):
         r"""An analysis message to group the query and results.
-
         Attributes:
-            analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+            analysis_query (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery):
                 The analysis query.
-            analysis_results (Sequence[~.assets.IamPolicyAnalysisResult]):
+            analysis_results (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult]):
                 A list of
                 [IamPolicyAnalysisResult][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult]
                 that matches the analysis query, or empty if no result is
@@ -280,23 +263,18 @@ class AnalyzeIamPolicyResponse(proto.Message):
         """
 
         analysis_query = proto.Field(
-            proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+            proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
         )
-
         analysis_results = proto.RepeatedField(
             proto.MESSAGE, number=2, message=assets.IamPolicyAnalysisResult,
         )
-
-        fully_explored = proto.Field(proto.BOOL, number=3)
+        fully_explored = proto.Field(proto.BOOL, number=3,)
 
     main_analysis = proto.Field(proto.MESSAGE, number=1, message=IamPolicyAnalysis,)
-
     service_account_impersonation_analysis = proto.RepeatedField(
         proto.MESSAGE, number=2, message=IamPolicyAnalysis,
     )
-
-    fully_explored = proto.Field(proto.BOOL, number=3)
-
+    fully_explored = proto.Field(proto.BOOL, number=3,)
     non_critical_errors = proto.RepeatedField(
         proto.MESSAGE, number=4, message=assets.IamPolicyAnalysisResult.AnalysisState,
     )
@@ -307,13 +285,12 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
     destination.
 
     Attributes:
-        gcs_destination (~.asset_service.IamPolicyAnalysisOutputConfig.GcsDestination):
+        gcs_destination (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig.GcsDestination):
             Destination on Cloud Storage.
     """
 
     class GcsDestination(proto.Message):
         r"""A Cloud Storage location.
-
         Attributes:
             uri (str):
                 Required. The uri of the Cloud Storage object. It's the same
@@ -324,7 +301,7 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
                 for more information.
         """
 
-        uri = proto.Field(proto.STRING, number=1)
+        uri = proto.Field(proto.STRING, number=1,)
 
     gcs_destination = proto.Field(
         proto.MESSAGE, number=1, oneof="destination", message=GcsDestination,
@@ -336,18 +313,17 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
     [AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
 
     Attributes:
-        analysis_query (~.asset_service.IamPolicyAnalysisQuery):
+        analysis_query (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery):
             Required. The request query.
-        options (~.asset_service.ExportIamPolicyAnalysisRequest.Options):
+        options (google.cloud.asset_v1p4beta1.types.ExportIamPolicyAnalysisRequest.Options):
             Optional. The request options.
-        output_config (~.asset_service.IamPolicyAnalysisOutputConfig):
+        output_config (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig):
             Required. Output configuration indicating
             where the results will be output to.
     """
 
     class Options(proto.Message):
         r"""Contains request options.
-
         Attributes:
             expand_groups (bool):
                 Optional. If true, the identities section of the result will
@@ -418,26 +394,19 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
                 Default is false.
         """
 
-        expand_groups = proto.Field(proto.BOOL, number=1)
-
-        expand_roles = proto.Field(proto.BOOL, number=2)
-
-        expand_resources = proto.Field(proto.BOOL, number=3)
-
-        output_resource_edges = proto.Field(proto.BOOL, number=4)
-
-        output_group_edges = proto.Field(proto.BOOL, number=5)
-
-        analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6)
+        expand_groups = proto.Field(proto.BOOL, number=1,)
+        expand_roles = proto.Field(proto.BOOL, number=2,)
+        expand_resources = proto.Field(proto.BOOL, number=3,)
+        output_resource_edges = proto.Field(proto.BOOL, number=4,)
+        output_group_edges = proto.Field(proto.BOOL, number=5,)
+        analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6,)
 
     analysis_query = proto.Field(
-        proto.MESSAGE, number=1, message=IamPolicyAnalysisQuery,
+        proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
     )
-
     options = proto.Field(proto.MESSAGE, number=2, message=Options,)
-
     output_config = proto.Field(
-        proto.MESSAGE, number=3, message=IamPolicyAnalysisOutputConfig,
+        proto.MESSAGE, number=3, message="IamPolicyAnalysisOutputConfig",
     )
 
 
@@ -447,13 +416,13 @@ class ExportIamPolicyAnalysisResponse(proto.Message):
     returned [google.longrunning.Operation.response][] field.
 
     Attributes:
-        output_config (~.asset_service.IamPolicyAnalysisOutputConfig):
+        output_config (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig):
             Output configuration indicating where the
             results were output to.
     """
 
     output_config = proto.Field(
-        proto.MESSAGE, number=1, message=IamPolicyAnalysisOutputConfig,
+        proto.MESSAGE, number=1, message="IamPolicyAnalysisOutputConfig",
     )
 
 

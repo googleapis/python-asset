@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,12 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
 import proto  # type: ignore
 
-
 from google.cloud.asset_v1p5beta1.types import assets as gca_assets
-from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
+from google.protobuf import timestamp_pb2  # type: ignore
 
 
 __protobuf__ = proto.module(
@@ -39,7 +36,6 @@ class ContentType(proto.Enum):
 
 class ListAssetsRequest(proto.Message):
     r"""ListAssets request.
-
     Attributes:
         parent (str):
             Required. Name of the organization or project the assets
@@ -47,7 +43,7 @@ class ListAssetsRequest(proto.Message):
             (such as "organizations/123"), "projects/[project-number]"
             (such as "projects/my-project-id"), or
             "projects/[project-id]" (such as "projects/12345").
-        read_time (~.timestamp.Timestamp):
+        read_time (google.protobuf.timestamp_pb2.Timestamp):
             Timestamp to take an asset snapshot. This can
             only be set to a timestamp between 2018-10-02
             UTC (inclusive) and the current time. If not
@@ -62,7 +58,7 @@ class ListAssetsRequest(proto.Message):
             Asset
             Inventory <https://cloud.google.com/resource-manager/docs/cloud-asset-inventory/overview>`__
             for all supported asset types.
-        content_type (~.asset_service.ContentType):
+        content_type (google.cloud.asset_v1p5beta1.types.ContentType):
             Asset content type. If not specified, no
             content but the asset name will be returned.
         page_size (int):
@@ -77,26 +73,20 @@ class ListAssetsRequest(proto.Message):
             of assets.
     """
 
-    parent = proto.Field(proto.STRING, number=1)
-
-    read_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
-
-    asset_types = proto.RepeatedField(proto.STRING, number=3)
-
+    parent = proto.Field(proto.STRING, number=1,)
+    read_time = proto.Field(proto.MESSAGE, number=2, message=timestamp_pb2.Timestamp,)
+    asset_types = proto.RepeatedField(proto.STRING, number=3,)
     content_type = proto.Field(proto.ENUM, number=4, enum="ContentType",)
-
-    page_size = proto.Field(proto.INT32, number=5)
-
-    page_token = proto.Field(proto.STRING, number=6)
+    page_size = proto.Field(proto.INT32, number=5,)
+    page_token = proto.Field(proto.STRING, number=6,)
 
 
 class ListAssetsResponse(proto.Message):
     r"""ListAssets response.
-
     Attributes:
-        read_time (~.timestamp.Timestamp):
+        read_time (google.protobuf.timestamp_pb2.Timestamp):
             Time the snapshot was taken.
-        assets (Sequence[~.gca_assets.Asset]):
+        assets (Sequence[google.cloud.asset_v1p5beta1.types.Asset]):
             Assets.
         next_page_token (str):
             Token to retrieve the next page of results.
@@ -107,11 +97,9 @@ class ListAssetsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    read_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
-
+    read_time = proto.Field(proto.MESSAGE, number=1, message=timestamp_pb2.Timestamp,)
     assets = proto.RepeatedField(proto.MESSAGE, number=2, message=gca_assets.Asset,)
-
-    next_page_token = proto.Field(proto.STRING, number=3)
+    next_page_token = proto.Field(proto.STRING, number=3,)
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

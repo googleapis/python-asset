@@ -1,4 +1,17 @@
 # -*- coding: utf-8 -*-
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 #
 # google-cloud-asset documentation build configuration file
 #
@@ -29,7 +42,7 @@ __version__ = ""
 # -- General configuration ------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-needs_sphinx = "1.6.3"
+needs_sphinx = "1.5.5"
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -39,6 +52,7 @@ extensions = [
     "sphinx.ext.autosummary",
     "sphinx.ext.intersphinx",
     "sphinx.ext.coverage",
+    "sphinx.ext.doctest",
     "sphinx.ext.napoleon",
     "sphinx.ext.todo",
     "sphinx.ext.viewcode",
@@ -62,13 +76,13 @@ source_suffix = [".rst", ".md"]
 # The encoding of source files.
 # source_encoding = 'utf-8-sig'
 
-# The master toctree document.
-master_doc = "index"
+# The root toctree document.
+root_doc = "index"
 
 # General information about the project.
-project = u"google-cloud-asset"
-copyright = u"2019, Google"
-author = u"Google APIs"
+project = "google-cloud-asset"
+copyright = "2019, Google"
+author = "Google APIs"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -96,6 +110,7 @@ language = None
 # directories to ignore when looking for source files.
 exclude_patterns = [
     "_build",
+    "**/.nox/**/*",
     "samples/AUTHORING_GUIDE.md",
     "samples/CONTRIBUTING.md",
     "samples/snippets/README.rst",
@@ -265,9 +280,9 @@ latex_elements = {
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
     (
-        master_doc,
+        root_doc,
         "google-cloud-asset.tex",
-        u"google-cloud-asset Documentation",
+        "google-cloud-asset Documentation",
         author,
         "manual",
     )
@@ -299,13 +314,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (
-        master_doc,
-        "google-cloud-asset",
-        u"google-cloud-asset Documentation",
-        [author],
-        1,
-    )
+    (root_doc, "google-cloud-asset", "google-cloud-asset Documentation", [author], 1,)
 ]
 
 # If true, show URL addresses after external links.
@@ -319,9 +328,9 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (
-        master_doc,
+        root_doc,
         "google-cloud-asset",
-        u"google-cloud-asset Documentation",
+        "google-cloud-asset Documentation",
         author,
         "google-cloud-asset",
         "google-cloud-asset Library",
@@ -344,10 +353,12 @@ texinfo_documents = [
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {
-    "python": ("http://python.readthedocs.org/en/latest/", None),
-    "google-auth": ("https://google-auth.readthedocs.io/en/stable", None),
+    "python": ("https://python.readthedocs.org/en/latest/", None),
+    "google-auth": ("https://googleapis.dev/python/google-auth/latest/", None),
     "google.api_core": ("https://googleapis.dev/python/google-api-core/latest/", None,),
-    "grpc": ("https://grpc.io/grpc/python/", None),
+    "grpc": ("https://grpc.github.io/grpc/python/", None),
+    "proto-plus": ("https://proto-plus-python.readthedocs.io/en/latest/", None),
+    "protobuf": ("https://googleapis.dev/python/protobuf/latest/", None),
 }
 
 

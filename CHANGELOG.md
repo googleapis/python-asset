@@ -4,6 +4,117 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+## [3.5.0](https://www.github.com/googleapis/python-asset/compare/v3.4.0...v3.5.0) (2021-09-03)
+
+
+### Features
+
+* add inventory_path ([#283](https://www.github.com/googleapis/python-asset/issues/283)) ([fbb47e6](https://www.github.com/googleapis/python-asset/commit/fbb47e6487fe454ca84d2415cf756a87bf66739f))
+* **v1:** Add content type Relationship to support relationship search ([038febe](https://www.github.com/googleapis/python-asset/commit/038febe4c21d6ece23872e01cffc1110c59d6699))
+* **v1:** add relationships ([#281](https://www.github.com/googleapis/python-asset/issues/281)) ([038febe](https://www.github.com/googleapis/python-asset/commit/038febe4c21d6ece23872e01cffc1110c59d6699))
+
+## [3.4.0](https://www.github.com/googleapis/python-asset/compare/v3.3.0...v3.4.0) (2021-08-17)
+
+
+### Features
+
+* Release of relationships in v1, Add content type Relationship to support relationship export  ([#262](https://www.github.com/googleapis/python-asset/issues/262)) ([93c92c1](https://www.github.com/googleapis/python-asset/commit/93c92c150581d22ff2f7b63d7591b3a97191ff20))
+
+## [3.3.0](https://www.github.com/googleapis/python-asset/compare/v3.2.1...v3.3.0) (2021-07-28)
+
+
+### Features
+
+* Add AnalyzeMove API ([a242adc](https://www.github.com/googleapis/python-asset/commit/a242adc8864724acb2d12136bb09d68cb7fc729c))
+* Add AttachedResource field for ResourceSearchResult ([a242adc](https://www.github.com/googleapis/python-asset/commit/a242adc8864724acb2d12136bb09d68cb7fc729c))
+* Add read_mask field for SearchAllResourcesRequest ([a242adc](https://www.github.com/googleapis/python-asset/commit/a242adc8864724acb2d12136bb09d68cb7fc729c))
+* Add VersionedResource field for ResourceSearchResult ([a242adc](https://www.github.com/googleapis/python-asset/commit/a242adc8864724acb2d12136bb09d68cb7fc729c))
+* Change metadata field for the AnalyzeIamPolicyLongrunning ([#245](https://www.github.com/googleapis/python-asset/issues/245)) ([a242adc](https://www.github.com/googleapis/python-asset/commit/a242adc8864724acb2d12136bb09d68cb7fc729c))
+
+
+### Bug Fixes
+
+* enable self signed jwt for grpc ([#244](https://www.github.com/googleapis/python-asset/issues/244)) ([a15e185](https://www.github.com/googleapis/python-asset/commit/a15e18574ce4d58a22955284ebfe444c152b30c7))
+
+
+### Documentation
+
+* add Samples section to CONTRIBUTING.rst ([#235](https://www.github.com/googleapis/python-asset/issues/235)) ([0d00e75](https://www.github.com/googleapis/python-asset/commit/0d00e75bf46d52beea0829b83a2df580a37491ca))
+
+
+### [3.2.1](https://www.github.com/googleapis/python-asset/compare/v3.2.0...v3.2.1) (2021-07-21)
+
+
+### Bug Fixes
+
+* **deps:** pin 'google-{api,cloud}-core', 'google-auth' to allow 2.x versions ([#234](https://www.github.com/googleapis/python-asset/issues/234)) ([0687c84](https://www.github.com/googleapis/python-asset/commit/0687c843a2bca03ddd4671dfe2b40863dbba3fee))
+
+## [3.2.0](https://www.github.com/googleapis/python-asset/compare/v3.1.0...v3.2.0) (2021-07-12)
+
+
+### Features
+
+* add always_use_jwt_access ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+* add new searchable fields (memberTypes, roles, project, folders and organization) in SearchAllIamPolicies ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+* new request fields (assetTypes and orderBy) in SearchAllIamPolicies ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+* new response fields (assetType, folders and organization) in SearchAllIamPolicies ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+
+
+### Bug Fixes
+
+* disable always_use_jwt_access ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+* disable always_use_jwt_access ([#217](https://www.github.com/googleapis/python-asset/issues/217)) ([0a14f25](https://www.github.com/googleapis/python-asset/commit/0a14f25784a5d39b666709c2dc6521f014eea781))
+
+
+### Documentation
+
+* omit mention of Python 2.7 in 'CONTRIBUTING.rst' ([#1127](https://www.github.com/googleapis/python-asset/issues/1127)) ([#205](https://www.github.com/googleapis/python-asset/issues/205)) ([b9db51a](https://www.github.com/googleapis/python-asset/commit/b9db51a1e88615ab2da22da188d59987fcfca5d4)), closes [#1126](https://www.github.com/googleapis/python-asset/issues/1126)
+
+## [3.1.0](https://www.github.com/googleapis/python-asset/compare/v3.0.0...v3.1.0) (2021-06-07)
+
+
+### Features
+
+* add `from_service_account_info` ([34278bf](https://www.github.com/googleapis/python-asset/commit/34278bf526384296e95196f755ab983c4efeca62))
+* add Cloud Asset List API, add access time as condition context in request and evaluation value in response for Cloud Asset AnalyzeIamPolicy API, add more info (folders, organizations, kms_key, create_time, update_time, state, parent_full_resource_name, parent_asset_type) in response for Cloud Asset SearchAllResources API ([#196](https://www.github.com/googleapis/python-asset/issues/196)) ([69ecd23](https://www.github.com/googleapis/python-asset/commit/69ecd237ade97257c92ba8bbe6dd7a5eca83288f))
+* support self-signed JWT flow for service accounts ([d0b9b21](https://www.github.com/googleapis/python-asset/commit/d0b9b21300eb9ad233cd8f7e0c73941bebc5fe46))
+
+
+### Bug Fixes
+
+* add async client to %name_%version/init.py ([d0b9b21](https://www.github.com/googleapis/python-asset/commit/d0b9b21300eb9ad233cd8f7e0c73941bebc5fe46))
+* remove v1beta1 ([#127](https://www.github.com/googleapis/python-asset/issues/127)) ([dab2d53](https://www.github.com/googleapis/python-asset/commit/dab2d539a1c89c0a5f09df4c4cab4d86f1a4ab08))
+* use correct retry deadlines ([#164](https://www.github.com/googleapis/python-asset/issues/164)) ([34278bf](https://www.github.com/googleapis/python-asset/commit/34278bf526384296e95196f755ab983c4efeca62))
+
+
+### Documentation
+
+* **python:** fix intersphinx link for google-auth ([#119](https://www.github.com/googleapis/python-asset/issues/119)) ([e455c9e](https://www.github.com/googleapis/python-asset/commit/e455c9e52641cd9f13440d342c9eeb931135889c))
+
+## [2.2.0](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v2.2.0) (2020-11-19)
+
+
+### Features
+
+* add AnalyzeIamPolicy and ExportIamPolicyAnalysis; support OSInventory; add common resource helper methods; expose client transport ([#113](https://www.github.com/googleapis/python-asset/issues/113)) ([3bf4c0a](https://www.github.com/googleapis/python-asset/commit/3bf4c0ab20346e3a12af168e20139f2cc067540a))
+
+
+### Documentation
+
+* remove note on editable installs ([#99](https://www.github.com/googleapis/python-asset/issues/99)) ([cf6072a](https://www.github.com/googleapis/python-asset/commit/cf6072a09b76dce78bd4c0c471c8c2d81186e0c6))
+
+## [2.1.0](https://www.github.com/googleapis/python-asset/compare/v2.0.0...v2.1.0) (2020-09-25)
+
+
+### Features
+
+* add support for per type and partition export ([#86](https://www.github.com/googleapis/python-asset/issues/86)) ([cd26192](https://www.github.com/googleapis/python-asset/commit/cd2619262bbea00c01d054b783b218009171284e))
+
+
+### Bug Fixes
+
+* **sample:** mark a test with flaky ([#81](https://www.github.com/googleapis/python-asset/issues/81)) ([aa153dc](https://www.github.com/googleapis/python-asset/commit/aa153dce2f62c18101472c40964cc3cee9188d78)), closes [#75](https://www.github.com/googleapis/python-asset/issues/75)
+
 ## [2.0.0](https://www.github.com/googleapis/python-asset/compare/v1.3.0...v2.0.0) (2020-08-05)
 
 

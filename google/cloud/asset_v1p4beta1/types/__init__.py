@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 # Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-from .assets import IamPolicyAnalysisResult
 from .asset_service import (
-    IamPolicyAnalysisQuery,
     AnalyzeIamPolicyRequest,
     AnalyzeIamPolicyResponse,
-    IamPolicyAnalysisOutputConfig,
     ExportIamPolicyAnalysisRequest,
     ExportIamPolicyAnalysisResponse,
+    IamPolicyAnalysisOutputConfig,
+    IamPolicyAnalysisQuery,
 )
-
+from .assets import IamPolicyAnalysisResult
 
 __all__ = (
-    "IamPolicyAnalysisResult",
-    "IamPolicyAnalysisQuery",
     "AnalyzeIamPolicyRequest",
     "AnalyzeIamPolicyResponse",
-    "IamPolicyAnalysisOutputConfig",
     "ExportIamPolicyAnalysisRequest",
     "ExportIamPolicyAnalysisResponse",
+    "IamPolicyAnalysisOutputConfig",
+    "IamPolicyAnalysisQuery",
+    "IamPolicyAnalysisResult",
 )
