@@ -63,9 +63,10 @@ if __name__ == "__main__":
         help="Num of assets in one page, which must be between 1 and 1000 "
         "(both inclusively)",
     )
+    parser.add_argument("content_type", help="Content type to list")
 
     args = parser.parse_args()
 
     asset_type_list = args.asset_types.split(",")
 
-    list_assets(args.project_id, asset_type_list, int(args.page_size))
+    list_assets(args.project_id, asset_type_list, int(args.page_size), args.content_type)
