@@ -88,7 +88,7 @@ setuptools.setup(
     packages=packages,
     namespace_packages=namespaces,
     install_requires=dependencies,
-    extras_requires=extras,
+    extras_require=extras,
     python_requires=">=3.6",
     scripts=[
         "scripts/fixup_asset_v1_keywords.py",
