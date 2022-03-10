@@ -28,7 +28,7 @@ version = "1.3.0"
 # 'Development Status :: 5 - Production/Stable'
 release_status = "Development Status :: 5 - Production/Stable"
 dependencies = [
-    "google-api-core[grpc] >= 1.14.0, < 2.0.0dev",
+    "google-api-core[grpc] >= 1.31.5, <3.0.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0",
     'enum34; python_version < "3.4"',
     "grpc-google-iam-v1 >= 0.12.3, < 0.13dev",
     "google-cloud-access-context-manager >= 0.1.2, < 0.2.0dev",
