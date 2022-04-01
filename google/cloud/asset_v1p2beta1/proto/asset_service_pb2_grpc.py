@@ -9,8 +9,7 @@ from google.protobuf import empty_pb2 as google_dot_protobuf_dot_empty__pb2
 
 
 class AssetServiceStub(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def __init__(self, channel):
         """Constructor.
@@ -46,8 +45,7 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def CreateFeed(self, request, context):
         """Creates a feed in a parent project/folder/organization to listen to its
@@ -58,29 +56,25 @@ class AssetServiceServicer(object):
         raise NotImplementedError("Method not implemented!")
 
     def GetFeed(self, request, context):
-        """Gets details about an asset feed.
-        """
+        """Gets details about an asset feed."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def ListFeeds(self, request, context):
-        """Lists all asset feeds in a parent project/folder/organization.
-        """
+        """Lists all asset feeds in a parent project/folder/organization."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def UpdateFeed(self, request, context):
-        """Updates an asset feed configuration.
-        """
+        """Updates an asset feed configuration."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
 
     def DeleteFeed(self, request, context):
-        """Deletes an asset feed.
-        """
+        """Deletes an asset feed."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")
@@ -122,8 +116,7 @@ def add_AssetServiceServicer_to_server(servicer, server):
 
 # This class is part of an EXPERIMENTAL API.
 class AssetService(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     @staticmethod
     def CreateFeed(

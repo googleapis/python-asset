@@ -270,7 +270,9 @@ _STANDARDRESOURCEMETADATA = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_STANDARDRESOURCEMETADATA_LABELSENTRY,],
+    nested_types=[
+        _STANDARDRESOURCEMETADATA_LABELSENTRY,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -370,7 +372,9 @@ _IAMPOLICYSEARCHRESULT_EXPLANATION = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_IAMPOLICYSEARCHRESULT_EXPLANATION_MATCHEDPERMISSIONSENTRY,],
+    nested_types=[
+        _IAMPOLICYSEARCHRESULT_EXPLANATION_MATCHEDPERMISSIONSENTRY,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -467,7 +471,9 @@ _IAMPOLICYSEARCHRESULT = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_IAMPOLICYSEARCHRESULT_EXPLANATION,],
+    nested_types=[
+        _IAMPOLICYSEARCHRESULT_EXPLANATION,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,

@@ -487,7 +487,9 @@ _ANALYZEIAMPOLICYREQUEST = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_ANALYZEIAMPOLICYREQUEST_OPTIONS,],
+    nested_types=[
+        _ANALYZEIAMPOLICYREQUEST_OPTIONS,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -663,7 +665,9 @@ _ANALYZEIAMPOLICYRESPONSE = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS,],
+    nested_types=[
+        _ANALYZEIAMPOLICYRESPONSE_IAMPOLICYANALYSIS,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -744,7 +748,9 @@ _IAMPOLICYANALYSISOUTPUTCONFIG = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION,],
+    nested_types=[
+        _IAMPOLICYANALYSISOUTPUTCONFIG_GCSDESTINATION,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -967,7 +973,9 @@ _EXPORTIAMPOLICYANALYSISREQUEST = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS,],
+    nested_types=[
+        _EXPORTIAMPOLICYANALYSISREQUEST_OPTIONS,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,

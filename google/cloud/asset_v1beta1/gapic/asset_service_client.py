@@ -40,7 +40,9 @@ from google.longrunning import operations_pb2
 from google.protobuf import timestamp_pb2
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-asset",).version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    "google-cloud-asset",
+).version
 
 
 class AssetServiceClient(object):
@@ -167,7 +169,9 @@ class AssetServiceClient(object):
                 self.transport = transport
         else:
             self.transport = asset_service_grpc_transport.AssetServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials,
+                address=api_endpoint,
+                channel=channel,
+                credentials=credentials,
             )
 
         if client_info is None:

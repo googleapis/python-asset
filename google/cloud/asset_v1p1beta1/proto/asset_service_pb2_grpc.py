@@ -8,8 +8,7 @@ from google.cloud.asset_v1p1beta1.proto import (
 
 
 class AssetServiceStub(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def __init__(self, channel):
         """Constructor.
@@ -30,8 +29,7 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def SearchAllResources(self, request, context):
         """Searches all the resources under a given accessible CRM scope
@@ -79,8 +77,7 @@ def add_AssetServiceServicer_to_server(servicer, server):
 
 # This class is part of an EXPERIMENTAL API.
 class AssetService(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     @staticmethod
     def SearchAllResources(
