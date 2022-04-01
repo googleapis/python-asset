@@ -7,15 +7,14 @@ from google.cloud.asset_v1p5beta1.proto import (
 
 
 class AssetServiceStub(object):
-    """Asset service definition.
-  """
+    """Asset service definition."""
 
     def __init__(self, channel):
         """Constructor.
 
-    Args:
-      channel: A grpc.Channel.
-    """
+        Args:
+          channel: A grpc.Channel.
+        """
         self.ListAssets = channel.unary_unary(
             "/google.cloud.asset.v1p5beta1.AssetService/ListAssets",
             request_serializer=google_dot_cloud_dot_asset__v1p5beta1_dot_proto_dot_asset__service__pb2.ListAssetsRequest.SerializeToString,
@@ -24,13 +23,12 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-    """Asset service definition.
-  """
+    """Asset service definition."""
 
     def ListAssets(self, request, context):
         """Lists assets with time and resource types and returns paged results in
-    response.
-    """
+        response.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details("Method not implemented!")
         raise NotImplementedError("Method not implemented!")

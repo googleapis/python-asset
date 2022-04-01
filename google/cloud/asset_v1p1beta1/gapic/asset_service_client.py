@@ -36,7 +36,9 @@ from google.cloud.asset_v1p1beta1.proto import asset_service_pb2
 from google.cloud.asset_v1p1beta1.proto import asset_service_pb2_grpc
 
 
-_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution("google-cloud-asset",).version
+_GAPIC_LIBRARY_VERSION = pkg_resources.get_distribution(
+    "google-cloud-asset",
+).version
 
 
 class AssetServiceClient(object):
@@ -156,7 +158,9 @@ class AssetServiceClient(object):
                 self.transport = transport
         else:
             self.transport = asset_service_grpc_transport.AssetServiceGrpcTransport(
-                address=api_endpoint, channel=channel, credentials=credentials,
+                address=api_endpoint,
+                channel=channel,
+                credentials=credentials,
             )
 
         if client_info is None:
@@ -401,7 +405,9 @@ class AssetServiceClient(object):
             )
 
         request = asset_service_pb2.SearchAllIamPoliciesRequest(
-            scope=scope, query=query, page_size=page_size,
+            scope=scope,
+            query=query,
+            page_size=page_size,
         )
         if metadata is None:
             metadata = []

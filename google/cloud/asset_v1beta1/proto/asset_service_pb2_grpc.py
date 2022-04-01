@@ -11,8 +11,7 @@ from google.longrunning import (
 
 
 class AssetServiceStub(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def __init__(self, channel):
         """Constructor.
@@ -33,8 +32,7 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def ExportAssets(self, request, context):
         """Exports assets with time and resource types to a given Cloud Storage
@@ -82,8 +80,7 @@ def add_AssetServiceServicer_to_server(servicer, server):
 
 # This class is part of an EXPERIMENTAL API.
 class AssetService(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     @staticmethod
     def ExportAssets(

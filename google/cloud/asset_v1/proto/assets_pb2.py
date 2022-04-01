@@ -218,7 +218,9 @@ _TEMPORALASSET = _descriptor.Descriptor(
     ],
     extensions=[],
     nested_types=[],
-    enum_types=[_TEMPORALASSET_PRIORASSETSTATE,],
+    enum_types=[
+        _TEMPORALASSET_PRIORASSETSTATE,
+    ],
     serialized_options=None,
     is_extendable=False,
     syntax="proto3",
@@ -905,7 +907,9 @@ _RESOURCESEARCHRESULT = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_RESOURCESEARCHRESULT_LABELSENTRY,],
+    nested_types=[
+        _RESOURCESEARCHRESULT_LABELSENTRY,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,
@@ -1145,7 +1149,9 @@ _IAMPOLICYSEARCHRESULT = _descriptor.Descriptor(
         ),
     ],
     extensions=[],
-    nested_types=[_IAMPOLICYSEARCHRESULT_EXPLANATION,],
+    nested_types=[
+        _IAMPOLICYSEARCHRESULT_EXPLANATION,
+    ],
     enum_types=[],
     serialized_options=None,
     is_extendable=False,

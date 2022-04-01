@@ -11,8 +11,7 @@ from google.longrunning import (
 
 
 class AssetServiceStub(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def __init__(self, channel):
         """Constructor.
@@ -33,8 +32,7 @@ class AssetServiceStub(object):
 
 
 class AssetServiceServicer(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     def AnalyzeIamPolicy(self, request, context):
         """Analyzes IAM policies based on the specified request. Returns
@@ -76,8 +74,7 @@ def add_AssetServiceServicer_to_server(servicer, server):
 
 # This class is part of an EXPERIMENTAL API.
 class AssetService(object):
-    """Asset service definition.
-    """
+    """Asset service definition."""
 
     @staticmethod
     def AnalyzeIamPolicy(
