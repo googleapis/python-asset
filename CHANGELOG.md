@@ -4,6 +4,13 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+### [2.2.1](https://github.com/googleapis/python-asset/compare/v2.2.0...v2.2.1) (2022-04-04)
+
+
+### Bug Fixes
+
+* **deps:** require google-api-core >= 1.31.5, >= 2.3.2 on v2 release ([#386](https://github.com/googleapis/python-asset/issues/386)) ([07dccc8](https://github.com/googleapis/python-asset/commit/07dccc8902594d969acc76370327b782fee06132))
+
 ## [2.2.0](https://www.github.com/googleapis/python-asset/compare/v2.1.0...v2.2.0) (2020-11-19)
 
 
