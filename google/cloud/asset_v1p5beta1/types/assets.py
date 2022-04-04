@@ -27,7 +27,11 @@ from google.protobuf import struct_pb2 as struct  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.asset.v1p5beta1", manifest={"Asset", "Resource",},
+    package="google.cloud.asset.v1p5beta1",
+    manifest={
+        "Asset",
+        "Resource",
+    },
 )
 
 
@@ -78,11 +82,23 @@ class Asset(proto.Message):
 
     asset_type = proto.Field(proto.STRING, number=2)
 
-    resource = proto.Field(proto.MESSAGE, number=3, message="Resource",)
+    resource = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Resource",
+    )
 
-    iam_policy = proto.Field(proto.MESSAGE, number=4, message=policy.Policy,)
+    iam_policy = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=policy.Policy,
+    )
 
-    org_policy = proto.RepeatedField(proto.MESSAGE, number=6, message=orgpolicy.Policy,)
+    org_policy = proto.RepeatedField(
+        proto.MESSAGE,
+        number=6,
+        message=orgpolicy.Policy,
+    )
 
     access_policy = proto.Field(
         proto.MESSAGE,
@@ -161,7 +177,11 @@ class Resource(proto.Message):
 
     parent = proto.Field(proto.STRING, number=5)
 
-    data = proto.Field(proto.MESSAGE, number=6, message=struct.Struct,)
+    data = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message=struct.Struct,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))

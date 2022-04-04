@@ -24,7 +24,11 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.cloud.asset.v1p5beta1",
-    manifest={"ContentType", "ListAssetsRequest", "ListAssetsResponse",},
+    manifest={
+        "ContentType",
+        "ListAssetsRequest",
+        "ListAssetsResponse",
+    },
 )
 
 
@@ -79,11 +83,19 @@ class ListAssetsRequest(proto.Message):
 
     parent = proto.Field(proto.STRING, number=1)
 
-    read_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    read_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp.Timestamp,
+    )
 
     asset_types = proto.RepeatedField(proto.STRING, number=3)
 
-    content_type = proto.Field(proto.ENUM, number=4, enum="ContentType",)
+    content_type = proto.Field(
+        proto.ENUM,
+        number=4,
+        enum="ContentType",
+    )
 
     page_size = proto.Field(proto.INT32, number=5)
 
@@ -107,9 +119,17 @@ class ListAssetsResponse(proto.Message):
     def raw_page(self):
         return self
 
-    read_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+    read_time = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=timestamp.Timestamp,
+    )
 
-    assets = proto.RepeatedField(proto.MESSAGE, number=2, message=gca_assets.Asset,)
+    assets = proto.RepeatedField(
+        proto.MESSAGE,
+        number=2,
+        message=gca_assets.Asset,
+    )
 
     next_page_token = proto.Field(proto.STRING, number=3)
 

@@ -105,7 +105,9 @@ class SearchAllResourcesResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=assets.StandardResourceMetadata,
+        proto.MESSAGE,
+        number=1,
+        message=assets.StandardResourceMetadata,
     )
 
     next_page_token = proto.Field(proto.STRING, number=2)
@@ -173,7 +175,9 @@ class SearchAllIamPoliciesResponse(proto.Message):
         return self
 
     results = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=assets.IamPolicySearchResult,
+        proto.MESSAGE,
+        number=1,
+        message=assets.IamPolicySearchResult,
     )
 
     next_page_token = proto.Field(proto.STRING, number=2)

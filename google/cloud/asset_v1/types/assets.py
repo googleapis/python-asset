@@ -73,15 +73,31 @@ class TemporalAsset(proto.Message):
         DOES_NOT_EXIST = 3
         DELETED = 4
 
-    window = proto.Field(proto.MESSAGE, number=1, message="TimeWindow",)
+    window = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="TimeWindow",
+    )
 
     deleted = proto.Field(proto.BOOL, number=2)
 
-    asset = proto.Field(proto.MESSAGE, number=3, message="Asset",)
+    asset = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Asset",
+    )
 
-    prior_asset_state = proto.Field(proto.ENUM, number=4, enum=PriorAssetState,)
+    prior_asset_state = proto.Field(
+        proto.ENUM,
+        number=4,
+        enum=PriorAssetState,
+    )
 
-    prior_asset = proto.Field(proto.MESSAGE, number=5, message="Asset",)
+    prior_asset = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message="Asset",
+    )
 
 
 class TimeWindow(proto.Message):
@@ -96,9 +112,17 @@ class TimeWindow(proto.Message):
             instead.
     """
 
-    start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+    start_time = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=timestamp.Timestamp,
+    )
 
-    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    end_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp.Timestamp,
+    )
 
 
 class Asset(proto.Message):
@@ -175,17 +199,33 @@ class Asset(proto.Message):
             ``["projects/123456789", "folders/5432", "organizations/1234"]``
     """
 
-    update_time = proto.Field(proto.MESSAGE, number=11, message=timestamp.Timestamp,)
+    update_time = proto.Field(
+        proto.MESSAGE,
+        number=11,
+        message=timestamp.Timestamp,
+    )
 
     name = proto.Field(proto.STRING, number=1)
 
     asset_type = proto.Field(proto.STRING, number=2)
 
-    resource = proto.Field(proto.MESSAGE, number=3, message="Resource",)
+    resource = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Resource",
+    )
 
-    iam_policy = proto.Field(proto.MESSAGE, number=4, message=gi_policy.Policy,)
+    iam_policy = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=gi_policy.Policy,
+    )
 
-    org_policy = proto.RepeatedField(proto.MESSAGE, number=6, message=orgpolicy.Policy,)
+    org_policy = proto.RepeatedField(
+        proto.MESSAGE,
+        number=6,
+        message=orgpolicy.Policy,
+    )
 
     access_policy = proto.Field(
         proto.MESSAGE,
@@ -208,7 +248,11 @@ class Asset(proto.Message):
         message=gia_service_perimeter.ServicePerimeter,
     )
 
-    os_inventory = proto.Field(proto.MESSAGE, number=12, message=Inventory,)
+    os_inventory = proto.Field(
+        proto.MESSAGE,
+        number=12,
+        message=Inventory,
+    )
 
     ancestors = proto.RepeatedField(proto.STRING, number=10)
 
@@ -272,7 +316,11 @@ class Resource(proto.Message):
 
     parent = proto.Field(proto.STRING, number=5)
 
-    data = proto.Field(proto.MESSAGE, number=6, message=struct.Struct,)
+    data = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message=struct.Struct,
+    )
 
     location = proto.Field(proto.STRING, number=8)
 
@@ -401,7 +449,11 @@ class ResourceSearchResult(proto.Message):
 
     network_tags = proto.RepeatedField(proto.STRING, number=8)
 
-    additional_attributes = proto.Field(proto.MESSAGE, number=9, message=struct.Struct,)
+    additional_attributes = proto.Field(
+        proto.MESSAGE,
+        number=9,
+        message=struct.Struct,
+    )
 
 
 class IamPolicySearchResult(proto.Message):
@@ -496,9 +548,17 @@ class IamPolicySearchResult(proto.Message):
 
     project = proto.Field(proto.STRING, number=2)
 
-    policy = proto.Field(proto.MESSAGE, number=3, message=gi_policy.Policy,)
+    policy = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=gi_policy.Policy,
+    )
 
-    explanation = proto.Field(proto.MESSAGE, number=4, message=Explanation,)
+    explanation = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=Explanation,
+    )
 
 
 class IamPolicyAnalysisState(proto.Message):
@@ -521,7 +581,11 @@ class IamPolicyAnalysisState(proto.Message):
             of failure.
     """
 
-    code = proto.Field(proto.ENUM, number=1, enum=gr_code.Code,)
+    code = proto.Field(
+        proto.ENUM,
+        number=1,
+        enum=gr_code.Code,
+    )
 
     cause = proto.Field(proto.STRING, number=2)
 
@@ -569,7 +633,9 @@ class IamPolicyAnalysisResult(proto.Message):
         full_resource_name = proto.Field(proto.STRING, number=1)
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisState",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisState",
         )
 
     class Access(proto.Message):
@@ -589,7 +655,9 @@ class IamPolicyAnalysisResult(proto.Message):
         permission = proto.Field(proto.STRING, number=2, oneof="oneof_access")
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=3, message="IamPolicyAnalysisState",
+            proto.MESSAGE,
+            number=3,
+            message="IamPolicyAnalysisState",
         )
 
     class Identity(proto.Message):
@@ -616,7 +684,9 @@ class IamPolicyAnalysisResult(proto.Message):
         name = proto.Field(proto.STRING, number=1)
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisState",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisState",
         )
 
     class Edge(proto.Message):
@@ -682,15 +752,21 @@ class IamPolicyAnalysisResult(proto.Message):
         """
 
         resources = proto.RepeatedField(
-            proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Resource",
+            proto.MESSAGE,
+            number=1,
+            message="IamPolicyAnalysisResult.Resource",
         )
 
         accesses = proto.RepeatedField(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Access",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.Access",
         )
 
         resource_edges = proto.RepeatedField(
-            proto.MESSAGE, number=3, message="IamPolicyAnalysisResult.Edge",
+            proto.MESSAGE,
+            number=3,
+            message="IamPolicyAnalysisResult.Edge",
         )
 
     class IdentityList(proto.Message):
@@ -719,22 +795,36 @@ class IamPolicyAnalysisResult(proto.Message):
         """
 
         identities = proto.RepeatedField(
-            proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Identity",
+            proto.MESSAGE,
+            number=1,
+            message="IamPolicyAnalysisResult.Identity",
         )
 
         group_edges = proto.RepeatedField(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Edge",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.Edge",
         )
 
     attached_resource_full_name = proto.Field(proto.STRING, number=1)
 
-    iam_binding = proto.Field(proto.MESSAGE, number=2, message=gi_policy.Binding,)
-
-    access_control_lists = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=AccessControlList,
+    iam_binding = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=gi_policy.Binding,
     )
 
-    identity_list = proto.Field(proto.MESSAGE, number=4, message=IdentityList,)
+    access_control_lists = proto.RepeatedField(
+        proto.MESSAGE,
+        number=3,
+        message=AccessControlList,
+    )
+
+    identity_list = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=IdentityList,
+    )
 
     fully_explored = proto.Field(proto.BOOL, number=5)
 

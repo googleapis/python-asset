@@ -79,13 +79,25 @@ class ExportAssetsRequest(proto.Message):
 
     parent = proto.Field(proto.STRING, number=1)
 
-    read_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    read_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp.Timestamp,
+    )
 
     asset_types = proto.RepeatedField(proto.STRING, number=3)
 
-    content_type = proto.Field(proto.ENUM, number=4, enum="ContentType",)
+    content_type = proto.Field(
+        proto.ENUM,
+        number=4,
+        enum="ContentType",
+    )
 
-    output_config = proto.Field(proto.MESSAGE, number=5, message="OutputConfig",)
+    output_config = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message="OutputConfig",
+    )
 
 
 class ExportAssetsResponse(proto.Message):
@@ -104,9 +116,17 @@ class ExportAssetsResponse(proto.Message):
             format.
     """
 
-    read_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+    read_time = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=timestamp.Timestamp,
+    )
 
-    output_config = proto.Field(proto.MESSAGE, number=2, message="OutputConfig",)
+    output_config = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message="OutputConfig",
+    )
 
 
 class BatchGetAssetsHistoryRequest(proto.Message):
@@ -145,10 +165,16 @@ class BatchGetAssetsHistoryRequest(proto.Message):
 
     asset_names = proto.RepeatedField(proto.STRING, number=2)
 
-    content_type = proto.Field(proto.ENUM, number=3, enum="ContentType",)
+    content_type = proto.Field(
+        proto.ENUM,
+        number=3,
+        enum="ContentType",
+    )
 
     read_time_window = proto.Field(
-        proto.MESSAGE, number=4, message=gca_assets.TimeWindow,
+        proto.MESSAGE,
+        number=4,
+        message=gca_assets.TimeWindow,
     )
 
 
@@ -161,7 +187,9 @@ class BatchGetAssetsHistoryResponse(proto.Message):
     """
 
     assets = proto.RepeatedField(
-        proto.MESSAGE, number=1, message=gca_assets.TemporalAsset,
+        proto.MESSAGE,
+        number=1,
+        message=gca_assets.TemporalAsset,
     )
 
 
@@ -174,7 +202,10 @@ class OutputConfig(proto.Message):
     """
 
     gcs_destination = proto.Field(
-        proto.MESSAGE, number=1, oneof="destination", message="GcsDestination",
+        proto.MESSAGE,
+        number=1,
+        oneof="destination",
+        message="GcsDestination",
     )
 
 

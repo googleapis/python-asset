@@ -23,7 +23,10 @@ from google.rpc import code_pb2 as gr_code  # type: ignore
 
 
 __protobuf__ = proto.module(
-    package="google.cloud.asset.v1p4beta1", manifest={"IamPolicyAnalysisResult",},
+    package="google.cloud.asset.v1p4beta1",
+    manifest={
+        "IamPolicyAnalysisResult",
+    },
 )
 
 
@@ -74,7 +77,11 @@ class IamPolicyAnalysisResult(proto.Message):
                 of failure.
         """
 
-        code = proto.Field(proto.ENUM, number=1, enum=gr_code.Code,)
+        code = proto.Field(
+            proto.ENUM,
+            number=1,
+            enum=gr_code.Code,
+        )
 
         cause = proto.Field(proto.STRING, number=2)
 
@@ -92,7 +99,9 @@ class IamPolicyAnalysisResult(proto.Message):
         full_resource_name = proto.Field(proto.STRING, number=1)
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.AnalysisState",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.AnalysisState",
         )
 
     class Access(proto.Message):
@@ -112,7 +121,9 @@ class IamPolicyAnalysisResult(proto.Message):
         permission = proto.Field(proto.STRING, number=2, oneof="oneof_access")
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=3, message="IamPolicyAnalysisResult.AnalysisState",
+            proto.MESSAGE,
+            number=3,
+            message="IamPolicyAnalysisResult.AnalysisState",
         )
 
     class Edge(proto.Message):
@@ -153,7 +164,9 @@ class IamPolicyAnalysisResult(proto.Message):
         name = proto.Field(proto.STRING, number=1)
 
         analysis_state = proto.Field(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.AnalysisState",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.AnalysisState",
         )
 
     class AccessControlList(proto.Message):
@@ -201,15 +214,21 @@ class IamPolicyAnalysisResult(proto.Message):
         """
 
         resources = proto.RepeatedField(
-            proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Resource",
+            proto.MESSAGE,
+            number=1,
+            message="IamPolicyAnalysisResult.Resource",
         )
 
         accesses = proto.RepeatedField(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Access",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.Access",
         )
 
         resource_edges = proto.RepeatedField(
-            proto.MESSAGE, number=3, message="IamPolicyAnalysisResult.Edge",
+            proto.MESSAGE,
+            number=3,
+            message="IamPolicyAnalysisResult.Edge",
         )
 
     class IdentityList(proto.Message):
@@ -238,22 +257,36 @@ class IamPolicyAnalysisResult(proto.Message):
         """
 
         identities = proto.RepeatedField(
-            proto.MESSAGE, number=1, message="IamPolicyAnalysisResult.Identity",
+            proto.MESSAGE,
+            number=1,
+            message="IamPolicyAnalysisResult.Identity",
         )
 
         group_edges = proto.RepeatedField(
-            proto.MESSAGE, number=2, message="IamPolicyAnalysisResult.Edge",
+            proto.MESSAGE,
+            number=2,
+            message="IamPolicyAnalysisResult.Edge",
         )
 
     attached_resource_full_name = proto.Field(proto.STRING, number=1)
 
-    iam_binding = proto.Field(proto.MESSAGE, number=2, message=policy.Binding,)
-
-    access_control_lists = proto.RepeatedField(
-        proto.MESSAGE, number=3, message=AccessControlList,
+    iam_binding = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=policy.Binding,
     )
 
-    identity_list = proto.Field(proto.MESSAGE, number=4, message=IdentityList,)
+    access_control_lists = proto.RepeatedField(
+        proto.MESSAGE,
+        number=3,
+        message=AccessControlList,
+    )
+
+    identity_list = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=IdentityList,
+    )
 
     fully_explored = proto.Field(proto.BOOL, number=5)
 

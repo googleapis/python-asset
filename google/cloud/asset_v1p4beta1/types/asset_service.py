@@ -110,11 +110,23 @@ class IamPolicyAnalysisQuery(proto.Message):
 
     parent = proto.Field(proto.STRING, number=1)
 
-    resource_selector = proto.Field(proto.MESSAGE, number=2, message=ResourceSelector,)
+    resource_selector = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=ResourceSelector,
+    )
 
-    identity_selector = proto.Field(proto.MESSAGE, number=3, message=IdentitySelector,)
+    identity_selector = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message=IdentitySelector,
+    )
 
-    access_selector = proto.Field(proto.MESSAGE, number=4, message=AccessSelector,)
+    access_selector = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=AccessSelector,
+    )
 
 
 class AnalyzeIamPolicyRequest(proto.Message):
@@ -228,14 +240,22 @@ class AnalyzeIamPolicyRequest(proto.Message):
         analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6)
 
         execution_timeout = proto.Field(
-            proto.MESSAGE, number=7, message=duration.Duration,
+            proto.MESSAGE,
+            number=7,
+            message=duration.Duration,
         )
 
     analysis_query = proto.Field(
-        proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
+        proto.MESSAGE,
+        number=1,
+        message="IamPolicyAnalysisQuery",
     )
 
-    options = proto.Field(proto.MESSAGE, number=2, message=Options,)
+    options = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=Options,
+    )
 
 
 class AnalyzeIamPolicyResponse(proto.Message):
@@ -280,25 +300,37 @@ class AnalyzeIamPolicyResponse(proto.Message):
         """
 
         analysis_query = proto.Field(
-            proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
+            proto.MESSAGE,
+            number=1,
+            message="IamPolicyAnalysisQuery",
         )
 
         analysis_results = proto.RepeatedField(
-            proto.MESSAGE, number=2, message=assets.IamPolicyAnalysisResult,
+            proto.MESSAGE,
+            number=2,
+            message=assets.IamPolicyAnalysisResult,
         )
 
         fully_explored = proto.Field(proto.BOOL, number=3)
 
-    main_analysis = proto.Field(proto.MESSAGE, number=1, message=IamPolicyAnalysis,)
+    main_analysis = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=IamPolicyAnalysis,
+    )
 
     service_account_impersonation_analysis = proto.RepeatedField(
-        proto.MESSAGE, number=2, message=IamPolicyAnalysis,
+        proto.MESSAGE,
+        number=2,
+        message=IamPolicyAnalysis,
     )
 
     fully_explored = proto.Field(proto.BOOL, number=3)
 
     non_critical_errors = proto.RepeatedField(
-        proto.MESSAGE, number=4, message=assets.IamPolicyAnalysisResult.AnalysisState,
+        proto.MESSAGE,
+        number=4,
+        message=assets.IamPolicyAnalysisResult.AnalysisState,
     )
 
 
@@ -327,7 +359,10 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
         uri = proto.Field(proto.STRING, number=1)
 
     gcs_destination = proto.Field(
-        proto.MESSAGE, number=1, oneof="destination", message=GcsDestination,
+        proto.MESSAGE,
+        number=1,
+        oneof="destination",
+        message=GcsDestination,
     )
 
 
@@ -431,13 +466,21 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
         analyze_service_account_impersonation = proto.Field(proto.BOOL, number=6)
 
     analysis_query = proto.Field(
-        proto.MESSAGE, number=1, message="IamPolicyAnalysisQuery",
+        proto.MESSAGE,
+        number=1,
+        message="IamPolicyAnalysisQuery",
     )
 
-    options = proto.Field(proto.MESSAGE, number=2, message=Options,)
+    options = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=Options,
+    )
 
     output_config = proto.Field(
-        proto.MESSAGE, number=3, message="IamPolicyAnalysisOutputConfig",
+        proto.MESSAGE,
+        number=3,
+        message="IamPolicyAnalysisOutputConfig",
     )
 
 
@@ -453,7 +496,9 @@ class ExportIamPolicyAnalysisResponse(proto.Message):
     """
 
     output_config = proto.Field(
-        proto.MESSAGE, number=1, message="IamPolicyAnalysisOutputConfig",
+        proto.MESSAGE,
+        number=1,
+        message="IamPolicyAnalysisOutputConfig",
     )
 
 

@@ -25,7 +25,12 @@ from google.protobuf import timestamp_pb2 as timestamp  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.cloud.asset.v1p2beta1",
-    manifest={"TemporalAsset", "TimeWindow", "Asset", "Resource",},
+    manifest={
+        "TemporalAsset",
+        "TimeWindow",
+        "Asset",
+        "Resource",
+    },
 )
 
 
@@ -44,11 +49,19 @@ class TemporalAsset(proto.Message):
             Asset.
     """
 
-    window = proto.Field(proto.MESSAGE, number=1, message="TimeWindow",)
+    window = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="TimeWindow",
+    )
 
     deleted = proto.Field(proto.BOOL, number=2)
 
-    asset = proto.Field(proto.MESSAGE, number=3, message="Asset",)
+    asset = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Asset",
+    )
 
 
 class TimeWindow(proto.Message):
@@ -62,9 +75,17 @@ class TimeWindow(proto.Message):
             Current timestamp if not specified.
     """
 
-    start_time = proto.Field(proto.MESSAGE, number=1, message=timestamp.Timestamp,)
+    start_time = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message=timestamp.Timestamp,
+    )
 
-    end_time = proto.Field(proto.MESSAGE, number=2, message=timestamp.Timestamp,)
+    end_time = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=timestamp.Timestamp,
+    )
 
 
 class Asset(proto.Message):
@@ -103,9 +124,17 @@ class Asset(proto.Message):
 
     asset_type = proto.Field(proto.STRING, number=2)
 
-    resource = proto.Field(proto.MESSAGE, number=3, message="Resource",)
+    resource = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Resource",
+    )
 
-    iam_policy = proto.Field(proto.MESSAGE, number=4, message=policy.Policy,)
+    iam_policy = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=policy.Policy,
+    )
 
     ancestors = proto.RepeatedField(proto.STRING, number=6)
 
@@ -163,7 +192,11 @@ class Resource(proto.Message):
 
     parent = proto.Field(proto.STRING, number=5)
 
-    data = proto.Field(proto.MESSAGE, number=6, message=struct.Struct,)
+    data = proto.Field(
+        proto.MESSAGE,
+        number=6,
+        message=struct.Struct,
+    )
 
 
 __all__ = tuple(sorted(__protobuf__.manifest))
