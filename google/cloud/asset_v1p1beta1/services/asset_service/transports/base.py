@@ -30,7 +30,9 @@ from google.cloud.asset_v1p1beta1.types import asset_service
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-cloud-asset",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-asset",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
@@ -67,10 +69,10 @@ class AssetServiceTransport(abc.ABC):
             scope (Optional[Sequence[str]]): A list of scopes.
             quota_project_id (Optional[str]): An optional project to use for billing
                 and quota.
-            client_info (google.api_core.gapic_v1.client_info.ClientInfo):	
-                The client info used to send a user-agent string along with	
-                API requests. If ``None``, then default info will be used.	
-                Generally, you only need to set this if you're developing	
+            client_info (google.api_core.gapic_v1.client_info.ClientInfo):
+                The client info used to send a user-agent string along with
+                API requests. If ``None``, then default info will be used.
+                Generally, you only need to set this if you're developing
                 your own client library.
         """
         # Save the hostname. Default to port 443 (HTTPS) if none is specified.
@@ -111,7 +113,8 @@ class AssetServiceTransport(abc.ABC):
                     maximum=60.0,
                     multiplier=1.3,
                     predicate=retries.if_exception_type(
-                        exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                        exceptions.DeadlineExceeded,
+                        exceptions.ServiceUnavailable,
                     ),
                 ),
                 default_timeout=15.0,
@@ -124,7 +127,8 @@ class AssetServiceTransport(abc.ABC):
                     maximum=60.0,
                     multiplier=1.3,
                     predicate=retries.if_exception_type(
-                        exceptions.DeadlineExceeded, exceptions.ServiceUnavailable,
+                        exceptions.DeadlineExceeded,
+                        exceptions.ServiceUnavailable,
                     ),
                 ),
                 default_timeout=15.0,

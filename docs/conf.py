@@ -67,9 +67,9 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = u"google-cloud-asset"
-copyright = u"2019, Google"
-author = u"Google APIs"
+project = "google-cloud-asset"
+copyright = "2019, Google"
+author = "Google APIs"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -268,7 +268,7 @@ latex_documents = [
     (
         master_doc,
         "google-cloud-asset.tex",
-        u"google-cloud-asset Documentation",
+        "google-cloud-asset Documentation",
         author,
         "manual",
     )
@@ -303,7 +303,7 @@ man_pages = [
     (
         master_doc,
         "google-cloud-asset",
-        u"google-cloud-asset Documentation",
+        "google-cloud-asset Documentation",
         [author],
         1,
     )
@@ -322,7 +322,7 @@ texinfo_documents = [
     (
         master_doc,
         "google-cloud-asset",
-        u"google-cloud-asset Documentation",
+        "google-cloud-asset Documentation",
         author,
         "google-cloud-asset",
         "google-cloud-asset Library",
@@ -350,7 +350,10 @@ intersphinx_mapping = {
         "https://googleapis.dev/python/google-auth/latest/index.html",
         None,
     ),
-    "google.api_core": ("https://googleapis.dev/python/google-api-core/latest/", None,),
+    "google.api_core": (
+        "https://googleapis.dev/python/google-api-core/latest/",
+        None,
+    ),
     "grpc": ("https://grpc.github.io/grpc/python/", None),
     "proto-plus": ("https://proto-plus-python.readthedocs.io/en/latest/", None),
 }

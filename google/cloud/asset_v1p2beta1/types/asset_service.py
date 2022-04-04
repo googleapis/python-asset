@@ -76,7 +76,11 @@ class CreateFeedRequest(proto.Message):
 
     feed_id = proto.Field(proto.STRING, number=2)
 
-    feed = proto.Field(proto.MESSAGE, number=3, message="Feed",)
+    feed = proto.Field(
+        proto.MESSAGE,
+        number=3,
+        message="Feed",
+    )
 
 
 class GetFeedRequest(proto.Message):
@@ -117,7 +121,11 @@ class ListFeedsResponse(proto.Message):
             A list of feeds.
     """
 
-    feeds = proto.RepeatedField(proto.MESSAGE, number=1, message="Feed",)
+    feeds = proto.RepeatedField(
+        proto.MESSAGE,
+        number=1,
+        message="Feed",
+    )
 
 
 class UpdateFeedRequest(proto.Message):
@@ -136,9 +144,17 @@ class UpdateFeedRequest(proto.Message):
             contain fields that are immutable or only set by the server.
     """
 
-    feed = proto.Field(proto.MESSAGE, number=1, message="Feed",)
+    feed = proto.Field(
+        proto.MESSAGE,
+        number=1,
+        message="Feed",
+    )
 
-    update_mask = proto.Field(proto.MESSAGE, number=2, message=field_mask.FieldMask,)
+    update_mask = proto.Field(
+        proto.MESSAGE,
+        number=2,
+        message=field_mask.FieldMask,
+    )
 
 
 class DeleteFeedRequest(proto.Message):
@@ -164,7 +180,10 @@ class OutputConfig(proto.Message):
     """
 
     gcs_destination = proto.Field(
-        proto.MESSAGE, number=1, oneof="destination", message="GcsDestination",
+        proto.MESSAGE,
+        number=1,
+        oneof="destination",
+        message="GcsDestination",
     )
 
 
@@ -205,7 +224,10 @@ class FeedOutputConfig(proto.Message):
     """
 
     pubsub_destination = proto.Field(
-        proto.MESSAGE, number=1, oneof="destination", message="PubsubDestination",
+        proto.MESSAGE,
+        number=1,
+        oneof="destination",
+        message="PubsubDestination",
     )
 
 
@@ -261,10 +283,16 @@ class Feed(proto.Message):
 
     asset_types = proto.RepeatedField(proto.STRING, number=3)
 
-    content_type = proto.Field(proto.ENUM, number=4, enum="ContentType",)
+    content_type = proto.Field(
+        proto.ENUM,
+        number=4,
+        enum="ContentType",
+    )
 
     feed_output_config = proto.Field(
-        proto.MESSAGE, number=5, message="FeedOutputConfig",
+        proto.MESSAGE,
+        number=5,
+        message="FeedOutputConfig",
     )
 
 

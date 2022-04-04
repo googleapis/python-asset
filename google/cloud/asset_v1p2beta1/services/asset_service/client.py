@@ -51,7 +51,10 @@ class AssetServiceClientMeta(type):
     _transport_registry["grpc"] = AssetServiceGrpcTransport
     _transport_registry["grpc_asyncio"] = AssetServiceGrpcAsyncIOTransport
 
-    def get_transport_class(cls, label: str = None,) -> Type[AssetServiceTransport]:
+    def get_transport_class(
+        cls,
+        label: str = None,
+    ) -> Type[AssetServiceTransport]:
         """Return an appropriate transport class.
 
         Args:
@@ -137,9 +140,15 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return self._transport
 
     @staticmethod
-    def feed_path(project: str, feed: str,) -> str:
+    def feed_path(
+        project: str,
+        feed: str,
+    ) -> str:
         """Return a fully-qualified feed string."""
-        return "projects/{project}/feeds/{feed}".format(project=project, feed=feed,)
+        return "projects/{project}/feeds/{feed}".format(
+            project=project,
+            feed=feed,
+        )
 
     @staticmethod
     def parse_feed_path(path: str) -> Dict[str, str]:
@@ -148,7 +157,9 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_billing_account_path(billing_account: str,) -> str:
+    def common_billing_account_path(
+        billing_account: str,
+    ) -> str:
         """Return a fully-qualified billing_account string."""
         return "billingAccounts/{billing_account}".format(
             billing_account=billing_account,
@@ -161,9 +172,13 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_folder_path(folder: str,) -> str:
+    def common_folder_path(
+        folder: str,
+    ) -> str:
         """Return a fully-qualified folder string."""
-        return "folders/{folder}".format(folder=folder,)
+        return "folders/{folder}".format(
+            folder=folder,
+        )
 
     @staticmethod
     def parse_common_folder_path(path: str) -> Dict[str, str]:
@@ -172,9 +187,13 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_organization_path(organization: str,) -> str:
+    def common_organization_path(
+        organization: str,
+    ) -> str:
         """Return a fully-qualified organization string."""
-        return "organizations/{organization}".format(organization=organization,)
+        return "organizations/{organization}".format(
+            organization=organization,
+        )
 
     @staticmethod
     def parse_common_organization_path(path: str) -> Dict[str, str]:
@@ -183,9 +202,13 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_project_path(project: str,) -> str:
+    def common_project_path(
+        project: str,
+    ) -> str:
         """Return a fully-qualified project string."""
-        return "projects/{project}".format(project=project,)
+        return "projects/{project}".format(
+            project=project,
+        )
 
     @staticmethod
     def parse_common_project_path(path: str) -> Dict[str, str]:
@@ -194,10 +217,14 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         return m.groupdict() if m else {}
 
     @staticmethod
-    def common_location_path(project: str, location: str,) -> str:
+    def common_location_path(
+        project: str,
+        location: str,
+    ) -> str:
         """Return a fully-qualified location string."""
         return "projects/{project}/locations/{location}".format(
-            project=project, location=location,
+            project=project,
+            location=location,
         )
 
     @staticmethod
@@ -404,7 +431,12 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
@@ -483,7 +515,12 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
@@ -558,7 +595,12 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
@@ -640,7 +682,12 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         )
 
         # Send the request.
-        response = rpc(request, retry=retry, timeout=timeout, metadata=metadata,)
+        response = rpc(
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
+        )
 
         # Done; return the response.
         return response
@@ -709,13 +756,18 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         # Send the request.
         rpc(
-            request, retry=retry, timeout=timeout, metadata=metadata,
+            request,
+            retry=retry,
+            timeout=timeout,
+            metadata=metadata,
         )
 
 
 try:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution("google-cloud-asset",).version,
+        gapic_version=pkg_resources.get_distribution(
+            "google-cloud-asset",
+        ).version,
     )
 except pkg_resources.DistributionNotFound:
     DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()

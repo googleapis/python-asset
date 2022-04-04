@@ -23,7 +23,11 @@ from google.iam.v1 import policy_pb2 as giv_policy  # type: ignore
 
 __protobuf__ = proto.module(
     package="google.cloud.asset.v1p1beta1",
-    manifest={"StandardResourceMetadata", "IamPolicySearchResult", "Permissions",},
+    manifest={
+        "StandardResourceMetadata",
+        "IamPolicySearchResult",
+        "Permissions",
+    },
 )
 
 
@@ -132,16 +136,27 @@ class IamPolicySearchResult(proto.Message):
         """
 
         matched_permissions = proto.MapField(
-            proto.STRING, proto.MESSAGE, number=1, message="Permissions",
+            proto.STRING,
+            proto.MESSAGE,
+            number=1,
+            message="Permissions",
         )
 
     resource = proto.Field(proto.STRING, number=1)
 
     project = proto.Field(proto.STRING, number=3)
 
-    policy = proto.Field(proto.MESSAGE, number=4, message=giv_policy.Policy,)
+    policy = proto.Field(
+        proto.MESSAGE,
+        number=4,
+        message=giv_policy.Policy,
+    )
 
-    explanation = proto.Field(proto.MESSAGE, number=5, message=Explanation,)
+    explanation = proto.Field(
+        proto.MESSAGE,
+        number=5,
+        message=Explanation,
+    )
 
 
 class Permissions(proto.Message):
