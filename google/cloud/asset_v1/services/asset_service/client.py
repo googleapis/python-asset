@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -530,7 +530,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_export_assets():
                 # Create a client
@@ -627,7 +627,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_list_assets():
                 # Create a client
@@ -742,7 +742,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_batch_get_assets_history():
                 # Create a client
@@ -817,7 +817,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_create_feed():
                 # Create a client
@@ -928,7 +928,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_get_feed():
                 # Create a client
@@ -1031,7 +1031,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_list_feeds():
                 # Create a client
@@ -1127,7 +1127,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_update_feed():
                 # Create a client
@@ -1234,7 +1234,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_delete_feed():
                 # Create a client
@@ -1324,7 +1324,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_search_all_resources():
                 # Create a client
@@ -1525,7 +1525,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_search_all_iam_policies():
                 # Create a client
@@ -1702,7 +1702,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_analyze_iam_policy():
                 # Create a client
@@ -1793,7 +1793,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_analyze_iam_policy_longrunning():
                 # Create a client
@@ -1901,7 +1901,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         .. code-block:: python
 
-            from google.cloud import asset_v1
+                    from google.cloud import asset_v1
 
             def sample_analyze_move():
                 # Create a client
