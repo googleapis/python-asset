@@ -16,7 +16,7 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Optional, Sequence, Tuple, Type, Union
+from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -211,7 +211,6 @@ class AssetServiceAsyncClient:
         [IamPolicyAnalysisResult][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult]
         matching the request.
 
-
         .. code-block:: python
 
             from google.cloud import asset_v1p4beta1
@@ -262,7 +261,7 @@ class AssetServiceAsyncClient:
                 maximum=60.0,
                 multiplier=1.3,
                 predicate=retries.if_exception_type(
-                    core_exceptions.ServiceUnavailable,
+                    core_exceptions.GoogleAPICallError,
                 ),
                 deadline=300.0,
             ),
@@ -302,7 +301,6 @@ class AssetServiceAsyncClient:
         [google.longrunning.Operation][google.longrunning.Operation] API
         allowing you to keep track of the export. The metadata contains
         the request to help callers to map responses to requests.
-
 
         .. code-block:: python
 
