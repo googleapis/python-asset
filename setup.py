@@ -35,6 +35,7 @@ dependencies = [
     "google-cloud-os-config >= 1.0.0, <2.0.0dev",
     "proto-plus >= 0.4.0",
     "libcst >= 0.2.5",
+    "protobuf<4.0.0dev",
 ]
 
 # Setup boilerplate below this line.
