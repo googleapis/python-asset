@@ -33,6 +33,7 @@ dependencies = [
     "grpc-google-iam-v1 >= 0.12.3, < 0.13dev",
     "google-cloud-access-context-manager >= 0.1.2, < 0.2.0dev",
     "google-cloud-org-policy >= 0.1.2, < 0.2.0dev",
+    "protobuf<4.0.0dev",
 ]
 
 # Setup boilerplate below this line.
