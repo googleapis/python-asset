@@ -1218,7 +1218,6 @@ def test_asset_service_transport_auth_adc(transport_class):
     [
         transports.AssetServiceGrpcTransport,
         transports.AssetServiceGrpcAsyncIOTransport,
-        transports.AssetServiceRestTransport,
     ],
 )
 def test_asset_service_transport_auth_gdch_credentials(transport_class):
