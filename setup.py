@@ -21,17 +21,14 @@ import setuptools
 
 name = "google-cloud-asset"
 description = "Cloud Asset API API client library"
-version = "3.9.1"
+version = "3.10.0"
 # Should be one of:
 # 'Development Status :: 3 - Alpha'
 # 'Development Status :: 4 - Beta'
 # 'Development Status :: 5 - Production/Stable'
 release_status = "Development Status :: 5 - Production/Stable"
 dependencies = [
-    # NOTE: Maintainers, please do not require google-api-core>=2.x.x
-    # Until this issue is closed
-    # https://github.com/googleapis/google-cloud-python/issues/10566
-    "google-api-core[grpc] >= 1.31.5, <3.0.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0",
+    "google-api-core[grpc] >= 1.32.0, <3.0.0dev,!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*",
     "grpc-google-iam-v1 >=0.12.4, <1.0.0dev",
     "google-cloud-access-context-manager >= 0.1.2, <1.0.0dev",
     "google-cloud-org-policy>=0.1.2, <2.0.0",
