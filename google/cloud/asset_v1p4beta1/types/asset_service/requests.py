@@ -18,123 +18,10 @@ import proto  # type: ignore
 from google.cloud.asset_v1p4beta1.types import assets
 from google.protobuf import duration_pb2  # type: ignore
 
-
-__protobuf__ = proto.module(
-    package="google.cloud.asset.v1p4beta1",
-    manifest={
-        "IamPolicyAnalysisQuery",
-        "AnalyzeIamPolicyRequest",
-        "AnalyzeIamPolicyResponse",
-        "IamPolicyAnalysisOutputConfig",
-        "ExportIamPolicyAnalysisRequest",
-        "ExportIamPolicyAnalysisResponse",
-    },
+__manifest__ = (
+    "AnalyzeIamPolicyRequest",
+    "ExportIamPolicyAnalysisRequest",
 )
-
-
-class IamPolicyAnalysisQuery(proto.Message):
-    r"""IAM policy analysis query message.
-
-    Attributes:
-        parent (str):
-            Required. The relative name of the root
-            asset. Only resources and IAM policies within
-            the parent will be analyzed. This can only be an
-            organization number (such as
-            "organizations/123") or a folder number (such as
-            "folders/123").
-        resource_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.ResourceSelector):
-            Optional. Specifies a resource for analysis.
-            Leaving it empty means ANY.
-        identity_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.IdentitySelector):
-            Optional. Specifies an identity for analysis.
-            Leaving it empty means ANY.
-        access_selector (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery.AccessSelector):
-            Optional. Specifies roles or permissions for
-            analysis. Leaving it empty means ANY.
-    """
-
-    class ResourceSelector(proto.Message):
-        r"""Specifies the resource to analyze for access policies, which may be
-        set directly on the resource, or on ancestors such as organizations,
-        folders or projects. At least one of
-        [ResourceSelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.ResourceSelector],
-        [IdentitySelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.IdentitySelector]
-        or
-        [AccessSelector][google.cloud.asset.v1p4beta1.IamPolicyAnalysisQuery.AccessSelector]
-        must be specified in a request.
-
-        Attributes:
-            full_resource_name (str):
-                Required. The `full resource
-                name <https://cloud.google.com/apis/design/resource_names#full_resource_name>`__
-                .
-        """
-
-        full_resource_name = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-
-    class IdentitySelector(proto.Message):
-        r"""Specifies an identity for which to determine resource access,
-        based on roles assigned either directly to them or to the groups
-        they belong to, directly or indirectly.
-
-        Attributes:
-            identity (str):
-                Required. The identity appear in the form of members in `IAM
-                policy
-                binding <https://cloud.google.com/iam/reference/rest/v1/Binding>`__.
-        """
-
-        identity = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-
-    class AccessSelector(proto.Message):
-        r"""Specifies roles and/or permissions to analyze, to determine
-        both the identities possessing them and the resources they
-        control. If multiple values are specified, results will include
-        identities and resources matching any of them.
-
-        Attributes:
-            roles (Sequence[str]):
-                Optional. The roles to appear in result.
-            permissions (Sequence[str]):
-                Optional. The permissions to appear in
-                result.
-        """
-
-        roles = proto.RepeatedField(
-            proto.STRING,
-            number=1,
-        )
-        permissions = proto.RepeatedField(
-            proto.STRING,
-            number=2,
-        )
-
-    parent = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    resource_selector = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=ResourceSelector,
-    )
-    identity_selector = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message=IdentitySelector,
-    )
-    access_selector = proto.Field(
-        proto.MESSAGE,
-        number=4,
-        message=AccessSelector,
-    )
 
 
 class AnalyzeIamPolicyRequest(proto.Message):
@@ -147,6 +34,7 @@ class AnalyzeIamPolicyRequest(proto.Message):
         options (google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyRequest.Options):
             Optional. The request options.
     """
+    __module__ = __module__.rsplit(".", maxsplit=1)[0]  # type: ignore
 
     class Options(proto.Message):
         r"""Contains request options.
@@ -234,6 +122,7 @@ class AnalyzeIamPolicyRequest(proto.Message):
 
                 Default is empty.
         """
+        __module__ = __module__.rsplit(".", maxsplit=1)[0]  # type: ignore
 
         expand_groups = proto.Field(
             proto.BOOL,
@@ -277,123 +166,6 @@ class AnalyzeIamPolicyRequest(proto.Message):
     )
 
 
-class AnalyzeIamPolicyResponse(proto.Message):
-    r"""A response message for
-    [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1p4beta1.AssetService.AnalyzeIamPolicy].
-
-    Attributes:
-        main_analysis (google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse.IamPolicyAnalysis):
-            The main analysis that matches the original
-            request.
-        service_account_impersonation_analysis (Sequence[google.cloud.asset_v1p4beta1.types.AnalyzeIamPolicyResponse.IamPolicyAnalysis]):
-            The service account impersonation analysis if
-            [AnalyzeIamPolicyRequest.analyze_service_account_impersonation][]
-            is enabled.
-        fully_explored (bool):
-            Represents whether all entries in the
-            [main_analysis][google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.main_analysis]
-            and
-            [service_account_impersonation_analysis][google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis]
-            have been fully explored to answer the query in the request.
-        non_critical_errors (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult.AnalysisState]):
-            A list of non-critical errors happened during the request
-            handling to explain why ``fully_explored`` is false, or
-            empty if no error happened.
-    """
-
-    class IamPolicyAnalysis(proto.Message):
-        r"""An analysis message to group the query and results.
-
-        Attributes:
-            analysis_query (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisQuery):
-                The analysis query.
-            analysis_results (Sequence[google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisResult]):
-                A list of
-                [IamPolicyAnalysisResult][google.cloud.asset.v1p4beta1.IamPolicyAnalysisResult]
-                that matches the analysis query, or empty if no result is
-                found.
-            fully_explored (bool):
-                Represents whether all entries in the
-                [analysis_results][google.cloud.asset.v1p4beta1.AnalyzeIamPolicyResponse.IamPolicyAnalysis.analysis_results]
-                have been fully explored to answer the query.
-        """
-
-        analysis_query = proto.Field(
-            proto.MESSAGE,
-            number=1,
-            message="IamPolicyAnalysisQuery",
-        )
-        analysis_results = proto.RepeatedField(
-            proto.MESSAGE,
-            number=2,
-            message=assets.IamPolicyAnalysisResult,
-        )
-        fully_explored = proto.Field(
-            proto.BOOL,
-            number=3,
-        )
-
-    main_analysis = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        message=IamPolicyAnalysis,
-    )
-    service_account_impersonation_analysis = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message=IamPolicyAnalysis,
-    )
-    fully_explored = proto.Field(
-        proto.BOOL,
-        number=3,
-    )
-    non_critical_errors = proto.RepeatedField(
-        proto.MESSAGE,
-        number=4,
-        message=assets.IamPolicyAnalysisResult.AnalysisState,
-    )
-
-
-class IamPolicyAnalysisOutputConfig(proto.Message):
-    r"""Output configuration for export IAM policy analysis
-    destination.
-
-
-    .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
-
-    Attributes:
-        gcs_destination (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig.GcsDestination):
-            Destination on Cloud Storage.
-
-            This field is a member of `oneof`_ ``destination``.
-    """
-
-    class GcsDestination(proto.Message):
-        r"""A Cloud Storage location.
-
-        Attributes:
-            uri (str):
-                Required. The uri of the Cloud Storage object. It's the same
-                uri that is used by gsutil. For example:
-                "gs://bucket_name/object_name". See `Viewing and Editing
-                Object
-                Metadata <https://cloud.google.com/storage/docs/viewing-editing-metadata>`__
-                for more information.
-        """
-
-        uri = proto.Field(
-            proto.STRING,
-            number=1,
-        )
-
-    gcs_destination = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        oneof="destination",
-        message=GcsDestination,
-    )
-
-
 class ExportIamPolicyAnalysisRequest(proto.Message):
     r"""A request message for
     [AssetService.ExportIamPolicyAnalysis][google.cloud.asset.v1p4beta1.AssetService.ExportIamPolicyAnalysis].
@@ -407,6 +179,7 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
             Required. Output configuration indicating
             where the results will be output to.
     """
+    __module__ = __module__.rsplit(".", maxsplit=1)[0]  # type: ignore
 
     class Options(proto.Message):
         r"""Contains request options.
@@ -480,6 +253,7 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
 
                 Default is false.
         """
+        __module__ = __module__.rsplit(".", maxsplit=1)[0]  # type: ignore
 
         expand_groups = proto.Field(
             proto.BOOL,
@@ -523,22 +297,4 @@ class ExportIamPolicyAnalysisRequest(proto.Message):
     )
 
 
-class ExportIamPolicyAnalysisResponse(proto.Message):
-    r"""The export IAM policy analysis response. This message is returned by
-    the [google.longrunning.Operations.GetOperation][] method in the
-    returned [google.longrunning.Operation.response][] field.
-
-    Attributes:
-        output_config (google.cloud.asset_v1p4beta1.types.IamPolicyAnalysisOutputConfig):
-            Output configuration indicating where the
-            results were output to.
-    """
-
-    output_config = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        message="IamPolicyAnalysisOutputConfig",
-    )
-
-
-__all__ = tuple(sorted(__protobuf__.manifest))
+__all__ = tuple(sorted(__manifest__))

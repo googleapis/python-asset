@@ -37,147 +37,24 @@ __protobuf__ = proto.module(
 )
 
 
+from .requests import (
+    CreateFeedRequest,
+    GetFeedRequest,
+    ListFeedsRequest,
+    UpdateFeedRequest,
+    DeleteFeedRequest,
+)
+
+from .responses import (
+    ListFeedsResponse,
+)
+
+
 class ContentType(proto.Enum):
     r"""Asset content type."""
     CONTENT_TYPE_UNSPECIFIED = 0
     RESOURCE = 1
     IAM_POLICY = 2
-
-
-class CreateFeedRequest(proto.Message):
-    r"""Create asset feed request.
-
-    Attributes:
-        parent (str):
-            Required. The name of the
-            project/folder/organization where this feed
-            should be created in. It can only be an
-            organization number (such as
-            "organizations/123"), a folder number (such as
-            "folders/123"), a project ID (such as
-            "projects/my-project-id")", or a project number
-            (such as "projects/12345").
-        feed_id (str):
-            Required. This is the client-assigned asset
-            feed identifier and it needs to be unique under
-            a specific parent project/folder/organization.
-        feed (google.cloud.asset_v1p2beta1.types.Feed):
-            Required. The feed details. The field ``name`` must be empty
-            and it will be generated in the format of:
-            projects/project_number/feeds/feed_id
-            folders/folder_number/feeds/feed_id
-            organizations/organization_number/feeds/feed_id
-    """
-
-    parent = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-    feed_id = proto.Field(
-        proto.STRING,
-        number=2,
-    )
-    feed = proto.Field(
-        proto.MESSAGE,
-        number=3,
-        message="Feed",
-    )
-
-
-class GetFeedRequest(proto.Message):
-    r"""Get asset feed request.
-
-    Attributes:
-        name (str):
-            Required. The name of the Feed and it must be in the format
-            of: projects/project_number/feeds/feed_id
-            folders/folder_number/feeds/feed_id
-            organizations/organization_number/feeds/feed_id
-    """
-
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-
-
-class ListFeedsRequest(proto.Message):
-    r"""List asset feeds request.
-
-    Attributes:
-        parent (str):
-            Required. The parent
-            project/folder/organization whose feeds are to
-            be listed. It can only be using
-            project/folder/organization number (such as
-            "folders/12345")", or a project ID (such as
-            "projects/my-project-id").
-    """
-
-    parent = proto.Field(
-        proto.STRING,
-        number=1,
-    )
-
-
-class ListFeedsResponse(proto.Message):
-    r"""
-
-    Attributes:
-        feeds (Sequence[google.cloud.asset_v1p2beta1.types.Feed]):
-            A list of feeds.
-    """
-
-    feeds = proto.RepeatedField(
-        proto.MESSAGE,
-        number=1,
-        message="Feed",
-    )
-
-
-class UpdateFeedRequest(proto.Message):
-    r"""Update asset feed request.
-
-    Attributes:
-        feed (google.cloud.asset_v1p2beta1.types.Feed):
-            Required. The new values of feed details. It must match an
-            existing feed and the field ``name`` must be in the format
-            of: projects/project_number/feeds/feed_id or
-            folders/folder_number/feeds/feed_id or
-            organizations/organization_number/feeds/feed_id.
-        update_mask (google.protobuf.field_mask_pb2.FieldMask):
-            Required. Only updates the ``feed`` fields indicated by this
-            mask. The field mask must not be empty, and it must not
-            contain fields that are immutable or only set by the server.
-    """
-
-    feed = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        message="Feed",
-    )
-    update_mask = proto.Field(
-        proto.MESSAGE,
-        number=2,
-        message=field_mask_pb2.FieldMask,
-    )
-
-
-class DeleteFeedRequest(proto.Message):
-    r"""
-
-    Attributes:
-        name (str):
-            Required. The name of the feed and it must be in the format
-            of: projects/project_number/feeds/feed_id
-            folders/folder_number/feeds/feed_id
-            organizations/organization_number/feeds/feed_id
-    """
-
-    name = proto.Field(
-        proto.STRING,
-        number=1,
-    )
 
 
 class OutputConfig(proto.Message):

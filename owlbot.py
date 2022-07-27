@@ -27,19 +27,19 @@ default_version = "v1"
 for library in s.get_staging_dirs(default_version):
     # Fix import of 'osconfig' type
     s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
+        library / f"google/cloud/asset_{library.name}/**/*.py",
         f"from google\.cloud\.osconfig\.{library.name} import inventory_pb2",
         f"from google.cloud.osconfig_{library.name} import Inventory"
     )
 
     s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
+        library / f"google/cloud/asset_{library.name}/**/*.py",
         "message=inventory_pb2\.Inventory,",
         "message=Inventory,"
     )
 
     s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
+        library / f"google/cloud/asset_{library.name}/**/*.py",
         "google\.cloud\.osconfig\.v1\.inventory_pb2\.Inventory",
         "google.cloud.osconfig_v1.Inventory"
     )

@@ -18,24 +18,7 @@ import proto  # type: ignore
 from google.cloud.asset_v1p5beta1.types import assets as gca_assets
 from google.protobuf import timestamp_pb2  # type: ignore
 
-
-__protobuf__ = proto.module(
-    package="google.cloud.asset.v1p5beta1",
-    manifest={
-        "ContentType",
-        "ListAssetsRequest",
-        "ListAssetsResponse",
-    },
-)
-
-
-class ContentType(proto.Enum):
-    r"""Asset content type."""
-    CONTENT_TYPE_UNSPECIFIED = 0
-    RESOURCE = 1
-    IAM_POLICY = 2
-    ORG_POLICY = 4
-    ACCESS_POLICY = 5
+__manifest__ = ("ListAssetsRequest",)
 
 
 class ListAssetsRequest(proto.Message):
@@ -77,6 +60,7 @@ class ListAssetsRequest(proto.Message):
             ``ListAssets`` call, and the API should return the next page
             of assets.
     """
+    __module__ = __module__.rsplit(".", maxsplit=1)[0]  # type: ignore
 
     parent = proto.Field(
         proto.STRING,
@@ -106,37 +90,4 @@ class ListAssetsRequest(proto.Message):
     )
 
 
-class ListAssetsResponse(proto.Message):
-    r"""ListAssets response.
-
-    Attributes:
-        read_time (google.protobuf.timestamp_pb2.Timestamp):
-            Time the snapshot was taken.
-        assets (Sequence[google.cloud.asset_v1p5beta1.types.Asset]):
-            Assets.
-        next_page_token (str):
-            Token to retrieve the next page of results.
-            Set to empty if there are no remaining results.
-    """
-
-    @property
-    def raw_page(self):
-        return self
-
-    read_time = proto.Field(
-        proto.MESSAGE,
-        number=1,
-        message=timestamp_pb2.Timestamp,
-    )
-    assets = proto.RepeatedField(
-        proto.MESSAGE,
-        number=2,
-        message=gca_assets.Asset,
-    )
-    next_page_token = proto.Field(
-        proto.STRING,
-        number=3,
-    )
-
-
-__all__ = tuple(sorted(__protobuf__.manifest))
+__all__ = tuple(sorted(__manifest__))
