@@ -94,8 +94,6 @@ def deleter():
 
 @pytest.fixture(scope="module")
 def test_saved_query():
-    from google.cloud import asset_v1
-
     saved_query_id = f"saved-query-{uuid.uuid4().hex}"
 
     @backoff.on_exception(backoff.expo, InternalServerError, max_time=60)
