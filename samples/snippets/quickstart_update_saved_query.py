@@ -35,7 +35,7 @@ def update_saved_query(saved_query_name, description):
     # You can update other content of the saved query.
     update_mask.paths.append("description")
     response = client.update_saved_query(request={"saved_query": saved_query, "update_mask": update_mask})
-    print("updated_saved_query: {}".format(response))
+    print(f"updated_saved_query: {response}")
     # [END asset_quickstart_update_saved_query]
 
 
