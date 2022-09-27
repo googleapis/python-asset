@@ -27,7 +27,7 @@ def create_saved_query(project_id, saved_query_id, description):
     scope = "organizations/474566717491"  # Change to your org, folder. or project
 
     client = asset_v1.AssetServiceClient()
-    parent = "projects/{}".format(project_id)
+    parent = f"projects/{project_id}"
     saved_query = asset_v1.SavedQuery()
     saved_query.description = description
     saved_query.content.iam_policy_analysis_query.scope = scope
