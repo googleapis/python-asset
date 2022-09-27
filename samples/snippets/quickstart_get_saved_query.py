@@ -26,7 +26,7 @@ def get_saved_query(saved_query_name):
 
     client = asset_v1.AssetServiceClient()
     response = client.get_saved_query(request={"name": saved_query_name})
-    print("gotten_saved_query: {}".format(response))
+    print(f"gotten_saved_query: {response}")
     # [END asset_quickstart_get_saved_query]
 
 
