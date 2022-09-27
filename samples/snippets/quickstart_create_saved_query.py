@@ -40,7 +40,7 @@ def create_saved_query(project_id, saved_query_id, description):
             "saved_query": saved_query,
         }
     )
-    print("saved_query: {}".format(response))
+    print(f"saved_query: {response}")
     # [END asset_quickstart_create_saved_query]
     return response
 
