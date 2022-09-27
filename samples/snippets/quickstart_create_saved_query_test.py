@@ -21,7 +21,7 @@ import quickstart_create_saved_query
 
 
 PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
-SAVED_QUERY_ID = "saved-query-{}".format(uuid.uuid4().hex)
+SAVED_QUERY_ID = f"saved-query-{uuid.uuid4().hex}"
 
 
 def test_create_saved_query(capsys, saved_query_deleter):
