@@ -26,7 +26,7 @@ def list_saved_queries(parent_resource):
 
     client = asset_v1.AssetServiceClient()
     response = client.list_saved_queries(request={"parent": parent_resource})
-    print("saved_queries: {}".format(response.saved_queries))
+    print(f"saved_queries: {response.saved_queries}")
     # [END asset_quickstart_list_saved_queries]
 
 
