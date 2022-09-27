@@ -28,5 +28,5 @@ def test_create_saved_query(capsys, saved_query_deleter):
     saved_query = quickstart_create_saved_query.create_saved_query(
         PROJECT, SAVED_QUERY_ID, "saved query foo")
     saved_query_deleter.append(saved_query.name)
-    out, _ = capsys.readouterr()
-    assert "saved_query" in out
+    expected_name = f"projects/{PROJECT}/savedQueries/{SAVED_QUERY_ID}"
+    assert saved_query.name == expected_name

@@ -24,17 +24,18 @@ def create_saved_query(project_id, saved_query_id, description):
 
     # TODO project_id = 'Your Google Cloud Project ID'
     # TODO saved_query_id = 'SavedQuery ID you want to create'
-    scope = "organizations/474566717491"  # Change to your org, folder. or project
-
     client = asset_v1.AssetServiceClient()
     parent = f"projects/{project_id}"
     saved_query = asset_v1.SavedQuery()
     saved_query.description = description
-    saved_query.content.iam_policy_analysis_query.scope = scope
-    # TODO: add more details into your saved query here.
+
+    # TODO: customize your saved query based on the guide below.
+    # https://cloud.google.com/asset-inventory/docs/reference/rest/v1/savedQueries#IamPolicyAnalysisQuery
+    saved_query.content.iam_policy_analysis_query.scope = parent
+    saved_query.content.iam_policy_analysis_query.access_selector.permissions.append("iam.serviceAccounts.actAs")
 
     response = client.create_saved_query(
-        request = {
+        request={
             "parent": parent,
             "saved_query_id": saved_query_id,
             "saved_query": saved_query,
