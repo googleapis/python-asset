@@ -4,6 +4,14 @@
 
 [1]: https://pypi.org/project/google-cloud-asset/#history
 
+
+## [3.14.2](https://github.com/googleapis/python-asset/compare/v3.14.1...v3.14.2) (2022-10-10)
+
+
+### Bug Fixes
+
+* **deps:** Allow protobuf 3.19.5 ([#508](https://github.com/googleapis/python-asset/issues/508)) ([818abbb](https://github.com/googleapis/python-asset/commit/818abbbcbb829a726d18ba1e7e7e03f997d4256a))
+
 ## [3.14.1](https://github.com/googleapis/python-asset/compare/v3.14.0...v3.14.1) (2022-09-29)
 
 
