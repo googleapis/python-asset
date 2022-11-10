@@ -16,7 +16,18 @@
 from collections import OrderedDict
 import os
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union, cast
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+    cast,
+)
 import pkg_resources
 
 from google.api_core import client_options as client_options_lib
@@ -54,7 +65,7 @@ class AssetServiceClientMeta(type):
 
     def get_transport_class(
         cls,
-        label: str = None,
+        label: Optional[str] = None,
     ) -> Type[AssetServiceTransport]:
         """Returns an appropriate transport class.
 
@@ -324,7 +335,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         self,
         *,
         credentials: Optional[ga_credentials.Credentials] = None,
-        transport: Union[str, AssetServiceTransport, None] = None,
+        transport: Optional[Union[str, AssetServiceTransport]] = None,
         client_options: Optional[Union[client_options_lib.ClientOptions, dict]] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
@@ -422,11 +433,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
     def create_feed(
         self,
-        request: Union[asset_service.CreateFeedRequest, dict] = None,
+        request: Optional[Union[asset_service.CreateFeedRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Creates a feed in a parent
@@ -542,11 +553,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
     def get_feed(
         self,
-        request: Union[asset_service.GetFeedRequest, dict] = None,
+        request: Optional[Union[asset_service.GetFeedRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Gets details about an asset feed.
@@ -650,11 +661,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
     def list_feeds(
         self,
-        request: Union[asset_service.ListFeedsRequest, dict] = None,
+        request: Optional[Union[asset_service.ListFeedsRequest, dict]] = None,
         *,
-        parent: str = None,
+        parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.ListFeedsResponse:
         r"""Lists all asset feeds in a parent
@@ -754,11 +765,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
     def update_feed(
         self,
-        request: Union[asset_service.UpdateFeedRequest, dict] = None,
+        request: Optional[Union[asset_service.UpdateFeedRequest, dict]] = None,
         *,
-        feed: asset_service.Feed = None,
+        feed: Optional[asset_service.Feed] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Updates an asset feed configuration.
@@ -868,11 +879,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
     def delete_feed(
         self,
-        request: Union[asset_service.DeleteFeedRequest, dict] = None,
+        request: Optional[Union[asset_service.DeleteFeedRequest, dict]] = None,
         *,
-        name: str = None,
+        name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes an asset feed.

@@ -16,7 +16,17 @@
 from collections import OrderedDict
 import functools
 import re
-from typing import Dict, Mapping, Optional, Sequence, Tuple, Type, Union
+from typing import (
+    Dict,
+    Mapping,
+    MutableMapping,
+    MutableSequence,
+    Optional,
+    Sequence,
+    Tuple,
+    Type,
+    Union,
+)
 import pkg_resources
 
 from google.api_core.client_options import ClientOptions
@@ -163,9 +173,9 @@ class AssetServiceAsyncClient:
     def __init__(
         self,
         *,
-        credentials: ga_credentials.Credentials = None,
+        credentials: Optional[ga_credentials.Credentials] = None,
         transport: Union[str, AssetServiceTransport] = "grpc_asyncio",
-        client_options: ClientOptions = None,
+        client_options: Optional[ClientOptions] = None,
         client_info: gapic_v1.client_info.ClientInfo = DEFAULT_CLIENT_INFO,
     ) -> None:
         """Instantiates the asset service client.
@@ -209,10 +219,10 @@ class AssetServiceAsyncClient:
 
     async def list_assets(
         self,
-        request: Union[asset_service.ListAssetsRequest, dict] = None,
+        request: Optional[Union[asset_service.ListAssetsRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: float = None,
+        timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListAssetsAsyncPager:
         r"""Lists assets with time and resource types and returns
@@ -246,7 +256,7 @@ class AssetServiceAsyncClient:
                     print(response)
 
         Args:
-            request (Union[google.cloud.asset_v1p5beta1.types.ListAssetsRequest, dict]):
+            request (Optional[Union[google.cloud.asset_v1p5beta1.types.ListAssetsRequest, dict]]):
                 The request object. ListAssets request.
             retry (google.api_core.retry.Retry): Designation of what errors, if any,
                 should be retried.
