@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Copyright 2018 Google LLC.
+# Copyright 2022 Google LLC.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ def get_saved_query(saved_query_name):
 
     client = asset_v1.AssetServiceClient()
     response = client.get_saved_query(request={"name": saved_query_name})
-    print("gotten_saved_query: {}".format(response))
+    print(f"gotten_saved_query: {response}")
     # [END asset_quickstart_get_saved_query]
 
 
