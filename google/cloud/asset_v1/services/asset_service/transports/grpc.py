@@ -253,14 +253,14 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ) -> Callable[[asset_service.ExportAssetsRequest], operations_pb2.Operation]:
         r"""Return a callable for the export assets method over gRPC.
 
-        Exports assets with time and resource types to a given Cloud
-        Storage location/BigQuery table. For Cloud Storage location
-        destinations, the output format is newline-delimited JSON. Each
-        line represents a
+        Exports assets with time and resource types to a given
+        {{storage_name}} location/{{bigquery_name}} table. For
+        {{storage_name}} location destinations, the output format is
+        newline-delimited JSON. Each line represents a
         [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in
-        the JSON format; for BigQuery table destinations, the output
-        table stores the fields in asset Protobuf as columns. This API
-        implements the
+        the JSON format; for {{bigquery_name}} table destinations, the
+        output table stores the fields in asset Protobuf as columns.
+        This API implements the
         [google.longrunning.Operation][google.longrunning.Operation]
         API, which allows you to keep track of the export. We recommend
         intervals of at least 2 seconds with exponential retry to poll
@@ -323,7 +323,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
 
         Batch gets the update history of assets that overlap a time
         window. For IAM_POLICY content, this API outputs history when
-        the asset and its attached IAM POLICY both exist. This can
+        the asset and its attached IAM_POLICY both exist. This can
         create gaps in the output history. Otherwise, this API outputs
         history with asset in both non-delete or deleted status. If a
         specified asset does not exist, this API returns an
@@ -487,10 +487,10 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all resources method over gRPC.
 
-        Searches all Cloud resources within the specified scope, such as
-        a project, folder, or organization. The caller must be granted
-        the ``cloudasset.assets.searchAllResources`` permission on the
-        desired scope, otherwise the request will be rejected.
+        Searches all {{gcp_name}} resources within the specified scope,
+        such as a project, folder, or organization. The caller must be
+        granted the ``cloudasset.assets.searchAllResources`` permission
+        on the desired scope, otherwise the request will be rejected.
 
         Returns:
             Callable[[~.SearchAllResourcesRequest],
@@ -519,10 +519,11 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all iam policies method over gRPC.
 
-        Searches all IAM policies within the specified scope, such as a
-        project, folder, or organization. The caller must be granted the
-        ``cloudasset.assets.searchAllIamPolicies`` permission on the
-        desired scope, otherwise the request will be rejected.
+        Searches all {{iam_name_short}} policies within the specified
+        scope, such as a project, folder, or organization. The caller
+        must be granted the ``cloudasset.assets.searchAllIamPolicies``
+        permission on the desired scope, otherwise the request will be
+        rejected.
 
         Returns:
             Callable[[~.SearchAllIamPoliciesRequest],
@@ -550,8 +551,8 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the analyze iam policy method over gRPC.
 
-        Analyzes IAM policies to answer which identities have
-        what accesses on which resources.
+        Analyzes {{iam_name_short}} policies to answer which identities
+        have what accesses on which resources.
 
         Returns:
             Callable[[~.AnalyzeIamPolicyRequest],
@@ -579,11 +580,11 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the analyze iam policy longrunning method over gRPC.
 
-        Analyzes IAM policies asynchronously to answer which identities
-        have what accesses on which resources, and writes the analysis
-        results to a Google Cloud Storage or a BigQuery destination. For
-        Cloud Storage destination, the output format is the JSON format
-        that represents a
+        Analyzes {{iam_name_short}} policies asynchronously to answer
+        which identities have what accesses on which resources, and
+        writes the analysis results to a Google {{storage_name}} or a
+        {{bigquery_name}} destination. For {{storage_name}} destination,
+        the output format is the JSON format that represents a
         [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
         This method implements the
         [google.longrunning.Operation][google.longrunning.Operation],
@@ -655,7 +656,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
         r"""Return a callable for the query assets method over gRPC.
 
         Issue a job that queries assets using a SQL statement compatible
-        with `BigQuery Standard
+        with `{{bigquery_name}} Standard
         SQL <http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql>`__.
 
         If the query execution finishes within timeout and there's no
@@ -667,7 +668,7 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
         ``QueryAssets`` call.
 
         Note, the query result has approximately 10 GB limitation
-        enforced by BigQuery
+        enforced by {{bigquery_name}}
         https://cloud.google.com/bigquery/docs/best-practices-performance-output,
         queries return larger results will result in errors.
 
@@ -833,7 +834,8 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
         r"""Return a callable for the batch get effective iam
         policies method over gRPC.
 
-        Gets effective IAM policies for a batch of resources.
+        Gets effective {{iam_name_short}} policies for a batch of
+        resources.
 
         Returns:
             Callable[[~.BatchGetEffectiveIamPoliciesRequest],

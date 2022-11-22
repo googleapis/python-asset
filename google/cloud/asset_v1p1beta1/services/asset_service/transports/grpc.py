@@ -238,13 +238,13 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all resources method over gRPC.
 
-        Searches all the resources under a given accessible
-        CRM scope (project/folder/organization). This RPC gives
-        callers especially admins the ability to search all the
-        resources under a scope, even if they don't have .get
-        permission of all the resources. Callers should have
-        cloud.assets.SearchAllResources permission on the
-        requested scope, otherwise it will be rejected.
+        Searches all the resources under a given accessible {{crm_name}}
+        scope (project/folder/organization). This RPC gives callers
+        especially admins the ability to search all the resources under
+        a scope, even if they don't have .get permission of all the
+        resources. Callers should have cloud.assets.SearchAllResources
+        permission on the requested scope, otherwise it will be
+        rejected.
 
         Returns:
             Callable[[~.SearchAllResourcesRequest],
@@ -273,14 +273,14 @@ class AssetServiceGrpcTransport(AssetServiceTransport):
     ]:
         r"""Return a callable for the search all iam policies method over gRPC.
 
-        Searches all the IAM policies under a given
-        accessible CRM scope (project/folder/organization). This
-        RPC gives callers especially admins the ability to
-        search all the IAM policies under a scope, even if they
-        don't have .getIamPolicy permission of all the IAM
-        policies. Callers should have
-        cloud.assets.SearchAllIamPolicies permission on the
-        requested scope, otherwise it will be rejected.
+        Searches all the {{iam_name_short}} policies under a given
+        accessible {{crm_name}} scope (project/folder/organization).
+        This RPC gives callers especially admins the ability to search
+        all the {{iam_name_short}} policies under a scope, even if they
+        don't have .getIamPolicy permission of all the
+        {{iam_name_short}} policies. Callers should have
+        cloud.assets.SearchAllIamPolicies permission on the requested
+        scope, otherwise it will be rejected.
 
         Returns:
             Callable[[~.SearchAllIamPoliciesRequest],

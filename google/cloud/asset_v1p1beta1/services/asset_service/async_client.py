@@ -218,13 +218,13 @@ class AssetServiceAsyncClient:
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllResourcesAsyncPager:
-        r"""Searches all the resources under a given accessible
-        CRM scope (project/folder/organization). This RPC gives
-        callers especially admins the ability to search all the
-        resources under a scope, even if they don't have .get
-        permission of all the resources. Callers should have
-        cloud.assets.SearchAllResources permission on the
-        requested scope, otherwise it will be rejected.
+        r"""Searches all the resources under a given accessible {{crm_name}}
+        scope (project/folder/organization). This RPC gives callers
+        especially admins the ability to search all the resources under
+        a scope, even if they don't have .get permission of all the
+        resources. Callers should have cloud.assets.SearchAllResources
+        permission on the requested scope, otherwise it will be
+        rejected.
 
         .. code-block:: python
 
@@ -374,14 +374,14 @@ class AssetServiceAsyncClient:
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllIamPoliciesAsyncPager:
-        r"""Searches all the IAM policies under a given
-        accessible CRM scope (project/folder/organization). This
-        RPC gives callers especially admins the ability to
-        search all the IAM policies under a scope, even if they
-        don't have .getIamPolicy permission of all the IAM
-        policies. Callers should have
-        cloud.assets.SearchAllIamPolicies permission on the
-        requested scope, otherwise it will be rejected.
+        r"""Searches all the {{iam_name_short}} policies under a given
+        accessible {{crm_name}} scope (project/folder/organization).
+        This RPC gives callers especially admins the ability to search
+        all the {{iam_name_short}} policies under a scope, even if they
+        don't have .getIamPolicy permission of all the
+        {{iam_name_short}} policies. Callers should have
+        cloud.assets.SearchAllIamPolicies permission on the requested
+        scope, otherwise it will be rejected.
 
         .. code-block:: python
 
@@ -412,7 +412,8 @@ class AssetServiceAsyncClient:
 
         Args:
             request (Optional[Union[google.cloud.asset_v1p1beta1.types.SearchAllIamPoliciesRequest, dict]]):
-                The request object. Search all IAM policies request.
+                The request object. Search all {{iam_name_short}}
+                policies request.
             scope (:class:`str`):
                 Required. The relative name of an asset. The search is
                 limited to the resources within the ``scope``. The
@@ -443,10 +444,10 @@ class AssetServiceAsyncClient:
 
         Returns:
             google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllIamPoliciesAsyncPager:
-                Search all IAM policies response.
-                Iterating over this object will yield
-                results and resolve additional pages
-                automatically.
+                Search all {{iam_name_short}} policies response.
+
+                Iterating over this object will yield results and
+                resolve additional pages automatically.
 
         """
         # Create or coerce a protobuf request object.

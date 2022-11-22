@@ -128,7 +128,7 @@ class SearchAllResourcesResponse(proto.Message):
 
 
 class SearchAllIamPoliciesRequest(proto.Message):
-    r"""Search all IAM policies request.
+    r"""Search all {{iam_name_short}} policies request.
 
     Attributes:
         scope (str):
@@ -179,14 +179,13 @@ class SearchAllIamPoliciesRequest(proto.Message):
 
 
 class SearchAllIamPoliciesResponse(proto.Message):
-    r"""Search all IAM policies response.
+    r"""Search all {{iam_name_short}} policies response.
 
     Attributes:
         results (MutableSequence[google.cloud.asset_v1p1beta1.types.IamPolicySearchResult]):
-            A list of IamPolicy that match the search
-            query. Related information such as the
-            associated resource is returned along with the
-            policy.
+            A list of {{iam_name_short}} policies that match the search
+            query. Related information such as the associated resource
+            is returned along with the policy.
         next_page_token (str):
             Set if there are more results than those appearing in this
             response; to get the next set of results, call this method
