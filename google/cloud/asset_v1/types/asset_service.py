@@ -155,8 +155,8 @@ class ExportAssetsRequest(proto.Message):
 
             If specified, only matching assets will be returned,
             otherwise, it will snapshot all asset types. See
-            `Introduction to
-            {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+            `Introduction to Cloud Asset
+            Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
             for all supported asset types.
         content_type (google.cloud.asset_v1.types.ContentType):
             Asset content type. If not specified, no
@@ -178,8 +178,8 @@ class ExportAssetsRequest(proto.Message):
                all [asset_types] or returns an error if any of the
                [asset_types] has no relationship support. An unspecified
                asset types field means all supported asset_types. See
-               `Introduction to
-               {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+               `Introduction to Cloud Asset
+               Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
                for all supported asset types and relationship types.
     """
 
@@ -227,11 +227,11 @@ class ExportAssetsResponse(proto.Message):
             results were output to.
         output_result (google.cloud.asset_v1.types.OutputResult):
             Output result indicating where the assets were exported to.
-            For example, a set of actual {{storage_name}} object uris
-            where the assets are exported to. The uris can be different
-            from what [output_config] has specified, as the service will
-            split the output object into multiple ones once it exceeds a
-            single {{storage_name}} object limit.
+            For example, a set of actual Google Cloud Storage object
+            uris where the assets are exported to. The uris can be
+            different from what [output_config] has specified, as the
+            service will split the output object into multiple ones once
+            it exceeds a single Google Cloud Storage object limit.
     """
 
     read_time: timestamp_pb2.Timestamp = proto.Field(
@@ -292,8 +292,8 @@ class ListAssetsRequest(proto.Message):
 
             If specified, only matching assets will be returned,
             otherwise, it will snapshot all asset types. See
-            `Introduction to
-            {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+            `Introduction to Cloud Asset
+            Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
             for all supported asset types.
         content_type (google.cloud.asset_v1.types.ContentType):
             Asset content type. If not specified, no
@@ -322,8 +322,8 @@ class ListAssetsRequest(proto.Message):
                all [asset_types] or returns an error if any of the
                [asset_types] has no relationship support. An unspecified
                asset types field means all supported asset_types. See
-               `Introduction to
-               {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+               `Introduction to Cloud Asset
+               Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
                for all supported asset types and relationship types.
     """
 
@@ -438,8 +438,8 @@ class BatchGetAssetsHistoryRequest(proto.Message):
             -  Otherwise: it outputs the supported relationships'
                history on the [asset_names] or returns an error if any
                of the [asset_names]'s types has no relationship support.
-               See `Introduction to
-               {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+               See `Introduction to Cloud Asset
+               Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
                for all supported asset types and relationship types.
     """
 
@@ -630,13 +630,13 @@ class OutputConfig(proto.Message):
 
     Attributes:
         gcs_destination (google.cloud.asset_v1.types.GcsDestination):
-            Destination on {{storage_name}}.
+            Destination on Cloud Storage.
 
             This field is a member of `oneof`_ ``destination``.
         bigquery_destination (google.cloud.asset_v1.types.BigQueryDestination):
-            Destination on {{bigquery_name}}. The output table stores
-            the fields in asset Protobuf as columns in
-            {{bigquery_name}}.
+            Destination on BigQuery. The output table
+            stores the fields in asset Protobuf as columns
+            in BigQuery.
 
             This field is a member of `oneof`_ ``destination``.
     """
@@ -662,7 +662,7 @@ class OutputResult(proto.Message):
 
     Attributes:
         gcs_result (google.cloud.asset_v1.types.GcsOutputResult):
-            Export result on {{storage_name}}.
+            Export result on Cloud Storage.
 
             This field is a member of `oneof`_ ``result``.
     """
@@ -676,11 +676,11 @@ class OutputResult(proto.Message):
 
 
 class GcsOutputResult(proto.Message):
-    r"""A {{storage_name}} output result.
+    r"""A Cloud Storage output result.
 
     Attributes:
         uris (MutableSequence[str]):
-            List of uris of the {{storage_name}} objects. Example:
+            List of uris of the Cloud Storage objects. Example:
             "gs://bucket_name/object_name".
     """
 
@@ -691,7 +691,7 @@ class GcsOutputResult(proto.Message):
 
 
 class GcsDestination(proto.Message):
-    r"""A {{storage_name}} location.
+    r"""A Cloud Storage location.
 
     This message has `oneof`_ fields (mutually exclusive fields).
     For each oneof, at most one member field can be set at the same time.
@@ -702,21 +702,20 @@ class GcsDestination(proto.Message):
 
     Attributes:
         uri (str):
-            The uri of the {{storage_name}} object. It's the same uri
-            that is used by gsutil. Example:
-            "gs://bucket_name/object_name". See `Viewing and Editing
-            Object
+            The uri of the Cloud Storage object. It's the same uri that
+            is used by gsutil. Example: "gs://bucket_name/object_name".
+            See `Viewing and Editing Object
             Metadata <https://cloud.google.com/storage/docs/viewing-editing-metadata>`__
             for more information.
 
-            If the specified {{storage_name}} object already exists and
+            If the specified Cloud Storage object already exists and
             there is no
             `hold <https://cloud.google.com/storage/docs/object-holds>`__,
             it will be overwritten with the exported result.
 
             This field is a member of `oneof`_ ``object_uri``.
         uri_prefix (str):
-            The uri prefix of all generated {{storage_name}} objects.
+            The uri prefix of all generated Cloud Storage objects.
             Example: "gs://bucket_name/object_name_prefix". Each object
             uri is in format: "gs://bucket_name/object_name_prefix// and
             only contains assets for that type. starts from 0. Example:
@@ -742,24 +741,25 @@ class GcsDestination(proto.Message):
 
 
 class BigQueryDestination(proto.Message):
-    r"""A {{bigquery_name}} destination for exporting assets to.
+    r"""A BigQuery destination for exporting assets to.
 
     Attributes:
         dataset (str):
-            Required. The {{bigquery_name}} dataset in format
+            Required. The BigQuery dataset in format
             "projects/projectId/datasets/datasetId", to which the
             snapshot result should be exported. If this dataset does not
             exist, the export call returns an INVALID_ARGUMENT error.
             Setting the ``contentType`` for ``exportAssets`` determines
             the
             `schema </asset-inventory/docs/exporting-to-bigquery#bigquery-schema>`__
-            of the {{bigquery_name}} table. Setting
+            of the BigQuery table. Setting
             ``separateTablesPerAssetType`` to ``TRUE`` also influences
             the schema.
         table (str):
-            Required. The {{bigquery_name}} table to which the snapshot
-            result should be written. If this table does not exist, a
-            new table with the given name will be created.
+            Required. The BigQuery table to which the
+            snapshot result should be written. If this table
+            does not exist, a new table with the given name
+            will be created.
         force (bool):
             If the destination table already exists and this flag is
             ``TRUE``, the table will be overwritten by the contents of
@@ -810,7 +810,7 @@ class BigQueryDestination(proto.Message):
             ``RESOURCE``, the schema of each table will include
             RECORD-type columns mapped to the nested fields in the
             Asset.resource.data field of that asset type (up to the 15
-            nested level {{bigquery_name}} supports
+            nested level BigQuery supports
             (https://cloud.google.com/bigquery/docs/nested-repeated#limitations)).
             The fields in >15 nested levels will be stored in JSON
             format string as a child column of its parent RECORD column.
@@ -848,20 +848,20 @@ class BigQueryDestination(proto.Message):
 
 
 class PartitionSpec(proto.Message):
-    r"""Specifications of {{bigquery_name}} partitioned table as export
+    r"""Specifications of BigQuery partitioned table as export
     destination.
 
     Attributes:
         partition_key (google.cloud.asset_v1.types.PartitionSpec.PartitionKey):
-            The partition key for {{bigquery_name}} partitioned table.
+            The partition key for BigQuery partitioned
+            table.
     """
 
     class PartitionKey(proto.Enum):
         r"""This enum is used to determine the partition key column when
-        exporting assets to {{bigquery_name}} partitioned table(s). Note
-        that, if the partition key is a timestamp column, the actual
-        partition is based on its date value (expressed in UTC. see details
-        in
+        exporting assets to BigQuery partitioned table(s). Note that, if the
+        partition key is a timestamp column, the actual partition is based
+        on its date value (expressed in UTC. see details in
         https://cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables).
         """
         PARTITION_KEY_UNSPECIFIED = 0
@@ -984,8 +984,9 @@ class Feed(proto.Message):
             -  Otherwise: it outputs the supported relationships of the
                types of [asset_names] and [asset_types] or returns an
                error if any of the [asset_names] or the [asset_types]
-               has no replationship support. See `Introduction to
-               {{cai_name}} <https://cloud.google.com/asset-inventory/docs/overview>`__
+               has no replationship support. See `Introduction to Cloud
+               Asset
+               Inventory <https://cloud.google.com/asset-inventory/docs/overview>`__
                for all supported asset types and relationship types.
     """
 
@@ -1048,30 +1049,29 @@ class SearchAllResourcesRequest(proto.Message):
 
             Examples:
 
-            -  ``name:Important`` to find {{gcp_name}} resources whose
-               name contains "Important" as a word.
-            -  ``name=Important`` to find the {{gcp_name}} resource
-               whose name is exactly "Important".
-            -  ``displayName:Impor*`` to find {{gcp_name}} resources
-               whose display name contains "Impor" as a prefix of any
-               word in the field.
-            -  ``location:us-west*`` to find {{gcp_name}} resources
-               whose location contains both "us" and "west" as prefixes.
-            -  ``labels:prod`` to find {{gcp_name}} resources whose
-               labels contain "prod" as a key or value.
-            -  ``labels.env:prod`` to find {{gcp_name}} resources that
-               have a label "env" and its value is "prod".
-            -  ``labels.env:*`` to find {{gcp_name}} resources that have
-               a label "env".
-            -  ``kmsKey:key`` to find {{gcp_name}} resources encrypted
-               with a customer-managed encryption key whose name
-               contains "key" as a word. This field is deprecated.
-               Please use the ``kmsKeys`` field to retrieve KMS key
-               information.
-            -  ``kmsKeys:key`` to find {{gcp_name}} resources encrypted
-               with customer-managed encryption keys whose name contains
-               the word "key".
-            -  ``relationships:instance-group-1`` to find {{gcp_name}}
+            -  ``name:Important`` to find Cloud resources whose name
+               contains "Important" as a word.
+            -  ``name=Important`` to find the Cloud resource whose name
+               is exactly "Important".
+            -  ``displayName:Impor*`` to find Cloud resources whose
+               display name contains "Impor" as a prefix of any word in
+               the field.
+            -  ``location:us-west*`` to find Cloud resources whose
+               location contains both "us" and "west" as prefixes.
+            -  ``labels:prod`` to find Cloud resources whose labels
+               contain "prod" as a key or value.
+            -  ``labels.env:prod`` to find Cloud resources that have a
+               label "env" and its value is "prod".
+            -  ``labels.env:*`` to find Cloud resources that have a
+               label "env".
+            -  ``kmsKey:key`` to find Cloud resources encrypted with a
+               customer-managed encryption key whose name contains "key"
+               as a word. This field is deprecated. Please use the
+               ``kmsKeys`` field to retrieve KMS key information.
+            -  ``kmsKeys:key`` to find Cloud resources encrypted with
+               customer-managed encryption keys whose name contains the
+               word "key".
+            -  ``relationships:instance-group-1`` to find Cloud
                resources that have relationships with "instance-group-1"
                in the related resource name.
             -  ``relationships:INSTANCE_TO_INSTANCEGROUP`` to find
@@ -1081,27 +1081,26 @@ class SearchAllResourcesRequest(proto.Message):
                to find compute instances that have relationships with
                "instance-group-1" in the compute instance group resource
                name, for relationship type "INSTANCE_TO_INSTANCEGROUP".
-            -  ``state:ACTIVE`` to find {{gcp_name}} resources whose
-               state contains "ACTIVE" as a word.
-            -  ``NOT state:ACTIVE`` to find {{gcp_name}} resources whose
-               state doesn't contain "ACTIVE" as a word.
-            -  ``createTime<1609459200`` to find {{gcp_name}} resources
-               that were created before "2021-01-01 00:00:00 UTC".
-               1609459200 is the epoch timestamp of "2021-01-01 00:00:00
-               UTC" in seconds.
-            -  ``updateTime>1609459200`` to find {{gcp_name}} resources
-               that were updated after "2021-01-01 00:00:00 UTC".
-               1609459200 is the epoch timestamp of "2021-01-01 00:00:00
-               UTC" in seconds.
-            -  ``Important`` to find {{gcp_name}} resources that contain
+            -  ``state:ACTIVE`` to find Cloud resources whose state
+               contains "ACTIVE" as a word.
+            -  ``NOT state:ACTIVE`` to find Cloud resources whose state
+               doesn't contain "ACTIVE" as a word.
+            -  ``createTime<1609459200`` to find Cloud resources that
+               were created before "2021-01-01 00:00:00 UTC". 1609459200
+               is the epoch timestamp of "2021-01-01 00:00:00 UTC" in
+               seconds.
+            -  ``updateTime>1609459200`` to find Cloud resources that
+               were updated after "2021-01-01 00:00:00 UTC". 1609459200
+               is the epoch timestamp of "2021-01-01 00:00:00 UTC" in
+               seconds.
+            -  ``Important`` to find Cloud resources that contain
                "Important" as a word in any of the searchable fields.
-            -  ``Impor*`` to find {{gcp_name}} resources that contain
-               "Impor" as a prefix of any word in any of the searchable
-               fields.
-            -  ``Important location:(us-west1 OR global)`` to find
-               {{gcp_name}} resources that contain "Important" as a word
-               in any of the searchable fields and are also located in
-               the "us-west1" region or the "global" location.
+            -  ``Impor*`` to find Cloud resources that contain "Impor"
+               as a prefix of any word in any of the searchable fields.
+            -  ``Important location:(us-west1 OR global)`` to find Cloud
+               resources that contain "Important" as a word in any of
+               the searchable fields and are also located in the
+               "us-west1" region or the "global" location.
         asset_types (MutableSequence[str]):
             Optional. A list of asset types that this request searches
             for. If empty, it will search all the `searchable asset
@@ -1257,14 +1256,13 @@ class SearchAllResourcesResponse(proto.Message):
 
 
 class SearchAllIamPoliciesRequest(proto.Message):
-    r"""Search all {{iam_name_short}} policies request.
+    r"""Search all IAM policies request.
 
     Attributes:
         scope (str):
             Required. A scope can be a project, a folder, or an
-            organization. The search is limited to the
-            {{iam_name_short}} policies within the ``scope``. The caller
-            must be granted the
+            organization. The search is limited to the IAM policies
+            within the ``scope``. The caller must be granted the
             ```cloudasset.assets.searchAllIamPolicies`` <https://cloud.google.com/asset-inventory/docs/access-control#required_permissions>`__
             permission on the desired scope.
 
@@ -1279,55 +1277,49 @@ class SearchAllIamPoliciesRequest(proto.Message):
             Optional. The query statement. See `how to construct a
             query <https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query>`__
             for more information. If not specified or empty, it will
-            search all the {{iam_name_short}} policies within the
-            specified ``scope``. Note that the query string is compared
-            against each {{iam_name_short}} policy binding, including
-            its principals, roles, and {{iam_name_short}} conditions.
-            The returned {{iam_name_short}} policies will only contain
-            the bindings that match your query. To learn more about the
-            {{iam_name_short}} policy structure, see the
-            `{{iam_name_short}} policy
+            search all the IAM policies within the specified ``scope``.
+            Note that the query string is compared against each Cloud
+            IAM policy binding, including its principals, roles, and
+            Cloud IAM conditions. The returned Cloud IAM policies will
+            only contain the bindings that match your query. To learn
+            more about the IAM policy structure, see the `IAM policy
             documentation <https://cloud.google.com/iam/help/allow-policies/structure>`__.
 
             Examples:
 
-            -  ``policy:amy@gmail.com`` to find {{iam_name_short}}
-               policy bindings that specify user "amy@gmail.com".
-            -  ``policy:roles/compute.admin`` to find {{iam_name_short}}
-               policy bindings that specify the Compute Admin role.
-            -  ``policy:comp*`` to find {{iam_name_short}} policy
-               bindings that contain "comp" as a prefix of any word in
-               the binding.
+            -  ``policy:amy@gmail.com`` to find IAM policy bindings that
+               specify user "amy@gmail.com".
+            -  ``policy:roles/compute.admin`` to find IAM policy
+               bindings that specify the Compute Admin role.
+            -  ``policy:comp*`` to find IAM policy bindings that contain
+               "comp" as a prefix of any word in the binding.
             -  ``policy.role.permissions:storage.buckets.update`` to
-               find {{iam_name_short}} policy bindings that specify a
-               role containing "storage.buckets.update" permission. Note
-               that if callers don't have ``iam.roles.get`` access to a
-               role's included permissions, policy bindings that specify
-               this role will be dropped from the search results.
-            -  ``policy.role.permissions:upd*`` to find
-               {{iam_name_short}} policy bindings that specify a role
-               containing "upd" as a prefix of any word in the role
-               permission. Note that if callers don't have
-               ``iam.roles.get`` access to a role's included
+               find IAM policy bindings that specify a role containing
+               "storage.buckets.update" permission. Note that if callers
+               don't have ``iam.roles.get`` access to a role's included
                permissions, policy bindings that specify this role will
                be dropped from the search results.
-            -  ``resource:organizations/123456`` to find
-               {{iam_name_short}} policy bindings that are set on
-               "organizations/123456".
+            -  ``policy.role.permissions:upd*`` to find IAM policy
+               bindings that specify a role containing "upd" as a prefix
+               of any word in the role permission. Note that if callers
+               don't have ``iam.roles.get`` access to a role's included
+               permissions, policy bindings that specify this role will
+               be dropped from the search results.
+            -  ``resource:organizations/123456`` to find IAM policy
+               bindings that are set on "organizations/123456".
             -  ``resource=//cloudresourcemanager.googleapis.com/projects/myproject``
-               to find {{iam_name_short}} policy bindings that are set
-               on the project named "myproject".
-            -  ``Important`` to find {{iam_name_short}} policy bindings
-               that contain "Important" as a word in any of the
-               searchable fields (except for the included permissions).
+               to find IAM policy bindings that are set on the project
+               named "myproject".
+            -  ``Important`` to find IAM policy bindings that contain
+               "Important" as a word in any of the searchable fields
+               (except for the included permissions).
             -  ``resource:(instance1 OR instance2) policy:amy`` to find
-               {{iam_name_short}} policy bindings that are set on
-               resources "instance1" or "instance2" and also specify
-               user "amy".
-            -  ``roles:roles/compute.admin`` to find {{iam_name_short}}
-               policy bindings that specify the Compute Admin role.
-            -  ``memberTypes:user`` to find {{iam_name_short}} policy
-               bindings that contain the principal type "user".
+               IAM policy bindings that are set on resources "instance1"
+               or "instance2" and also specify user "amy".
+            -  ``roles:roles/compute.admin`` to find IAM policy bindings
+               that specify the Compute Admin role.
+            -  ``memberTypes:user`` to find IAM policy bindings that
+               contain the principal type "user".
         page_size (int):
             Optional. The page size for search result pagination. Page
             size is capped at 500 even if a larger value is given. If
@@ -1342,21 +1334,20 @@ class SearchAllIamPoliciesRequest(proto.Message):
             response. The values of all other method parameters must be
             identical to those in the previous call.
         asset_types (MutableSequence[str]):
-            Optional. A list of asset types that the {{iam_name_short}}
-            policies are attached to. If empty, it will search the
-            {{iam_name_short}} policies that are attached to all the
-            `searchable asset
+            Optional. A list of asset types that the IAM policies are
+            attached to. If empty, it will search the IAM policies that
+            are attached to all the `searchable asset
             types <https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types>`__.
 
             Regular expressions are also supported. For example:
 
-            -  "compute.googleapis.com.*" snapshots {{iam_name_short}}
-               policies attached to asset type starts with
+            -  "compute.googleapis.com.*" snapshots IAM policies
+               attached to asset type starts with
                "compute.googleapis.com".
-            -  ".*Instance" snapshots {{iam_name_short}} policies
-               attached to asset type ends with "Instance".
-            -  ".*Instance.*" snapshots {{iam_name_short}} policies
-               attached to asset type contains "Instance".
+            -  ".*Instance" snapshots IAM policies attached to asset
+               type ends with "Instance".
+            -  ".*Instance.*" snapshots IAM policies attached to asset
+               type contains "Instance".
 
             See `RE2 <https://github.com/google/re2/wiki/Syntax>`__ for
             all supported regular expression syntax. If the regular
@@ -1404,13 +1395,14 @@ class SearchAllIamPoliciesRequest(proto.Message):
 
 
 class SearchAllIamPoliciesResponse(proto.Message):
-    r"""Search all {{iam_name_short}} policies response.
+    r"""Search all IAM policies response.
 
     Attributes:
         results (MutableSequence[google.cloud.asset_v1.types.IamPolicySearchResult]):
-            A list of {{iam_name_short}} policies that match the search
-            query. Related information such as the associated resource
-            is returned along with the policy.
+            A list of IamPolicy that match the search
+            query. Related information such as the
+            associated resource is returned along with the
+            policy.
         next_page_token (str):
             Set if there are more results than those appearing in this
             response; to get the next set of results, call this method
@@ -1433,13 +1425,13 @@ class SearchAllIamPoliciesResponse(proto.Message):
 
 
 class IamPolicyAnalysisQuery(proto.Message):
-    r"""{{iam_name_short}} policy analysis query message.
+    r"""IAM policy analysis query message.
 
     Attributes:
         scope (str):
             Required. The relative name of the root asset. Only
-            resources and {{iam_name_short}} policies within the scope
-            will be analyzed.
+            resources and IAM policies within the scope will be
+            analyzed.
 
             This can only be an organization number (such as
             "organizations/123"), a folder number (such as
@@ -1462,7 +1454,7 @@ class IamPolicyAnalysisQuery(proto.Message):
         options (google.cloud.asset_v1.types.IamPolicyAnalysisQuery.Options):
             Optional. The query options.
         condition_context (google.cloud.asset_v1.types.IamPolicyAnalysisQuery.ConditionContext):
-            Optional. The hypothetical context for {{iam_name_short}}
+            Optional. The hypothetical context for IAM
             conditions evaluation.
     """
 
@@ -1492,7 +1484,7 @@ class IamPolicyAnalysisQuery(proto.Message):
         Attributes:
             identity (str):
                 Required. The identity appear in the form of principals in
-                `{{iam_name_short}} policy
+                `IAM policy
                 binding <https://cloud.google.com/iam/reference/rest/v1/Binding>`__.
 
                 The examples of supported forms are:
@@ -1539,8 +1531,7 @@ class IamPolicyAnalysisQuery(proto.Message):
         Attributes:
             expand_groups (bool):
                 Optional. If true, the identities section of the result will
-                expand any Google groups appearing in an {{iam_name_short}}
-                policy binding.
+                expand any Google groups appearing in an IAM policy binding.
 
                 If
                 [IamPolicyAnalysisQuery.identity_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.identity_selector]
@@ -1553,8 +1544,8 @@ class IamPolicyAnalysisQuery(proto.Message):
                 Default is false.
             expand_roles (bool):
                 Optional. If true, the access section of result will expand
-                any roles appearing in {{iam_name_short}} policy bindings to
-                include their permissions.
+                any roles appearing in IAM policy bindings to include their
+                permissions.
 
                 If
                 [IamPolicyAnalysisQuery.access_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.access_selector]
@@ -1567,14 +1558,13 @@ class IamPolicyAnalysisQuery(proto.Message):
                 Optional. If true and
                 [IamPolicyAnalysisQuery.resource_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector]
                 is not specified, the resource section of the result will
-                expand any resource attached to an {{iam_name_short}} policy
-                to include resources lower in the resource hierarchy.
+                expand any resource attached to an IAM policy to include
+                resources lower in the resource hierarchy.
 
                 For example, if the request analyzes for which resources
-                user A has permission P, and the results include an
-                {{iam_name_short}} policy with P on a GCP folder, the
-                results will also include resources in that folder with
-                permission P.
+                user A has permission P, and the results include an IAM
+                policy with P on a GCP folder, the results will also include
+                resources in that folder with permission P.
 
                 If true and
                 [IamPolicyAnalysisQuery.resource_selector][google.cloud.asset.v1.IamPolicyAnalysisQuery.resource_selector]
@@ -1613,20 +1603,18 @@ class IamPolicyAnalysisQuery(proto.Message):
                 rpc instead.
 
                 For example, if the request analyzes for which resources
-                user A has permission P, and there's an {{iam_name_short}}
-                policy states user A has iam.serviceAccounts.getAccessToken
-                permission to a service account SA, and there's another
-                {{iam_name_short}} policy states service account SA has
-                permission P to a GCP folder F, then user A potentially has
-                access to the GCP folder F. And those advanced analysis
-                results will be included in
+                user A has permission P, and there's an IAM policy states
+                user A has iam.serviceAccounts.getAccessToken permission to
+                a service account SA, and there's another IAM policy states
+                service account SA has permission P to a GCP folder F, then
+                user A potentially has access to the GCP folder F. And those
+                advanced analysis results will be included in
                 [AnalyzeIamPolicyResponse.service_account_impersonation_analysis][google.cloud.asset.v1.AnalyzeIamPolicyResponse.service_account_impersonation_analysis].
 
                 Another example, if the request analyzes for who has
-                permission P to a GCP folder F, and there's an
-                {{iam_name_short}} policy states user A has
-                iam.serviceAccounts.actAs permission to a service account
-                SA, and there's another {{iam_name_short}} policy states
+                permission P to a GCP folder F, and there's an IAM policy
+                states user A has iam.serviceAccounts.actAs permission to a
+                service account SA, and there's another IAM policy states
                 service account SA has permission P to the GCP folder F,
                 then user A potentially has access to the GCP folder F. And
                 those advanced analysis results will be included in
@@ -1671,16 +1659,16 @@ class IamPolicyAnalysisQuery(proto.Message):
         )
 
     class ConditionContext(proto.Message):
-        r"""The {{iam_name_short}} conditions context.
+        r"""The IAM conditions context.
 
         .. _oneof: https://proto-plus-python.readthedocs.io/en/stable/fields.html#oneofs-mutually-exclusive-fields
 
         Attributes:
             access_time (google.protobuf.timestamp_pb2.Timestamp):
-                The hypothetical access timestamp to evaluate
-                {{iam_name_short}} conditions. Note that this value must not
-                be earlier than the current time; otherwise, an
-                INVALID_ARGUMENT error will be returned.
+                The hypothetical access timestamp to evaluate IAM
+                conditions. Note that this value must not be earlier than
+                the current time; otherwise, an INVALID_ARGUMENT error will
+                be returned.
 
                 This field is a member of `oneof`_ ``TimeContext``.
         """
@@ -1863,7 +1851,7 @@ class AnalyzeIamPolicyResponse(proto.Message):
 
 
 class IamPolicyAnalysisOutputConfig(proto.Message):
-    r"""Output configuration for export {{iam_name_short}} policy analysis
+    r"""Output configuration for export IAM policy analysis
     destination.
 
     This message has `oneof`_ fields (mutually exclusive fields).
@@ -1875,28 +1863,28 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
 
     Attributes:
         gcs_destination (google.cloud.asset_v1.types.IamPolicyAnalysisOutputConfig.GcsDestination):
-            Destination on {{storage_name}}.
+            Destination on Cloud Storage.
 
             This field is a member of `oneof`_ ``destination``.
         bigquery_destination (google.cloud.asset_v1.types.IamPolicyAnalysisOutputConfig.BigQueryDestination):
-            Destination on {{bigquery_name}}.
+            Destination on BigQuery.
 
             This field is a member of `oneof`_ ``destination``.
     """
 
     class GcsDestination(proto.Message):
-        r"""A {{storage_name}} location.
+        r"""A Cloud Storage location.
 
         Attributes:
             uri (str):
-                Required. The uri of the {{storage_name}} object. It's the
-                same uri that is used by gsutil. Example:
+                Required. The uri of the Cloud Storage object. It's the same
+                uri that is used by gsutil. Example:
                 "gs://bucket_name/object_name". See `Viewing and Editing
                 Object
                 Metadata <https://cloud.google.com/storage/docs/viewing-editing-metadata>`__
                 for more information.
 
-                If the specified {{storage_name}} object already exists and
+                If the specified Cloud Storage object already exists and
                 there is no
                 `hold <https://cloud.google.com/storage/docs/object-holds>`__,
                 it will be overwritten with the analysis result.
@@ -1908,19 +1896,19 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
         )
 
     class BigQueryDestination(proto.Message):
-        r"""A {{bigquery_name}} destination.
+        r"""A BigQuery destination.
 
         Attributes:
             dataset (str):
-                Required. The {{bigquery_name}} dataset in format
+                Required. The BigQuery dataset in format
                 "projects/projectId/datasets/datasetId", to which the
                 analysis results should be exported. If this dataset does
                 not exist, the export call will return an INVALID_ARGUMENT
                 error.
             table_prefix (str):
-                Required. The prefix of the {{bigquery_name}} tables to
-                which the analysis results will be written. Tables will be
-                created based on this table_prefix if not exist:
+                Required. The prefix of the BigQuery tables to which the
+                analysis results will be written. Tables will be created
+                based on this table_prefix if not exist:
 
                 -  <table_prefix>_analysis table will contain export
                    operation's metadata.
@@ -1929,31 +1917,32 @@ class IamPolicyAnalysisOutputConfig(proto.Message):
                    When [partition_key] is specified, both tables will be
                    partitioned based on the [partition_key].
             partition_key (google.cloud.asset_v1.types.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey):
-                The partition key for {{bigquery_name}} partitioned table.
+                The partition key for BigQuery partitioned
+                table.
             write_disposition (str):
                 Optional. Specifies the action that occurs if the
                 destination table or partition already exists. The following
                 values are supported:
 
                 -  WRITE_TRUNCATE: If the table or partition already exists,
-                   {{bigquery_name}} overwrites the entire table or all the
+                   BigQuery overwrites the entire table or all the
                    partitions data.
                 -  WRITE_APPEND: If the table or partition already exists,
-                   {{bigquery_name}} appends the data to the table or the
-                   latest partition.
+                   BigQuery appends the data to the table or the latest
+                   partition.
                 -  WRITE_EMPTY: If the table already exists and contains
                    data, an error is returned.
 
                 The default value is WRITE_APPEND. Each action is atomic and
-                only occurs if {{bigquery_name}} is able to complete the job
+                only occurs if BigQuery is able to complete the job
                 successfully. Details are at
                 https://cloud.google.com/bigquery/docs/loading-data-local#appending_to_or_overwriting_a_table_using_a_local_file.
         """
 
         class PartitionKey(proto.Enum):
             r"""This enum determines the partition key column for the
-            {{bigquery_name}} tables. Partitioning can improve query performance
-            and reduce query cost by filtering partitions. Refer to
+            bigquery tables. Partitioning can improve query performance and
+            reduce query cost by filtering partitions. Refer to
             https://cloud.google.com/bigquery/docs/partitioned-tables for
             details.
             """
@@ -2087,8 +2076,7 @@ class SavedQuery(proto.Message):
 
         Attributes:
             iam_policy_analysis_query (google.cloud.asset_v1.types.IamPolicyAnalysisQuery):
-                An {{iam_name_short}} Policy Analysis query, which could be
-                used in the
+                An IAM Policy Analysis query, which could be used in the
                 [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy]
                 rpc or the
                 [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning]
@@ -2229,9 +2217,8 @@ class ListSavedQueriesRequest(proto.Message):
             Optional. The maximum number of saved queries
             to return per page. The service may return fewer
             than this value. If unspecified, at most 50 will
-            be returned.
-             The maximum value is 1000; values above 1000
-            will be coerced to 1000.
+            be returned.  The maximum value is 1000; values
+            above 1000 will be coerced to 1000.
         page_token (str):
             Optional. A page token, received from a previous
             ``ListSavedQueries`` call. Provide this to retrieve the
@@ -2386,9 +2373,9 @@ class AnalyzeMoveResponse(proto.Message):
 
     Attributes:
         move_analysis (MutableSequence[google.cloud.asset_v1.types.MoveAnalysis]):
-            The list of analyses returned from performing the intended
-            resource move analysis. The analysis is grouped by different
-            {{gcp_name}} services.
+            The list of analyses returned from performing
+            the intended resource move analysis. The
+            analysis is grouped by different Cloud services.
     """
 
     move_analysis: MutableSequence["MoveAnalysis"] = proto.RepeatedField(
@@ -2410,8 +2397,8 @@ class MoveAnalysis(proto.Message):
 
     Attributes:
         display_name (str):
-            The user friendly display name of the analysis. E.g.
-            {{iam_name_short}}, {{orgpol_name}} etc.
+            The user friendly display name of the
+            analysis. E.g. IAM, Organization Policy etc.
         analysis (google.cloud.asset_v1.types.MoveAnalysisResult):
             Analysis result of moving the target
             resource.
@@ -2490,33 +2477,34 @@ class QueryAssetsOutputConfig(proto.Message):
 
     Attributes:
         bigquery_destination (google.cloud.asset_v1.types.QueryAssetsOutputConfig.BigQueryDestination):
-            {{bigquery_name}} destination where the query results will
-            be saved.
+            BigQuery destination where the query results
+            will be saved.
     """
 
     class BigQueryDestination(proto.Message):
-        r"""{{bigquery_name}} destination.
+        r"""BigQuery destination.
 
         Attributes:
             dataset (str):
-                Required. The {{bigquery_name}} dataset where the query
-                results will be saved. It has the format of
-                "projects/{projectId}/datasets/{datasetId}".
+                Required. The BigQuery dataset where the
+                query results will be saved. It has the format
+                of "projects/{projectId}/datasets/{datasetId}".
             table (str):
-                Required. The {{bigquery_name}} table where the query
-                results will be saved. If this table does not exist, a new
-                table with the given name will be created.
+                Required. The BigQuery table where the query
+                results will be saved. If this table does not
+                exist, a new table with the given name will be
+                created.
             write_disposition (str):
                 Specifies the action that occurs if the destination table or
                 partition already exists. The following values are
                 supported:
 
                 -  WRITE_TRUNCATE: If the table or partition already exists,
-                   {{bigquery_name}} overwrites the entire table or all the
+                   BigQuery overwrites the entire table or all the
                    partitions data.
                 -  WRITE_APPEND: If the table or partition already exists,
-                   {{bigquery_name}} appends the data to the table or the
-                   latest partition.
+                   BigQuery appends the data to the table or the latest
+                   partition.
                 -  WRITE_EMPTY: If the table already exists and contains
                    data, a 'duplicate' error is returned in the job result.
 
@@ -2563,8 +2551,8 @@ class QueryAssetsRequest(proto.Message):
 
             Only assets belonging to the ``parent`` will be returned.
         statement (str):
-            Optional. A SQL statement that's compatible with
-            `{{bigquery_name}} Standard
+            Optional. A SQL statement that's compatible with `BigQuery
+            Standard
             SQL <http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql>`__.
 
             This field is a member of `oneof`_ ``query``.
@@ -2595,7 +2583,7 @@ class QueryAssetsRequest(proto.Message):
             the ``done`` field in the ``QueryAssetsResponse`` is true,
             otherwise false.
 
-            Like {{bigquery_name}} `jobs.query
+            Like BigQuery `jobs.query
             API <https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest>`__
             The call is not guaranteed to wait for the specified
             timeout; it typically returns after around 200 seconds
@@ -2741,9 +2729,9 @@ class QueryAssetsResponse(proto.Message):
 class QueryResult(proto.Message):
     r"""Execution results of the query.
 
-    The result is formatted as rows represented by {{bigquery_name}}
-    compatible [schema]. When pagination is necessary, it will contains
-    the page token to retrieve the results of following pages.
+    The result is formatted as rows represented by BigQuery compatible
+    [schema]. When pagination is necessary, it will contains the page
+    token to retrieve the results of following pages.
 
     Attributes:
         rows (MutableSequence[google.protobuf.struct_pb2.Struct]):
@@ -2782,7 +2770,7 @@ class QueryResult(proto.Message):
 
 
 class TableSchema(proto.Message):
-    r"""{{bigquery_name}} Compatible table schema.
+    r"""BigQuery Compatible table schema.
 
     Attributes:
         fields (MutableSequence[google.cloud.asset_v1.types.TableFieldSchema]):
@@ -2856,8 +2844,8 @@ class BatchGetEffectiveIamPoliciesRequest(proto.Message):
 
     Attributes:
         scope (str):
-            Required. Only {{iam_name_short}} policies on or below the
-            scope will be returned.
+            Required. Only IAM policies on or below the scope will be
+            returned.
 
             This can only be an organization number (such as
             "organizations/123"), a folder number (such as
@@ -2898,14 +2886,13 @@ class BatchGetEffectiveIamPoliciesResponse(proto.Message):
             The effective policies for a batch of resources. Note that
             the results order is the same as the order of
             [BatchGetEffectiveIamPoliciesRequest.names][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest.names].
-            When a resource does not have any effective
-            {{iam_name_short}} policies, its corresponding policy_result
-            will contain empty
+            When a resource does not have any effective IAM policies,
+            its corresponding policy_result will contain empty
             [EffectiveIamPolicy.policies][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.policies].
     """
 
     class EffectiveIamPolicy(proto.Message):
-        r"""The effective {{iam_name_short}} policies on one resource.
+        r"""The effective IAM policies on one resource.
 
         Attributes:
             full_resource_name (str):
@@ -2940,7 +2927,7 @@ class BatchGetEffectiveIamPoliciesResponse(proto.Message):
         """
 
         class PolicyInfo(proto.Message):
-            r"""The {{iam_name_short}} policy and its attached resource.
+            r"""The IAM policy and its attached resource.
 
             Attributes:
                 attached_resource (str):
@@ -2948,8 +2935,7 @@ class BatchGetEffectiveIamPoliciesResponse(proto.Message):
                     [policy][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.policy]
                     is directly attached to.
                 policy (google.iam.v1.policy_pb2.Policy):
-                    The {{iam_name_short}} policy that's directly attached to
-                    the
+                    The IAM policy that's directly attached to the
                     [attached_resource][google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.attached_resource].
             """
 

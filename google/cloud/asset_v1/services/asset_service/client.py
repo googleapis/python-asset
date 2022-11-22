@@ -548,14 +548,14 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Exports assets with time and resource types to a given
-        {{storage_name}} location/{{bigquery_name}} table. For
-        {{storage_name}} location destinations, the output format is
-        newline-delimited JSON. Each line represents a
+        r"""Exports assets with time and resource types to a given Cloud
+        Storage location/BigQuery table. For Cloud Storage location
+        destinations, the output format is newline-delimited JSON. Each
+        line represents a
         [google.cloud.asset.v1.Asset][google.cloud.asset.v1.Asset] in
-        the JSON format; for {{bigquery_name}} table destinations, the
-        output table stores the fields in asset Protobuf as columns.
-        This API implements the
+        the JSON format; for BigQuery table destinations, the output
+        table stores the fields in asset Protobuf as columns. This API
+        implements the
         [google.longrunning.Operation][google.longrunning.Operation]
         API, which allows you to keep track of the export. We recommend
         intervals of at least 2 seconds with exponential retry to poll
@@ -784,7 +784,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
     ) -> asset_service.BatchGetAssetsHistoryResponse:
         r"""Batch gets the update history of assets that overlap a time
         window. For IAM_POLICY content, this API outputs history when
-        the asset and its attached IAM_POLICY both exist. This can
+        the asset and its attached IAM POLICY both exist. This can
         create gaps in the output history. Otherwise, this API outputs
         history with asset in both non-delete or deleted status. If a
         specified asset does not exist, this API returns an
@@ -1406,10 +1406,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllResourcesPager:
-        r"""Searches all {{gcp_name}} resources within the specified scope,
-        such as a project, folder, or organization. The caller must be
-        granted the ``cloudasset.assets.searchAllResources`` permission
-        on the desired scope, otherwise the request will be rejected.
+        r"""Searches all Cloud resources within the specified scope, such as
+        a project, folder, or organization. The caller must be granted
+        the ``cloudasset.assets.searchAllResources`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         .. code-block:: python
 
@@ -1467,32 +1467,31 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
                 Examples:
 
-                -  ``name:Important`` to find {{gcp_name}} resources
-                   whose name contains "Important" as a word.
-                -  ``name=Important`` to find the {{gcp_name}} resource
-                   whose name is exactly "Important".
-                -  ``displayName:Impor*`` to find {{gcp_name}} resources
-                   whose display name contains "Impor" as a prefix of
-                   any word in the field.
-                -  ``location:us-west*`` to find {{gcp_name}} resources
-                   whose location contains both "us" and "west" as
-                   prefixes.
-                -  ``labels:prod`` to find {{gcp_name}} resources whose
-                   labels contain "prod" as a key or value.
-                -  ``labels.env:prod`` to find {{gcp_name}} resources
-                   that have a label "env" and its value is "prod".
-                -  ``labels.env:*`` to find {{gcp_name}} resources that
-                   have a label "env".
-                -  ``kmsKey:key`` to find {{gcp_name}} resources
-                   encrypted with a customer-managed encryption key
-                   whose name contains "key" as a word. This field is
-                   deprecated. Please use the ``kmsKeys`` field to
-                   retrieve KMS key information.
-                -  ``kmsKeys:key`` to find {{gcp_name}} resources
-                   encrypted with customer-managed encryption keys whose
-                   name contains the word "key".
-                -  ``relationships:instance-group-1`` to find
-                   {{gcp_name}} resources that have relationships with
+                -  ``name:Important`` to find Cloud resources whose name
+                   contains "Important" as a word.
+                -  ``name=Important`` to find the Cloud resource whose
+                   name is exactly "Important".
+                -  ``displayName:Impor*`` to find Cloud resources whose
+                   display name contains "Impor" as a prefix of any word
+                   in the field.
+                -  ``location:us-west*`` to find Cloud resources whose
+                   location contains both "us" and "west" as prefixes.
+                -  ``labels:prod`` to find Cloud resources whose labels
+                   contain "prod" as a key or value.
+                -  ``labels.env:prod`` to find Cloud resources that have
+                   a label "env" and its value is "prod".
+                -  ``labels.env:*`` to find Cloud resources that have a
+                   label "env".
+                -  ``kmsKey:key`` to find Cloud resources encrypted with
+                   a customer-managed encryption key whose name contains
+                   "key" as a word. This field is deprecated. Please use
+                   the ``kmsKeys`` field to retrieve KMS key
+                   information.
+                -  ``kmsKeys:key`` to find Cloud resources encrypted
+                   with customer-managed encryption keys whose name
+                   contains the word "key".
+                -  ``relationships:instance-group-1`` to find Cloud
+                   resources that have relationships with
                    "instance-group-1" in the related resource name.
                 -  ``relationships:INSTANCE_TO_INSTANCEGROUP`` to find
                    compute instances that have relationships of type
@@ -1502,29 +1501,28 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                    with "instance-group-1" in the compute instance group
                    resource name, for relationship type
                    "INSTANCE_TO_INSTANCEGROUP".
-                -  ``state:ACTIVE`` to find {{gcp_name}} resources whose
-                   state contains "ACTIVE" as a word.
-                -  ``NOT state:ACTIVE`` to find {{gcp_name}} resources
-                   whose state doesn't contain "ACTIVE" as a word.
-                -  ``createTime<1609459200`` to find {{gcp_name}}
-                   resources that were created before "2021-01-01
-                   00:00:00 UTC". 1609459200 is the epoch timestamp of
-                   "2021-01-01 00:00:00 UTC" in seconds.
-                -  ``updateTime>1609459200`` to find {{gcp_name}}
-                   resources that were updated after "2021-01-01
-                   00:00:00 UTC". 1609459200 is the epoch timestamp of
-                   "2021-01-01 00:00:00 UTC" in seconds.
-                -  ``Important`` to find {{gcp_name}} resources that
-                   contain "Important" as a word in any of the
-                   searchable fields.
-                -  ``Impor*`` to find {{gcp_name}} resources that
-                   contain "Impor" as a prefix of any word in any of the
+                -  ``state:ACTIVE`` to find Cloud resources whose state
+                   contains "ACTIVE" as a word.
+                -  ``NOT state:ACTIVE`` to find Cloud resources whose
+                   state doesn't contain "ACTIVE" as a word.
+                -  ``createTime<1609459200`` to find Cloud resources
+                   that were created before "2021-01-01 00:00:00 UTC".
+                   1609459200 is the epoch timestamp of "2021-01-01
+                   00:00:00 UTC" in seconds.
+                -  ``updateTime>1609459200`` to find Cloud resources
+                   that were updated after "2021-01-01 00:00:00 UTC".
+                   1609459200 is the epoch timestamp of "2021-01-01
+                   00:00:00 UTC" in seconds.
+                -  ``Important`` to find Cloud resources that contain
+                   "Important" as a word in any of the searchable
+                   fields.
+                -  ``Impor*`` to find Cloud resources that contain
+                   "Impor" as a prefix of any word in any of the
                    searchable fields.
                 -  ``Important location:(us-west1 OR global)`` to find
-                   {{gcp_name}} resources that contain "Important" as a
-                   word in any of the searchable fields and are also
-                   located in the "us-west1" region or the "global"
-                   location.
+                   Cloud resources that contain "Important" as a word in
+                   any of the searchable fields and are also located in
+                   the "us-west1" region or the "global" location.
 
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -1633,11 +1631,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllIamPoliciesPager:
-        r"""Searches all {{iam_name_short}} policies within the specified
-        scope, such as a project, folder, or organization. The caller
-        must be granted the ``cloudasset.assets.searchAllIamPolicies``
-        permission on the desired scope, otherwise the request will be
-        rejected.
+        r"""Searches all IAM policies within the specified scope, such as a
+        project, folder, or organization. The caller must be granted the
+        ``cloudasset.assets.searchAllIamPolicies`` permission on the
+        desired scope, otherwise the request will be rejected.
 
         .. code-block:: python
 
@@ -1668,13 +1665,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         Args:
             request (Union[google.cloud.asset_v1.types.SearchAllIamPoliciesRequest, dict]):
-                The request object. Search all {{iam_name_short}}
-                policies request.
+                The request object. Search all IAM policies request.
             scope (str):
                 Required. A scope can be a project, a folder, or an
-                organization. The search is limited to the
-                {{iam_name_short}} policies within the ``scope``. The
-                caller must be granted the
+                organization. The search is limited to the IAM policies
+                within the ``scope``. The caller must be granted the
                 ```cloudasset.assets.searchAllIamPolicies`` <https://cloud.google.com/asset-inventory/docs/access-control#required_permissions>`__
                 permission on the desired scope.
 
@@ -1693,60 +1688,55 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
                 Optional. The query statement. See `how to construct a
                 query <https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query>`__
                 for more information. If not specified or empty, it will
-                search all the {{iam_name_short}} policies within the
-                specified ``scope``. Note that the query string is
-                compared against each {{iam_name_short}} policy binding,
-                including its principals, roles, and {{iam_name_short}}
-                conditions. The returned {{iam_name_short}} policies
-                will only contain the bindings that match your query. To
-                learn more about the {{iam_name_short}} policy
-                structure, see the `{{iam_name_short}} policy
+                search all the IAM policies within the specified
+                ``scope``. Note that the query string is compared
+                against each Cloud IAM policy binding, including its
+                principals, roles, and Cloud IAM conditions. The
+                returned Cloud IAM policies will only contain the
+                bindings that match your query. To learn more about the
+                IAM policy structure, see the `IAM policy
                 documentation <https://cloud.google.com/iam/help/allow-policies/structure>`__.
 
                 Examples:
 
-                -  ``policy:amy@gmail.com`` to find {{iam_name_short}}
-                   policy bindings that specify user "amy@gmail.com".
-                -  ``policy:roles/compute.admin`` to find
-                   {{iam_name_short}} policy bindings that specify the
-                   Compute Admin role.
-                -  ``policy:comp*`` to find {{iam_name_short}} policy
-                   bindings that contain "comp" as a prefix of any word
-                   in the binding.
+                -  ``policy:amy@gmail.com`` to find IAM policy bindings
+                   that specify user "amy@gmail.com".
+                -  ``policy:roles/compute.admin`` to find IAM policy
+                   bindings that specify the Compute Admin role.
+                -  ``policy:comp*`` to find IAM policy bindings that
+                   contain "comp" as a prefix of any word in the
+                   binding.
                 -  ``policy.role.permissions:storage.buckets.update`` to
-                   find {{iam_name_short}} policy bindings that specify
-                   a role containing "storage.buckets.update"
-                   permission. Note that if callers don't have
-                   ``iam.roles.get`` access to a role's included
-                   permissions, policy bindings that specify this role
-                   will be dropped from the search results.
-                -  ``policy.role.permissions:upd*`` to find
-                   {{iam_name_short}} policy bindings that specify a
-                   role containing "upd" as a prefix of any word in the
-                   role permission. Note that if callers don't have
-                   ``iam.roles.get`` access to a role's included
-                   permissions, policy bindings that specify this role
-                   will be dropped from the search results.
-                -  ``resource:organizations/123456`` to find
-                   {{iam_name_short}} policy bindings that are set on
-                   "organizations/123456".
+                   find IAM policy bindings that specify a role
+                   containing "storage.buckets.update" permission. Note
+                   that if callers don't have ``iam.roles.get`` access
+                   to a role's included permissions, policy bindings
+                   that specify this role will be dropped from the
+                   search results.
+                -  ``policy.role.permissions:upd*`` to find IAM policy
+                   bindings that specify a role containing "upd" as a
+                   prefix of any word in the role permission. Note that
+                   if callers don't have ``iam.roles.get`` access to a
+                   role's included permissions, policy bindings that
+                   specify this role will be dropped from the search
+                   results.
+                -  ``resource:organizations/123456`` to find IAM policy
+                   bindings that are set on "organizations/123456".
                 -  ``resource=//cloudresourcemanager.googleapis.com/projects/myproject``
-                   to find {{iam_name_short}} policy bindings that are
-                   set on the project named "myproject".
-                -  ``Important`` to find {{iam_name_short}} policy
-                   bindings that contain "Important" as a word in any of
-                   the searchable fields (except for the included
+                   to find IAM policy bindings that are set on the
+                   project named "myproject".
+                -  ``Important`` to find IAM policy bindings that
+                   contain "Important" as a word in any of the
+                   searchable fields (except for the included
                    permissions).
                 -  ``resource:(instance1 OR instance2) policy:amy`` to
-                   find {{iam_name_short}} policy bindings that are set
-                   on resources "instance1" or "instance2" and also
-                   specify user "amy".
-                -  ``roles:roles/compute.admin`` to find
-                   {{iam_name_short}} policy bindings that specify the
-                   Compute Admin role.
-                -  ``memberTypes:user`` to find {{iam_name_short}}
-                   policy bindings that contain the principal type
-                   "user".
+                   find IAM policy bindings that are set on resources
+                   "instance1" or "instance2" and also specify user
+                   "amy".
+                -  ``roles:roles/compute.admin`` to find IAM policy
+                   bindings that specify the Compute Admin role.
+                -  ``memberTypes:user`` to find IAM policy bindings that
+                   contain the principal type "user".
 
                 This corresponds to the ``query`` field
                 on the ``request`` instance; if ``request`` is provided, this
@@ -1759,10 +1749,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
 
         Returns:
             google.cloud.asset_v1.services.asset_service.pagers.SearchAllIamPoliciesPager:
-                Search all {{iam_name_short}} policies response.
-
-                Iterating over this object will yield results and
-                resolve additional pages automatically.
+                Search all IAM policies response.
+                Iterating over this object will yield
+                results and resolve additional pages
+                automatically.
 
         """
         # Create or coerce a protobuf request object.
@@ -1826,8 +1816,8 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.AnalyzeIamPolicyResponse:
-        r"""Analyzes {{iam_name_short}} policies to answer which identities
-        have what accesses on which resources.
+        r"""Analyzes IAM policies to answer which identities have
+        what accesses on which resources.
 
         .. code-block:: python
 
@@ -1871,7 +1861,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         Returns:
             google.cloud.asset_v1.types.AnalyzeIamPolicyResponse:
                 A response message for
-                   [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
+                [AssetService.AnalyzeIamPolicy][google.cloud.asset.v1.AssetService.AnalyzeIamPolicy].
 
         """
         # Create or coerce a protobuf request object.
@@ -1915,11 +1905,11 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
-        r"""Analyzes {{iam_name_short}} policies asynchronously to answer
-        which identities have what accesses on which resources, and
-        writes the analysis results to a Google {{storage_name}} or a
-        {{bigquery_name}} destination. For {{storage_name}} destination,
-        the output format is the JSON format that represents a
+        r"""Analyzes IAM policies asynchronously to answer which identities
+        have what accesses on which resources, and writes the analysis
+        results to a Google Cloud Storage or a BigQuery destination. For
+        Cloud Storage destination, the output format is the JSON format
+        that represents a
         [AnalyzeIamPolicyResponse][google.cloud.asset.v1.AnalyzeIamPolicyResponse].
         This method implements the
         [google.longrunning.Operation][google.longrunning.Operation],
@@ -1979,8 +1969,10 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
             google.api_core.operation.Operation:
                 An object representing a long-running operation.
 
-                The result type for the operation will be :class:`google.cloud.asset_v1.types.AnalyzeIamPolicyLongrunningResponse` A response message for
-                   [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
+                The result type for the operation will be
+                :class:`google.cloud.asset_v1.types.AnalyzeIamPolicyLongrunningResponse`
+                A response message for
+                [AssetService.AnalyzeIamPolicyLongrunning][google.cloud.asset.v1.AssetService.AnalyzeIamPolicyLongrunning].
 
         """
         # Create or coerce a protobuf request object.
@@ -2121,7 +2113,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.QueryAssetsResponse:
         r"""Issue a job that queries assets using a SQL statement compatible
-        with `{{bigquery_name}} Standard
+        with `BigQuery Standard
         SQL <http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql>`__.
 
         If the query execution finishes within timeout and there's no
@@ -2133,7 +2125,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         ``QueryAssets`` call.
 
         Note, the query result has approximately 10 GB limitation
-        enforced by {{bigquery_name}}
+        enforced by BigQuery
         https://cloud.google.com/bigquery/docs/best-practices-performance-output,
         queries return larger results will result in errors.
 
@@ -2787,8 +2779,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         timeout: Optional[float] = None,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.BatchGetEffectiveIamPoliciesResponse:
-        r"""Gets effective {{iam_name_short}} policies for a batch of
-        resources.
+        r"""Gets effective IAM policies for a batch of resources.
 
         .. code-block:: python
 
@@ -2830,7 +2821,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         Returns:
             google.cloud.asset_v1.types.BatchGetEffectiveIamPoliciesResponse:
                 A response message for
-                   [AssetService.BatchGetEffectiveIamPolicies][google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies].
+                [AssetService.BatchGetEffectiveIamPolicies][google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies].
 
         """
         # Create or coerce a protobuf request object.

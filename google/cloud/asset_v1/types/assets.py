@@ -52,8 +52,9 @@ __protobuf__ = proto.module(
 
 
 class TemporalAsset(proto.Message):
-    r"""An asset in {{gcp_name}} and its temporal metadata, including the
-    time window when it was observed and its status during that window.
+    r"""An asset in Google Cloud and its temporal metadata, including
+    the time window when it was observed and its status during that
+    window.
 
     Attributes:
         window (google.cloud.asset_v1.types.TimeWindow):
@@ -62,7 +63,7 @@ class TemporalAsset(proto.Message):
         deleted (bool):
             Whether the asset has been deleted or not.
         asset (google.cloud.asset_v1.types.Asset):
-            An asset in {{gcp_name}}.
+            An asset in Google Cloud.
         prior_asset_state (google.cloud.asset_v1.types.TemporalAsset.PriorAssetState):
             State of prior_asset.
         prior_asset (google.cloud.asset_v1.types.Asset):
@@ -130,12 +131,12 @@ class TimeWindow(proto.Message):
 
 
 class Asset(proto.Message):
-    r"""An asset in {{gcp_name}}. An asset can be any resource in the
-    {{gcp_name}} `resource
+    r"""An asset in Google Cloud. An asset can be any resource in the Google
+    Cloud `resource
     hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
-    a resource outside the {{gcp_name}} resource hierarchy (such as
-    {{container_name}} clusters and objects), or a policy (e.g.
-    {{iam_name_short}} policy), or a relationship (e.g. an
+    a resource outside the Google Cloud resource hierarchy (such as
+    Google Kubernetes Engine clusters and objects), or a policy (e.g.
+    Cloud IAM policy), or a relationship (e.g. an
     INSTANCE_TO_INSTANCEGROUP relationship). See `Supported asset
     types <https://cloud.google.com/asset-inventory/docs/supported-asset-types>`__
     for more information.
@@ -168,15 +169,15 @@ class Asset(proto.Message):
         resource (google.cloud.asset_v1.types.Resource):
             A representation of the resource.
         iam_policy (google.iam.v1.policy_pb2.Policy):
-            A representation of the {{iam_name_short}} policy set on a
-            {{gcp_name}} resource. There can be a maximum of one
-            {{iam_name_short}} policy set on any given resource. In
-            addition, {{iam_name_short}} policies inherit their granted
-            access scope from any policies set on parent resources in
-            the resource hierarchy. Therefore, the effectively policy is
-            the union of both the policy set on this resource and each
-            policy set on all of the resource's ancestry resource levels
-            in the hierarchy. See `this
+            A representation of the Cloud IAM policy set on a Google
+            Cloud resource. There can be a maximum of one Cloud IAM
+            policy set on any given resource. In addition, Cloud IAM
+            policies inherit their granted access scope from any
+            policies set on parent resources in the resource hierarchy.
+            Therefore, the effectively policy is the union of both the
+            policy set on this resource and each policy set on all of
+            the resource's ancestry resource levels in the hierarchy.
+            See `this
             topic <https://cloud.google.com/iam/help/allow-policies/inheritance>`__
             for more information.
         org_policy (MutableSequence[google.cloud.orgpolicy.v1.orgpolicy_pb2.Policy]):
@@ -214,7 +215,7 @@ class Asset(proto.Message):
         related_asset (google.cloud.asset_v1.types.RelatedAsset):
             One related asset of the current asset.
         ancestors (MutableSequence[str]):
-            The ancestry path of an asset in {{gcp_name}} `resource
+            The ancestry path of an asset in Google Cloud `resource
             hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
             represented as a list of relative resource names. An
             ancestry path starts with the closest ancestor in the
@@ -294,7 +295,7 @@ class Asset(proto.Message):
 
 
 class Resource(proto.Message):
-    r"""A representation of a {{gcp_name}} resource.
+    r"""A representation of a Google Cloud resource.
 
     Attributes:
         version (str):
@@ -305,15 +306,13 @@ class Resource(proto.Message):
             ``https://www.googleapis.com/discovery/v1/apis/compute/v1/rest``
 
             This value is unspecified for resources that do not have an
-            API based on a discovery document, such as
-            {{bigtable_name}}.
+            API based on a discovery document, such as Cloud Bigtable.
         discovery_name (str):
             The JSON schema name listed in the discovery document.
             Example: ``Project``
 
             This value is unspecified for resources that do not have an
-            API based on a discovery document, such as
-            {{bigtable_name}}.
+            API based on a discovery document, such as Cloud Bigtable.
         resource_url (str):
             The REST URL for accessing the resource. An HTTP ``GET``
             request using this URL returns the resource itself. Example:
@@ -326,8 +325,8 @@ class Resource(proto.Message):
             Names <https://cloud.google.com/apis/design/resource_names#full_resource_name>`__
             for more information.
 
-            For {{gcp_name}} assets, this value is the parent resource
-            defined in the `{{iam_name_short}} policy
+            For Google Cloud assets, this value is the parent resource
+            defined in the `Cloud IAM policy
             hierarchy <https://cloud.google.com/iam/docs/overview#policy_hierarchy>`__.
             Example:
             ``//cloudresourcemanager.googleapis.com/projects/my_project_123``
@@ -338,8 +337,9 @@ class Resource(proto.Message):
             sensitive fields are removed and may not be
             present.
         location (str):
-            The location of the resource in {{gcp_name}}, such as its
-            zone and region. For more information, see
+            The location of the resource in Google Cloud,
+            such as its zone and region. For more
+            information, see
             https://cloud.google.com/about/locations/.
     """
 
@@ -439,13 +439,13 @@ class RelationshipAttributes(proto.Message):
 
 
 class RelatedAsset(proto.Message):
-    r"""An asset identifier in {{gcp_name}} which contains its name, type
-    and ancestors. An asset can be any resource in the {{gcp_name}}
+    r"""An asset identifier in Google Cloud which contains its name, type
+    and ancestors. An asset can be any resource in the Google Cloud
     `resource
     hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
-    a resource outside the {{gcp_name}} resource hierarchy (such as
-    {{container_name}} clusters and objects), or a policy (e.g.
-    {{iam_name_short}} policy). See `Supported asset
+    a resource outside the Google Cloud resource hierarchy (such as
+    Google Kubernetes Engine clusters and objects), or a policy (e.g.
+    Cloud IAM policy). See `Supported asset
     types <https://cloud.google.com/asset-inventory/docs/supported-asset-types>`__
     for more information.
 
@@ -465,7 +465,7 @@ class RelatedAsset(proto.Message):
             types <https://cloud.google.com/asset-inventory/docs/supported-asset-types>`__
             for more information.
         ancestors (MutableSequence[str]):
-            The ancestors of an asset in {{gcp_name}} `resource
+            The ancestors of an asset in Google Cloud `resource
             hierarchy <https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy>`__,
             represented as a list of relative resource names. An
             ancestry path starts with the closest ancestor in the
@@ -504,7 +504,7 @@ class ResourceSearchResult(proto.Message):
         name (str):
             The full resource name of this resource. Example:
             ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
-            See `{{cai_name}} Resource Name
+            See `Cloud Asset Inventory Resource Name
             Format <https://cloud.google.com/asset-inventory/docs/resource-name-format>`__
             for more information.
 
@@ -581,7 +581,7 @@ class ResourceSearchResult(proto.Message):
             -  Use a free text query. Example: ``us-west*``
         labels (MutableMapping[str, str]):
             Labels associated with this resource. See `Labelling and
-            grouping {{gcp_name}}
+            grouping GCP
             resources <https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources>`__
             for more information. This field is available only when the
             resource's Protobuf contains it.
@@ -599,8 +599,8 @@ class ResourceSearchResult(proto.Message):
             -  Use a free text query. Example: ``prod``
         network_tags (MutableSequence[str]):
             Network tags associated with this resource. Like labels,
-            network tags are a type of annotations used to group
-            {{gcp_name}} resources. See `Labelling {{gcp_name}}
+            network tags are a type of annotations used to group GCP
+            resources. See `Labelling GCP
             resources <https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources>`__
             for more information. This field is available only when the
             resource's Protobuf contains it.
@@ -610,7 +610,7 @@ class ResourceSearchResult(proto.Message):
             -  Use a field query. Example: ``networkTags:internal``
             -  Use a free text query. Example: ``internal``
         kms_key (str):
-            The {{kms_name_short}}
+            The Cloud KMS
             `CryptoKey <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys>`__
             name or
             `CryptoKeyVersion <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions>`__
@@ -618,9 +618,9 @@ class ResourceSearchResult(proto.Message):
 
             This field only presents for the purpose of backward
             compatibility. Please use the ``kms_keys`` field to retrieve
-            {{kms_name_short}} key information. This field is available
-            only when the resource's Protobuf contains it and will only
-            be populated for `these resource
+            KMS key information. This field is available only when the
+            resource's Protobuf contains it and will only be populated
+            for `these resource
             types <https://cloud.google.com/asset-inventory/docs/legacy-field-names#resource_types_with_the_to_be_deprecated_kmskey_field>`__
             for backward compatible purposes.
 
@@ -629,7 +629,7 @@ class ResourceSearchResult(proto.Message):
             -  Use a field query. Example: ``kmsKey:key``
             -  Use a free text query. Example: ``key``
         kms_keys (MutableSequence[str]):
-            The {{kms_name_short}}
+            The Cloud KMS
             `CryptoKey <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys>`__
             names or
             `CryptoKeyVersion <https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions>`__
@@ -683,9 +683,9 @@ class ResourceSearchResult(proto.Message):
             RUNNING, STOPPING, SUSPENDING, SUSPENDED, REPAIRING, and
             TERMINATED. See ``status`` definition in `API
             Reference <https://cloud.google.com/compute/docs/reference/rest/v1/instances>`__.
-            If the resource is a project provided by {{crm_name}}, its
-            state will include LIFECYCLE_STATE_UNSPECIFIED, ACTIVE,
-            DELETE_REQUESTED and DELETE_IN_PROGRESS. See
+            If the resource is a project provided by Cloud Resource
+            Manager, its state will include LIFECYCLE_STATE_UNSPECIFIED,
+            ACTIVE, DELETE_REQUESTED and DELETE_IN_PROGRESS. See
             ``lifecycleState`` definition in `API
             Reference <https://cloud.google.com/resource-manager/reference/rest/v1/projects>`__.
 
@@ -699,17 +699,15 @@ class ResourceSearchResult(proto.Message):
             Examples: ``projectId`` for Project, ``dnsName`` for DNS
             ManagedZone. This field contains a subset of the resource
             metadata fields that are returned by the List or Get APIs
-            provided by the corresponding {{gcp_name}} service (e.g.,
-            Compute Engine). see `API references and supported
-            searchable
+            provided by the corresponding GCP service (e.g., Compute
+            Engine). see `API references and supported searchable
             attributes <https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types>`__
             to see which fields are included.
 
             You can search values of these fields through free text
             search. However, you should not consume the field
             programically as the field names and values may change as
-            the {{gcp_name}} service updates to a new incompatible API
-            version.
+            the GCP service updates to a new incompatible API version.
 
             To search against the ``additional_attributes``:
 
@@ -1018,15 +1016,15 @@ class RelatedResource(proto.Message):
 
 
 class IamPolicySearchResult(proto.Message):
-    r"""A result of {{iam_name_short}} Policy search, containing information
-    of an {{iam_name_short}} policy.
+    r"""A result of IAM Policy search, containing information of an
+    IAM policy.
 
     Attributes:
         resource (str):
             The full resource name of the resource associated with this
-            {{iam_name_short}} policy. Example:
+            IAM policy. Example:
             ``//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1``.
-            See `{{cai_name}} Resource Name
+            See `Cloud Asset Inventory Resource Name
             Format <https://cloud.google.com/asset-inventory/docs/resource-name-format>`__
             for more information.
 
@@ -1035,31 +1033,28 @@ class IamPolicySearchResult(proto.Message):
             -  use a field query. Example:
                ``resource:organizations/123``
         asset_type (str):
-            The type of the resource associated with this
-            {{iam_name_short}} policy. Example:
-            ``compute.googleapis.com/Disk``.
+            The type of the resource associated with this IAM policy.
+            Example: ``compute.googleapis.com/Disk``.
 
             To search against the ``asset_type``:
 
             -  specify the ``asset_types`` field in your search request.
         project (str):
-            The project that the associated {{gcp_name}} resource
-            belongs to, in the form of projects/{PROJECT_NUMBER}. If an
-            {{iam_name_short}} policy is set on a resource (like VM
-            instance, {{storage_name}} bucket), the project field will
-            indicate the project that contains the resource. If an
-            {{iam_name_short}} policy is set on a folder or orgnization,
-            this field will be empty.
+            The project that the associated GCP resource belongs to, in
+            the form of projects/{PROJECT_NUMBER}. If an IAM policy is
+            set on a resource (like VM instance, Cloud Storage bucket),
+            the project field will indicate the project that contains
+            the resource. If an IAM policy is set on a folder or
+            orgnization, this field will be empty.
 
             To search against the ``project``:
 
             -  specify the ``scope`` field as this project in your
                search request.
         folders (MutableSequence[str]):
-            The folder(s) that the {{iam_name_short}} policy belongs to,
-            in the form of folders/{FOLDER_NUMBER}. This field is
-            available when the {{iam_name_short}} policy belongs to one
-            or more folders.
+            The folder(s) that the IAM policy belongs to, in the form of
+            folders/{FOLDER_NUMBER}. This field is available when the
+            IAM policy belongs to one or more folders.
 
             To search against ``folders``:
 
@@ -1068,10 +1063,9 @@ class IamPolicySearchResult(proto.Message):
             -  specify the ``scope`` field as this folder in your search
                request.
         organization (str):
-            The organization that the {{iam_name_short}} policy belongs
-            to, in the form of organizations/{ORGANIZATION_NUMBER}. This
-            field is available when the {{iam_name_short}} policy
-            belongs to an organization.
+            The organization that the IAM policy belongs to, in the form
+            of organizations/{ORGANIZATION_NUMBER}. This field is
+            available when the IAM policy belongs to an organization.
 
             To search against ``organization``:
 
@@ -1080,12 +1074,11 @@ class IamPolicySearchResult(proto.Message):
             -  specify the ``scope`` field as this organization in your
                search request.
         policy (google.iam.v1.policy_pb2.Policy):
-            The {{iam_name_short}} policy directly set on the given
-            resource. Note that the original {{iam_name_short}} policy
-            can contain multiple bindings. This only contains the
-            bindings that match the given query. For queries that don't
-            contain a constrain on policies (e.g., an empty query), this
-            contains all the bindings.
+            The IAM policy directly set on the given resource. Note that
+            the original IAM policy can contain multiple bindings. This
+            only contains the bindings that match the given query. For
+            queries that don't contain a constrain on policies (e.g., an
+            empty query), this contains all the bindings.
 
             To search against the ``policy`` bindings:
 
@@ -1099,13 +1092,13 @@ class IamPolicySearchResult(proto.Message):
                   permissions. Example:
                   ``policy.role.permissions:compute.instances.create``
         explanation (google.cloud.asset_v1.types.IamPolicySearchResult.Explanation):
-            Explanation about the {{iam_name_short}} policy search
-            result. It contains additional information to explain why
-            the search result matches the query.
+            Explanation about the IAM policy search
+            result. It contains additional information to
+            explain why the search result matches the query.
     """
 
     class Explanation(proto.Message):
-        r"""Explanation about the {{iam_name_short}} policy search result.
+        r"""Explanation about the IAM policy search result.
 
         Attributes:
             matched_permissions (MutableMapping[str, google.cloud.asset_v1.types.IamPolicySearchResult.Explanation.Permissions]):
@@ -1122,7 +1115,7 @@ class IamPolicySearchResult(proto.Message):
         """
 
         class Permissions(proto.Message):
-            r"""{{iam_name_short}} permissions
+            r"""IAM permissions
 
             Attributes:
                 permissions (MutableSequence[str]):
@@ -1230,8 +1223,8 @@ class ConditionEvaluation(proto.Message):
 
 
 class IamPolicyAnalysisResult(proto.Message):
-    r"""{{iam_name_short}} Policy analysis result, consisting of one
-    {{iam_name_short}} policy binding and derived access control lists.
+    r"""IAM Policy analysis result, consisting of one IAM policy
+    binding and derived access control lists.
 
     Attributes:
         attached_resource_full_name (str):
@@ -1241,7 +1234,7 @@ class IamPolicyAnalysisResult(proto.Message):
             [iam_binding][google.cloud.asset.v1.IamPolicyAnalysisResult.iam_binding]
             policy attaches.
         iam_binding (google.iam.v1.policy_pb2.Binding):
-            The {{iam_name_short}} policy binding under analysis.
+            The Cloud IAM policy binding under analysis.
         access_control_lists (MutableSequence[google.cloud.asset_v1.types.IamPolicyAnalysisResult.AccessControlList]):
             The access control lists derived from the
             [iam_binding][google.cloud.asset.v1.IamPolicyAnalysisResult.iam_binding]
@@ -1259,7 +1252,7 @@ class IamPolicyAnalysisResult(proto.Message):
     """
 
     class Resource(proto.Message):
-        r"""A {{gcp_name}} resource under analysis.
+        r"""A Google Cloud resource under analysis.
 
         Attributes:
             full_resource_name (str):
@@ -1280,7 +1273,7 @@ class IamPolicyAnalysisResult(proto.Message):
         )
 
     class Access(proto.Message):
-        r"""An {{iam_name_short}} role or permission under analysis.
+        r"""An IAM role or permission under analysis.
 
         This message has `oneof`_ fields (mutually exclusive fields).
         For each oneof, at most one member field can be set at the same time.
@@ -1323,8 +1316,8 @@ class IamPolicyAnalysisResult(proto.Message):
 
         Attributes:
             name (str):
-                The identity name in any form of members appear in
-                `{{iam_name_short}} policy
+                The identity name in any form of members appear in `IAM
+                policy
                 binding <https://cloud.google.com/iam/reference/rest/v1/Binding>`__,
                 such as:
 
@@ -1373,16 +1366,16 @@ class IamPolicyAnalysisResult(proto.Message):
         )
 
     class AccessControlList(proto.Message):
-        r"""An access control list, derived from the above {{iam_name_short}}
-        policy binding, which contains a set of resources and accesses. May
-        include one item from each set to compose an access control entry.
+        r"""An access control list, derived from the above IAM policy binding,
+        which contains a set of resources and accesses. May include one item
+        from each set to compose an access control entry.
 
-        NOTICE that there could be multiple access control lists for one
-        {{iam_name_short}} policy binding. The access control lists are
-        created based on resource and access combinations.
+        NOTICE that there could be multiple access control lists for one IAM
+        policy binding. The access control lists are created based on
+        resource and access combinations.
 
-        For example, assume we have the following cases in one
-        {{iam_name_short}} policy binding:
+        For example, assume we have the following cases in one IAM policy
+        binding:
 
         -  Permission P1 and P2 apply to resource R1 and R2;
         -  Permission P3 applies to resource R2 and R3;
@@ -1415,9 +1408,9 @@ class IamPolicyAnalysisResult(proto.Message):
                 field is present only if the output_resource_edges option is
                 enabled in request.
             condition_evaluation (google.cloud.asset_v1.types.ConditionEvaluation):
-                Condition evaluation for this AccessControlList, if there is
-                a condition defined in the above {{iam_name_short}} policy
-                binding.
+                Condition evaluation for this
+                AccessControlList, if there is a condition
+                defined in the above IAM policy binding.
         """
 
         resources: MutableSequence[
