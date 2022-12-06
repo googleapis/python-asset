@@ -28,7 +28,8 @@ from typing import (
     Union,
     cast,
 )
-import pkg_resources
+
+from google.cloud.asset_v1 import gapic_version as package_version
 
 from google.api_core import client_options as client_options_lib
 from google.api_core import exceptions as core_exceptions
@@ -545,7 +546,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         request: Optional[Union[asset_service.ExportAssetsRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Exports assets with time and resource types to a given Cloud
@@ -659,7 +660,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListAssetsPager:
         r"""Lists assets with time and resource types and returns
@@ -779,7 +780,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.BatchGetAssetsHistoryResponse:
         r"""Batch gets the update history of assets that overlap a time
@@ -864,7 +865,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Creates a feed in a parent
@@ -984,7 +985,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Gets details about an asset feed.
@@ -1092,7 +1093,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.ListFeedsResponse:
         r"""Lists all asset feeds in a parent
@@ -1196,7 +1197,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         feed: Optional[asset_service.Feed] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.Feed:
         r"""Updates an asset feed configuration.
@@ -1310,7 +1311,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes an asset feed.
@@ -1403,7 +1404,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         query: Optional[str] = None,
         asset_types: Optional[MutableSequence[str]] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllResourcesPager:
         r"""Searches all Cloud resources within the specified scope, such as
@@ -1628,7 +1629,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         scope: Optional[str] = None,
         query: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.SearchAllIamPoliciesPager:
         r"""Searches all IAM policies within the specified scope, such as a
@@ -1813,7 +1814,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         request: Optional[Union[asset_service.AnalyzeIamPolicyRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.AnalyzeIamPolicyResponse:
         r"""Analyzes IAM policies to answer which identities have
@@ -1902,7 +1903,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> operation.Operation:
         r"""Analyzes IAM policies asynchronously to answer which identities
@@ -2021,7 +2022,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         request: Optional[Union[asset_service.AnalyzeMoveRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.AnalyzeMoveResponse:
         r"""Analyze moving a resource to a specified destination
@@ -2109,7 +2110,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         request: Optional[Union[asset_service.QueryAssetsRequest, dict]] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.QueryAssetsResponse:
         r"""Issue a job that queries assets using a SQL statement compatible
@@ -2206,7 +2207,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         saved_query: Optional[asset_service.SavedQuery] = None,
         saved_query_id: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.SavedQuery:
         r"""Creates a saved query in a parent
@@ -2340,7 +2341,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.SavedQuery:
         r"""Gets details about a saved query.
@@ -2445,7 +2446,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         parent: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> pagers.ListSavedQueriesPager:
         r"""Lists all saved queries in a parent
@@ -2565,7 +2566,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         saved_query: Optional[asset_service.SavedQuery] = None,
         update_mask: Optional[field_mask_pb2.FieldMask] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.SavedQuery:
         r"""Updates a saved query.
@@ -2682,7 +2683,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         *,
         name: Optional[str] = None,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> None:
         r"""Deletes a saved query.
@@ -2776,7 +2777,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         ] = None,
         *,
         retry: OptionalRetry = gapic_v1.method.DEFAULT,
-        timeout: Optional[float] = None,
+        timeout: Union[float, object] = gapic_v1.method.DEFAULT,
         metadata: Sequence[Tuple[str, str]] = (),
     ) -> asset_service.BatchGetEffectiveIamPoliciesResponse:
         r"""Gets effective IAM policies for a batch of resources.
@@ -2869,14 +2870,9 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         self.transport.close()
 
 
-try:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
-        gapic_version=pkg_resources.get_distribution(
-            "google-cloud-asset",
-        ).version,
-    )
-except pkg_resources.DistributionNotFound:
-    DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo()
+DEFAULT_CLIENT_INFO = gapic_v1.client_info.ClientInfo(
+    gapic_version=package_version.__version__
+)
 
 
 __all__ = ("AssetServiceClient",)
