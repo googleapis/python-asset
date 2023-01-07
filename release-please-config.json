@@ -29,31 +29,6 @@
           "type": "json",
           "path": "samples/generated_samples/snippet_metadata_google.cloud.asset.v1p1beta1.json",
           "jsonpath": "$.clientLibrary.version"
-        },
-        {
-          "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_asset_v1.json",
-          "jsonpath": "$.clientLibrary.version"
-        },
-        {
-          "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_asset_v1p5beta1.json",
-          "jsonpath": "$.clientLibrary.version"
-        },
-        {
-          "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_asset_v1p1beta1.json",
-          "jsonpath": "$.clientLibrary.version"
-        },
-        {
-          "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_asset_v1p4beta1.json",
-          "jsonpath": "$.clientLibrary.version"
-        },
-        {
-          "type": "json",
-          "path": "samples/generated_samples/snippet_metadata_asset_v1p2beta1.json",
-          "jsonpath": "$.clientLibrary.version"
         }
       ]
     }
