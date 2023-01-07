@@ -200,7 +200,7 @@ class Asset(proto.Message):
             guide <https://cloud.google.com/vpc-service-controls/docs/overview>`__.
 
             This field is a member of `oneof`_ ``access_context_policy``.
-        os_inventory (google.cloud.osconfig_v1.Inventory):
+        os_inventory (google.cloud.osconfig.v1.Inventory):
             A representation of runtime OS Inventory information. See
             `this
             topic <https://cloud.google.com/compute/docs/instances/os-inventory-management>`__
@@ -273,7 +273,7 @@ class Asset(proto.Message):
         oneof="access_context_policy",
         message=service_perimeter_pb2.ServicePerimeter,
     )
-    os_inventory: inventory_pb2.Inventory = proto.Field(
+    os_inventory: Inventory = proto.Field(
         proto.MESSAGE,
         number=12,
         message=Inventory,

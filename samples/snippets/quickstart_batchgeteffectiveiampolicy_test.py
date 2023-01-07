@@ -24,8 +24,10 @@ PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 def test_batch_get_effective_iam_policies(capsys):
     scope = "projects/{}".format(PROJECT)
     resource_names = [
-        "//cloudresourcemanager.googleapis.com/projects/{}".format(PROJECT)]
+        "//cloudresourcemanager.googleapis.com/projects/{}".format(PROJECT)
+    ]
     quickstart_batchgeteffectiveiampolicy.batch_get_effective_iam_policies(
-        resource_names, scope)
+        resource_names, scope
+    )
     out, _ = capsys.readouterr()
     assert resource_names[0] in out
