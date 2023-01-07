@@ -84,7 +84,7 @@ for library in s.get_staging_dirs(default_version):
         f"from google.cloud.asset_{library.name} import gapic_version as package_version",
     )
 
-    s.move([library], excludes=["**/gapic_version.py", "docs/index.rst", "setup.py"])
+    s.move([library], excludes=["**/gapic_version.py", "docs/index.rst", "setup.py", "testing/constraints-3.7.txt"])
 s.remove_staging_dirs()
 
 # ----------------------------------------------------------------------------
@@ -96,7 +96,7 @@ templated_files = gcp.CommonTemplates().py_library(
     microgenerator=True,
     versions=gcp.common.detect_versions(path="./google", default_first=True),
 )
-s.move(templated_files, excludes=[".coveragerc", ".github/release-please.yml", "docs/index.rst", "setup.py", "testing/constraints-3.7.txt"])
+s.move(templated_files, excludes=[".coveragerc", ".github/release-please.yml", "docs/index.rst"])
 
 python.py_samples(skip_readmes=True)
 
