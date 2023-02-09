@@ -24,9 +24,13 @@ PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 SAVED_QUERY_ID = f"saved-query-{uuid.uuid4().hex}"
 
 
-def test_create_saved_query(capsys, saved_query_deleter):
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
+def test_create_saved_query(transport, capsys, saved_query_deleter):
     saved_query = quickstart_create_saved_query.create_saved_query(
-        PROJECT, SAVED_QUERY_ID, "saved query foo"
+        project_id=PROJECT,
+        saved_query_id=SAVED_QUERY_ID,
+        description="saved query foo",
+        transport=transport,
     )
     saved_query_deleter.append(saved_query.name)
     expected_resource_name_suffix = f"savedQueries/{SAVED_QUERY_ID}"

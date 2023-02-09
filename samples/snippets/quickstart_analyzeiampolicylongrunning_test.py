@@ -30,8 +30,14 @@ DATASET = "analysis_{}".format(int(uuid.uuid4()))
 
 
 @pytest.fixture(scope="module")
-def storage_client():
-    yield storage.Client()
+def storage_client(transport: str = None) -> None:
+    """
+    Args:
+    
+    transport(str): The transport to use. For example, "grpc"
+        or "rest". If set to None, a transport is chosen automatically.
+    """
+    yield storage.Client(transport=transport)
 
 
 @pytest.fixture(scope="module")
@@ -53,28 +59,35 @@ def analysis_bucket(storage_client):
 
 
 @pytest.fixture(scope="module")
-def dataset(bigquery_client):
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
+def dataset(bigquery_client, transport):
     dataset_id = "{}.{}".format(PROJECT, DATASET)
     dataset = bigquery.Dataset(dataset_id)
     dataset.location = "US"
-    dataset = bigquery_client.create_dataset(dataset)
+    dataset = bigquery_client(transport=transport).create_dataset(dataset)
 
     yield DATASET
 
     bigquery_client.delete_dataset(dataset_id, delete_contents=True, not_found_ok=False)
 
 
-def test_analyze_iam_policy_longrunning(analysis_bucket, dataset, capsys):
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
+def test_analyze_iam_policy_longrunning(analysis_bucket, dataset, capsys, transport):
     dump_file_path = "gs://{}/analysis-dump.txt".format(analysis_bucket)
     quickstart_analyzeiampolicylongrunning.analyze_iam_policy_longrunning_gcs(
-        PROJECT, dump_file_path
+        project_id=PROJECT,
+        dump_file_path=dump_file_path,
+        transport=transport,
     )
     out, _ = capsys.readouterr()
     assert "True" in out
 
     dataset_id = "projects/{}/datasets/{}".format(PROJECT, dataset)
     quickstart_analyzeiampolicylongrunning.analyze_iam_policy_longrunning_bigquery(
-        PROJECT, dataset_id, "analysis_"
+        project_id=PROJECT,
+        dataset=dataset_id,
+        table="analysis_",
+        transport=transport,
     )
     out, _ = capsys.readouterr()
     assert "True" in out

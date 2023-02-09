@@ -17,8 +17,9 @@
 import quickstart_get_saved_query
 
 
-def test_get_saved_query(capsys, test_saved_query):
-    quickstart_get_saved_query.get_saved_query(test_saved_query.name)
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
+def test_get_saved_query(transport, capsys, test_saved_query):
+    quickstart_get_saved_query.get_saved_query(test_saved_query.name, transport=transport)
     out, _ = capsys.readouterr()
 
     assert "gotten_saved_query" in out

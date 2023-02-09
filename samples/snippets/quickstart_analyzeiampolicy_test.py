@@ -21,7 +21,8 @@ import quickstart_analyzeiampolicy
 PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 
 
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
 def test_analyze_iam_policy(capsys):
-    quickstart_analyzeiampolicy.analyze_iam_policy(PROJECT)
+    quickstart_analyzeiampolicy.analyze_iam_policy(PROJECT, transport=transport)
     out, _ = capsys.readouterr()
     assert "fully_explored: true" in out

@@ -46,6 +46,7 @@ def asset_bucket(storage_client):
         raise e
 
 
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
 def test_batch_get_assets_history(asset_bucket, capsys):
     bucket_asset_name = "//storage.googleapis.com/{}".format(BUCKET)
     asset_names = [
@@ -54,7 +55,10 @@ def test_batch_get_assets_history(asset_bucket, capsys):
 
     @backoff.on_exception(backoff.expo, (AssertionError, InvalidArgument), max_time=60)
     def eventually_consistent_test():
-        quickstart_batchgetassetshistory.batch_get_assets_history(PROJECT, asset_names)
+        quickstart_batchgetassetshistory.batch_get_assets_history(
+            project_id=PROJECT,
+            asset_names=asset_names,
+            transport=transport)
         out, _ = capsys.readouterr()
 
         assert bucket_asset_name in out

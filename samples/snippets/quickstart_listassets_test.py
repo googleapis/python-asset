@@ -21,7 +21,8 @@ import quickstart_listassets
 PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 
 
-def test_list_assets(capsys):
+@pytest.mark.parametrize("transport", ["grpc", "rest"])
+def test_list_assets(transport, capsys):
     from google.cloud import asset_v1
 
     quickstart_listassets.list_assets(
@@ -29,6 +30,7 @@ def test_list_assets(capsys):
         asset_types=["iam.googleapis.com/Role"],
         page_size=10,
         content_type=asset_v1.ContentType.RESOURCE,
+        transport=transport
     )
     out, _ = capsys.readouterr()
     assert "asset" in out
@@ -38,6 +40,7 @@ def test_list_assets(capsys):
         asset_types=[],
         page_size=10,
         content_type=asset_v1.ContentType.RELATIONSHIP,
+        transport=transport
     )
     out_r, _ = capsys.readouterr()
     assert "asset" in out_r
