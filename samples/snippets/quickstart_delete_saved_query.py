@@ -20,10 +20,10 @@ import argparse
 
 def delete_saved_query(saved_query_name: str, transport: str = None):
     """
-        Args:
-            saved_query_name(str): SavedQuery name you want to delete
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        saved_query_name(str): SavedQuery name you want to delete
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_delete_saved_query]
     from google.cloud import asset_v1

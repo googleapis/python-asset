@@ -18,7 +18,9 @@
 import argparse
 
 
-def analyze_iam_policy_longrunning_gcs(project_id: str, dump_file_path: str, transport: str = None) -> None:
+def analyze_iam_policy_longrunning_gcs(
+    project_id: str, dump_file_path: str, transport: str = None
+) -> None:
     """
     Args:
 
@@ -58,7 +60,9 @@ def analyze_iam_policy_longrunning_gcs(project_id: str, dump_file_path: str, tra
     # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 
 
-def analyze_iam_policy_longrunning_bigquery(project_id: str, dataset: str, table, transport: str = None) -> None:
+def analyze_iam_policy_longrunning_bigquery(
+    project_id: str, dataset: str, table, transport: str = None
+) -> None:
     """
     Args:
 

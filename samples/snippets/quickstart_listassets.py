@@ -18,7 +18,9 @@
 import argparse
 
 
-def list_assets(project_id, asset_types, page_size, content_type, transport: str = None):
+def list_assets(
+    project_id, asset_types, page_size, content_type, transport: str = None
+):
     # [START asset_quickstart_list_assets]
     from google.cloud import asset_v1
 

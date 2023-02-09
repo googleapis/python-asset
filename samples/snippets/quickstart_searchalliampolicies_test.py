@@ -25,6 +25,8 @@ PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 def test_search_all_iam_policies(transport, capsys):
     scope = "projects/{}".format(PROJECT)
     query = "policy:roles/owner"
-    quickstart_searchalliampolicies.search_all_iam_policies(scope=scope, query=query, transport=transport)
+    quickstart_searchalliampolicies.search_all_iam_policies(
+        scope=scope, query=query, transport=transport
+    )
     out, _ = capsys.readouterr()
     assert "roles/owner" in out

@@ -18,14 +18,16 @@
 import argparse
 
 
-def create_saved_query(project_id: str, saved_query_id: str, description: str, transport: str = None):
+def create_saved_query(
+    project_id: str, saved_query_id: str, description: str, transport: str = None
+):
     """
-        Args:
-            project_id(str): Your Google Cloud Project ID
-            saved_query_id(str): SavedQuery ID you want to create
-            description(str): The description for the query.
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        project_id(str): Your Google Cloud Project ID
+        saved_query_id(str): SavedQuery ID you want to create
+        description(str): The description for the query.
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_create_saved_query]
     from google.cloud import asset_v1

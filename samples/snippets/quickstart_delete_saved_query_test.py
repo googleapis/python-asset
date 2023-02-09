@@ -25,7 +25,9 @@ PROJECT = os.environ["GOOGLE_CLOUD_PROJECT"]
 @pytest.mark.parametrize("transport", ["grpc", "rest"])
 def test_delete_saved_query(transport, capsys, test_saved_query):
 
-    quickstart_delete_saved_query.delete_saved_query(saved_query_name=test_saved_query.name, transport=transport)
+    quickstart_delete_saved_query.delete_saved_query(
+        saved_query_name=test_saved_query.name, transport=transport
+    )
 
     out, _ = capsys.readouterr()
     assert "deleted_saved_query" in out

@@ -20,11 +20,11 @@ import argparse
 
 def update_feed(feed_name: str, topic: str, transport: str = None):
     """
-        Args:
-            feed_name(str): Feed Name you want to update
-            topic(str): Topic name you want to update with
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        feed_name(str): Feed Name you want to update
+        topic(str): Topic name you want to update with
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_update_feed]
     from google.cloud import asset_v1

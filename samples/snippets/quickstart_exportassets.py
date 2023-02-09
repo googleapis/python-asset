@@ -21,12 +21,12 @@ import asset_v1.ContentType
 
 def export_assets(project_id: str, dump_file_path: str, transport: str = None):
     """
-        Args:
+    Args:
 
-            project_id(str): Your Google Cloud Project ID
-            dump_file_path(str): Your analysis dump file path
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+        project_id(str): Your Google Cloud Project ID
+        dump_file_path(str): Your analysis dump file path
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_export_assets]
     from google.cloud import asset_v1
@@ -46,15 +46,21 @@ def export_assets(project_id: str, dump_file_path: str, transport: str = None):
     # [END asset_quickstart_export_assets]
 
 
-def export_assets_bigquery(project_id: str, dataset: str, table: str, content_type: asset_v1.ContentType, transport: str = None):
+def export_assets_bigquery(
+    project_id: str,
+    dataset: str,
+    table: str,
+    content_type: asset_v1.ContentType,
+    transport: str = None,
+):
     """
-        Args:
-            project_id(str): The project id.
-            dataset(str): Your BigQuery dataset path.
-            table(str): Your BigQuery table name.
-            content_type[asset_v1.ContentType]: Content type of the feed.
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        project_id(str): The project id.
+        dataset(str): Your BigQuery dataset path.
+        table(str): Your BigQuery table name.
+        content_type[asset_v1.ContentType]: Content type of the feed.
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_export_assets_bigquery]
     from google.cloud import asset_v1

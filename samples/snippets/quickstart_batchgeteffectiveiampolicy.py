@@ -18,13 +18,16 @@
 import argparse
 from typing import List
 
-def batch_get_effective_iam_policies(resource_names: List[str], scope: str, transport: str = None):
+
+def batch_get_effective_iam_policies(
+    resource_names: List[str], scope: str, transport: str = None
+):
     """
-        Args:
-            resource_names(List[str]): List of resource names
-            scope(str): project ID/number, folder number or org number
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        resource_names(List[str]): List of resource names
+        scope(str): project ID/number, folder number or org number
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
 
     # [START asset_quickstart_batch_get_effective_iam_policies]

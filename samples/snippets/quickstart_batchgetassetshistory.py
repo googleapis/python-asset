@@ -18,14 +18,17 @@
 import argparse
 from typing import List
 
-def batch_get_assets_history(project_id: str, asset_names: List[str], transport: str = None):
+
+def batch_get_assets_history(
+    project_id: str, asset_names: List[str], transport: str = None
+):
     """
-        Args:
-            project_id(str): Your Google Cloud Project ID
-            asset_names(List[str]): Your asset names list. 
-                For example: ["//storage.googleapis.com/[BUCKET_NAME]",]
-            transport(str): The transport to use. For example, "grpc"
-                or "rest". If set to None, a transport is chosen automatically.
+    Args:
+        project_id(str): Your Google Cloud Project ID
+        asset_names(List[str]): Your asset names list.
+            For example: ["//storage.googleapis.com/[BUCKET_NAME]",]
+        transport(str): The transport to use. For example, "grpc"
+            or "rest". If set to None, a transport is chosen automatically.
     """
     # [START asset_quickstart_batch_get_assets_history]
     from google.cloud import asset_v1

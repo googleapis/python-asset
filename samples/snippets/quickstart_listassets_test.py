@@ -30,7 +30,7 @@ def test_list_assets(transport, capsys):
         asset_types=["iam.googleapis.com/Role"],
         page_size=10,
         content_type=asset_v1.ContentType.RESOURCE,
-        transport=transport
+        transport=transport,
     )
     out, _ = capsys.readouterr()
     assert "asset" in out
@@ -40,7 +40,7 @@ def test_list_assets(transport, capsys):
         asset_types=[],
         page_size=10,
         content_type=asset_v1.ContentType.RELATIONSHIP,
-        transport=transport
+        transport=transport,
     )
     out_r, _ = capsys.readouterr()
     assert "asset" in out_r

@@ -18,6 +18,7 @@
 import argparse
 import asset_v1.ContentType
 
+
 def search_all_resources(
     scope: str,
     query: str = None,
