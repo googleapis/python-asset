@@ -30,14 +30,8 @@ DATASET = "analysis_{}".format(int(uuid.uuid4()))
 
 
 @pytest.fixture(scope="module")
-def storage_client(transport: str = None) -> None:
-    """
-    Args:
-    
-    transport(str): The transport to use. For example, "grpc"
-        or "rest". If set to None, a transport is chosen automatically.
-    """
-    yield storage.Client(transport=transport)
+def storage_client() -> None:
+    yield storage.Client()
 
 
 @pytest.fixture(scope="module")
