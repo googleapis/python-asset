@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+import pytest
 import uuid
 
 import quickstart_createfeed

@@ -15,6 +15,7 @@
 # limitations under the License.
 
 import os
+import pytest
 
 import quickstart_list_saved_queries
 
