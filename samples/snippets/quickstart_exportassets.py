@@ -16,7 +16,7 @@
 
 
 import argparse
-import asset_v1.ContentType
+import google.cloud.asset_v1.ContentType
 
 
 def export_assets(project_id: str, dump_file_path: str, transport: str = None):
@@ -50,7 +50,7 @@ def export_assets_bigquery(
     project_id: str,
     dataset: str,
     table: str,
-    content_type: asset_v1.ContentType,
+    content_type: google.cloud.asset_v1.ContentType,
     transport: str = None,
 ):
     """
@@ -58,7 +58,7 @@ def export_assets_bigquery(
         project_id(str): The project id.
         dataset(str): Your BigQuery dataset path.
         table(str): Your BigQuery table name.
-        content_type[asset_v1.ContentType]: Content type of the feed.
+        content_type[google.cloud.asset_v1.ContentType]: Content type of the feed.
         transport(str): The transport to use. For example, "grpc"
             or "rest". If set to None, a transport is chosen automatically.
     """

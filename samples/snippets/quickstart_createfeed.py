@@ -17,7 +17,7 @@
 
 import argparse
 from typing import List
-import asset_v1.ContentType
+import google.cloud.asset_v1.ContentType
 
 
 def create_feed(
@@ -25,7 +25,7 @@ def create_feed(
     feed_id: str,
     asset_names: List[str],
     topic: str,
-    content_type: asset_v1.ContentType,
+    content_type: google.cloud.asset_v1.ContentType,
     transport: str = None,
 ):
     """
@@ -34,7 +34,7 @@ def create_feed(
         feed_id(str): Feed ID you want to create
         asset_names(List[str]): List of asset names the feed listen to
         topic(str): Topic name of the feed.
-        content_type[asset_v1.ContentType]: Content type of the feed.
+        content_type[google.cloud.asset_v1.ContentType]: Content type of the feed.
         transport(str): The transport to use. For example, "grpc"
             or "rest". If set to None, a transport is chosen automatically.
     """

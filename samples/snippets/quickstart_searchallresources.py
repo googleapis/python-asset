@@ -16,13 +16,13 @@
 
 
 import argparse
-import asset_v1.ContentType
+import google.cloud.asset_v1.ContentType
 
 
 def search_all_resources(
     scope: str,
     query: str = None,
-    asset_types: List[asset_v1.ContentType] = None,
+    asset_types: List[google.cloud.asset_v1.ContentType] = None,
     page_size: int = None,
     order_by: List[str] = None,
     transport: str = None,
