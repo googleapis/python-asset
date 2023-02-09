@@ -17,7 +17,7 @@
 
 import argparse
 from typing import List
-import google.cloud.asset_v1.ContentType
+from google.cloud.asset_v1 import ContentType
 
 
 def create_feed(
@@ -25,7 +25,7 @@ def create_feed(
     feed_id: str,
     asset_names: List[str],
     topic: str,
-    content_type: google.cloud.asset_v1.ContentType,
+    content_type: ContentType,
     transport: str = None,
 ):
     """

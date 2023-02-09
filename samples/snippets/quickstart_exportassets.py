@@ -16,7 +16,7 @@
 
 
 import argparse
-import google.cloud.asset_v1.ContentType
+from google.cloud.asset_v1 import ContentType
 
 
 def export_assets(project_id: str, dump_file_path: str, transport: str = None):
@@ -50,7 +50,7 @@ def export_assets_bigquery(
     project_id: str,
     dataset: str,
     table: str,
-    content_type: google.cloud.asset_v1.ContentType,
+    content_type: ContentType,
     transport: str = None,
 ):
     """
