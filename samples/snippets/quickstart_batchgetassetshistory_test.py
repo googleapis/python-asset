@@ -54,7 +54,7 @@ def test_batch_get_assets_history(asset_bucket, capsys):
     ]
 
     @backoff.on_exception(backoff.expo, (AssertionError, InvalidArgument), max_time=60)
-    def eventually_consistent_test():
+    def eventually_consistent_test(transport):
         quickstart_batchgetassetshistory.batch_get_assets_history(
             project_id=PROJECT, asset_names=asset_names, transport=transport
         )

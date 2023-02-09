@@ -16,6 +16,8 @@
 
 
 import argparse
+from typing import List
+
 import google.cloud.asset_v1.ContentType
 
 
