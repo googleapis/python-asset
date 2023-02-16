@@ -27,6 +27,7 @@ from google.api_core import path_template
 from google.api_core import gapic_v1
 
 from google.protobuf import json_format
+from google.longrunning import operations_pb2
 from requests import __version__ as requests_version
 import dataclasses
 import re
