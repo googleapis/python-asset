@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import os
-import pytest
 
 import quickstart_delete_saved_query
 
