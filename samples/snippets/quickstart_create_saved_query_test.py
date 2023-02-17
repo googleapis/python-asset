@@ -29,10 +29,10 @@ SAVED_QUERY_ID = f"saved-query-{uuid.uuid4().hex}"
 def test_create_saved_query(transport, capsys, saved_query_deleter):
     saved_query = quickstart_create_saved_query.create_saved_query(
         project_id=PROJECT,
-        saved_query_id=SAVED_QUERY_ID,
+        saved_query_id=f"{SAVED_QUERY_ID}-{transport}",
         description="saved query foo",
         transport=transport,
     )
     saved_query_deleter.append(saved_query.name)
-    expected_resource_name_suffix = f"savedQueries/{SAVED_QUERY_ID}"
+    expected_resource_name_suffix = f"savedQueries/{SAVED_QUERY_ID}-{transport}"
     assert saved_query.name.endswith(expected_resource_name_suffix)
