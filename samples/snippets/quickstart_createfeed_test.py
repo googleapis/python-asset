@@ -34,7 +34,7 @@ def test_create_feed(transport, capsys, test_topic, deleter):
     feed = quickstart_createfeed.create_feed(
         project_id=PROJECT,
         feed_id=f"{FEED_ID}-{transport}",
-        asset_names=[f"{ASSET_NAME}-{transport}"],
+        asset_names=[f"{ASSET_NAME}"],
         topic=test_topic.name,
         content_type=asset_v1.ContentType.RESOURCE,
         transport=transport,
@@ -46,7 +46,7 @@ def test_create_feed(transport, capsys, test_topic, deleter):
     feed_r = quickstart_createfeed.create_feed(
         project_id=PROJECT,
         feed_id=f"{FEED_ID_R}-{transport}",
-        asset_names=[f"{ASSET_NAME}-{transport}"],
+        asset_names=[f"{ASSET_NAME}"],
         topic=test_topic.name,
         content_type=asset_v1.ContentType.RELATIONSHIP,
         transport=transport,
