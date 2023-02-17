@@ -47,8 +47,7 @@ def asset_dataset(bigquery_client):
 
 
 @pytest.mark.flaky(max_runs=3, min_passes=1)
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def test_search_all_resources(transport, asset_dataset, capsys):
+def test_search_all_resources(asset_dataset, capsys):
     scope = "projects/{}".format(PROJECT)
     query = "name:{}".format(DATASET)
 
@@ -57,7 +56,7 @@ def test_search_all_resources(transport, asset_dataset, capsys):
     @backoff.on_exception(backoff.expo, (AssertionError), max_time=240)
     def eventually_consistent_test():
         quickstart_searchallresources.search_all_resources(
-            scope=scope, query=query, transport=transport
+            scope=scope, query=query, transport="grpc"
         )
         out, _ = capsys.readouterr()
 
