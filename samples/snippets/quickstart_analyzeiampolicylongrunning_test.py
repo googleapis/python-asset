@@ -53,12 +53,11 @@ def analysis_bucket(storage_client):
 
 
 @pytest.fixture(scope="module")
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def dataset(bigquery_client, transport):
+def dataset(bigquery_client):
     dataset_id = "{}.{}".format(PROJECT, DATASET)
     dataset = bigquery.Dataset(dataset_id)
     dataset.location = "US"
-    dataset = bigquery_client(transport=transport).create_dataset(dataset)
+    dataset = bigquery_client().create_dataset(dataset)
 
     yield DATASET
 
