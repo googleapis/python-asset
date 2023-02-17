@@ -57,7 +57,7 @@ def dataset(bigquery_client):
     dataset_id = "{}.{}".format(PROJECT, DATASET)
     dataset = bigquery.Dataset(dataset_id)
     dataset.location = "US"
-    dataset = bigquery_client().create_dataset(dataset)
+    dataset = bigquery_client.create_dataset(dataset)
 
     yield DATASET
 
