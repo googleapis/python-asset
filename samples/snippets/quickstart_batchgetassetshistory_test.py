@@ -46,7 +46,7 @@ def asset_bucket(storage_client):
         raise e
 
 
-def test_batch_get_assets_history(capsys):
+def test_batch_get_assets_history(asset_bucket, capsys):
     bucket_asset_name = "//storage.googleapis.com/{}".format(BUCKET)
     asset_names = [
         bucket_asset_name,
