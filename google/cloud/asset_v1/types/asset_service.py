@@ -13,6 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+from __future__ import annotations
+
 from typing import MutableMapping, MutableSequence
 
 import proto  # type: ignore
@@ -2279,7 +2281,7 @@ class ListSavedQueriesRequest(proto.Message):
             to return per page. The service may return fewer
             than this value. If unspecified, at most 50 will
             be returned.
-            The maximum value is 1000; values above 1000
+             The maximum value is 1000; values above 1000
             will be coerced to 1000.
         page_token (str):
             Optional. A page token, received from a previous
