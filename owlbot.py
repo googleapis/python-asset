@@ -36,25 +36,6 @@ for library in s.get_staging_dirs(default_version):
     if clean_up_generated_samples:
         shutil.rmtree("samples/generated_samples", ignore_errors=True)
         clean_up_generated_samples = False
-    # Fix import of 'osconfig' type
-    s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
-        f"from google\.cloud\.osconfig\.{library.name} import inventory_pb2",
-        f"from google.cloud.osconfig_{library.name} import Inventory"
-    )
-
-    s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
-        "inventory_pb2\.Inventory",
-        "Inventory"
-    )
-
-    s.replace(
-        library / f"google/cloud/asset_{library.name}/types/assets.py",
-        "google\.cloud\.osconfig\.v1\.inventory_pb2\.Inventory",
-        "google.cloud.osconfig_v1.Inventory"
-    )
-
     # Remove broken `parse_asset_path` method
     # The resource pattern is '*' which breaks the regex match
     s.replace(
