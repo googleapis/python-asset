@@ -46,6 +46,7 @@ from google.api_core import operation
 from google.api_core import operation_async  # type: ignore
 from google.api_core import operations_v1
 from google.api_core import path_template
+from google.api_core import retry as retries
 from google.auth import credentials as ga_credentials
 from google.auth.exceptions import MutualTLSChannelError
 from google.cloud.asset_v1.services.asset_service import AssetServiceAsyncClient
@@ -1116,12 +1117,16 @@ def test_list_assets_pager(transport_name: str = "grpc"):
         )
 
         metadata = ()
+        retry = retries.Retry()
+        timeout = 5
         metadata = tuple(metadata) + (
             gapic_v1.routing_header.to_grpc_metadata((("parent", ""),)),
         )
-        pager = client.list_assets(request={})
+        pager = client.list_assets(request={}, retry=retry, timeout=timeout)
 
         assert pager._metadata == metadata
+        assert pager._retry == retry
+        assert pager._timeout == timeout
 
         results = list(pager)
         assert len(results) == 6
