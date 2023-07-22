@@ -26,14 +26,14 @@ from test_utils.vpcsc_config import vpcsc_config
 _VPCSC_PROHIBITED_MESSAGE = "Request is prohibited by organization's policy"
 
 
-@pytest.fixture
-def client(transport: str = None):
+@pytest.fixture(params=["grpc", "rest"])
+def client(request):
     """
     Args:
         transport(str): The transport to use. For example, "grpc"
             or "rest". If set to None, a transport is chosen automatically.
     """
-    return asset_v1.AssetServiceClient(transport=transport)
+    return asset_v1.AssetServiceClient(transport=request.param)
 
 
 @pytest.fixture
@@ -53,19 +53,17 @@ def parent_outside():
 
 
 @vpcsc_config.skip_unless_inside_vpcsc
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def test_export_assets_inside(client, output_config, parent_inside, transport):
+def test_export_assets_inside(client, output_config, parent_inside):
     with pytest.raises(exceptions.InvalidArgument):
-        client(transport=transport).export_assets(
+        client.export_assets(
             request={"parent": parent_inside, "output_config": output_config}
         )
 
 
 @vpcsc_config.skip_unless_inside_vpcsc
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def test_export_assets_outside(client, output_config, parent_outside, transport):
+def test_export_assets_outside(client, output_config, parent_outside):
     with pytest.raises(exceptions.PermissionDenied) as exc:
-        client(transport=transport).export_assets(
+        client.export_assets(
             request={"parent": parent_outside, "output_config": output_config}
         )
 
@@ -73,10 +71,8 @@ def test_export_assets_outside(client, output_config, parent_outside, transport)
 
 
 @vpcsc_config.skip_unless_inside_vpcsc
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def test_batch_get_assets_history_inside(client, parent_inside, transport):
-    read_time_window = {}
-    client(transport=transport).batch_get_assets_history(
+def test_batch_get_assets_history_inside(client, parent_inside):
+    client.batch_get_assets_history(
         request={
             "parent": parent_inside,
             "read_time_window": {},
@@ -86,12 +82,9 @@ def test_batch_get_assets_history_inside(client, parent_inside, transport):
 
 
 @vpcsc_config.skip_unless_inside_vpcsc
-@pytest.mark.parametrize("transport", ["grpc", "rest"])
-def test_batch_get_assets_history_outside(client, parent_outside, transport):
-    content_type = asset_v1.ContentType.CONTENT_TYPE_UNSPECIFIED
-    read_time_window = {}
+def test_batch_get_assets_history_outside(client, parent_outside):
     with pytest.raises(exceptions.PermissionDenied) as exc:
-        client(transport=transport).batch_get_assets_history(
+        client.batch_get_assets_history(
             request={
                 "parent": parent_outside,
                 "read_time_window": {},
