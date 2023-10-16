@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import grpc  # type: ignore
 from grpc.experimental import aio  # type: ignore
 
 from google.cloud.asset_v1.types import asset_service
-from google.longrunning import operations_pb2
 from google.longrunning import operations_pb2  # type: ignore
 from google.protobuf import empty_pb2  # type: ignore
 from .base import AssetServiceTransport, DEFAULT_CLIENT_INFO
@@ -671,8 +670,8 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         r"""Return a callable for the query assets method over gRPC.
 
         Issue a job that queries assets using a SQL statement compatible
-        with `BigQuery Standard
-        SQL <http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql>`__.
+        with `BigQuery
+        SQL <https://cloud.google.com/bigquery/docs/introduction-sql>`__.
 
         If the query execution finishes within timeout and there's no
         pagination, the full query results will be returned in the
@@ -683,9 +682,9 @@ class AssetServiceGrpcAsyncIOTransport(AssetServiceTransport):
         ``QueryAssets`` call.
 
         Note, the query result has approximately 10 GB limitation
-        enforced by BigQuery
-        https://cloud.google.com/bigquery/docs/best-practices-performance-output,
-        queries return larger results will result in errors.
+        enforced by
+        `BigQuery <https://cloud.google.com/bigquery/docs/best-practices-performance-output>`__.
+        Queries return larger results will result in errors.
 
         Returns:
             Callable[[~.QueryAssetsRequest],

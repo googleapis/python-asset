@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -277,6 +277,7 @@ class Feed(proto.Message):
     An asset feed filter controls what updates are exported. The
     asset feed must be created within a project, organization, or
     folder. Supported destinations are:
+
     Cloud Pub/Sub topics.
 
     Attributes:

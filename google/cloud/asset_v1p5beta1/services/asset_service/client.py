@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ except AttributeError:  # pragma: NO COVER
 from google.cloud.asset_v1p5beta1.services.asset_service import pagers
 from google.cloud.asset_v1p5beta1.types import asset_service
 from google.cloud.asset_v1p5beta1.types import assets
-from google.longrunning import operations_pb2
+from google.longrunning import operations_pb2  # type: ignore
 from .transports.base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc import AssetServiceGrpcTransport
 from .transports.grpc_asyncio import AssetServiceGrpcAsyncIOTransport
@@ -541,6 +541,7 @@ class AssetServiceClient(metaclass=AssetServiceClientMeta):
         Returns:
             google.cloud.asset_v1p5beta1.services.asset_service.pagers.ListAssetsPager:
                 ListAssets response.
+
                 Iterating over this object will yield
                 results and resolve additional pages
                 automatically.

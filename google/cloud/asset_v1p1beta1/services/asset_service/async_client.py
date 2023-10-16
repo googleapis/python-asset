@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Copyright 2022 Google LLC
+# Copyright 2023 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -45,7 +45,7 @@ except AttributeError:  # pragma: NO COVER
 from google.cloud.asset_v1p1beta1.services.asset_service import pagers
 from google.cloud.asset_v1p1beta1.types import asset_service
 from google.cloud.asset_v1p1beta1.types import assets
-from google.longrunning import operations_pb2
+from google.longrunning import operations_pb2  # type: ignore
 from .transports.base import AssetServiceTransport, DEFAULT_CLIENT_INFO
 from .transports.grpc_asyncio import AssetServiceGrpcAsyncIOTransport
 from .client import AssetServiceClient
@@ -294,6 +294,7 @@ class AssetServiceAsyncClient:
         Returns:
             google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllResourcesAsyncPager:
                 Search all resources response.
+
                 Iterating over this object will yield
                 results and resolve additional pages
                 automatically.
@@ -445,6 +446,7 @@ class AssetServiceAsyncClient:
         Returns:
             google.cloud.asset_v1p1beta1.services.asset_service.pagers.SearchAllIamPoliciesAsyncPager:
                 Search all IAM policies response.
+
                 Iterating over this object will yield
                 results and resolve additional pages
                 automatically.
@@ -513,7 +515,7 @@ class AssetServiceAsyncClient:
         # Done; return the response.
         return response
 
-    async def __aenter__(self):
+    async def __aenter__(self) -> "AssetServiceAsyncClient":
         return self
 
     async def __aexit__(self, exc_type, exc, tb):
