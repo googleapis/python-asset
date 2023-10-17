@@ -86,8 +86,3 @@ python.py_samples(skip_readmes=True)
 # run format session for all directories which have a noxfile
 for noxfile in Path(".").glob("**/noxfile.py"):
     s.shell.run(["nox", "-s", "blacken"], cwd=noxfile.parent, hide_output=False)
-
-with open("scripts/client-post-processing.txt", "r") as f:
-    for line in f:
-        print(line)
-
