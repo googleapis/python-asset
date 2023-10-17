@@ -35,6 +35,38 @@ for library in s.get_staging_dirs(default_version):
     if clean_up_generated_samples:
         shutil.rmtree("samples/generated_samples", ignore_errors=True)
         clean_up_generated_samples = False
+
+    # ----------------------------------------------------------------------------
+    # Workarounds to be migrated to the monorepo
+    # ----------------------------------------------------------------------------
+
+    # Generator issue: https://github.com/googleapis/gapic-generator-python/issues/1806
+    # Description: google-cloud-org-policy is not defined in https://github.com/googleapis/gapic-generator-python/blob/main/gapic/templates/_pypi_packages.j2.
+    # An attempt was made to add the dependency via https://github.com/googleapis/gapic-generator-python/pull/1805 however mypy checks 
+    # failed with error `google.cloud.orgpolicy.v1.orgpolicy_pb2.Policy is not valid as a type`.
+
+    # Only the setup.py and testing/constraints-3.7.txt from the default version need to be updated
+    if library.name == default_version:
+        replacement_count = 1
+        assert replacement_count == s.replace(
+            library / "setup.py",
+        """\"google-cloud-access-context-manager >= 0.1.2, <1.0.0dev\",
+    \"google-cloud-os-config >= 1.0.0, <2.0.0dev\",""",
+        """"google-cloud-access-context-manager >= 0.1.2, <1.0.0dev",
+    "google-cloud-org-policy >= 0.1.2, <2.0.0dev",
+    "google-cloud-os-config >= 1.0.0, <2.0.0dev",""",
+        )
+
+        replacement_count = 1
+        assert replacement_count == s.replace(
+            library / "testing/constraints-3.7.txt",
+        """google-cloud-access-context-manager==0.1.2
+google-cloud-os-config==1.0.0""",
+        """google-cloud-access-context-manager==0.1.2
+google-cloud-org-policy==0.1.2
+google-cloud-os-config==1.0.0""",
+        )
+
     s.move([library], excludes=["**/gapic_version.py"])
 s.remove_staging_dirs()
 
@@ -54,3 +86,8 @@ python.py_samples(skip_readmes=True)
 # run format session for all directories which have a noxfile
 for noxfile in Path(".").glob("**/noxfile.py"):
     s.shell.run(["nox", "-s", "blacken"], cwd=noxfile.parent, hide_output=False)
+
+with open("scripts/client-post-processing.txt", "r") as f:
+    for line in f:
+        print(line)
+
